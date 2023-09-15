@@ -361,7 +361,7 @@ Transform:
   m_GameObject: {fileID: 573244570}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -5}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -380,6 +380,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3d2491ac1f32440aceebad67de8119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 5
+  Gravity: -10
 --- !u!114 &573244573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,6 +394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b407d72e8406e141a502f557e1a3b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StickyThreshold: 0.4
+  StickyRadius: 0.2
 --- !u!143 &573244574
 CharacterController:
   m_ObjectHideFlags: 0
