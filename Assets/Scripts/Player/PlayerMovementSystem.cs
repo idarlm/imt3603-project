@@ -30,6 +30,8 @@ namespace Player
 
         private MovementHandler _handler;
 
+        private Vector3 _inputVector = Vector3.zero;
+
         private bool _changeState = false;
         private MovementState _currentState;
         private MovementState _nextState;
@@ -43,7 +45,7 @@ namespace Player
 
         private void Update()
         {
-
+            _inputVector = new(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         }
 
         private void FixedUpdate()
@@ -91,7 +93,7 @@ namespace Player
             public override void Update()
             {
                 var dt = Time.fixedDeltaTime;
-                var movement = Vector3.right * dt;
+                var movement = MovementSystem._inputVector * MovementSystem.Speed * dt;
                 movement += Vector3.up * (MovementSystem.Gravity * dt * dt);
 
                 if (Handler.ShouldStick)
