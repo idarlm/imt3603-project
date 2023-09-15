@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace PlayerMovement
@@ -25,6 +24,16 @@ namespace PlayerMovement
             public abstract void HandleInput();  // Used to handle inputs/state transitions
         }
         
+        // Public properties
+        public Vector3 Velocity => _handler.Velocity;
+        public float CurrentSpeed => _handler.Velocity.magnitude;
+        
+        // Events
+        public event EventHandler Falling;
+        public event EventHandler Landed;
+        public event EventHandler Jumped;
+        
+        // Fields
         public float Speed = 5f;
         public float Gravity = -10f;
 
@@ -45,7 +54,7 @@ namespace PlayerMovement
 
         private void Update()
         {
-            _inputVector = new(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            _inputVector = transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
         }
 
         private void FixedUpdate()
