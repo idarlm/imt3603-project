@@ -234,6 +234,8 @@ MonoBehaviour:
   smoothTime: 0.25
   sensitivity: 0.25
   targetHeightOffset: 3
+  horizontalDrift: 0.5
+  lookAhead: 10
 --- !u!114 &619586356
 MonoBehaviour:
   m_ObjectHideFlags: 0

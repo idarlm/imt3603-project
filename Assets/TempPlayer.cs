@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     void Start()
     {
-      
+        cameraTransform.GetComponent<FollowerCamera>();
     }
 
     public Transform cameraTransform;
