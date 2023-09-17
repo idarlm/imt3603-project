@@ -27,6 +27,32 @@ namespace PlayerMovement
         // Public properties
         public Vector3 Velocity => _handler.Velocity;
         public float CurrentSpeed => _handler.Velocity.magnitude;
+
+        public Vector3 Forward
+        {
+            get
+            {
+                if (cameraTransform)
+                {
+                    return Vector3.ProjectOnPlane(cameraTransform.forward, Vector3.up).normalized;
+                }
+
+                return transform.forward;
+            }
+        }
+        
+        public Vector3 Right
+        {
+            get
+            {
+                if (cameraTransform)
+                {
+                    return Vector3.ProjectOnPlane(cameraTransform.right, Vector3.up).normalized;
+                }
+
+                return transform.right;
+            }
+        }
         
         // Events
         public event EventHandler Falling;
@@ -43,7 +69,7 @@ namespace PlayerMovement
 
         private MovementHandler _handler;
 
-        private Vector3 _inputVector = Vector3.zero;
+        private Vector2 _inputVector = Vector2.zero;
 
         private bool _changeState = false;
         private MovementState _currentState;
@@ -58,7 +84,7 @@ namespace PlayerMovement
 
         private void Update()
         {
-            _inputVector = transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
+            _inputVector = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             
             // Interpolate body
             float t = (Time.time - Time.fixedTime) / Time.fixedDeltaTime;
@@ -111,7 +137,8 @@ namespace PlayerMovement
             public override void Update()
             {
                 var dt = Time.fixedDeltaTime;
-                var movement = MovementSystem._inputVector * MovementSystem.speed * dt;
+                var movement = MovementSystem.Forward * (MovementSystem._inputVector.y * MovementSystem.speed * dt);
+                movement += MovementSystem.Right * (MovementSystem._inputVector.x * MovementSystem.speed * dt);
                 movement += Vector3.up * (MovementSystem.gravity * dt * dt);
 
                 if (Handler.ShouldStick)
