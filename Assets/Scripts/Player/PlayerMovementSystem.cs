@@ -126,7 +126,7 @@ namespace PlayerMovement
             
             public override void Enter()
             {
-                Debug.Log("Enter grounded state");
+                MovementSystem.Landed?.Invoke(MovementSystem, EventArgs.Empty);
             }
 
             public override void Exit()
@@ -169,7 +169,7 @@ namespace PlayerMovement
 
             public override void Enter()
             {
-                Debug.Log("Entered FallingState");
+                MovementSystem.Falling?.Invoke(MovementSystem, EventArgs.Empty);
             }
 
             public override void Exit()

@@ -54,12 +54,12 @@ namespace PlayerMovement
 
         public void SetVelocity(Vector3 velocity)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void AddVelocity(Vector3 velocity)
         {
-            
+            throw new NotImplementedException();
         }
         
     }
