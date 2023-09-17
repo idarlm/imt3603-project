@@ -172,10 +172,8 @@ namespace PlayerMovement
                 {
                     movement += Vector3.down;
                 }
-                
+
                 Handler.Move(movement);
-                
-                Debug.Log($"Movement speed: {Handler.Velocity.magnitude}");
             }
 
             public override void HandleInput()
