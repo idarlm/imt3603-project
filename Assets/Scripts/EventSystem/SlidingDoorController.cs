@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 namespace EventSystem
 {
-    public class DoorController : MonoBehaviour
+    public class SlidingDoorController : MonoBehaviour
     {
         private TriggerCollection _triggerStatus;
         
@@ -15,8 +15,8 @@ namespace EventSystem
         public float closeTime = 3.0f;
         public Vector3 endPositionOffset;
         private Vector3 _startPosition;
-        private bool _opening;
-        private bool _moving;
+        private bool _opening; // If true, the door is opening. if _opening && _moving, it is closing.
+        private bool _moving; // If true, the door is not in its resting position
 
         
         private float _animationState;
@@ -45,6 +45,7 @@ namespace EventSystem
             }
         }
 
+        
         private void OnDoorwayClose(int id)
         {
             _opening = !_triggerStatus.SetStatus(id, false);
