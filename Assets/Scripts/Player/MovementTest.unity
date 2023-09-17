@@ -383,7 +383,7 @@ MonoBehaviour:
   speed: 5
   gravity: 10
   cameraTransform: {fileID: 1926914096}
-  interpolatedBody: {fileID: 2042169874}
+  interpolatedBody: {fileID: 663075054}
 --- !u!114 &573244573
 MonoBehaviour:
   m_ObjectHideFlags: 0
