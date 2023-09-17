@@ -14,13 +14,14 @@ namespace PlayerInput
         
         Vector2 LeftJoystickXY();
         Vector2 RightJoystickXY();
-        IButton LeftPad();
-        IButton RightPad();
-        IButton UpPad();
-        IButton DownPad();
-        IButton LeftAction();
-        IButton TopAction();
-        IButton RightAction();
-        IButton BottomAction();
+        IButton Left();
+        IButton Right();
+        IButton Up();
+        IButton Down();
+        IButton Confirm();
+        IButton Cancel();
+        IButton Interact();
+        IButton Jump();
+        IButton Menu();
     }
 }

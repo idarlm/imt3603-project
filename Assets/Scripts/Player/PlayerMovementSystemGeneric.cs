@@ -116,7 +116,7 @@ namespace PlayerMovement
         {
             // temporary input handling
             _inputVector = _playerInput.LeftJoystickXY();
-            _jump |= _playerInput.BottomAction().Pressed();
+            _jump |= _playerInput.Jump().Pressed();
             
             // Interpolate body
             float t = (Time.time - Time.fixedTime) / Time.fixedDeltaTime;

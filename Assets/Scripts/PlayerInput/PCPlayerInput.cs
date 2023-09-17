@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace PlayerInput
 {
-    public class PSPlayerInput : IPlayerInput
+    public class PCPlayerInput : IPlayerInput
     {
-        class PS4Button : IPlayerInput.IButton
+        class PCButton : IPlayerInput.IButton
         {
             private readonly string _name;
             public bool Pressed()
@@ -23,21 +23,21 @@ namespace PlayerInput
                 return Input.GetButton(_name);
             }
 
-            public PS4Button(string name)
+            public PCButton(string name)
             {
                 _name = name;
             }
         }
 
-        private PS4Button _leftDPad;
-        private PS4Button _topDPad;
-        private PS4Button _rightDPad;
-        private PS4Button _downDPad;
+        private PCButton _leftDPad;
+        private PCButton _topDPad;
+        private PCButton _rightDPad;
+        private PCButton _downDPad;
 
-        private PS4Button _squareButton;
-        private PS4Button _xButton = new ("Fire2");
-        private PS4Button _circleButton;
-        private PS4Button _triangleButton;
+        private PCButton _jumpButton = new PCButton("Jump");
+        private PCButton _interactButton = new ("Fire2");
+        private PCButton _circleButton;
+        private PCButton _triangleButton;
 
         public Vector2 LeftJoystickXY()
         {
@@ -71,7 +71,7 @@ namespace PlayerInput
 
         public IPlayerInput.IButton Confirm()
         {
-            return _squareButton;
+            return _circleButton;
         }
 
         public IPlayerInput.IButton Cancel()
@@ -86,12 +86,12 @@ namespace PlayerInput
 
         public IPlayerInput.IButton Jump()
         {
-            return _xButton;
+            return _jumpButton;
         }
-
+        
         public IPlayerInput.IButton Menu()
         {
-            return _xButton;
+            return _jumpButton;
         }
     }
 }
