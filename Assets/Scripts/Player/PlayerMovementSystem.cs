@@ -15,8 +15,8 @@ namespace PlayerMovement
                 Handler = system._handler;
             }
 
-            public PlayerMovementSystem MovementSystem { get; private set; }
-            public MovementHandler Handler { get; private set; }
+            protected PlayerMovementSystem MovementSystem { get; private set; }
+            protected MovementHandler Handler { get; private set; }
 
             public abstract void Enter();        // Called when entering state
             public abstract void Exit();         // Called when exiting state
@@ -37,6 +37,9 @@ namespace PlayerMovement
         public float Speed = 5f;
         public float Gravity = -10f;
 
+        [SerializeField] private Transform _interpolatedBody;
+        private Vector3 _oldPosition;
+
         private MovementHandler _handler;
 
         private Vector3 _inputVector = Vector3.zero;
@@ -55,10 +58,16 @@ namespace PlayerMovement
         private void Update()
         {
             _inputVector = transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
+            
+            // Interpolate body
+            float t = (Time.time - Time.fixedTime) / Time.fixedDeltaTime;
+            _interpolatedBody.position = Vector3.Lerp(_oldPosition, transform.position, t);
         }
 
         private void FixedUpdate()
         {
+            _oldPosition = transform.position;
+            
             _currentState.HandleInput();
 
             if (_changeState)
@@ -87,8 +96,7 @@ namespace PlayerMovement
             public GroundedState(PlayerMovementSystem pms) : base(pms)
             {
             }
-
-
+            
             public override void Enter()
             {
                 Debug.Log("Enter grounded state");
