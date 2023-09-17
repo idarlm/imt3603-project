@@ -365,7 +365,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2042169874}
+  - {fileID: 663075054}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &573244572
@@ -380,8 +380,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3d2491ac1f32440aceebad67de8119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
-  Gravity: -10
+  speed: 3
+  gravity: 10
+  acceleration: 15
+  deceleration: 10
+  cameraTransform: {fileID: 1926914096}
+  interpolatedBody: {fileID: 663075054}
 --- !u!114 &573244573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,8 +424,40 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &663075053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 663075054}
+  m_Layer: 0
+  m_Name: Interpolated Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &663075054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663075053}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2042169874}
+  m_Father: {fileID: 573244571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &782639032
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,9 +799,9 @@ GameObject:
   - component: {fileID: 1926914095}
   - component: {fileID: 1926914094}
   - component: {fileID: 1926914098}
-  - component: {fileID: 1926914097}
+  - component: {fileID: 1926914099}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Player Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -845,23 +881,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1926914097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926914093}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ad64aa2380fb6c49b26fb0efa0885d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 573244571}
-  distance: 5
-  smoothTime: 0.25
-  sensitivity: 0.25
-  targetHeightOffset: 1.5
 --- !u!114 &1926914098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,6 +925,26 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1926914099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926914093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad64aa2380fb6c49b26fb0efa0885d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToTargetObject: 7
+  smoothTime: 0.1
+  sensitivity: 0.25
+  lookAheadCatchupRate: 1.1
+  targetObject: {fileID: 663075054}
+  targetObjectHeightOffset: 0.2
+  horizontalDrift: 0.1
+  lookAheadMaxDistance: 1
 --- !u!1 &2042169873
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,12 +971,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042169873}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 573244571}
+  m_Father: {fileID: 663075054}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2042169875
 MeshRenderer:
@@ -1098,7 +1137,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1926914096}
   - {fileID: 1571583594}
   - {fileID: 1142984736}
   - {fileID: 782639036}
@@ -1106,3 +1144,4 @@ SceneRoots:
   - {fileID: 2063948675}
   - {fileID: 148653578}
   - {fileID: 573244571}
+  - {fileID: 1926914096}
