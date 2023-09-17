@@ -11,12 +11,13 @@ namespace CameraSystem
     public float distanceToTargetObject = 3;
     public float smoothTime = 0.25f;
     public float sensitivity = 0.25f;
+    public float lookAheadCatchupRate = 2.5f;
     
     
     [SerializeField] private Transform targetObject;
     [SerializeField] private float targetObjectHeightOffset;
     [SerializeField] private float horizontalDrift = 0.1f;
-    [SerializeField] private float lookAheadCoefficient = 1.0f;
+    [SerializeField] private float lookAheadMaxDistance = 2.0f;
     
     
     private float   _cameraYaw;
@@ -124,14 +125,14 @@ namespace CameraSystem
     private void UpdateLookAtDirection(ref Vector3 targetMovement)
     {
         var lookAtTargetPosition = targetObject.transform.position 
-                                   - lookAheadCoefficient * targetMovement.normalized;
+                                   - lookAheadMaxDistance * targetMovement.normalized;
         lookAtTargetPosition.y += targetObjectHeightOffset;
         
         // TODO. No control of how quickly the camera catches up in real time.
         _lookAtTargetPosition = Vector3.Lerp(
             _lookAtTargetPosition,
             lookAtTargetPosition,
-            Time.deltaTime * (_cameraIsColliding ? 15.0f : 5.0f)
+            Time.deltaTime * (_cameraIsColliding ? 3.0f : 1.0f) * lookAheadCatchupRate
         );
         transform.LookAt(_lookAtTargetPosition);
     }
