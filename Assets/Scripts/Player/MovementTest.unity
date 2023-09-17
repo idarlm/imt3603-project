@@ -380,9 +380,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3d2491ac1f32440aceebad67de8119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
-  Gravity: -10
-  _interpolatedBody: {fileID: 663075054}
+  speed: 5
+  gravity: 10
+  cameraTransform: {fileID: 1926914096}
+  interpolatedBody: {fileID: 2042169874}
 --- !u!114 &573244573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,12 +930,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926914093}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad64aa2380fb6c49b26fb0efa0885d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToTargetObject: 5
+  distanceToTargetObject: 7
   smoothTime: 0.25
   sensitivity: 0.25
   targetObject: {fileID: 663075054}

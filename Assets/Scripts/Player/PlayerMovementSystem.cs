@@ -61,7 +61,7 @@ namespace PlayerMovement
         
         // Fields
         public float speed = 5f;
-        public float gravity = -10f;
+        public float gravity = 10f;
 
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Transform interpolatedBody;
@@ -139,7 +139,7 @@ namespace PlayerMovement
                 var dt = Time.fixedDeltaTime;
                 var movement = MovementSystem.Forward * (MovementSystem._inputVector.y * MovementSystem.speed * dt);
                 movement += MovementSystem.Right * (MovementSystem._inputVector.x * MovementSystem.speed * dt);
-                movement += Vector3.up * (MovementSystem.gravity * dt * dt);
+                movement += Vector3.down * (MovementSystem.gravity * dt * dt);
 
                 if (Handler.ShouldStick)
                 {
@@ -181,7 +181,7 @@ namespace PlayerMovement
             {
                 float dt = Time.fixedDeltaTime;
                 Vector3 movement = Handler.Velocity * dt;
-                movement += Vector3.up * (MovementSystem.gravity * dt * dt);
+                movement += Vector3.down * (MovementSystem.gravity * dt * dt);
                 
                 Handler.Move(movement);
             }
