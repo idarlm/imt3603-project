@@ -62,6 +62,8 @@ namespace PlayerMovement
         // Fields
         public float speed = 5f;
         public float gravity = 10f;
+        [SerializeField] private float acceleration = 20f;
+        [SerializeField] private float deceleration = 10f;
 
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Transform interpolatedBody;
@@ -80,6 +82,9 @@ namespace PlayerMovement
         {
             _handler = GetComponent<MovementHandler>();
             _currentState = new GroundedState(this);
+
+            Falling += (System.Object sender, EventArgs e) => { Debug.Log("[PlayerMovementSystem] Falling"); };
+            Landed += (System.Object sender, EventArgs e) => { Debug.Log("[PlayerMovementSystem] Landed"); };
         }
 
         private void Update()
@@ -131,15 +136,37 @@ namespace PlayerMovement
 
             public override void Exit()
             {
-                Debug.Log("Exit grounded state");
+                
             }
 
             public override void Update()
             {
                 var dt = Time.fixedDeltaTime;
-                var movement = MovementSystem.Forward * (MovementSystem._inputVector.y * MovementSystem.speed * dt);
-                movement += MovementSystem.Right * (MovementSystem._inputVector.x * MovementSystem.speed * dt);
-                movement += Vector3.down * (MovementSystem.gravity * dt * dt);
+                
+                // inherit velocity from previous frame
+                var movement = Handler.Velocity * dt;
+                
+                var fwd = MovementSystem.Forward;
+                var rgt = MovementSystem.Right;
+                var input = MovementSystem._inputVector;
+
+                // calculate acceleration
+                float speedFactor = Mathf.Clamp01(MovementSystem.speed - Handler.Velocity.magnitude);
+                var acceleration = fwd * input.y;
+                acceleration += rgt * input.x;
+                acceleration *= MovementSystem.acceleration * speedFactor * dt * dt;
+
+                movement += acceleration;
+                
+                // calculate deceleration
+                var deceleration = Handler.Velocity.normalized - acceleration.normalized;
+                deceleration *= MovementSystem.deceleration * dt;
+
+                deceleration = deceleration.sqrMagnitude > Handler.Velocity.sqrMagnitude
+                    ? Handler.Velocity
+                    : deceleration;
+
+                movement -= deceleration * dt;
 
                 if (Handler.ShouldStick)
                 {
@@ -147,6 +174,8 @@ namespace PlayerMovement
                 }
                 
                 Handler.Move(movement);
+                
+                Debug.Log($"Movement speed: {Handler.Velocity.magnitude}");
             }
 
             public override void HandleInput()
@@ -174,7 +203,7 @@ namespace PlayerMovement
 
             public override void Exit()
             {
-                Debug.Log("Exit GroundedState");
+                
             }
 
             public override void Update()
