@@ -35,7 +35,7 @@ namespace PlayerInput
         private PS4Button _downDPad;
 
         private PS4Button _squareButton;
-        private PS4Button _xButton;
+        private PS4Button _xButton = new ("Fire2");
         private PS4Button _circleButton;
         private PS4Button _triangleButton;
 
