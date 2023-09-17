@@ -34,10 +34,11 @@ namespace PlayerMovement
         public event EventHandler Jumped;
         
         // Fields
-        public float Speed = 5f;
-        public float Gravity = -10f;
+        public float speed = 5f;
+        public float gravity = -10f;
 
-        [SerializeField] private Transform _interpolatedBody;
+        [SerializeField] private Transform cameraTransform;
+        [SerializeField] private Transform interpolatedBody;
         private Vector3 _oldPosition;
 
         private MovementHandler _handler;
@@ -61,7 +62,7 @@ namespace PlayerMovement
             
             // Interpolate body
             float t = (Time.time - Time.fixedTime) / Time.fixedDeltaTime;
-            _interpolatedBody.position = Vector3.Lerp(_oldPosition, transform.position, t);
+            interpolatedBody.position = Vector3.Lerp(_oldPosition, transform.position, t);
         }
 
         private void FixedUpdate()
@@ -110,8 +111,8 @@ namespace PlayerMovement
             public override void Update()
             {
                 var dt = Time.fixedDeltaTime;
-                var movement = MovementSystem._inputVector * MovementSystem.Speed * dt;
-                movement += Vector3.up * (MovementSystem.Gravity * dt * dt);
+                var movement = MovementSystem._inputVector * MovementSystem.speed * dt;
+                movement += Vector3.up * (MovementSystem.gravity * dt * dt);
 
                 if (Handler.ShouldStick)
                 {
@@ -153,7 +154,7 @@ namespace PlayerMovement
             {
                 float dt = Time.fixedDeltaTime;
                 Vector3 movement = Handler.Velocity * dt;
-                movement += Vector3.up * (MovementSystem.Gravity * dt * dt);
+                movement += Vector3.up * (MovementSystem.gravity * dt * dt);
                 
                 Handler.Move(movement);
             }

@@ -929,7 +929,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926914093}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad64aa2380fb6c49b26fb0efa0885d6, type: 3}
   m_Name: 
@@ -937,7 +937,7 @@ MonoBehaviour:
   distanceToTargetObject: 5
   smoothTime: 0.25
   sensitivity: 0.25
-  targetObject: {fileID: 573244571}
+  targetObject: {fileID: 663075054}
   targetObjectHeightOffset: 0.2
   horizontalDrift: 0.1
   lookAheadCoefficient: 1
