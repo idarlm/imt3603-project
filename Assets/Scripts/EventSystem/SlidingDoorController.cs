@@ -26,6 +26,7 @@ namespace EventSystem
         {
             _triggerStatus = new TriggerCollection(triggerIDs);
         }
+        
         private void Start()
         {
             _startPosition = transform.position;
