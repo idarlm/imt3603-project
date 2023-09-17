@@ -9,16 +9,16 @@ namespace PlayerInput
         class PS4Button : IPlayerInput.IButton
         {
             private readonly string _name;
-            public bool Pressed()
+            public bool IsPressed()
             {
                 return Input.GetButtonDown(_name);
             }
-            public bool Released()
+            public bool IsReleased()
             {
                 return Input.GetButtonUp(_name);
             }
 
-            public bool Held()
+            public bool IsHeld()
             {
                 return Input.GetButton(_name);
             }

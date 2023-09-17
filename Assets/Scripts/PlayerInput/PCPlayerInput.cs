@@ -1,6 +1,9 @@
 ﻿
 
+using System.Numerics;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace PlayerInput
 {
@@ -9,16 +12,16 @@ namespace PlayerInput
         class PCButton : IPlayerInput.IButton
         {
             private readonly string _name;
-            public bool Pressed()
+            public bool IsPressed()
             {
                 return Input.GetButtonDown(_name);
             }
-            public bool Released()
+            public bool IsReleased()
             {
                 return Input.GetButtonUp(_name);
             }
 
-            public bool Held()
+            public bool IsHeld()
             {
                 return Input.GetButton(_name);
             }
@@ -41,12 +44,29 @@ namespace PlayerInput
 
         public Vector2 LeftJoystickXY()
         {
-            return new Vector2(Input.GetAxis("Joystick1 Horizontal"), Input.GetAxis("Joystick1 Vertical"));
+            var inputVector = Vector2.zero;
+            if (Input.GetKey(KeyCode.W))
+            {
+                inputVector += Vector2.up;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                inputVector -= Vector2.up;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                inputVector -= Vector2.right;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                inputVector += Vector2.right;
+            }
+            return inputVector.normalized;
         }
 
         public Vector2 RightJoystickXY()
         {
-            return new Vector2(Input.GetAxis("Joystick2 Horizontal"), Input.GetAxis("Joystick2 Vertical"));
+            return new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
 
         public IPlayerInput.IButton Left()

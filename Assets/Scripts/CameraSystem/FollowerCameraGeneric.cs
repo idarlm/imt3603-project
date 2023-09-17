@@ -35,7 +35,7 @@ namespace CameraSystem
     
     private void Start()
     {
-        _playerInput = new PSPlayerInput();
+        _playerInput = new PCPlayerInput();
         _previousMousePos = Input.mousePosition;
         _previousPlayerPos = targetObject.position;
         _front = new Vector3(

@@ -7,9 +7,9 @@ namespace PlayerInput
     {
         public interface IButton
         {
-            public bool Pressed();
-            public bool Released();
-            public bool Held();
+            public bool IsPressed();
+            public bool IsReleased();
+            public bool IsHeld();
         }
         
         Vector2 LeftJoystickXY();

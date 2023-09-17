@@ -102,7 +102,7 @@ namespace PlayerMovement
         private void Start()
         {
             // set up dependencies
-            _playerInput = new PSPlayerInput();
+            _playerInput = new PCPlayerInput();
             _handler = GetComponent<MovementHandler>();
             _currentState = new GroundedState(this);
             
@@ -116,7 +116,7 @@ namespace PlayerMovement
         {
             // temporary input handling
             _inputVector = _playerInput.LeftJoystickXY();
-            _jump |= _playerInput.Jump().Pressed();
+            _jump |= _playerInput.Jump().IsPressed();
             
             // Interpolate body
             float t = (Time.time - Time.fixedTime) / Time.fixedDeltaTime;
