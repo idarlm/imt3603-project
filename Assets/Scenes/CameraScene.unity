@@ -336,12 +336,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToTargetObject: 8
-  smoothTime: 0.25
+  smoothTime: 0.1
   sensitivity: 5
+  lookAheadCatchupRate: 2.5
   targetObject: {fileID: 844490857}
   targetObjectHeightOffset: 1.5
-  horizontalDrift: 0.5
-  lookAheadCoefficient: 2
+  horizontalDrift: 0.2
+  lookAheadMaxDistance: 3
 --- !u!114 &619586356
 MonoBehaviour:
   m_ObjectHideFlags: 0

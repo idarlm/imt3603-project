@@ -347,13 +347,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad64aa2380fb6c49b26fb0efa0885d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToTargetObject: 3
+  distanceToTargetObject: 7
   smoothTime: 0.25
   sensitivity: 0.25
-  targetObject: {fileID: 0}
-  targetObjectHeightOffset: 0
+  lookAheadCatchupRate: 2.5
+  targetObject: {fileID: 844490857}
+  targetObjectHeightOffset: 1.5
   horizontalDrift: 0.1
-  lookAheadCoefficient: 1
+  lookAheadMaxDistance: 2
 --- !u!114 &619586356
 MonoBehaviour:
   m_ObjectHideFlags: 0

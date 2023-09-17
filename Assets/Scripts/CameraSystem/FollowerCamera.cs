@@ -11,12 +11,14 @@ namespace CameraSystem
     public float distanceToTargetObject = 3;
     public float smoothTime = 0.25f;
     public float sensitivity = 0.25f;
+    public float lookAheadCatchupRate = 2.5f;
     
     
     [SerializeField] private Transform targetObject;
     [SerializeField] private float targetObjectHeightOffset;
     [SerializeField] private float horizontalDrift = 0.1f;
-    [SerializeField] private float lookAheadCoefficient = 1.0f;
+    [SerializeField] private float lookAheadMaxDistance = 2.0f;
+    
     
     private float   _cameraYaw;
     private float   _cameraPitch;
@@ -58,7 +60,7 @@ namespace CameraSystem
         cameraPosition.y += targetObjectHeightOffset;
         
         AdjustForObstructions(ref cameraPosition);
-        SmoothTowardsTargetCameraPosition(ref cameraPosition);
+        LerpTowardsTargetPosition(ref cameraPosition);
         UpdateLookAtDirection(ref targetMovement);
         
         _previousPlayerPos = targetPosition;
@@ -66,11 +68,11 @@ namespace CameraSystem
     }
     
     
-    
-    
-    
-    
-    
+    /// <summary>
+    /// AdjustForObstructions moves the camera closer to the target object
+    /// if there is no clear line of sight from the target object to the camera position
+    /// </summary>
+    /// <param name="cameraTargetPosition"></param>
     private void AdjustForObstructions(ref Vector3 cameraTargetPosition)
     {
         var rayOrigin = targetObject.position + new Vector3(0.0f, targetObjectHeightOffset,0.0f);
@@ -87,6 +89,10 @@ namespace CameraSystem
     }
 
 
+    /// <summary>
+    /// UpdateFront updates the front facing vector of the camera based on
+    /// _cameraYaw and _cameraPitch, the horizontal and vertical rotation in radians.
+    /// </summary>
     private void UpdateFront()
     {
         _front = new Vector3(
@@ -97,7 +103,12 @@ namespace CameraSystem
     }
     
     
-    private void SmoothTowardsTargetCameraPosition(ref Vector3 cameraTargetPosition)
+    /// <summary>
+    /// LerpTowardsTargetPosition interpolates from the current camera position
+    /// to a provided target camera position. 
+    /// </summary>
+    /// <param name="cameraTargetPosition">Destination camera position</param>
+    private void LerpTowardsTargetPosition(ref Vector3 cameraTargetPosition)
     {
         transform.position = Vector3.SmoothDamp(
             transform.position, 
@@ -106,22 +117,34 @@ namespace CameraSystem
             smoothTime);
     }
 
-
+    /// <summary>
+    /// UpdateLookAtDirection updates the lookAt direction of the camera. lookAt drifts
+    /// towards the target objects actual position, but may deviate depending on _lookAheadCoefficient 
+    /// </summary>
+    /// <param name="targetMovement">The movement of the target object since the last frame</param>
     private void UpdateLookAtDirection(ref Vector3 targetMovement)
     {
-        var lookAtTargetPosition = targetObject.transform.position - lookAheadCoefficient * targetMovement.normalized;
+        var lookAtTargetPosition = targetObject.transform.position 
+                                   - lookAheadMaxDistance * targetMovement.normalized;
         lookAtTargetPosition.y += targetObjectHeightOffset;
         
         // TODO. No control of how quickly the camera catches up in real time.
         _lookAtTargetPosition = Vector3.Lerp(
             _lookAtTargetPosition,
             lookAtTargetPosition,
-            Time.deltaTime * (_cameraIsColliding ? 15.0f : 5.0f)
+            Time.deltaTime * (_cameraIsColliding ? 3.0f : 1.0f) * lookAheadCatchupRate
         );
         transform.LookAt(_lookAtTargetPosition);
     }
 
 
+    /// <summary>
+    /// UpdatePitchAndYaw updates the horizontal and lateral rotation of the camera anchor
+    /// position around the target object. A horizontalDrift > 0 will cause the camera to track
+    /// target movement by rotating.
+    /// </summary>
+    /// <param name="targetMovement"></param>
+    /// <param name="controllerXYDelta"></param>
     private void UpdatePitchAndYaw(ref Vector3 targetMovement, ref Vector3 controllerXYDelta)
     {
         var targetObjectHorizontalMovement = 
