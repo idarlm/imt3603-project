@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PlayerMovement
@@ -25,6 +23,11 @@ namespace PlayerMovement
         // Private fields
         private Vector3 _groundNormal = Vector3.up;
 
+        private bool _addVelocity = false;
+        private bool _setVelocity = false;
+        private Vector3 _addVelocityVector;
+        private Vector3 _setVelocityVector;
+
         // Unity messages
         private void Start()
         {
@@ -43,6 +46,19 @@ namespace PlayerMovement
         public void Move(Vector3 movement)
         {
             OldVelocity = Controller.velocity;
+
+            if (_addVelocity)
+            {
+                movement += _addVelocityVector * Time.deltaTime;
+                _addVelocityVector = Vector3.zero;
+                _addVelocity = false;
+            }
+
+            if (_setVelocity)
+            {
+                movement = _setVelocityVector * Time.deltaTime;
+                _setVelocity = false;
+            }
             
             Controller.Move(movement);
             
@@ -54,12 +70,14 @@ namespace PlayerMovement
 
         public void SetVelocity(Vector3 velocity)
         {
-            throw new NotImplementedException();
+            _setVelocity = true;
+            _setVelocityVector = velocity;
         }
 
         public void AddVelocity(Vector3 velocity)
         {
-            throw new NotImplementedException();
+            _addVelocity = true;
+            _addVelocityVector += velocity;
         }
         
     }

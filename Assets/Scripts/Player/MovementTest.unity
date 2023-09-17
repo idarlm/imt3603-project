@@ -932,19 +932,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926914093}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad64aa2380fb6c49b26fb0efa0885d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToTargetObject: 7
-  smoothTime: 0.25
+  smoothTime: 0.1
   sensitivity: 0.25
-  lookAheadCatchupRate: 2.5
+  lookAheadCatchupRate: 1.1
   targetObject: {fileID: 663075054}
   targetObjectHeightOffset: 0.2
   horizontalDrift: 0.1
-  lookAheadMaxDistance: 2
+  lookAheadMaxDistance: 1
 --- !u!1 &2042169873
 GameObject:
   m_ObjectHideFlags: 0
