@@ -47,7 +47,7 @@ namespace CameraSystem
         // TODO: get Generic XY delta
         var mouseDelta = new Vector3(Input.GetAxis("Horizontal Right")*-1, 
             Input.GetAxis("Vertical Right")*-1, 0.0f)  * (Time.deltaTime * sensitivity);
-        //var mouseDelta = (_previousMousePos - Input.mousePosition) * (Time.deltaTime * sensitivity);
+        mouseDelta += (_previousMousePos - Input.mousePosition) * (Time.deltaTime * sensitivity);
         var targetPosition = targetObject.position;
         var targetMovement = _previousPlayerPos - targetPosition;
         
