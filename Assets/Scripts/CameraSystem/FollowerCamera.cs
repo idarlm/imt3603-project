@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.XR;
 
-
-public class FollowerCamera : MonoBehaviour
+namespace CameraSystem
+{
+    public class FollowerCamera : MonoBehaviour
 {
     
     public float distanceToTargetObject = 3;
@@ -24,6 +26,7 @@ public class FollowerCamera : MonoBehaviour
     private Vector3 _previousMousePos;
     private Vector3 _previousPlayerPos;
     private Vector3 _lookAtTargetPosition;
+    private bool _cameraIsColliding;
 
     
     private void Start()
@@ -42,7 +45,9 @@ public class FollowerCamera : MonoBehaviour
     private void LateUpdate()
     {
         // TODO: get Generic XY delta
-        var mouseDelta = (_previousMousePos - Input.mousePosition) * (Time.deltaTime * sensitivity);
+        var mouseDelta = new Vector3(Input.GetAxis("Horizontal Right")*-1, 
+            Input.GetAxis("Vertical Right")*-1, 0.0f)  * (Time.deltaTime * sensitivity);
+        //var mouseDelta = (_previousMousePos - Input.mousePosition) * (Time.deltaTime * sensitivity);
         var targetPosition = targetObject.position;
         var targetMovement = _previousPlayerPos - targetPosition;
         
@@ -74,8 +79,11 @@ public class FollowerCamera : MonoBehaviour
         if (Physics.Raycast(rayOrigin, -_front, out var wallHit) &&
             Math.Pow(wallHit.distance, 2) < sqrDistanceToCamera)
         {
+            _cameraIsColliding = true;
             cameraTargetPosition = wallHit.point + _front * 0.5f;
         }
+
+        _cameraIsColliding = false;
     }
 
 
@@ -108,7 +116,7 @@ public class FollowerCamera : MonoBehaviour
         _lookAtTargetPosition = Vector3.Lerp(
             _lookAtTargetPosition,
             lookAtTargetPosition,
-            Time.deltaTime * 5.0f
+            Time.deltaTime * (_cameraIsColliding ? 15.0f : 5.0f)
         );
         transform.LookAt(_lookAtTargetPosition);
     }
@@ -122,4 +130,5 @@ public class FollowerCamera : MonoBehaviour
         _cameraYaw -= controllerXYDelta.x + targetObjectHorizontalMovement;
         _cameraPitch = Math.Max(Math.Min(_cameraPitch -= controllerXYDelta.y, .5f),- 1.25f);
     }
+}
 }
