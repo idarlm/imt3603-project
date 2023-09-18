@@ -187,6 +187,12 @@ namespace PlayerMovement
                 // inherit velocity from previous frame
                 var movement = Handler.Velocity * dt;
                 
+                // Don't allow player to preserve upwards
+                // velocity while grounded.
+                // Prevents a bug that can fling the player
+                // into the air.
+                movement.y = Mathf.Min(0, movement.y);
+                
                 var fwd = MovementSystem.Forward;
                 var rgt = MovementSystem.Right;
                 var input = MovementSystem._inputVector;
