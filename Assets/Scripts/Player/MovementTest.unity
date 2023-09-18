@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 573244574}
   - component: {fileID: 573244573}
   - component: {fileID: 573244572}
+  - component: {fileID: 573244575}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -375,7 +376,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 573244570}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e3d2491ac1f32440aceebad67de8119, type: 3}
   m_Name: 
@@ -384,6 +385,7 @@ MonoBehaviour:
   gravity: 10
   acceleration: 15
   deceleration: 10
+  jumpSpeed: 5
   cameraTransform: {fileID: 1926914096}
   interpolatedBody: {fileID: 663075054}
 --- !u!114 &573244573
@@ -422,10 +424,29 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_StepOffset: 0.4
+  m_SkinWidth: 0.01
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &573244575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573244570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264e0f1a0d1743b28fbe3ac2b0f6838f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  gravity: 10
+  acceleration: 20
+  deceleration: 10
+  jumpSpeed: 5
+  cameraTransform: {fileID: 1926914096}
+  interpolatedBody: {fileID: 663075054}
 --- !u!1 &663075053
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +821,7 @@ GameObject:
   - component: {fileID: 1926914094}
   - component: {fileID: 1926914098}
   - component: {fileID: 1926914099}
+  - component: {fileID: 1926914100}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: MainCamera
@@ -932,7 +954,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926914093}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad64aa2380fb6c49b26fb0efa0885d6, type: 3}
   m_Name: 
@@ -945,6 +967,26 @@ MonoBehaviour:
   targetObjectHeightOffset: 0.2
   horizontalDrift: 0.1
   lookAheadMaxDistance: 1
+--- !u!114 &1926914100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926914093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7114e0efa84888a5bc811fa1d7aec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToTargetObject: 8
+  smoothTime: 0.25
+  sensitivity: 2
+  lookAheadCatchupRate: 2.5
+  targetObject: {fileID: 663075054}
+  targetObjectHeightOffset: 1.5
+  horizontalDrift: 0.1
+  lookAheadMaxDistance: 0
 --- !u!1 &2042169873
 GameObject:
   m_ObjectHideFlags: 0
