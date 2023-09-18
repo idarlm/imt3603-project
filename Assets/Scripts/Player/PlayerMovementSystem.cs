@@ -1,6 +1,6 @@
 using System;
+using PlayerInput;
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
 
 namespace PlayerMovement
 {
@@ -87,32 +87,29 @@ namespace PlayerMovement
         private MovementHandler _handler;
         
         // state management
-        private bool _changeState = false;
+        private bool _changeState;
         private MovementState _currentState;
         private MovementState _nextState;
         
-        // temporary input handling
+        // input handling
+        private IPlayerInput _playerInput;
         private Vector2 _inputVector = Vector2.zero;
-        private bool _jump = false;
+        private bool _jump;
         
         // Unity messages
         private void Start()
         {
             // set up dependencies
+            _playerInput = new PCPlayerInput();
             _handler = GetComponent<MovementHandler>();
             _currentState = new GroundedState(this);
-            
-            // temp
-            Falling += (sender, e) => { Debug.Log("[PlayerMovementSystem] Falling"); };
-            Landed += (sender, e) => { Debug.Log("[PlayerMovementSystem] Landed"); };
-            Jumped += (sender, e) => { Debug.Log("[PlayerMovementSystem] Jumped"); };
         }
 
         private void Update()
         {
             // temporary input handling
-            _inputVector = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            _jump |= Input.GetButtonDown("Jump");
+            _inputVector = _playerInput.LeftJoystickXY();
+            _jump |= _playerInput.Jump().IsPressed();
             
             // Interpolate body
             float t = (Time.time - Time.fixedTime) / Time.fixedDeltaTime;
@@ -182,6 +179,12 @@ namespace PlayerMovement
                 
                 // inherit velocity from previous frame
                 var movement = Handler.Velocity * dt;
+                
+                // Don't allow player to preserve upwards
+                // velocity while grounded.
+                // Prevents a bug that can fling the player
+                // into the air.
+                movement.y = Mathf.Min(0, movement.y);
                 
                 var fwd = MovementSystem.Forward;
                 var rgt = MovementSystem.Right;
