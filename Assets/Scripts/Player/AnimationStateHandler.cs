@@ -27,12 +27,12 @@ namespace Player
             var notTouchingGround = _playerController.Falling;
             var movingUp = _playerController.Velocity.y > 0;
             _characterAnimator.SetBool(IsJumping, movingUp && notTouchingGround);
-            _characterAnimator.SetBool(IsMoving, _playerController.Velocity.magnitude != 0);
+            
             _characterAnimator.SetBool(IsFalling, notTouchingGround);
             _characterAnimator.SetBool(IsFalling, notTouchingGround);
             
             var frontVector = Vector3.ProjectOnPlane(_playerController.Velocity.normalized, Vector3.up);
-            
+            _characterAnimator.SetBool(IsMoving, frontVector.magnitude != 0);
             if (frontVector != Vector3.zero)
             {
                 transform.forward = frontVector;
