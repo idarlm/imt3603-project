@@ -2,22 +2,23 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.XR;
+using PlayerInput;
 
 namespace CameraSystem
 {
     public class FollowerCamera : MonoBehaviour
 {
     
-    public float distanceToTargetObject = 3;
+    public float distanceToTargetObject = 8;
     public float smoothTime = 0.25f;
-    public float sensitivity = 0.25f;
+    public float sensitivity = 2.0f;
     public float lookAheadCatchupRate = 2.5f;
     
     
     [SerializeField] private Transform targetObject;
-    [SerializeField] private float targetObjectHeightOffset;
+    [SerializeField] private float targetObjectHeightOffset = 1.5f;
     [SerializeField] private float horizontalDrift = 0.1f;
-    [SerializeField] private float lookAheadMaxDistance = 2.0f;
+    [SerializeField] private float lookAheadMaxDistance = 0.0f;
     
     
     private float   _cameraYaw;
@@ -30,9 +31,11 @@ namespace CameraSystem
     private Vector3 _lookAtTargetPosition;
     private bool _cameraIsColliding;
 
+    private IPlayerInput _playerInput;
     
     private void Start()
     {
+        _playerInput = new PCPlayerInput();
         _previousMousePos = Input.mousePosition;
         _previousPlayerPos = targetObject.position;
         _front = new Vector3(
@@ -47,13 +50,11 @@ namespace CameraSystem
     private void LateUpdate()
     {
         // TODO: get Generic XY delta
-        var mouseDelta = new Vector3(Input.GetAxis("Horizontal Right")*-1, 
-            Input.GetAxis("Vertical Right")*-1, 0.0f)  * (Time.deltaTime * sensitivity);
-        mouseDelta += (_previousMousePos - Input.mousePosition) * (Time.deltaTime * sensitivity);
+        var cameraControlDelta = -_playerInput.RightJoystickXY() * (Time.deltaTime * sensitivity);
         var targetPosition = targetObject.position;
         var targetMovement = _previousPlayerPos - targetPosition;
         
-        UpdatePitchAndYaw(ref  targetMovement, ref mouseDelta);
+        UpdatePitchAndYaw(ref  targetMovement, ref cameraControlDelta);
         UpdateFront();
         
         var cameraPosition = targetPosition - _front * distanceToTargetObject;
@@ -145,7 +146,7 @@ namespace CameraSystem
     /// </summary>
     /// <param name="targetMovement"></param>
     /// <param name="controllerXYDelta"></param>
-    private void UpdatePitchAndYaw(ref Vector3 targetMovement, ref Vector3 controllerXYDelta)
+    private void UpdatePitchAndYaw(ref Vector3 targetMovement, ref Vector2 controllerXYDelta)
     {
         var targetObjectHorizontalMovement = 
             (targetMovement.x * _front.z - targetMovement.z * _front.x) * horizontalDrift;
