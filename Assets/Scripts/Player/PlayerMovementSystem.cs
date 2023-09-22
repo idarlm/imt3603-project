@@ -17,10 +17,10 @@ namespace PlayerMovement
             }
             
             // reference to the base movement system
-            protected PlayerMovementSystem MovementSystem { get; private set; }
+            protected PlayerMovementSystem MovementSystem { get; }
             
             // reference to the attached movement handler
-            protected MovementHandler Handler { get; private set; }
+            protected MovementHandler Handler { get; }
 
             public abstract void Enter();        // Called when entering state
             public abstract void Exit();         // Called when exiting state
@@ -51,6 +51,7 @@ namespace PlayerMovement
         // Public properties
         public Vector3 Velocity => _handler.Velocity;               // current velocity
         public float CurrentSpeed => _handler.Velocity.magnitude;   // current speed
+        public bool Falling { get; private set; }
 
         public Vector3 Forward
         {
@@ -79,7 +80,7 @@ namespace PlayerMovement
         }
 
         // Events
-        public event EventHandler<PlayerMovementEventArgs> Falling;
+        public event EventHandler<PlayerMovementEventArgs> StartFalling;
         public event EventHandler<PlayerMovementEventArgs> Landed;
         public event EventHandler<PlayerMovementEventArgs> Jumped;
         public event EventHandler<PlayerMovementEventArgs> StanceChanged;
@@ -224,6 +225,7 @@ namespace PlayerMovement
         private PlayerMovementEventArgs GetEventArgs()
         {
             var args = new PlayerMovementEventArgs();
+            
             args.Velocity = Velocity;
             args.Speed = CurrentSpeed;
             args.FallSpeed = -Mathf.Min(Velocity.y - gravity * Mathf.Pow(Time.fixedDeltaTime, 2), 0);
@@ -315,6 +317,8 @@ namespace PlayerMovement
 
             public override void Enter()
             {
+                MovementSystem.Falling = true;
+                
                 // Add velocity upwards if jump flag is set
                 if (MovementSystem._jumpInput)
                 {
@@ -326,15 +330,12 @@ namespace PlayerMovement
                     MovementSystem.Jumped?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
                 }
                 
-                // Raise Falling event
-                // TODO: add event args
-                MovementSystem.Falling?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
+                MovementSystem.StartFalling?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
             }
 
             public override void Exit()
             {
-                // Raise Landed event
-                // TODO: add event args
+                MovementSystem.Falling = false;
                 MovementSystem.Landed?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
             }
 
@@ -361,16 +362,9 @@ namespace PlayerMovement
 
 }
 
-public enum PlayerMovementStateFlag
-{
-    Grounded,
-    Falling,
-}
-
 public class PlayerMovementEventArgs : EventArgs
 {
-    public PlayerMovementStateFlag CurrentState { get; set; }
-    
+    public bool Falling      { get; set; }
     public Vector3 Velocity  { get; set; }
     public float   Speed     { get; set; }
     public float   FallSpeed { get; set; }
