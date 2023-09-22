@@ -149,8 +149,6 @@ namespace PlayerMovement
                 ToggleStance();
             }
             
-            
-            
             _currentState.HandleInput();
             
             // change active state if needed
