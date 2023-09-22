@@ -123,18 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &57513444 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-    type: 3}
-  m_PrefabInstance: {fileID: 725573237}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3d2491ac1f32440aceebad67de8119, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &148653574
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +327,7 @@ Transform:
   m_GameObject: {fileID: 401436495}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.05, z: -2}
+  m_LocalPosition: {x: 0, y: 2.5, z: -2}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -450,27 +438,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &672135488 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5040888831750044997, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-    type: 3}
-  m_PrefabInstance: {fileID: 725573237}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &672135492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 672135488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3796cc698f60ec04fa0bd4d91d3fe937, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSystem: {fileID: 57513444}
-  crouchingHeight: 0.5
-  standingHeight: 1
 --- !u!1001 &725573237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -484,76 +451,6 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 1926914096}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: standingSettings.speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: crouchingSettings.speed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: standingSettings.acceleration
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: standingSettings.deceleration
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: crouchingSettings.acceleration
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: crouchingSettings.deceleration
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: standingSettings.controllerHeight
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: crouchingSettings.controllerHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: crouchingSettings.controllerCenter.y
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: crouchingSettings.controllerOffset.y
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1034280559241627406, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: m_Height
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1034280559241627406, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1034280559241627406, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1034280559241627406, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: m_StepOffset
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 5277396822397759764, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -612,11 +509,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5040888831750044997, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 672135492}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85bdfaf5606742b41bc5cbd34a988e5a, type: 3}
 --- !u!1 &782639032
 GameObject:
@@ -965,7 +858,6 @@ GameObject:
   - component: {fileID: 1926914095}
   - component: {fileID: 1926914094}
   - component: {fileID: 1926914098}
-  - component: {fileID: 1926914099}
   - component: {fileID: 1926914100}
   m_Layer: 0
   m_Name: Player Camera
@@ -1092,26 +984,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!114 &1926914099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926914093}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ad64aa2380fb6c49b26fb0efa0885d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceToTargetObject: 7
-  smoothTime: 0.1
-  sensitivity: 0.25
-  lookAheadCatchupRate: 1.1
-  targetObject: {fileID: 0}
-  targetObjectHeightOffset: 0.2
-  horizontalDrift: 0.1
-  lookAheadMaxDistance: 1
 --- !u!114 &1926914100
 MonoBehaviour:
   m_ObjectHideFlags: 0

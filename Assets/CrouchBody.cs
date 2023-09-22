@@ -12,8 +12,10 @@ public class CrouchBody : MonoBehaviour
         movementSystem.StanceChanged += OnStanceChanged;
     }
 
-    void OnStanceChanged(object sender, bool crouching)
+    void OnStanceChanged(object sender, PlayerMovementEventArgs args)
     {
+        bool crouching = args.Crouching;
+        
         transform.localScale = new(
             1,
             crouching ? crouchingHeight : standingHeight,
