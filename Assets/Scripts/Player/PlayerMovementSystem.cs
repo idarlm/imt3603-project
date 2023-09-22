@@ -127,7 +127,7 @@ namespace PlayerMovement
             // temporary input handling
             _inputVector = _playerInput.LeftJoystickXY();
             _jumpInput |= _playerInput.Jump().IsPressed();
-            _shouldCrouch ^= Input.GetKeyDown(KeyCode.LeftControl);
+            _shouldCrouch ^= _playerInput.Crouch().IsPressed();
             
             // Interpolate body
             float t = (Time.time - Time.fixedTime) / Time.fixedDeltaTime;

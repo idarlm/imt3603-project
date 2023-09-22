@@ -43,8 +43,8 @@ namespace PlayerInput
 
         private CombinedButton _jumpButton = new (new string[]{"Jump"});
         private CombinedButton _interactButton = new (new string[]{"Fire2"});
-        private CombinedButton _circleButton;
-        private CombinedButton _triangleButton;
+        private CombinedButton _crouchButton = new (new string[]{"Fire1"});
+        private CombinedButton _sprintButton;
 
         public Vector2 LeftJoystickXY()
         {
@@ -83,6 +83,16 @@ namespace PlayerInput
         }
         public IPlayerInput.IButton Menu(){
             return _leftDPad;
+        }
+        
+        public IPlayerInput.IButton Crouch()
+        {
+            return _crouchButton;
+        }
+        
+        public IPlayerInput.IButton Sprint()
+        {
+            return _jumpButton;
         }
     }
 }

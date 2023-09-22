@@ -22,6 +22,10 @@ namespace PlayerInput
         IButton Cancel();
         IButton Interact();
         IButton Jump();
+
+        IButton Crouch();
+
+        IButton Sprint();
         IButton Menu();
     }
 }

@@ -113,5 +113,15 @@ namespace PlayerInput
         {
             return _jumpButton;
         }
+        
+        public IPlayerInput.IButton Crouch()
+        {
+            return _jumpButton;
+        }
+        
+        public IPlayerInput.IButton Sprint()
+        {
+            return _jumpButton;
+        }
     }
 }
