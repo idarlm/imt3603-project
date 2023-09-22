@@ -189,19 +189,23 @@ namespace PlayerMovement
             if (_crouching)
             {
                 // Check if we are blocked from standing up
-                // This is very bugged now :)
-                // Will fix (maybe)
                 var controller = _handler.Controller;
                 
                 Ray ray = new(transform.position, Vector3.up);
-                var radius = _handler.Controller.radius;
-                var dist = standingSettings.controllerHeight * 0.5f;
-                Debug.DrawLine(transform.position, transform.position + Vector3.up * dist, Color.red);
-                if (Physics.SphereCast(ray, radius, dist))
-                {
-                    return;
-                }
+                var radius = controller.radius + controller.skinWidth;
+                var dist = standingSettings.controllerHeight * 0.5f - radius;
+                //Debug.DrawLine(transform.position, transform.position + Vector3.up * (dist + radius), Color.red);
+                //Debug.DrawLine(transform.position, transform.position + Vector3.right * radius, Color.red);
                 
+                var hits = Physics.SphereCastAll(ray, radius, dist);
+                
+                // Return if spherecast hits anything other than the player
+                foreach (var h in hits)
+                {
+                    if (h.transform != transform)
+                        return;
+                }
+
                 // Stand up
                 _crouching = false;
                 controller.height = standingSettings.controllerHeight;
@@ -209,6 +213,7 @@ namespace PlayerMovement
             }
             else
             {
+                // Crouch
                 _crouching = true;
                 var controller = _handler.Controller;
                 controller.height = crouchingSettings.controllerHeight;
