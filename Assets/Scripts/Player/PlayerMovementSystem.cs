@@ -228,7 +228,7 @@ namespace PlayerMovement
             
             args.Velocity = Velocity;
             args.Speed = CurrentSpeed;
-            args.FallSpeed = -Mathf.Min(Velocity.y - gravity * Mathf.Pow(Time.fixedDeltaTime, 2), 0);
+            args.FallSpeed = -Mathf.Min(_handler.OldVelocity.y, 0);
             args.Crouching = _crouching;
 
             return args;
