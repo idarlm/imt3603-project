@@ -103,9 +103,10 @@ namespace PlayerMovement
         private MovementState _nextState;
         
         // input handling
-        private IPlayerInput _playerInput;
+        private IPlayerInput _playerInput = new CombinedInput();
         private Vector2 _inputVector = Vector2.zero;
         private bool _jumpInput;
+        
         
         // stance
         private bool _crouching;
@@ -115,7 +116,6 @@ namespace PlayerMovement
         private void Start()
         {
             // set up dependencies
-            _playerInput = new PCPlayerInput();
             _handler = GetComponent<MovementHandler>();
             _currentState = new GroundedState(this);
 
@@ -149,6 +149,8 @@ namespace PlayerMovement
             {
                 ToggleStance();
             }
+            
+            
             
             _currentState.HandleInput();
             

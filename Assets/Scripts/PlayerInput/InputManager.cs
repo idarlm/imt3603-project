@@ -10,7 +10,7 @@ namespace PlayerInput
     {
         public static InputManager Instance;
 
-        private IPlayerInput _controllerScheme;
+        private IPlayerInput _controllerScheme = new PCPlayerInput();
         
         public Action<IPlayerInput> OnControllerSchemeChange;
     
@@ -24,6 +24,11 @@ namespace PlayerInput
         {
             _controllerScheme = controllerScheme;
             ControllerSchemeChange();
+        }
+
+        public IPlayerInput GetControllerScheme()
+        {
+            return _controllerScheme;
         }
         
         private void ControllerSchemeChange()
