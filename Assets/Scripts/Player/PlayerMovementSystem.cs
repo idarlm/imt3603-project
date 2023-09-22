@@ -17,10 +17,10 @@ namespace PlayerMovement
             }
             
             // reference to the base movement system
-            protected PlayerMovementSystem MovementSystem { get; private set; }
+            protected PlayerMovementSystem MovementSystem { get; }
             
             // reference to the attached movement handler
-            protected MovementHandler Handler { get; private set; }
+            protected MovementHandler Handler { get; }
 
             public abstract void Enter();        // Called when entering state
             public abstract void Exit();         // Called when exiting state
@@ -51,6 +51,7 @@ namespace PlayerMovement
         // Public properties
         public Vector3 Velocity => _handler.Velocity;               // current velocity
         public float CurrentSpeed => _handler.Velocity.magnitude;   // current speed
+        public bool Falling { get; private set; }
 
         public Vector3 Forward
         {
@@ -79,10 +80,10 @@ namespace PlayerMovement
         }
 
         // Events
-        public event EventHandler Falling;
-        public event EventHandler Landed;
-        public event EventHandler Jumped;
-        public event EventHandler<bool> StanceChanged;
+        public event EventHandler<PlayerMovementEventArgs> StartFalling;
+        public event EventHandler<PlayerMovementEventArgs> Landed;
+        public event EventHandler<PlayerMovementEventArgs> Jumped;
+        public event EventHandler<PlayerMovementEventArgs> StanceChanged;
         
         // Fields 
         [SerializeField] private StanceSettings standingSettings;
@@ -118,8 +119,6 @@ namespace PlayerMovement
             // set up dependencies
             _handler = GetComponent<MovementHandler>();
             _currentState = new GroundedState(this);
-
-            StanceChanged += (s, e) => { Debug.Log("[PlayerMovementSystem] Stance changed");};
         }
 
         private void Update()
@@ -149,8 +148,6 @@ namespace PlayerMovement
             {
                 ToggleStance();
             }
-            
-            
             
             _currentState.HandleInput();
             
@@ -220,7 +217,19 @@ namespace PlayerMovement
                 controller.center = crouchingSettings.controllerCenter;
             }
             
-            StanceChanged?.Invoke(this, _crouching);
+            StanceChanged?.Invoke(this, GetEventArgs());
+        }
+
+        private PlayerMovementEventArgs GetEventArgs()
+        {
+            var args = new PlayerMovementEventArgs();
+            
+            args.Velocity = Velocity;
+            args.Speed = CurrentSpeed;
+            args.FallSpeed = -Mathf.Min(_handler.OldVelocity.y, 0);
+            args.Crouching = _crouching;
+
+            return args;
         }
 
         // State classes
@@ -306,6 +315,8 @@ namespace PlayerMovement
 
             public override void Enter()
             {
+                MovementSystem.Falling = true;
+                
                 // Add velocity upwards if jump flag is set
                 if (MovementSystem._jumpInput)
                 {
@@ -314,19 +325,16 @@ namespace PlayerMovement
                     Handler.SetVelocity(newVelocity);
                     
                     // Raise Jumped event
-                    MovementSystem.Jumped?.Invoke(MovementSystem, EventArgs.Empty);
+                    MovementSystem.Jumped?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
                 }
                 
-                // Raise Falling event
-                // TODO: add event args
-                MovementSystem.Falling?.Invoke(MovementSystem, EventArgs.Empty);
+                MovementSystem.StartFalling?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
             }
 
             public override void Exit()
             {
-                // Raise Landed event
-                // TODO: add event args
-                MovementSystem.Landed?.Invoke(MovementSystem, EventArgs.Empty);
+                MovementSystem.Falling = false;
+                MovementSystem.Landed?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
             }
 
             public override void Update()
@@ -349,5 +357,14 @@ namespace PlayerMovement
         }
         
     }
-
+    
+    public class PlayerMovementEventArgs : EventArgs
+    {
+        public bool Falling      { get; set; }
+        public Vector3 Velocity  { get; set; }
+        public float   Speed     { get; set; }
+        public float   FallSpeed { get; set; }
+        public bool    Crouching { get; set; }
+    }
+    
 }
