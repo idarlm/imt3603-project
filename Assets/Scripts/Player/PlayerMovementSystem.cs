@@ -359,14 +359,14 @@ namespace PlayerMovement
         }
         
     }
-
-}
-
-public class PlayerMovementEventArgs : EventArgs
-{
-    public bool Falling      { get; set; }
-    public Vector3 Velocity  { get; set; }
-    public float   Speed     { get; set; }
-    public float   FallSpeed { get; set; }
-    public bool    Crouching { get; set; }
+    
+    public class PlayerMovementEventArgs : EventArgs
+    {
+        public bool Falling      { get; set; }
+        public Vector3 Velocity  { get; set; }
+        public float   Speed     { get; set; }
+        public float   FallSpeed { get; set; }
+        public bool    Crouching { get; set; }
+    }
+    
 }
