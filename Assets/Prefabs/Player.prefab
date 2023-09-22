@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 124210006553118448}
   - component: {fileID: 7413252257147104999}
   - component: {fileID: 5449973547198841212}
-  m_Layer: 0
+  - component: {fileID: 7899183141266156673}
+  m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +100,21 @@ MonoBehaviour:
   movementSystem: {fileID: 642060533905121347}
   crouchingHeight: 0.5
   standingHeight: 1
+--- !u!114 &7899183141266156673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5040888831750044997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3796cc698f60ec04fa0bd4d91d3fe937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSystem: {fileID: 642060533905121347}
+  crouchingHeight: 0.5
+  standingHeight: 1
 --- !u!1 &5839831559717099692
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2400750777599125005}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Interpolated Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +159,7 @@ GameObject:
   - component: {fileID: 1034280559241627406}
   - component: {fileID: 8218954484654295882}
   - component: {fileID: 642060533905121347}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -188,7 +204,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.4
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}

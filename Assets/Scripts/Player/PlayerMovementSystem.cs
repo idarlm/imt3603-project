@@ -194,13 +194,17 @@ namespace PlayerMovement
                 //Debug.DrawLine(transform.position, transform.position + Vector3.up * (dist + radius), Color.red);
                 //Debug.DrawLine(transform.position, transform.position + Vector3.right * radius, Color.red);
                 
-                var hits = Physics.SphereCastAll(ray, radius, dist);
-                
                 // Return if spherecast hits anything other than the player
-                foreach (var h in hits)
+                var hits = Physics.SphereCastAll(
+                    ray,
+                    radius,
+                    dist,
+                    LayerMask.NameToLayer("Player")
+                    );
+
+                if (hits.Length > 0)
                 {
-                    if (h.transform != transform)
-                        return;
+                    return;
                 }
 
                 // Stand up
