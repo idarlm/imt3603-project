@@ -1,6 +1,6 @@
 namespace AIController.ChaseBehaviour
 {
-    internal class SimpleFollower : IState<AIContext>
+    internal class SimpleFollowerState : IState<AIContext>
     {
         public void Enter(AIContext context)
         {
