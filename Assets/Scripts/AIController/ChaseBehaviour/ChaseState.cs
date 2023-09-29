@@ -1,4 +1,6 @@
-﻿namespace AIController.ChaseBehaviour 
+﻿using StateMachine;
+
+namespace AIController.ChaseBehaviour 
 {
     
     internal class ChaseState : IState<AIContext>

@@ -3,10 +3,15 @@
 //
 // This allows for reuse of state instances
 // in cases where the state behaviour is not inherently "stateful".
-public interface IState<TContext>
+
+
+namespace StateMachine
 {
-    void Enter(TContext context);
-    void Exit(TContext context);
-    void HandleInput(TContext context);
-    void Update(TContext context);
+    public interface IState<TContext>
+    {
+        void Enter(TContext context);
+        void Exit(TContext context);
+        void HandleInput(TContext context);
+        void Update(TContext context);
+    }
 }

@@ -1,4 +1,6 @@
-﻿namespace AIController.PatrolBehaviour
+﻿using StateMachine;
+
+namespace AIController.PatrolBehaviour
 {
     internal class PatrolState : IState<AIContext>
     {
