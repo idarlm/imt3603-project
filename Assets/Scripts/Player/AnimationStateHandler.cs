@@ -14,6 +14,7 @@ namespace Player
         private static readonly int IsMoving = Animator.StringToHash("isMoving");
         private static readonly int IsFalling = Animator.StringToHash("isFalling");
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
+        private static readonly int MovementSpeedPercentage = Animator.StringToHash("movementSpeedPercentage");
 
         // Start is called before the first frame update
         void Start()
@@ -27,12 +28,12 @@ namespace Player
             var notTouchingGround = _playerController.Falling;
             var movingUp = _playerController.Velocity.y > 0;
             _characterAnimator.SetBool(IsJumping, movingUp && notTouchingGround);
-            
             _characterAnimator.SetBool(IsFalling, notTouchingGround);
             _characterAnimator.SetBool(IsFalling, notTouchingGround);
             
             var frontVector = Vector3.ProjectOnPlane(_playerController.Velocity.normalized, Vector3.up);
             _characterAnimator.SetBool(IsMoving, frontVector.magnitude != 0);
+            _characterAnimator.SetFloat(MovementSpeedPercentage, _playerController.Velocity.magnitude / 5.0f);
             if (frontVector != Vector3.zero)
             {
                 transform.forward = frontVector;

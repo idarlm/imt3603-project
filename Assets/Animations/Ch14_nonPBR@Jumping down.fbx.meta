@@ -36,8 +36,8 @@ ModelImporter:
       name: Jumping down
       takeName: mixamo.com
       internalID: -203655887218126122
-      firstFrame: 23
-      lastFrame: 57
+      firstFrame: 31
+      lastFrame: 55
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
