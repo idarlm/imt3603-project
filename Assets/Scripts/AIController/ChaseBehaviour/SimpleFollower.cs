@@ -1,10 +1,10 @@
-﻿namespace AIController
+namespace AIController.ChaseBehaviour
 {
-    internal class PatrolState : IState<AIContext>
+    internal class SimpleFollower : IState<AIContext>
     {
         public void Enter(AIContext context)
         {
-            
+
         }
 
         public void Exit(AIContext context)
@@ -19,7 +19,8 @@
 
         public void Update(AIContext context)
         {
-            
+            context.Agent.destination = context.Target.position;
         }
     }
 }
+

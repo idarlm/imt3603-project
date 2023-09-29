@@ -1,5 +1,6 @@
-﻿namespace AIController
+﻿namespace AIController.ChaseBehaviour 
 {
+    
     internal class ChaseState : IState<AIContext>
     {
         public void Enter(AIContext context)
