@@ -649,7 +649,7 @@ PrefabInstance:
     - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
       propertyPath: standingSettings.speed
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
