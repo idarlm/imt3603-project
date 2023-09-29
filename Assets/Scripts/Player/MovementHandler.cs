@@ -13,7 +13,7 @@ namespace PlayerMovement
         public Vector3 Velocity => Controller.velocity;
         public Vector3 OldVelocity { get; private set; }
 
-        public bool Grounded => Controller.isGrounded;
+        public bool Grounded => Controller.isGrounded || _groundCheck;
         public bool ShouldStick { get; private set; }
 
         // Public fields
@@ -22,6 +22,7 @@ namespace PlayerMovement
 
         // Private fields
         private Vector3 _groundNormal = Vector3.up;
+        private bool _groundCheck;
 
         private bool _addVelocity = false;
         private bool _setVelocity = false;
@@ -61,10 +62,14 @@ namespace PlayerMovement
             }
             
             Controller.Move(movement);
-            
-            // Check if we should stick to the ground
+
+            // Perform additional ground check because unity is ass
             Ray r = new(transform.position, Vector3.down);
-            float dist = (Controller.height * 0.5f) + StickyThreshold;
+            float dist = (Controller.height * 0.5f) + Controller.skinWidth - Controller.radius;
+            _groundCheck = ShouldStick = Physics.SphereCast(r, Controller.radius, dist);
+
+            // Check if we should stick to the ground
+            dist = (Controller.height * 0.5f) + StickyThreshold;
             ShouldStick = Physics.SphereCast(r, StickyRadius, dist);
         }
 
