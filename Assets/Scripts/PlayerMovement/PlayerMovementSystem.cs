@@ -67,6 +67,9 @@ namespace PlayerMovement
         [SerializeField] private Transform cameraTransform; // used to determine forward direction
         [SerializeField] private Transform interpolatedBody; // used to smoothly move the body of the player
         private Vector3 _oldPosition; // used for interpolation
+    
+        [SerializeField]
+        internal Rigidbody pushTarget;
         
         // dependencies
         private MovementHandler _handler;
