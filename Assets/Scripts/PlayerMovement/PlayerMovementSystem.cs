@@ -8,38 +8,9 @@ namespace PlayerMovement
     [RequireComponent(typeof(MovementHandler))]
     public class PlayerMovementSystem : MonoBehaviour
     {
-        private abstract class MovementState
-        {
-            public MovementState(PlayerMovementSystem system)
-            {
-                MovementSystem = system;
-                Handler = system._handler;
-            }
-            
-            // reference to the base movement system
-            protected PlayerMovementSystem MovementSystem { get; }
-            
-            // reference to the attached movement handler
-            protected MovementHandler Handler { get; }
-
-            public abstract void Enter();        // Called when entering state
-            public abstract void Exit();         // Called when exiting state
-            
-            // Update is called every frame after input handling and state transitions.
-            // This is where behaviour code such as movement logic should go.
-            //
-            // Example: In the falling state, Update is used to accelerate the player downwards.
-            public abstract void Update();
-            
-            // HandleInput is called every frame before the Update method.
-            // HandleInput should be used to perform state changes.
-            //
-            // Example: if we lose contact with ground we should change to the falling state.
-            public abstract void HandleInput();
-        }
 
         [Serializable]
-        private struct StanceSettings
+        internal struct StanceSettings
         {
             public float speed;
             public float acceleration;
@@ -47,11 +18,12 @@ namespace PlayerMovement
             public float controllerHeight;
             public Vector3 controllerCenter;
         }
-        
+
         // Public properties
-        public Vector3 Velocity => _handler.Velocity;               // current velocity
-        public float CurrentSpeed => _handler.Velocity.magnitude;   // current speed
-        public bool Falling { get; private set; }
+        public Vector3 Velocity => _handler.Velocity; // current velocity
+        public float CurrentSpeed => _handler.Velocity.magnitude; // current speed
+        public bool Falling { get; internal set; }
+        public MovementHandler Handler => _handler;
 
         public Vector3 Forward
         {
@@ -84,57 +56,65 @@ namespace PlayerMovement
         public event EventHandler<PlayerMovementEventArgs> Landed;
         public event EventHandler<PlayerMovementEventArgs> Jumped;
         public event EventHandler<PlayerMovementEventArgs> StanceChanged;
-        
+
         // Fields 
         [SerializeField] private StanceSettings standingSettings;
         [SerializeField] private StanceSettings crouchingSettings;
-        [SerializeField] private float gravity = 10f;
-        [SerializeField] private float jumpSpeed = 5f;
-        [SerializeField] private float sprintSpeed = 5f;
+        [SerializeField] internal float gravity = 10f;
+        [SerializeField] internal float jumpSpeed = 5f;
+        [SerializeField] internal float sprintSpeed = 5f;
 
-        [SerializeField] private Transform cameraTransform;     // used to determine forward direction
-        [SerializeField] private Transform interpolatedBody;    // used to smoothly move the body of the player
-        private Vector3 _oldPosition;                           // used for interpolation
+        [SerializeField] private Transform cameraTransform; // used to determine forward direction
+        [SerializeField] private Transform interpolatedBody; // used to smoothly move the body of the player
+        private Vector3 _oldPosition; // used for interpolation
         
+        // dependencies
         private MovementHandler _handler;
-        
-        // state management
-        private bool _changeState;
-        private MovementState _currentState;
-        private MovementState _nextState;
-        
+        private GenericStateMachine<PlayerMovementSystem> _stateMachine;
+
         // input handling
         private IPlayerInput _playerInput = new CombinedInput();
-        private Vector2 _inputVector = Vector2.zero;
-        private bool _jumpInput;
-        
-        
+        internal Vector2 inputVector = Vector2.zero;
+        internal bool jumpInput;
+
         // stance
         private bool _crouching;
         private bool _shouldCrouch;
         
+        // Public Methods
+        internal void ChangeState(PlayerMovementState newState)
+        {
+            _stateMachine.ChangeState(newState);
+        }
+
+        internal ref StanceSettings GetStanceSettings()
+        {
+            if (_crouching)
+                return ref crouchingSettings;
+
+            return ref standingSettings;
+        }
+
         // Unity messages
         private void Start()
         {
             // set up dependencies
             _handler = GetComponent<MovementHandler>();
-            _currentState = new GroundedState(this);
+            _stateMachine = new(new PlayerGroundedState());
         }
 
         private void Update()
         {
-            // temporary input handling
-            _inputVector = _playerInput.LeftJoystickXY();
-            _jumpInput |= _playerInput.Jump().IsPressed();
+            // input handling
+            inputVector = _playerInput.LeftJoystickXY();
+            jumpInput |= _playerInput.Jump().IsPressed();
             _shouldCrouch ^= _playerInput.Crouch().IsPressed();
-            
+
             // Interpolate body
             float t = (Time.time - Time.fixedTime) / Time.fixedDeltaTime;
             interpolatedBody.position = Vector3.Lerp(_oldPosition, transform.position, t);
-            
-            // Check if _currentState is null
-            // To let us update code without having to reenter playmode.
-            _currentState ??= new GroundedState(this);
+
+            _stateMachine ??= new(new PlayerGroundedState());
         }
 
         private void FixedUpdate()
@@ -142,65 +122,47 @@ namespace PlayerMovement
             // set old position
             // used to interpolate body transform
             _oldPosition = transform.position;
-            
+
             // change stance
             if (_crouching != _shouldCrouch)
             {
                 ToggleStance();
             }
             
-            _currentState.HandleInput();
+            // update state machine
+            // the state machine performs all movement behaviour
+            // like acceleration, etc...
+            _stateMachine.Update(this);
             
-            // change active state if needed
-            if (_changeState)
-            {
-                _currentState.Exit();
-                _currentState = _nextState;
-                _currentState.Enter();
-
-                _changeState = false;
-            }
-
-            _currentState.Update();
-
-            _jumpInput = false; // temp
-        }
-        
-        // Private methods
-        private void ChangeState(MovementState newState)
-        {
-            _nextState = newState;
-            _changeState = true;
+            // clear input flags
+            jumpInput = false; // temp
         }
 
-        private ref StanceSettings GetStanceSettings()
-        {
-            if (_crouching)
-                return ref crouchingSettings;
-            
-            return ref standingSettings;
-        }
-
+        // Try to uncrouch if we are crouching,
+        // or crouch if we are not.
+        //
+        // Uncrouching is more complicated because we need to check
+        // for obstacles above the player.
         private void ToggleStance()
         {
             if (_crouching)
             {
                 // Check if we are blocked from standing up
                 var controller = _handler.Controller;
-                
+
                 Ray ray = new(transform.position, Vector3.up);
                 var radius = controller.radius + controller.skinWidth;
                 var dist = standingSettings.controllerHeight * 0.5f - radius;
                 //Debug.DrawLine(transform.position, transform.position + Vector3.up * (dist + radius), Color.red);
                 //Debug.DrawLine(transform.position, transform.position + Vector3.right * radius, Color.red);
-                
+
                 // Return if spherecast hits anything other than the player
                 var hits = Physics.SphereCastAll(
                     ray,
                     radius,
                     dist,
                     LayerMask.NameToLayer("Player")
-                    );
+                );
 
                 if (hits.Length > 0)
                 {
@@ -220,14 +182,14 @@ namespace PlayerMovement
                 controller.height = crouchingSettings.controllerHeight;
                 controller.center = crouchingSettings.controllerCenter;
             }
-            
+
             StanceChanged?.Invoke(this, GetEventArgs());
         }
 
         private PlayerMovementEventArgs GetEventArgs()
         {
             var args = new PlayerMovementEventArgs();
-            
+
             args.Velocity = Velocity;
             args.Speed = CurrentSpeed;
             args.FallSpeed = -Mathf.Min(_handler.OldVelocity.y, 0);
@@ -235,131 +197,6 @@ namespace PlayerMovement
 
             return args;
         }
-
-        // State classes
-        
-        // GroundedState defines the behaviour when the player is on the ground.
-        // This includes allowing the player to move around and potentially jump.
-        private class GroundedState : MovementState
-        {
-            public GroundedState(PlayerMovementSystem pms) : base(pms)
-            {
-            }
-            
-            public override void Enter()
-            {
-            }
-
-            public override void Exit()
-            {
-            }
-
-            public override void Update()
-            {
-                var dt = Time.fixedDeltaTime;
-                
-                // inherit velocity from previous frame
-                var movement = Handler.Velocity * dt;
-                
-                // Don't preserve upwards velocity while grounded.
-                // Prevents a bug that can fling the player into the air.
-                movement.y = Mathf.Min(0, movement.y);
-                
-                var fwd = MovementSystem.Forward;
-                var rgt = MovementSystem.Right;
-                var input = MovementSystem._inputVector;
-                var settings = MovementSystem.GetStanceSettings();
-
-                // calculate acceleration
-                float speedFactor = Mathf.Clamp01(settings.speed - Handler.Velocity.magnitude);
-                var acceleration = fwd * input.y;
-                acceleration += rgt * input.x;
-                acceleration *= settings.acceleration * speedFactor * dt * dt;
-
-                movement += acceleration;
-                
-                // calculate deceleration
-                var deceleration = Handler.Velocity.normalized - acceleration.normalized;
-                deceleration *= settings.deceleration * dt;
-
-                deceleration = deceleration.sqrMagnitude > Handler.Velocity.sqrMagnitude
-                    ? Handler.Velocity
-                    : deceleration;
-
-                movement -= deceleration * dt;
-
-                if (Handler.ShouldStick)
-                {
-                    movement += Vector3.down;
-                }
-
-                Handler.Move(movement);
-            }
-
-            public override void HandleInput()
-            {
-                bool grounded = Handler.Grounded || Handler.ShouldStick;
-
-                if (!grounded || MovementSystem._jumpInput)
-                {
-                    MovementSystem.ChangeState(new FallingState(MovementSystem));
-                    return;
-                }
-            }
-        }
-        
-        // FallingState defines the behaviour when the player is not on the ground
-        // This is mainly applying gravity and letting the player jump.
-        private class FallingState : MovementState
-        {
-            public FallingState(PlayerMovementSystem pms) : base(pms)
-            {
-            }
-
-
-            public override void Enter()
-            {
-                MovementSystem.Falling = true;
-                
-                // Add velocity upwards if jump flag is set
-                if (MovementSystem._jumpInput)
-                {
-                    var newVelocity = Handler.Velocity;
-                    newVelocity.y = MovementSystem.jumpSpeed;
-                    Handler.SetVelocity(newVelocity);
-                    
-                    // Raise Jumped event
-                    MovementSystem.Jumped?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
-                }
-                
-                MovementSystem.StartFalling?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
-            }
-
-            public override void Exit()
-            {
-                MovementSystem.Falling = false;
-                MovementSystem.Landed?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
-            }
-
-            public override void Update()
-            {
-                float dt = Time.fixedDeltaTime;
-                Vector3 movement = Handler.Velocity * dt;
-                movement += Vector3.down * (MovementSystem.gravity * dt * dt);
-                
-                Handler.Move(movement);
-            }
-
-            public override void HandleInput()
-            {
-                if (Handler.Grounded)
-                {
-                    MovementSystem.ChangeState(new GroundedState(MovementSystem));
-                    return;
-                }
-            }
-        }
-        
     }
     
     public class PlayerMovementEventArgs : EventArgs
