@@ -64,7 +64,7 @@ namespace PlayerMovement
         [SerializeField] internal float jumpSpeed = 5f;
         [SerializeField] internal float sprintSpeed = 5f;
 
-        [SerializeField] internal float turnRate = 15f;
+        [SerializeField] internal float turnRate = 180f;
         [SerializeField] internal float turnEventThreshold = 120f;
         
         [SerializeField] private StanceSettings standingSettings;
@@ -107,6 +107,8 @@ namespace PlayerMovement
             // set up dependencies
             _handler = GetComponent<MovementHandler>();
             _stateMachine = new(new PlayerGroundedState());
+
+            Forward = transform.forward;
         }
         
         // Handle player input and interpolation every frame
