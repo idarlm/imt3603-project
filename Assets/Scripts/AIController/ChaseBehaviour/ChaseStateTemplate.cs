@@ -1,10 +1,18 @@
-﻿using StateMachine;
+﻿
+
+using AIController;
+using StateMachine;
 
 namespace AIController.ChaseBehaviour 
 {
     
-    internal class ChaseState : IState<AIContext>
+    internal class ChaseStateTemplate : IAIState
     {
+        public string GetName()
+        {
+            return "";
+        }
+        
         public void Enter(AIContext context)
         {
             

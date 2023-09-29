@@ -2,8 +2,12 @@ using StateMachine;
 
 namespace AIController.ChaseBehaviour
 {
-    internal class SimpleFollowerState : IState<AIContext>
+    internal class SimpleFollowerState : IAIState
     {
+        public string GetName()
+        {
+            return "simpleFactory";
+        }
         public void Enter(AIContext context)
         {
 
