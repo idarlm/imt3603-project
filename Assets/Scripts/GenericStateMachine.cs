@@ -1,13 +1,23 @@
 
 public class GenericStateMachine<TContext>
 {
-    private IState<TContext> _currentState;
-
+    // state management
     private bool _changeState;
+    private IState<TContext> _currentState;
     private IState<TContext> _nextState;
 
     public IState<TContext> CurrentState => _currentState;
 
+    public GenericStateMachine()
+    {
+    }
+
+    public GenericStateMachine(IState<TContext> entry)
+    {
+        ChangeState(entry);
+    }
+    
+    // Update current state
     public void Update(TContext context)
     {
         _currentState?.HandleInput(context);
@@ -26,7 +36,7 @@ public class GenericStateMachine<TContext>
         _currentState?.Update(context);
     }
     
-    public void SetState(IState<TContext> nextState)
+    public void ChangeState(IState<TContext> nextState)
     {
         _changeState = true;
         _nextState = nextState;
