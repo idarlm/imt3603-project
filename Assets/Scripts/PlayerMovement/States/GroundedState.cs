@@ -27,8 +27,8 @@ namespace PlayerMovement
             // Prevents a bug that can fling the player into the air.
             movement.y = Mathf.Min(0, movement.y);
 
-            var fwd = context.Forward;
-            var rgt = context.Right;
+            var fwd = context.CameraForward;
+            var rgt = context.CameraRight;
             var input = context.inputVector;
             var settings = context.GetStanceSettings();
 
