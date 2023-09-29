@@ -6,22 +6,18 @@ namespace PlayerMovement
     // This is mainly applying gravity and letting the player jump.
     internal class PlayerFallingState : PlayerMovementState
     {
-        private MovementHandler Handler;
-        private PlayerMovementSystem MovementSystem;
-        
         public override void Enter(PlayerMovementSystem context)
         {
-            MovementSystem = context;
-            Handler = context.Handler;
+            var handler = context.Handler;
             
-            MovementSystem.Falling = true;
+            context.Falling = true;
 
             // Add velocity upwards if jump flag is set
-            if (MovementSystem.jumpInput)
+            if (context.jumpInput)
             {
-                var newVelocity = Handler.Velocity;
-                newVelocity.y = MovementSystem.jumpSpeed;
-                Handler.SetVelocity(newVelocity);
+                var newVelocity = handler.Velocity;
+                newVelocity.y = context.jumpSpeed;
+                handler.SetVelocity(newVelocity);
 
                 // Raise Jumped event
                 //MovementSystem.Jumped?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
@@ -32,24 +28,26 @@ namespace PlayerMovement
 
         public override void Exit(PlayerMovementSystem context)
         {
-            MovementSystem.Falling = false;
+            context.Falling = false;
             //MovementSystem.Landed?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
         }
 
         public override void Update(PlayerMovementSystem context)
         {
+            var handler = context.Handler;
+            
             float dt = Time.fixedDeltaTime;
-            Vector3 movement = Handler.Velocity * dt;
-            movement += Vector3.down * (MovementSystem.gravity * dt * dt);
+            Vector3 movement = handler.Velocity * dt;
+            movement += Vector3.down * (context.gravity * dt * dt);
 
-            Handler.Move(movement);
+            handler.Move(movement);
         }
 
         public override void HandleInput(PlayerMovementSystem context)
         {
-            if (Handler.Grounded)
+            if (context.Handler.Grounded)
             {
-                MovementSystem.ChangeState(new PlayerGroundedState());
+                context.ChangeState(new PlayerGroundedState());
             }
         }
     }

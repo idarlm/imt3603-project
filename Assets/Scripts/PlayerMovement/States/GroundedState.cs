@@ -6,13 +6,8 @@ namespace PlayerMovement
     // This includes allowing the player to move around and potentially jump.
     internal class PlayerGroundedState : PlayerMovementState
     {
-        MovementHandler Handler;
-        PlayerMovementSystem MovementSystem;
-        
         public override void Enter(PlayerMovementSystem context)
         {
-            MovementSystem = context;
-            Handler = context.Handler;
         }
 
         public override void Exit(PlayerMovementSystem context)
@@ -21,22 +16,24 @@ namespace PlayerMovement
 
         public override void Update(PlayerMovementSystem context)
         {
+            var handler = context.Handler;
+            
             var dt = Time.fixedDeltaTime;
 
             // inherit velocity from previous frame
-            var movement = Handler.Velocity * dt;
+            var movement = context.Velocity * dt;
 
             // Don't preserve upwards velocity while grounded.
             // Prevents a bug that can fling the player into the air.
             movement.y = Mathf.Min(0, movement.y);
 
-            var fwd = MovementSystem.Forward;
-            var rgt = MovementSystem.Right;
-            var input = MovementSystem.inputVector;
-            var settings = MovementSystem.GetStanceSettings();
+            var fwd = context.Forward;
+            var rgt = context.Right;
+            var input = context.inputVector;
+            var settings = context.GetStanceSettings();
 
             // calculate acceleration
-            float speedFactor = Mathf.Clamp01(settings.speed - Handler.Velocity.magnitude);
+            float speedFactor = Mathf.Clamp01(settings.speed - handler.Velocity.magnitude);
             var acceleration = fwd * input.y;
             acceleration += rgt * input.x;
             acceleration *= settings.acceleration * speedFactor * dt * dt;
@@ -44,30 +41,31 @@ namespace PlayerMovement
             movement += acceleration;
 
             // calculate deceleration
-            var deceleration = Handler.Velocity.normalized - acceleration.normalized;
+            var deceleration = handler.Velocity.normalized - acceleration.normalized;
             deceleration *= settings.deceleration * dt;
 
-            deceleration = deceleration.sqrMagnitude > Handler.Velocity.sqrMagnitude
-                ? Handler.Velocity
+            deceleration = deceleration.sqrMagnitude > handler.Velocity.sqrMagnitude
+                ? handler.Velocity
                 : deceleration;
 
             movement -= deceleration * dt;
 
-            if (Handler.ShouldStick)
+            if (handler.ShouldStick)
             {
                 movement += Vector3.down;
             }
 
-            Handler.Move(movement);
+            handler.Move(movement);
         }
 
         public override void HandleInput(PlayerMovementSystem context)
         {
-            bool grounded = Handler.Grounded || Handler.ShouldStick;
+            var handler = context.Handler;
+            bool grounded = handler.Grounded || handler.ShouldStick;
 
-            if (!grounded || MovementSystem.jumpInput)
+            if (!grounded || context.jumpInput)
             {
-                MovementSystem.ChangeState(new PlayerFallingState());
+                context.ChangeState(new PlayerFallingState());
                 return;
             }
         }
