@@ -4,28 +4,33 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
+using Utility;
 
 namespace EventSystem
 {
     public class StateDoorController : MonoBehaviour
     {
         private TriggerCollection _triggerStatus;
+        public DoorState CurrentState;
         
         public int[] triggerIDs;
         public float openTime = 1.0f;
         public float closeTime = 3.0f;
         public Vector3 endPositionOffset;
         private Vector3 _startPosition;
-        private bool _opening; // If true, the door is opening. if _opening && _moving, it is closing.
-        private bool _moving; // If true, the door is not in its resting position
-        private LTDescr _tween;
         
         
-        private float _animationState;
+        protected float _animationState;
 
+
+        public void ChangeState(DoorState newState)
+        {
+            CurrentState = newState;
+        }
 
         private void Awake()
         {
+            CurrentState = new StaticDoorState(this);
             _triggerStatus = new TriggerCollection(triggerIDs);
         }
         
@@ -36,46 +41,80 @@ namespace EventSystem
             WorldEvents.current.OnDoorwayTriggerExit += OnDoorwayClose;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (_moving)
-            {
-                _animationState = Math.Clamp(
-                    _animationState + Time.deltaTime * (_opening? 1 / openTime : -1 / closeTime), 0, 1);
-                transform.position = Vector3.Lerp(
-                    _startPosition, _startPosition + endPositionOffset, _animationState);
-                _moving = (transform.position != _startPosition);
-            }
+            CurrentState?.Execute();
         }
 
         
         private void OnDoorwayClose(int id)
         {
-            _moving = true;
-            _opening = !_triggerStatus.SetStatus(id, false);
-            //var remainingTime = Time.time - LeanTween.descr(_tweenID).time;
-            /*
-            if (_tween != null && _animationState != 0.0f) _animationState -= 
-                (openTime * _animationState - _tween.passed) / (openTime * _animationState);
-            LeanTween.cancel(gameObject);
-            _tween = LeanTween.move(gameObject, _startPosition, closeTime * _animationState);
-            */
+            //ChangeState(new ClosingState(this));
         }
 
         private void OnDoorwayOpen(int id)
         {
-            _triggerStatus.SetStatus(id, true);
-            _moving = _opening = _triggerStatus.AllActive();
-            //var remainingTime = Time.time - LeanTween.descr(_tweenID).time;
-            /*
-            if (_tween != null && _animationState != 1.0f) _animationState -=
-                (closeTime * (1.0f - _animationState) - _tween.passed) / closeTime * (1.0f-_animationState);
-            LeanTween.cancel(gameObject);
-            _tween = LeanTween
-                .move(gameObject, _startPosition + endPositionOffset, openTime * (1.0f-_animationState))
-                .setEaseInOutCubic();
-                */
+            ChangeState(new OpeningState(this));
         }
+
+        public abstract class DoorState
+        {
+            protected StateDoorController Door;
+            public DoorState(StateDoorController door)
+            {
+                Door = door;
+            }
+            public virtual void Enter() {}
+            public virtual void Exit() {}
+            public virtual void Execute() {}
+        }
+        
+        public class StaticDoorState : DoorState
+        {
+            public StaticDoorState(StateDoorController door) : base(door)
+            {
+                Door = door;
+            }
+            public override void Enter() {}
+            public override void Exit() {}
+            public override void Execute() {}
+        }
+        
+        private class OpeningState : DoorState
+        {
+            public OpeningState(StateDoorController door) : base(door) {}
+            public override void Enter() {}
+            public override void Exit() {}
+            public override void Execute()
+            {
+                Door._animationState = Math.Clamp(
+                    Door._animationState + Time.deltaTime * 1/Door.openTime, 0, 1);
+                Door.transform.position = Vector3.LerpUnclamped(
+                    Door._startPosition, Door._startPosition + Door.endPositionOffset, Easing.InOutCubic(Door._animationState));
+                if (Door._animationState >= 1.0f)
+                {
+                    Door.ChangeState(new StaticDoorState(Door));
+                }
+            }
+        }
+        
+        private class ClosingState : DoorState
+        {
+            public ClosingState(StateDoorController door) : base(door) {}
+            public override void Enter() {}
+            public override void Exit() {}
+            public override void Execute()
+            {
+                Door._animationState = Math.Clamp(
+                    Door._animationState + Time.deltaTime * -1/Door.closeTime, 0, 1);
+                Door.transform.position = Vector3.LerpUnclamped(
+                    Door._startPosition, Door._startPosition + Door.endPositionOffset, Easing.InOutCubic(Door._animationState));
+                if (Door._animationState <= 0.0f)
+                {
+                    Door.ChangeState(new StaticDoorState(Door));
+                }
+            }
+        }
+        
     }
-    
 }
