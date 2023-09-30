@@ -21,8 +21,9 @@ namespace PlayerMovement
         }
 
         // Public properties
-        public Vector3 Velocity => _handler.Velocity; // current velocity
-        public float CurrentSpeed => _handler.Velocity.magnitude; // current speed
+        public Vector3 Velocity => _handler.Velocity;
+        public Vector3 HorizontalVelocity => Vector3.ProjectOnPlane(_handler.Velocity, Vector3.up);
+        public float CurrentSpeed => HorizontalVelocity.magnitude;
         public bool Falling { get; internal set; }
         public MovementHandler Handler => _handler;
 

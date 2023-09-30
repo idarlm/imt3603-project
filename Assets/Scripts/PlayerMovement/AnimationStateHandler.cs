@@ -34,7 +34,7 @@ namespace Player
             var frontVector = _playerController.Forward;
             var playerSpeed = _playerController.CurrentSpeed;
             _characterAnimator.SetBool(IsMoving, playerSpeed != 0);
-            _characterAnimator.SetFloat(MovementSpeedPercentage, _playerController.Velocity.magnitude / 5.0f);
+            _characterAnimator.SetFloat(MovementSpeedPercentage, playerSpeed / 5.0f);
             if (frontVector != Vector3.zero)
             {
                 transform.forward = frontVector;
