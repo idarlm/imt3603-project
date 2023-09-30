@@ -18,7 +18,11 @@ namespace PlayerMovement
         {
             var handler = context.Handler;
 
-            var movement = CalculateMovement(context);
+            var movement = handler.Velocity * Time.deltaTime;
+            movement.y = Mathf.Min(movement.y, 0);
+
+            movement += CalculateAcceleration(context);
+            movement -= CalculateDeceleration(context);
 
             if (handler.ShouldStick)
             {
@@ -40,11 +44,15 @@ namespace PlayerMovement
             }
         }
 
-        private Vector3 CalculateMovement(PlayerMovementSystem context)
+        private Vector3 CalculateAcceleration(PlayerMovementSystem context)
         {
             var dt = Time.fixedDeltaTime;
             var input = context.inputVector;
             var settings = context.GetStanceSettings();
+
+            // joystick deadzone
+            input = input.sqrMagnitude > 0.1f ? input : Vector2.zero;
+            input.Normalize();
 
             // calculate new direction
             var currentDir = context.Forward;
@@ -54,20 +62,34 @@ namespace PlayerMovement
             var dir = Vector3.RotateTowards(currentDir, targetDirection, context.turnRate * Mathf.Deg2Rad * dt, 0f);
             context.Forward = dir;
 
-            // calculate speed
-            var speed = Vector3.ProjectOnPlane(context.Velocity, Vector3.up).magnitude;
+            // return acceleration in new direction
+            return dir * (settings.acceleration * input.sqrMagnitude * dt * dt);
+        }
 
-            if (speed < settings.speed * input.magnitude)
+        private Vector3 CalculateDeceleration(PlayerMovementSystem context)
+        {
+            var dt = Time.fixedDeltaTime;
+            var input = context.inputVector;
+            var settings = context.GetStanceSettings();
+
+            // limit speed
+            var horizontalVelocity = Vector3.ProjectOnPlane(context.Velocity, Vector3.up);
+            var speedLimitF = Mathf.Clamp(horizontalVelocity.sqrMagnitude / (Mathf.Pow(settings.speed, 2)), 0, 1f);
+
+            var deceleration = context.Velocity * (settings.acceleration * speedLimitF);
+
+            // calculate decel direction
+            var decelDir = context.Forward * (input.sqrMagnitude > 0.1f ? 1 : 0) - horizontalVelocity.normalized;
+
+            deceleration -= decelDir * settings.deceleration;
+
+            if((deceleration * dt).sqrMagnitude > context.Velocity.sqrMagnitude)
             {
-                speed += settings.acceleration * dt;
-            }
-            else if (speed > 0)
-            {
-                speed -= settings.deceleration * dt;
-                speed = speed < 0 ? 0 : speed;
+                deceleration = context.Velocity / dt;
             }
 
-            return dir * (speed * dt);
+            // return deceleration
+            return deceleration * dt * dt;
         }
 
     }
