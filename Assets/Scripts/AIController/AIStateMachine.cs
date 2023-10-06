@@ -1,4 +1,6 @@
-﻿using Pathing;
+﻿using System;
+using Illumination;
+using Pathing;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,17 +18,20 @@ namespace AIController
 
         [SerializeField] private Transform target;
         [SerializeField] private Animator playerAnimator;
+        [SerializeField] private PlayerIlluminationMeasurer playerIllumination;
         
         private void Start()
         {
             this.
             _context = new AIContext
             {
+                PlayerIllumination = playerIllumination,
                 PlayerAnimator = playerAnimator,
                 StateMachine = this,
                 TargetWaypoint = entryWaypoint,
                 Agent = GetComponent<NavMeshAgent>(),
-                Target = target.transform
+                Target = target.transform,
+                Alertness = 5.0f
             };
             ChangeState(StateFactory.CreateState(currentStateSerialized));
         }

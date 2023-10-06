@@ -1,4 +1,5 @@
-﻿using Pathing;
+﻿using Illumination;
+using Pathing;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,5 +15,7 @@ namespace AIController
         public Waypoint TargetWaypoint;
         public Vector3 LastKnownTargetPosition;
         public float TimeSincePlayerSeen;
+        public PlayerIlluminationMeasurer PlayerIllumination;
+        public float Alertness;
     }
 }

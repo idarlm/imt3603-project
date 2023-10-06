@@ -1,4 +1,5 @@
-﻿using StateMachine;
+﻿using Illumination;
+using StateMachine;
 using UnityEngine;
 
 namespace AIController
@@ -34,7 +35,12 @@ namespace AIController
             Physics.Raycast(thisPosition , (playerPosition-thisPosition) , out var playerRay);
             Debug.DrawLine(thisPosition, playerPosition);
             Debug.DrawRay(thisPosition,(playerPosition-thisPosition));
-            return (playerPosition - thisPosition).magnitude - playerRay.distance < 0.55;
+            if ((playerPosition - thisPosition).magnitude - playerRay.distance < 0.55 &&
+                context.PlayerIllumination.GetIllumination(bone) > 5.0f)
+            {
+                Debug.Log( "Bone:" + bone + "    Illumination:" + context.PlayerIllumination.GetIllumination(bone));
+            }
+            return (playerPosition - thisPosition).magnitude - playerRay.distance < 0.55 && context.PlayerIllumination.GetIllumination(bone) > context.Alertness;
         }
 
         public virtual void Enter(AIContext context)

@@ -11,7 +11,6 @@ namespace AIController.ChaseBehaviour
         }
         public override void Enter(AIContext context)
         {
-            Debug.Log("Entering " + GetName() + " state");
             context.Agent.destination = context.Target.position;
         }
 

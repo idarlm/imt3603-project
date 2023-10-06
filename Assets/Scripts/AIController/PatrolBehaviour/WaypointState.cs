@@ -14,14 +14,12 @@ namespace AIController.PatrolBehaviour
         }
         public override void Enter(AIContext context)
         {
-            Debug.Log("Entering " + GetName() + " state");
             _squareSwapDistance = _swapDistance * _swapDistance;
             context.Agent.destination = context.TargetWaypoint.GetPosition();
         }
 
         public override void Exit(AIContext context)
         {
-            Debug.Log("Leaving " + GetName() + " state");
         }
 
         public override void HandleInput(AIContext context)
