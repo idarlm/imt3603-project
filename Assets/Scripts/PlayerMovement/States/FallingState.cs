@@ -2,8 +2,10 @@ using UnityEngine;
 
 namespace PlayerMovement
 {
-    // FallingState defines the behaviour when the player is not on the ground
-    // This is mainly applying gravity and letting the player jump.
+    /// <summary>
+    /// PlayerFallingState defines the behaviour when the player is falling.
+    /// This includes accelerating the player downwards and some state management.
+    /// </summary>
     internal class PlayerFallingState : PlayerMovementState
     {
         public override void Enter(PlayerMovementSystem context)
@@ -47,7 +49,7 @@ namespace PlayerMovement
         {
             if (context.Handler.Grounded)
             {
-                context.ChangeState(new PlayerGroundedState());
+                context.ChangeState(new WalkingState());
             }
         }
     }

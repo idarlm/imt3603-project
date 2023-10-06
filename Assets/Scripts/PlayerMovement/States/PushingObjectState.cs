@@ -2,7 +2,10 @@ using UnityEngine;
 
 namespace PlayerMovement
 {
-    // PushingObjectState handles behaviour for when the player is pushing a rigidbody
+    /// <summary>
+    /// PushingObjectState defines the behaviour for when the player is pushing
+    /// a rigidbody.
+    /// </summary>
     internal class PushingObjectState : PlayerMovementState
     {
         private Rigidbody _target;
@@ -90,7 +93,7 @@ namespace PlayerMovement
 
             if (_detachFromTarget || context.Input.push)
             {
-                context.ChangeState(new PlayerGroundedState());
+                context.ChangeState(new WalkingState());
             }
         }
     }

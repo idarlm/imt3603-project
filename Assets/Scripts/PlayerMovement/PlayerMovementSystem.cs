@@ -11,12 +11,12 @@ namespace PlayerMovement
     {
         internal struct InputValues
         {
-            public bool jump, crouch, push;
+            public bool jump, crouch, push, sprint;
             public Vector2 joystick;
 
             public void ClearFlags()
             {
-                jump = push = false;
+                jump = crouch = push = false;
             }
         }
 
@@ -103,6 +103,7 @@ namespace PlayerMovement
 
         // stance
         private bool _crouching;
+        public  bool shouldCrouch;
         
         // Public Methods
         internal void ChangeState(PlayerMovementState newState)
@@ -123,7 +124,7 @@ namespace PlayerMovement
         {
             // set up dependencies
             _handler = GetComponent<MovementHandler>();
-            _stateMachine = new(new PlayerGroundedState());
+            _stateMachine = new(new WalkingState());
 
             Forward = transform.forward;
         }
@@ -134,15 +135,16 @@ namespace PlayerMovement
             // input handling
             _inputValues.joystick = _inputController.LeftJoystickXY();
             _inputValues.jump    |= _inputController.Jump().IsPressed();
-            _inputValues.push     = canPush && _inputController.Interact().IsPressed();
-            _inputValues.crouch  ^= _inputController.Crouch().IsPressed();
+            _inputValues.push    |= canPush && _inputController.Interact().IsPressed();
+            _inputValues.crouch  |= _inputController.Crouch().IsPressed();
+            _inputValues.sprint   = _inputController.Sprint().IsHeld();
 
             // Interpolate body
             float t = (Time.time - Time.fixedTime) / Time.fixedDeltaTime;
             interpolatedBody.position = Vector3.Lerp(_oldPosition, transform.position, t);
 
             // Make sure state machine is not null
-            _stateMachine ??= new(new PlayerGroundedState());
+            _stateMachine ??= new(new WalkingState());
         }
         
         // Perform movement behaviour in sync with physics updates 
@@ -153,7 +155,7 @@ namespace PlayerMovement
             _oldPosition = transform.position;
 
             // change stance
-            if (_crouching != _inputValues.crouch)
+            if (_crouching != shouldCrouch)
             {
                 ToggleStance();
             }
