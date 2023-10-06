@@ -2235,7 +2235,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317742316}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 48f158442d57c3c4e99e76cb5e43726b, type: 3}
   m_Controller: {fileID: 9100000, guid: 34ec5148e8fa70340b3d8637da5b31c9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -2387,7 +2387,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.89, y: 8.32, z: 9.16}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.045701, y: 2.045701, z: 2.045701}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2407,7 +2407,8 @@ MonoBehaviour:
   currentStateSerialized: WaypointState
   entryWaypoint: {fileID: 1971157045}
   chaseState: simpleFollower
-  target: {fileID: 1545942307}
+  target: {fileID: 1844505027}
+  playerAnimator: {fileID: 1317742318}
 --- !u!1 &1395465725
 GameObject:
   m_ObjectHideFlags: 0
@@ -3112,12 +3113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3d2491ac1f32440aceebad67de8119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1545942307 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5277396822397759764, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-    type: 3}
-  m_PrefabInstance: {fileID: 636489836}
-  m_PrefabAsset: {fileID: 0}
 --- !u!54 &1545942309
 Rigidbody:
   m_ObjectHideFlags: 0
