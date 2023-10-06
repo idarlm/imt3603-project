@@ -2,17 +2,15 @@ using UnityEngine;
 
 namespace PlayerMovement
 {
-    // GroundedState defines the behaviour when the player is on the ground.
-    // This includes allowing the player to move around and jump.
-    internal class PlayerGroundedState : PlayerMovementState
+    /// <summary>
+    /// PlayerGroundedState defines the common behaviour when the player is on the ground.
+    /// This behaviour includes moving, and transitioning to the fallingState when appropriate.
+    /// 
+    /// This is class provides the base implementation for the walking, crouching and sprinting states.
+    /// </summary>
+    internal abstract class PlayerGroundedState : PlayerMovementState
     {
-        public override void Enter(PlayerMovementSystem context)
-        {
-        }
-
-        public override void Exit(PlayerMovementSystem context)
-        {
-        }
+        protected PlayerMovementSystem.StanceSettings stanceSettings;
 
         public override void Update(PlayerMovementSystem context)
         {
@@ -34,36 +32,13 @@ namespace PlayerMovement
 
         public override void HandleInput(PlayerMovementSystem context)
         {
-            var input = context.Input;
             var handler = context.Handler;
             bool grounded = handler.Grounded || handler.ShouldStick;
 
-            if (!grounded || input.jump)
+            if (!grounded)
             {
                 context.ChangeState(new PlayerFallingState());
                 return;
-            }
-
-            if (input.push)
-            {
-                // assign pushTarget
-                Ray r = new(context.transform.position, context.Forward);
-
-                var hits = Physics.SphereCastAll(
-                    ray: r,
-                    radius: 0.2f,
-                    maxDistance: 2f,
-                    layerMask: LayerMask.NameToLayer("Player")
-                );
-
-                foreach ( var hit in hits )
-                {
-                    if (hit.rigidbody)
-                    {
-                        context.pushTarget = hit.rigidbody;
-                        context.ChangeState(new PushingObjectState());
-                    }
-                }
             }
         }
 
@@ -71,7 +46,6 @@ namespace PlayerMovement
         {
             var dt = Time.fixedDeltaTime;
             var input = context.Input.joystick;
-            var settings = context.GetStanceSettings();
 
             // joystick deadzone
             input = input.sqrMagnitude > 0.1f ? input : Vector2.zero;
@@ -86,25 +60,24 @@ namespace PlayerMovement
             context.Forward = dir;
 
             // return acceleration in new direction
-            return dir * (settings.acceleration * input.sqrMagnitude * dt * dt);
+            return dir * (stanceSettings.acceleration * input.sqrMagnitude * dt * dt);
         }
 
         private Vector3 CalculateDeceleration(PlayerMovementSystem context)
         {
             var dt = Time.fixedDeltaTime;
             var input = context.Input.joystick;
-            var settings = context.GetStanceSettings();
 
             // limit speed
             var horizontalVelocity = Vector3.ProjectOnPlane(context.Velocity, Vector3.up);
-            var speedLimitF = Mathf.Clamp(horizontalVelocity.sqrMagnitude / (Mathf.Pow(settings.speed, 2)), 0, 1f);
+            var speedLimitF = Mathf.Clamp(horizontalVelocity.sqrMagnitude / (Mathf.Pow(stanceSettings.speed, 2)), 0, 1f);
 
-            var deceleration = context.Velocity * (settings.acceleration * speedLimitF);
+            var deceleration = context.Velocity * (stanceSettings.acceleration * speedLimitF);
 
             // calculate decel direction
             var decelDir = context.Forward * (input.sqrMagnitude > 0.1f ? 1 : 0) - horizontalVelocity.normalized;
 
-            deceleration -= decelDir * settings.deceleration;
+            deceleration -= decelDir * stanceSettings.deceleration;
 
             if((deceleration * dt).sqrMagnitude > context.Velocity.sqrMagnitude)
             {
@@ -114,6 +87,5 @@ namespace PlayerMovement
             // return deceleration
             return deceleration * dt * dt;
         }
-
     }
 }

@@ -32,7 +32,7 @@ namespace PlayerInput
                 _names = names;
             }
         }
-        
+
         private IPlayerInput _gameController = new PSPlayerInput();
         private IPlayerInput _pcController = new PCPlayerInput();
 
@@ -41,10 +41,10 @@ namespace PlayerInput
         private CombinedButton _rightDPad;
         private CombinedButton _downDPad;
 
-        private CombinedButton _jumpButton = new (new string[]{"Jump"});
-        private CombinedButton _interactButton = new (new string[]{"Fire2"});
-        private CombinedButton _crouchButton = new (new string[]{"Fire1"});
-        private CombinedButton _sprintButton;
+        private CombinedButton _jumpButton = new(new string[] { "Jump" });
+        private CombinedButton _interactButton = new(new string[] { "Fire2" });
+        private CombinedButton _crouchButton = new(new string[] { "Fire1" });
+        private CombinedButton _sprintButton = new(new string[] { "Sprint" });
 
         public Vector2 LeftJoystickXY()
         {
@@ -92,7 +92,7 @@ namespace PlayerInput
         
         public IPlayerInput.IButton Sprint()
         {
-            return _jumpButton;
+            return _sprintButton;
         }
     }
 }
