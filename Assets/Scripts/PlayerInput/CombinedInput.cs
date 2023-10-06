@@ -76,7 +76,7 @@ namespace PlayerInput
             return _leftDPad;
         }
         public IPlayerInput.IButton Interact(){
-            return _leftDPad;
+            return _interactButton;
         }
         public IPlayerInput.IButton Jump(){
             return _jumpButton;

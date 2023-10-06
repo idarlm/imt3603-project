@@ -13,7 +13,7 @@ namespace PlayerMovement
             context.Falling = true;
 
             // Add velocity upwards if jump flag is set
-            if (context.jumpInput)
+            if (context.Input.jump)
             {
                 var newVelocity = handler.Velocity;
                 newVelocity.y = context.jumpSpeed;

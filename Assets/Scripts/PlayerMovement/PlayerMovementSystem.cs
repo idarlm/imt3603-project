@@ -9,6 +9,16 @@ namespace PlayerMovement
     [RequireComponent(typeof(MovementHandler))]
     public class PlayerMovementSystem : MonoBehaviour
     {
+        internal struct InputValues
+        {
+            public bool jump, crouch, push;
+            public Vector2 joystick;
+
+            public void ClearFlags()
+            {
+                jump = push = false;
+            }
+        }
 
         [Serializable]
         internal struct StanceSettings
@@ -75,19 +85,24 @@ namespace PlayerMovement
         [SerializeField] private Transform cameraTransform; // used to determine forward direction
         [SerializeField] private Transform interpolatedBody; // used to smoothly move the body of the player
         private Vector3 _oldPosition; // used for interpolation
-        
+    
+        // Fields ralating to object pushing
+        [SerializeField] internal Rigidbody pushTarget;
+        internal bool canPush = true;
+
         // dependencies
         private MovementHandler _handler;
         private GenericStateMachine<PlayerMovementSystem> _stateMachine;
 
         // input handling
-        private IPlayerInput _playerInput = new CombinedInput();
-        internal Vector2 inputVector = Vector2.zero;
-        internal bool jumpInput;
+        private IPlayerInput _inputController = new CombinedInput();
+        private InputValues _inputValues;
+
+        internal InputValues Input => _inputValues;
+
 
         // stance
         private bool _crouching;
-        private bool _shouldCrouch;
         
         // Public Methods
         internal void ChangeState(PlayerMovementState newState)
@@ -117,14 +132,16 @@ namespace PlayerMovement
         private void Update()
         {
             // input handling
-            inputVector = _playerInput.LeftJoystickXY();
-            jumpInput |= _playerInput.Jump().IsPressed();
-            _shouldCrouch ^= _playerInput.Crouch().IsPressed();
+            _inputValues.joystick = _inputController.LeftJoystickXY();
+            _inputValues.jump    |= _inputController.Jump().IsPressed();
+            _inputValues.push     = canPush && _inputController.Interact().IsPressed();
+            _inputValues.crouch  ^= _inputController.Crouch().IsPressed();
 
             // Interpolate body
             float t = (Time.time - Time.fixedTime) / Time.fixedDeltaTime;
             interpolatedBody.position = Vector3.Lerp(_oldPosition, transform.position, t);
 
+            // Make sure state machine is not null
             _stateMachine ??= new(new PlayerGroundedState());
         }
         
@@ -136,7 +153,7 @@ namespace PlayerMovement
             _oldPosition = transform.position;
 
             // change stance
-            if (_crouching != _shouldCrouch)
+            if (_crouching != _inputValues.crouch)
             {
                 ToggleStance();
             }
@@ -147,7 +164,7 @@ namespace PlayerMovement
             _stateMachine.Update(this);
             
             // clear input flags
-            jumpInput = false; // temp
+            _inputValues.ClearFlags();
         }
 
         // Try to uncrouch if we are crouching,
