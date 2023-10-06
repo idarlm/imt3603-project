@@ -35,6 +35,8 @@ namespace PlayerMovement
             fwd.Normalize();
             var rgt = -Vector3.Cross(fwd, Vector3.up);
 
+            context.Forward = fwd;  // update orientation of player
+
             // Get normal vector of the surface we are pushing on
             var col = _target.gameObject.GetComponent<BoxCollider>();
             var ray = new Ray(context.transform.position, targetDir);
