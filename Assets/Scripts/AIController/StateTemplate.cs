@@ -6,7 +6,7 @@ using StateMachine;
 namespace AIController 
 {
     
-    internal class StateTemplate : IAIState
+    internal class StateTemplate : AIState
     {
         public string GetName()
         {

@@ -6,7 +6,7 @@ namespace AIController
 {
     public static class StateFactory
     {
-        public static IAIState CreateState(string stateName)
+        public static AIState CreateState(string stateName)
         {
             switch (stateName)
             {

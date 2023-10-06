@@ -1,6 +1,4 @@
-﻿using AIController.ChaseBehaviour;
-using AIController.PatrolBehaviour;
-using Pathing;
+﻿using Pathing;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,13 +15,15 @@ namespace AIController
         [SerializeField] private string chaseState;
 
         [SerializeField] private Transform target;
-        
+        [SerializeField] private Animator playerAnimator;
         
         private void Start()
         {
             this.
             _context = new AIContext
             {
+                PlayerAnimator = playerAnimator,
+                StateMachine = this,
                 TargetWaypoint = entryWaypoint,
                 Agent = GetComponent<NavMeshAgent>(),
                 Target = target.transform
@@ -31,7 +31,7 @@ namespace AIController
             ChangeState(StateFactory.CreateState(currentStateSerialized));
         }
 
-        private void ChangeState(IAIState nextState)
+        public void ChangeState(AIState nextState)
         {
             base.ChangeState(nextState);
             _currentState = nextState;
