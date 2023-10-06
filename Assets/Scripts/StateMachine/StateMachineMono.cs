@@ -21,7 +21,7 @@ namespace StateMachine
         }
     
         // Update current state
-        public void Update(TContext context)
+        public void Execute(TContext context)
         {
             _currentState?.HandleInput(context);
 

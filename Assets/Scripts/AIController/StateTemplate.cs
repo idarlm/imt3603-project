@@ -3,10 +3,10 @@
 using AIController;
 using StateMachine;
 
-namespace AIController.ChaseBehaviour 
+namespace AIController 
 {
     
-    internal class ChaseStateTemplate : IAIState
+    internal class StateTemplate : IAIState
     {
         public string GetName()
         {

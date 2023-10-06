@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using AIController.ChaseBehaviour;
-using LabMaterials;
+﻿using AIController.ChaseBehaviour;
+using AIController.PatrolBehaviour;
+using Pathing;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 namespace AIController
 {
@@ -13,6 +12,7 @@ namespace AIController
         [SerializeField] private string currentStateSerialized;
         private IState<AIContext> _currentState;
         private AIContext _context;
+        [SerializeField] private Waypoint entryWaypoint;
 
         [SerializeField] private string chaseState;
 
@@ -21,18 +21,21 @@ namespace AIController
         
         private void Start()
         {
-            _currentState = ChaseFactory.CreateChaseState(currentStateSerialized);
             this.
             _context = new AIContext
             {
+                TargetWaypoint = entryWaypoint,
                 Agent = GetComponent<NavMeshAgent>(),
                 Target = target.transform
             };
+            ChangeState(StateFactory.CreateState(currentStateSerialized));
         }
 
-        public void ChangeState(IAIState nextState)
+        private void ChangeState(IAIState nextState)
         {
             base.ChangeState(nextState);
+            _currentState = nextState;
+            _currentState.Enter(_context);
             currentStateSerialized = nextState.GetName();
         }
 

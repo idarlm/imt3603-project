@@ -49,7 +49,7 @@ namespace EventSystem
         
         private void OnDoorwayClose(int id)
         {
-            //ChangeState(new ClosingState(this));
+            ChangeState(new ClosingState(this));
         }
 
         private void OnDoorwayOpen(int id)

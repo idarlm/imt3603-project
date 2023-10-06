@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Pathing;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace AIController
@@ -8,5 +9,6 @@ namespace AIController
         public NavMeshAgent Agent { set; get; }
         public Transform Target { set; get; }
         public Vector3[] PatrolWaypoints { set; get; }
+        public Waypoint TargetWaypoint;
     }
 }
