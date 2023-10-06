@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AIController.PatrolBehaviour
 {
-    internal class WaypointState : IAIState
+    internal class WaypointState : AIState
     { 
         private float _swapDistance = 2.0f;
         private float _squareSwapDistance;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AIController
 {
-    public abstract class IAIState : IState<AIContext>
+    public abstract class AIState : IState<AIContext>
     {
         public virtual string GetName()
         {
@@ -21,13 +21,19 @@ namespace AIController
         //TODO: More intelligent logic for player detection
         protected bool CanSeePlayer(AIContext context)
         {
+            return CanSeeLimb(context, HumanBodyBones.Head) || 
+                   CanSeeLimb(context, HumanBodyBones.Chest) ||
+                   CanSeeLimb(context, HumanBodyBones.LeftHand) ||
+                   CanSeeLimb(context, HumanBodyBones.RightHand);
+        }
+
+        protected bool CanSeeLimb(AIContext context, HumanBodyBones bone)
+        {
             var thisPosition = context.Agent.transform.position;
-            var playerPosition = context.Target.position;
-            
+            var playerPosition = context.PlayerAnimator.GetBoneTransform(bone).position;// context.Target.position;
             Physics.Raycast(thisPosition , (playerPosition-thisPosition) , out var playerRay);
             Debug.DrawLine(thisPosition, playerPosition);
             Debug.DrawRay(thisPosition,(playerPosition-thisPosition));
-            //Debug.Log((playerPosition - thisPosition).magnitude - playerRay.distance);
             return (playerPosition - thisPosition).magnitude - playerRay.distance < 0.55;
         }
 

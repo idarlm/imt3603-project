@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AIController.ChaseBehaviour
 {
-    internal class SimpleFollowerState : IAIState
+    internal class SimpleFollowerState : AIState
     {
         public override string GetName()
         {
