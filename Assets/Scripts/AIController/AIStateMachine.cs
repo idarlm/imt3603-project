@@ -1,6 +1,4 @@
-﻿using AIController.ChaseBehaviour;
-using AIController.PatrolBehaviour;
-using Pathing;
+﻿using Pathing;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,6 +22,7 @@ namespace AIController
             this.
             _context = new AIContext
             {
+                StateMachine = this,
                 TargetWaypoint = entryWaypoint,
                 Agent = GetComponent<NavMeshAgent>(),
                 Target = target.transform
@@ -31,7 +30,7 @@ namespace AIController
             ChangeState(StateFactory.CreateState(currentStateSerialized));
         }
 
-        private void ChangeState(IAIState nextState)
+        public void ChangeState(IAIState nextState)
         {
             base.ChangeState(nextState);
             _currentState = nextState;

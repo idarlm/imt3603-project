@@ -8,22 +8,23 @@ namespace AIController.PatrolBehaviour
         private float _swapDistance = 2.0f;
         private float _squareSwapDistance;
         private bool _reverseOrder = false;
-        public string GetName()
+        public override string GetName()
         {
             return "waypointState";
         }
-        public void Enter(AIContext context)
+        public override void Enter(AIContext context)
         {
+            Debug.Log("Entering " + GetName() + " state");
             _squareSwapDistance = _swapDistance * _swapDistance;
             context.Agent.destination = context.TargetWaypoint.GetPosition();
         }
 
-        public void Exit(AIContext context)
+        public override void Exit(AIContext context)
         {
-        
+            Debug.Log("Leaving " + GetName() + " state");
         }
 
-        public void HandleInput(AIContext context)
+        public override void HandleInput(AIContext context)
         {
             
         }
@@ -34,25 +35,33 @@ namespace AIController.PatrolBehaviour
             return (context.Agent.transform.position - 
                     context.TargetWaypoint.GetPosition()).sqrMagnitude < _squareSwapDistance;
         }
-
-        public void Update(AIContext context)
+        
+        public override void Update(AIContext context)
         {
-            if (IsCloseToWaypoint(context))
+            if (IsCloseToPlayer(context, 10.0f) && CanSeePlayer(context) )
             {
-                if (context.TargetWaypoint.isEndpoint)
-                {
-                    _reverseOrder = !_reverseOrder;
-                }
-                if (!_reverseOrder)
-                {
-                    context.TargetWaypoint = context.TargetWaypoint.GetNext();
-                }
-                else
-                {
-                    context.TargetWaypoint = context.TargetWaypoint.GetPrevious();
-                }
-                context.Agent.destination = context.TargetWaypoint.GetPosition();
+                context.StateMachine.ChangeState(StateFactory.CreateState("SimpleFollowerState"));
             }
+            else
+            {
+                if (IsCloseToWaypoint(context))
+                {
+                    if (context.TargetWaypoint.isEndpoint)
+                    {
+                        _reverseOrder = !_reverseOrder;
+                    }
+                    if (!_reverseOrder)
+                    {
+                        context.TargetWaypoint = context.TargetWaypoint.GetNext();
+                    }
+                    else
+                    {
+                        context.TargetWaypoint = context.TargetWaypoint.GetPrevious();
+                    }
+                    context.Agent.destination = context.TargetWaypoint.GetPosition();
+                }
+            }
+            
         }
     }
 }
