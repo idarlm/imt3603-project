@@ -53,7 +53,7 @@ namespace PlayerMovement
             }
 
             // Apply force to target
-            var forceF = Mathf.Clamp01(context.GetStanceSettings().speed - context.CurrentSpeed);
+            var forceF = Mathf.Clamp01(context.GetStanceSettings().speed * 0.5f - context.CurrentSpeed);
             Vector3 force = fwd * (input.y * forceF * 20);
             _target.AddForce(force, ForceMode.Force);
 
