@@ -37,7 +37,7 @@ namespace PlayerMovement
             var handler = context.Handler;
             bool grounded = handler.Grounded || handler.ShouldStick;
 
-            if (!grounded || context.jumpInput)
+            if (!grounded || context.Input.jump)
             {
                 context.ChangeState(new PlayerFallingState());
                 return;
@@ -47,7 +47,7 @@ namespace PlayerMovement
         private Vector3 CalculateAcceleration(PlayerMovementSystem context)
         {
             var dt = Time.fixedDeltaTime;
-            var input = context.inputVector;
+            var input = context.Input.joystick;
             var settings = context.GetStanceSettings();
 
             // joystick deadzone
@@ -69,7 +69,7 @@ namespace PlayerMovement
         private Vector3 CalculateDeceleration(PlayerMovementSystem context)
         {
             var dt = Time.fixedDeltaTime;
-            var input = context.inputVector;
+            var input = context.Input.joystick;
             var settings = context.GetStanceSettings();
 
             // limit speed

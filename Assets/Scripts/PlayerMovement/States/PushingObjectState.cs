@@ -20,7 +20,7 @@ namespace PlayerMovement
 
         public override void Update(PlayerMovementSystem context)
         {
-            var input = context.inputVector;
+            var input = context.Input.joystick;
             var minDist = 0.2f;
             var maxDist = 0.5f;
             var maxAngle = 45f;
@@ -85,7 +85,7 @@ namespace PlayerMovement
                 context.ChangeState(new PlayerFallingState());
             }
 
-            if (_detachFromTarget)
+            if (_detachFromTarget || context.Input.push)
             {
                 context.ChangeState(new PlayerGroundedState());
             }
