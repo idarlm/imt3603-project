@@ -34,20 +34,43 @@ namespace PlayerMovement
 
         public override void HandleInput(PlayerMovementSystem context)
         {
+            var input = context.Input;
             var handler = context.Handler;
             bool grounded = handler.Grounded || handler.ShouldStick;
 
-            if (!grounded || context.jumpInput)
+            if (!grounded || input.jump)
             {
                 context.ChangeState(new PlayerFallingState());
                 return;
+            }
+
+            if (input.push)
+            {
+                // assign pushTarget
+                Ray r = new(context.transform.position, context.Forward);
+
+                var hits = Physics.SphereCastAll(
+                    ray: r,
+                    radius: 0.2f,
+                    maxDistance: 2f,
+                    layerMask: LayerMask.NameToLayer("Player")
+                );
+
+                foreach ( var hit in hits )
+                {
+                    if (hit.rigidbody)
+                    {
+                        context.pushTarget = hit.rigidbody;
+                        context.ChangeState(new PushingObjectState());
+                    }
+                }
             }
         }
 
         private Vector3 CalculateAcceleration(PlayerMovementSystem context)
         {
             var dt = Time.fixedDeltaTime;
-            var input = context.inputVector;
+            var input = context.Input.joystick;
             var settings = context.GetStanceSettings();
 
             // joystick deadzone
@@ -69,7 +92,7 @@ namespace PlayerMovement
         private Vector3 CalculateDeceleration(PlayerMovementSystem context)
         {
             var dt = Time.fixedDeltaTime;
-            var input = context.inputVector;
+            var input = context.Input.joystick;
             var settings = context.GetStanceSettings();
 
             // limit speed
