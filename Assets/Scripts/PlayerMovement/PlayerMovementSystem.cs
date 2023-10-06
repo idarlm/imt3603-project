@@ -1,5 +1,6 @@
 using System;
 using PlayerInput;
+using StateMachine;
 using UnityEngine;
 
 namespace PlayerMovement
@@ -20,12 +21,15 @@ namespace PlayerMovement
         }
 
         // Public properties
-        public Vector3 Velocity => _handler.Velocity; // current velocity
-        public float CurrentSpeed => _handler.Velocity.magnitude; // current speed
+        public Vector3 Velocity => _handler.Velocity;
+        public Vector3 HorizontalVelocity => Vector3.ProjectOnPlane(_handler.Velocity, Vector3.up);
+        public float CurrentSpeed => HorizontalVelocity.magnitude;
         public bool Falling { get; internal set; }
         public MovementHandler Handler => _handler;
 
-        public Vector3 Forward
+        public Vector3 Forward { get; set; }
+
+        public Vector3 CameraForward
         {
             get
             {
@@ -38,7 +42,7 @@ namespace PlayerMovement
             }
         }
 
-        public Vector3 Right
+        public Vector3 CameraRight
         {
             get
             {
@@ -58,11 +62,15 @@ namespace PlayerMovement
         public event EventHandler<PlayerMovementEventArgs> StanceChanged;
 
         // Fields 
-        [SerializeField] private StanceSettings standingSettings;
-        [SerializeField] private StanceSettings crouchingSettings;
         [SerializeField] internal float gravity = 10f;
         [SerializeField] internal float jumpSpeed = 5f;
         [SerializeField] internal float sprintSpeed = 5f;
+
+        [SerializeField] internal float turnRate = 180f;
+        [SerializeField] internal float turnEventThreshold = 120f;
+        
+        [SerializeField] private StanceSettings standingSettings;
+        [SerializeField] private StanceSettings crouchingSettings;
 
         [SerializeField] private Transform cameraTransform; // used to determine forward direction
         [SerializeField] private Transform interpolatedBody; // used to smoothly move the body of the player
@@ -98,14 +106,17 @@ namespace PlayerMovement
             return ref standingSettings;
         }
 
-        // Unity messages
+        // Set up references to dependencies
         private void Start()
         {
             // set up dependencies
             _handler = GetComponent<MovementHandler>();
             _stateMachine = new(new PlayerGroundedState());
-        }
 
+            Forward = transform.forward;
+        }
+        
+        // Handle player input and interpolation every frame
         private void Update()
         {
             // input handling
@@ -119,7 +130,8 @@ namespace PlayerMovement
 
             _stateMachine ??= new(new PlayerGroundedState());
         }
-
+        
+        // Perform movement behaviour in sync with physics updates 
         private void FixedUpdate()
         {
             // set old position

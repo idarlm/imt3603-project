@@ -48,7 +48,7 @@ namespace PlayerInput
 
         public Vector2 LeftJoystickXY()
         {
-            return (_pcController.LeftJoystickXY() + _gameController.LeftJoystickXY()).normalized;
+            return (_pcController.LeftJoystickXY() + _gameController.LeftJoystickXY());
         }
 
         public Vector2 RightJoystickXY()
