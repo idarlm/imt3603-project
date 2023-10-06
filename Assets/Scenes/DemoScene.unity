@@ -793,6 +793,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
+      propertyPath: turnRate
+      value: 720
+      objectReference: {fileID: 0}
+    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
+        type: 3}
       propertyPath: sprintSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -815,6 +820,16 @@ PrefabInstance:
         type: 3}
       propertyPath: crouchingSettings.speed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
+        type: 3}
+      propertyPath: standingSettings.deceleration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
+        type: 3}
+      propertyPath: crouchingSettings.deceleration
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5277396822397759764, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}

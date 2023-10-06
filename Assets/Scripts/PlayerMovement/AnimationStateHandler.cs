@@ -31,9 +31,10 @@ namespace Player
             _characterAnimator.SetBool(IsFalling, notTouchingGround);
             _characterAnimator.SetBool(IsFalling, notTouchingGround);
             
-            var frontVector = Vector3.ProjectOnPlane(_playerController.Velocity.normalized, Vector3.up);
-            _characterAnimator.SetBool(IsMoving, frontVector.magnitude != 0);
-            _characterAnimator.SetFloat(MovementSpeedPercentage, _playerController.Velocity.magnitude / 5.0f);
+            var frontVector = _playerController.Forward;
+            var playerSpeed = _playerController.CurrentSpeed;
+            _characterAnimator.SetBool(IsMoving, playerSpeed != 0);
+            _characterAnimator.SetFloat(MovementSpeedPercentage, playerSpeed / 5.0f);
             if (frontVector != Vector3.zero)
             {
                 transform.forward = frontVector;
