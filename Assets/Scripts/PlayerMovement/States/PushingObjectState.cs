@@ -8,6 +8,14 @@ namespace PlayerMovement
         private Rigidbody _target;
         private bool _detachFromTarget;
 
+        float minDist = 0.2f;
+        float maxDist = 0.5f;
+        float maxAngle = 45f;
+        float distance = 1f;
+        float angle = 0f;
+
+        readonly float turnRate = 1f;
+
         public override void Enter(PlayerMovementSystem context)
         {
             _target = context.pushTarget;
@@ -21,13 +29,6 @@ namespace PlayerMovement
         public override void Update(PlayerMovementSystem context)
         {
             var input = context.Input.joystick;
-            var minDist = 0.2f;
-            var maxDist = 0.5f;
-            var maxAngle = 45f;
-            var distance = 1f;
-            var angle = 0f;
-
-            var turnRate = 1f;
 
             // Get directions based on position relative to target
             var targetDir = _target.position - context.transform.position;
