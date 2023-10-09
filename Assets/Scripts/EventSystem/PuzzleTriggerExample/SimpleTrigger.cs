@@ -8,6 +8,7 @@ public class SimpleTrigger : PuzzleTrigger
         if (other.gameObject.name == "Player")
         {
             FireTriggered(this, EventArgs.Empty);
+            Debug.Log("SimpleTrigger fired");
         }
     }
 }

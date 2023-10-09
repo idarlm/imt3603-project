@@ -9,11 +9,17 @@ public class ExampleBox : MonoBehaviour
 
     private void Start()
     {
-        trigger[0].Triggered += OnTriggered;
+        trigger[0].Triggered += OpenDoor;
+        trigger[1].Triggered += CloseDoor;
     }
 
-    void OnTriggered(object obj, EventArgs args)
+    void OpenDoor(object obj, EventArgs args)
     {
         transform.position += Vector3.up * 3;
+    }
+
+    void CloseDoor(object obj, EventArgs args)
+    {
+        transform.position += Vector3.down * 3;
     }
 }
