@@ -5,6 +5,7 @@
 - Thea Urke Remøy
 
 ## Links
+[Puzzle document](https://mousedevs.atlassian.net/wiki/spaces/GP/pages/2654209/Puzzles)
 
 ## Development process
 
