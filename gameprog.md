@@ -14,3 +14,6 @@
 #### How you controlled process and communication systems during development
 
 #### Use of version control systems, ticket tracking, branching, version control
+Version control system - git
+
+branching - bruker bare branching om en skal jobbe i samme script når en ikkje er sammen.
