@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PlayerInput;
 using StateMachine;
 using UnityEngine;
@@ -20,6 +21,11 @@ namespace PlayerMovement
             }
         }
 
+        /// <summary>
+        /// StanceSettings contains a set of options that are used to adjust
+        /// movement feel/functionality. This is used to provide different
+        /// values for the player when crouching vs when standing.
+        /// </summary>
         [Serializable]
         internal struct StanceSettings
         {
@@ -68,12 +74,17 @@ namespace PlayerMovement
         // Events
         public event EventHandler<PlayerMovementEventArgs> StartFalling;
         public event EventHandler<PlayerMovementEventArgs> Landed;
+        public event EventHandler<PlayerMovementEventArgs> PrepareJump;
         public event EventHandler<PlayerMovementEventArgs> Jumped;
         public event EventHandler<PlayerMovementEventArgs> StanceChanged;
 
         // Fields 
         [SerializeField] internal float gravity = 10f;
         [SerializeField] internal float jumpSpeed = 5f;
+        [Tooltip("How long to wait until jumping after jump button is pressed.")]
+        [SerializeField] internal float jumpDelay = 0f;
+        [Tooltip("How much speed should the player lose when landing (0-1).")]
+        [SerializeField] internal float landingSpeedPenalty = 0.5f;
         [SerializeField] internal float sprintSpeed = 5f;
 
         [SerializeField] internal float turnRate = 180f;
@@ -82,7 +93,9 @@ namespace PlayerMovement
         [SerializeField] private StanceSettings standingSettings;
         [SerializeField] private StanceSettings crouchingSettings;
 
+        [Tooltip("When Camera Transform is assigned the player will move based on camera direction.")]
         [SerializeField] private Transform cameraTransform; // used to determine forward direction
+        [Tooltip("Used to smoothly move child objects each frame, instead of only on fixed update tics.")]
         [SerializeField] private Transform interpolatedBody; // used to smoothly move the body of the player
         private Vector3 _oldPosition; // used for interpolation
     
@@ -98,7 +111,7 @@ namespace PlayerMovement
         private IPlayerInput _inputController = new CombinedInput();
         private InputValues _inputValues;
 
-        internal InputValues Input => _inputValues;
+        internal InputValues Input { get => _inputValues; set => _inputValues = value; }
 
 
         // stance
@@ -108,6 +121,7 @@ namespace PlayerMovement
         // Public Methods
         internal void ChangeState(PlayerMovementState newState)
         {
+            // Debug.Log($"Changing movement state: {_stateMachine.CurrentState} -> {newState}");
             _stateMachine.ChangeState(newState);
         }
 
@@ -169,11 +183,15 @@ namespace PlayerMovement
             _inputValues.ClearFlags();
         }
 
-        // Try to uncrouch if we are crouching,
-        // or crouch if we are not.
-        //
-        // Uncrouching is more complicated because we need to check
-        // for obstacles above the player.
+        /// <summary>
+        /// Try to uncrouch if we are crouching,
+        /// or crouch if we are not.
+        ///
+        /// Uncrouching might not happen immediately
+        /// if the space above the player is obstructed.
+        /// The StanceChanged event should be used to get notified
+        /// of stance changes.
+        /// </summary>
         private void ToggleStance()
         {
             if (_crouching)
@@ -216,7 +234,11 @@ namespace PlayerMovement
 
             StanceChanged?.Invoke(this, GetEventArgs());
         }
-
+        
+        /// <summary>
+        /// Get a new event args object.
+        /// </summary>
+        /// <returns>PlayerMovementEventArgs with prepopulated values.</returns>
         private PlayerMovementEventArgs GetEventArgs()
         {
             var args = new PlayerMovementEventArgs();
@@ -225,18 +247,59 @@ namespace PlayerMovement
             args.Speed = CurrentSpeed;
             args.FallSpeed = -Mathf.Min(_handler.OldVelocity.y, 0);
             args.Crouching = _crouching;
+            args.Falling = Falling;
+            args.Jumping = _inputValues.jump;
 
             return args;
+        }
+
+        /// <summary>
+        /// Fires the specified event.
+        /// </summary>
+        /// <param name="e">Event to fire</param>
+        internal void FireEvent(PlayerMovementEvent e)
+        {
+            switch(e)
+            {
+                case PlayerMovementEvent.Landed:
+                    Landed?.Invoke(this, GetEventArgs());
+                    break;
+                case PlayerMovementEvent.Jumped:
+                    Jumped?.Invoke(this, GetEventArgs());
+                    break;
+                case PlayerMovementEvent.StartFalling:
+                    StartFalling?.Invoke(this, GetEventArgs());
+                    break;
+                case PlayerMovementEvent.PrepareJump:
+                    PrepareJump?.Invoke(this, GetEventArgs());
+                    break;
+                case PlayerMovementEvent.StanceChanged:
+                    StanceChanged?.Invoke(this, GetEventArgs());
+                    break;
+                default:
+                    Debug.LogError($"The event handler for \"{e}\" is not implemented.");
+                    break;
+            }
         }
     }
     
     public class PlayerMovementEventArgs : EventArgs
     {
         public bool Falling      { get; set; }
+        public bool Jumping      { get; set; }
         public Vector3 Velocity  { get; set; }
         public float   Speed     { get; set; }
         public float   FallSpeed { get; set; }
         public bool    Crouching { get; set; }
+    }
+
+    internal enum PlayerMovementEvent
+    {
+        Landed,
+        Jumped,
+        StartFalling,
+        StanceChanged,
+        PrepareJump,
     }
     
 }

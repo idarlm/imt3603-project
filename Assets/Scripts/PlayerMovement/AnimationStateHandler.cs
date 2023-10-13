@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using PlayerMovement;
 using UnityEngine;
 
@@ -19,18 +17,16 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
-        
+            _playerController.StartFalling += OnStartFalling;
+            _playerController.Landed += OnLanded;
+
+            _characterAnimator.SetBool(IsJumping, false);
+            _characterAnimator.SetBool(IsFalling, _playerController.Falling);
         }
 
         // Update is called once per frame
         void Update()
-        {
-            var notTouchingGround = _playerController.Falling;
-            var movingUp = _playerController.Velocity.y > 0;
-            _characterAnimator.SetBool(IsJumping, movingUp && notTouchingGround);
-            _characterAnimator.SetBool(IsFalling, notTouchingGround);
-            _characterAnimator.SetBool(IsFalling, notTouchingGround);
-            
+        {            
             var frontVector = _playerController.Forward;
             var playerSpeed = _playerController.CurrentSpeed;
             _characterAnimator.SetBool(IsMoving, playerSpeed != 0);
@@ -39,6 +35,18 @@ namespace Player
             {
                 transform.forward = frontVector;
             }
+        }
+
+        void OnLanded(object sender, PlayerMovementEventArgs args)
+        {
+            _characterAnimator.SetBool(IsJumping, false);
+            _characterAnimator.SetBool(IsFalling, false);
+        }
+
+        void OnStartFalling(object sender, PlayerMovementEventArgs args)
+        {
+            _characterAnimator.SetBool(IsJumping, args.Jumping);
+            _characterAnimator.SetBool(IsFalling, true);
         }
     }
 }

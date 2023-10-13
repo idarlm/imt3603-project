@@ -10,17 +10,62 @@ namespace PlayerMovement
     /// </summary>
     internal abstract class PlayerGroundedState : PlayerMovementState
     {
+        /// <summary>
+        /// The current stance settings.
+        /// </summary>
         protected PlayerMovementSystem.StanceSettings stanceSettings;
+
+        /// <summary>
+        /// Did we land this frame?
+        /// </summary>
+        protected bool landed = false;
+
+        public override void Enter(PlayerMovementSystem context)
+        {
+            // check if we were falling before entering state
+            if (context.Falling)
+            {
+                context.Falling = false;
+                context.FireEvent(PlayerMovementEvent.Landed);
+                landed = true;
+            }
+
+            stanceSettings = context.GetStanceSettings();
+            context.StanceChanged += OnStanceChanged;
+        }
+
+        public override void Exit(PlayerMovementSystem context)
+        {
+            context.StanceChanged -= OnStanceChanged;
+        }
+
+        internal virtual void OnStanceChanged(object sender, PlayerMovementEventArgs args)
+        {
+            var context = sender as PlayerMovementSystem;
+            if (context != null)
+            {
+                stanceSettings = context.GetStanceSettings();
+            }
+        }
 
         public override void Update(PlayerMovementSystem context)
         {
             var handler = context.Handler;
 
+            // preserve velocity from last update
             var movement = handler.Velocity * Time.deltaTime;
             movement.y = Mathf.Min(movement.y, 0);
 
+            // calculate acceleration and deceleration
             movement += CalculateAcceleration(context);
             movement -= CalculateDeceleration(context);
+
+            // apply movement penalty when landing
+            if(landed)
+            {
+                movement -= movement * context.landingSpeedPenalty;
+                landed = false;
+            }
 
             if (handler.ShouldStick)
             {
@@ -60,7 +105,7 @@ namespace PlayerMovement
             context.Forward = dir;
 
             // return acceleration in new direction
-            return dir * (stanceSettings.acceleration * input.sqrMagnitude * dt * dt);
+            return targetDirection * (stanceSettings.acceleration * input.sqrMagnitude * dt * dt);
         }
 
         private Vector3 CalculateDeceleration(PlayerMovementSystem context)
