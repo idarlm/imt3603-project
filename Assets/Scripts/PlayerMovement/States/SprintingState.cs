@@ -2,6 +2,12 @@ using PlayerMovement;
 
 internal class SprintingState : PlayerGroundedState
 {
+    public override void Enter(PlayerMovementSystem context)
+    {
+        base.Enter(context);
+        stanceSettings.speed = context.sprintSpeed;
+    }
+
     internal override void OnStanceChanged(object sender, PlayerMovementEventArgs args)
     {
         base.OnStanceChanged(sender, args);

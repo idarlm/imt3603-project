@@ -3,6 +3,7 @@ using UnityEngine;
 
 internal class WalkingState : PlayerGroundedState
 {
+    // Set possible state transitions when walking
     public override void HandleInput(PlayerMovementSystem context)
     {
         base.HandleInput(context);
