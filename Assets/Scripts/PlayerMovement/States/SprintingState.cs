@@ -2,15 +2,10 @@ using PlayerMovement;
 
 internal class SprintingState : PlayerGroundedState
 {
-    public override void Enter(PlayerMovementSystem context)
+    internal override void OnStanceChanged(object sender, PlayerMovementEventArgs args)
     {
-        stanceSettings = context.GetStanceSettings();
-        stanceSettings.speed = context.sprintSpeed;
-    }
-
-    public override void Exit(PlayerMovementSystem context)
-    {
-
+        base.OnStanceChanged(sender, args);
+        stanceSettings.speed = (sender as PlayerMovementSystem).sprintSpeed; // OBS! ingen null check
     }
 
     public override void HandleInput(PlayerMovementSystem context)

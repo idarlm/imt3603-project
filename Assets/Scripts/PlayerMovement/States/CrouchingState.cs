@@ -4,12 +4,13 @@ internal class CrouchingState : PlayerGroundedState
 {
     public override void Enter(PlayerMovementSystem context)
     {
+        base.Enter(context);
         context.shouldCrouch = true;
-        stanceSettings = context.GetStanceSettings();
     }
 
     public override void Exit(PlayerMovementSystem context)
     {
+        base.Exit(context);
         context.shouldCrouch = false;
     }
 

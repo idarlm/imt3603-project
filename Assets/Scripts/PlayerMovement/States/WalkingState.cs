@@ -3,16 +3,6 @@ using UnityEngine;
 
 internal class WalkingState : PlayerGroundedState
 {
-    public override void Enter(PlayerMovementSystem context)
-    {
-        stanceSettings = context.GetStanceSettings();
-    }
-
-    public override void Exit(PlayerMovementSystem context)
-    {
-        
-    }
-
     public override void HandleInput(PlayerMovementSystem context)
     {
         base.HandleInput(context);
