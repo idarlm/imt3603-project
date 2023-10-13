@@ -4,13 +4,14 @@ internal class SprintingState : PlayerGroundedState
 {
     public override void Enter(PlayerMovementSystem context)
     {
-        stanceSettings = context.GetStanceSettings();
+        base.Enter(context);
         stanceSettings.speed = context.sprintSpeed;
     }
 
-    public override void Exit(PlayerMovementSystem context)
+    internal override void OnStanceChanged(object sender, PlayerMovementEventArgs args)
     {
-
+        base.OnStanceChanged(sender, args);
+        stanceSettings.speed = (sender as PlayerMovementSystem).sprintSpeed; // OBS! ingen null check
     }
 
     public override void HandleInput(PlayerMovementSystem context)

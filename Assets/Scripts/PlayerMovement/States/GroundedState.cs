@@ -12,6 +12,26 @@ namespace PlayerMovement
     {
         protected PlayerMovementSystem.StanceSettings stanceSettings;
 
+        public override void Enter(PlayerMovementSystem context)
+        {
+            stanceSettings = context.GetStanceSettings();
+            context.StanceChanged += OnStanceChanged;
+        }
+
+        public override void Exit(PlayerMovementSystem context)
+        {
+            context.StanceChanged -= OnStanceChanged;
+        }
+
+        internal virtual void OnStanceChanged(object sender, PlayerMovementEventArgs args)
+        {
+            var context = sender as PlayerMovementSystem;
+            if (context != null)
+            {
+                stanceSettings = context.GetStanceSettings();
+            }
+        }
+
         public override void Update(PlayerMovementSystem context)
         {
             var handler = context.Handler;
@@ -60,7 +80,7 @@ namespace PlayerMovement
             context.Forward = dir;
 
             // return acceleration in new direction
-            return dir * (stanceSettings.acceleration * input.sqrMagnitude * dt * dt);
+            return targetDirection * (stanceSettings.acceleration * input.sqrMagnitude * dt * dt);
         }
 
         private Vector3 CalculateDeceleration(PlayerMovementSystem context)

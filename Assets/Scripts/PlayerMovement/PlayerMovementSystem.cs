@@ -108,6 +108,7 @@ namespace PlayerMovement
         // Public Methods
         internal void ChangeState(PlayerMovementState newState)
         {
+            Debug.Log($"Changing movement state: {_stateMachine.CurrentState} -> {newState}");
             _stateMachine.ChangeState(newState);
         }
 
