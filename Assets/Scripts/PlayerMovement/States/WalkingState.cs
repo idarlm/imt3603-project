@@ -1,41 +1,43 @@
-using PlayerMovement;
 using UnityEngine;
 
-internal class WalkingState : PlayerGroundedState
+namespace PlayerMovement
 {
-    // Set possible state transitions when walking
-    public override void HandleInput(PlayerMovementSystem context)
+    internal class WalkingState : PlayerGroundedState
     {
-        base.HandleInput(context);
-
-        var input = context.Input;
-
-        if (input.crouch)
+        // Set possible state transitions when walking
+        public override void HandleInput(PlayerMovementSystem context)
         {
-            context.ChangeState(new CrouchingState());
-        }
+            base.HandleInput(context);
 
-        if (input.jump)
-        {
-            context.ChangeState(new PlayerFallingState());
-        }
+            var input = context.Input;
 
-        if (input.sprint)
-        {
-            context.ChangeState(new SprintingState());
-        }
-
-        if (input.push)
-        {
-            var ray = new Ray(context.transform.position, context.Forward);
-            
-            if(Physics.SphereCast(ray: ray, radius: 0.5f, maxDistance: 1f, hitInfo: out var hit))
+            if (input.crouch)
             {
-                var rb = hit.rigidbody;
-                if (rb)
+                context.ChangeState(new CrouchingState());
+            }
+
+            if (input.jump)
+            {
+                context.ChangeState(new PlayerFallingState());
+            }
+
+            if (input.sprint)
+            {
+                context.ChangeState(new SprintingState());
+            }
+
+            if (input.push)
+            {
+                var ray = new Ray(context.transform.position, context.Forward);
+
+                if (Physics.SphereCast(ray: ray, radius: 0.5f, maxDistance: 1f, hitInfo: out var hit))
                 {
-                    context.pushTarget = rb;
-                    context.ChangeState(new PushingObjectState());
+                    var rb = hit.rigidbody;
+                    if (rb)
+                    {
+                        context.pushTarget = rb;
+                        context.ChangeState(new PushingObjectState());
+                    }
                 }
             }
         }

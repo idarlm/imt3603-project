@@ -1,34 +1,35 @@
-using PlayerMovement;
-
-internal class SprintingState : PlayerGroundedState
+namespace PlayerMovement
 {
-    public override void Enter(PlayerMovementSystem context)
+    internal class SprintingState : PlayerGroundedState
     {
-        base.Enter(context);
-        stanceSettings.speed = context.sprintSpeed;
-    }
-
-    internal override void OnStanceChanged(object sender, PlayerMovementEventArgs args)
-    {
-        base.OnStanceChanged(sender, args);
-        stanceSettings.speed = (sender as PlayerMovementSystem).sprintSpeed; // OBS! ingen null check
-    }
-
-    public override void HandleInput(PlayerMovementSystem context)
-    {
-        base.HandleInput(context);
-        var input = context.Input;
-
-        if (!input.sprint)
+        public override void Enter(PlayerMovementSystem context)
         {
-            context.ChangeState(new WalkingState());
-            return;
+            base.Enter(context);
+            stanceSettings.speed = context.sprintSpeed;
         }
 
-        if (input.jump)
+        internal override void OnStanceChanged(object sender, PlayerMovementEventArgs args)
         {
-            context.ChangeState(new PlayerFallingState());
+            base.OnStanceChanged(sender, args);
+            stanceSettings.speed = (sender as PlayerMovementSystem).sprintSpeed; // OBS! ingen null check
         }
-    }
 
+        public override void HandleInput(PlayerMovementSystem context)
+        {
+            base.HandleInput(context);
+            var input = context.Input;
+
+            if (!input.sprint)
+            {
+                context.ChangeState(new WalkingState());
+                return;
+            }
+
+            if (input.jump)
+            {
+                context.ChangeState(new PlayerFallingState());
+            }
+        }
+
+    }
 }
