@@ -6,22 +6,38 @@ using UnityEngine;
 public class ListenerObject : MonoBehaviour
 {
     public PuzzleTrigger trigger;
+    [SerializeField] Vector3 offset;
+    private bool isOpening = false;
+    private Vector3 startPos;
+    [SerializeField] int closingTime;
 
     private void Start()
     {
-        trigger.Triggered += OpenDoor;
-        trigger.TriggeredFinished += CloseDoor;
+        startPos = transform.position;
+        trigger.Triggered += TriggerActivated;
+        trigger.TriggeredFinished += TriggerDeactivated;
     }
 
-    void OpenDoor(object obj, EventArgs args)
+    private void Update()
     {
-        transform.position += Vector3.up * 3;
-        //trigger.transform.position += Vector3.down * 0.2f;
-
+        if (isOpening)
+        {
+            transform.position = Vector3.Lerp(transform.position, startPos + offset, Time.deltaTime);
+        } else
+        {
+            transform.position = Vector3.Lerp(transform.position, startPos, Time.deltaTime/closingTime);
+        }
     }
 
-    void CloseDoor(object obj, EventArgs args)
+    void TriggerActivated(object obj, EventArgs args)
     {
-        transform.position += Vector3.down * 3;
+
+        isOpening = true;
+    }
+
+    void TriggerDeactivated(object obj, EventArgs args)
+    {
+
+        isOpening = false;
     }
 }
