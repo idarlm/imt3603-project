@@ -10,10 +10,26 @@ namespace PlayerMovement
     /// </summary>
     internal abstract class PlayerGroundedState : PlayerMovementState
     {
+        /// <summary>
+        /// The current stance settings.
+        /// </summary>
         protected PlayerMovementSystem.StanceSettings stanceSettings;
+
+        /// <summary>
+        /// Did we land this frame?
+        /// </summary>
+        protected bool landed = false;
 
         public override void Enter(PlayerMovementSystem context)
         {
+            // check if we were falling before entering state
+            if (context.Falling)
+            {
+                context.Falling = false;
+                context.FireEvent(PlayerMovementEvent.Landed);
+                landed = true;
+            }
+
             stanceSettings = context.GetStanceSettings();
             context.StanceChanged += OnStanceChanged;
         }
@@ -36,11 +52,20 @@ namespace PlayerMovement
         {
             var handler = context.Handler;
 
+            // preserve velocity from last update
             var movement = handler.Velocity * Time.deltaTime;
             movement.y = Mathf.Min(movement.y, 0);
 
+            // calculate acceleration and deceleration
             movement += CalculateAcceleration(context);
             movement -= CalculateDeceleration(context);
+
+            // apply movement penalty when landing
+            if(landed)
+            {
+                movement -= movement * context.landingSpeedPenalty;
+                landed = false;
+            }
 
             if (handler.ShouldStick)
             {

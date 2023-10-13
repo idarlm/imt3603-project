@@ -22,16 +22,15 @@ namespace PlayerMovement
                 handler.SetVelocity(newVelocity);
 
                 // Raise Jumped event
-                //MovementSystem.Jumped?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
+                context.FireEvent(PlayerMovementEvent.Jumped);
             }
 
-            //MovementSystem.StartFalling?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
+            context.FireEvent(PlayerMovementEvent.StartFalling);
         }
 
         public override void Exit(PlayerMovementSystem context)
         {
-            context.Falling = false;
-            //MovementSystem.Landed?.Invoke(MovementSystem, MovementSystem.GetEventArgs());
+            
         }
 
         public override void Update(PlayerMovementSystem context)
