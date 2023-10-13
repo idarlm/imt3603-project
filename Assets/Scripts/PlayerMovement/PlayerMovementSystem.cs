@@ -20,6 +20,11 @@ namespace PlayerMovement
             }
         }
 
+        /// <summary>
+        /// StanceSettings contains a set of options that are used to adjust
+        /// movement feel/functionality. This is used to provide different
+        /// values for the player when crouching vs when standing.
+        /// </summary>
         [Serializable]
         internal struct StanceSettings
         {
@@ -74,6 +79,10 @@ namespace PlayerMovement
         // Fields 
         [SerializeField] internal float gravity = 10f;
         [SerializeField] internal float jumpSpeed = 5f;
+        [Tooltip("How long to wait until jumping after jump button is pressed.")]
+        [SerializeField] internal float jumpDelay = 0f;
+        [Tooltip("How much speed should the player lose when landing (0-1).")]
+        [SerializeField] internal float landingSpeedPenalty = 0.5f;
         [SerializeField] internal float sprintSpeed = 5f;
 
         [SerializeField] internal float turnRate = 180f;
@@ -82,7 +91,9 @@ namespace PlayerMovement
         [SerializeField] private StanceSettings standingSettings;
         [SerializeField] private StanceSettings crouchingSettings;
 
+        [Tooltip("When Camera Transform is assigned the player will move based on camera direction.")]
         [SerializeField] private Transform cameraTransform; // used to determine forward direction
+        [Tooltip("Used to smoothly move child objects each frame, instead of only on fixed update tics.")]
         [SerializeField] private Transform interpolatedBody; // used to smoothly move the body of the player
         private Vector3 _oldPosition; // used for interpolation
     
@@ -170,11 +181,13 @@ namespace PlayerMovement
             _inputValues.ClearFlags();
         }
 
-        // Try to uncrouch if we are crouching,
-        // or crouch if we are not.
-        //
-        // Uncrouching is more complicated because we need to check
-        // for obstacles above the player.
+        /// <summary>
+        /// Try to uncrouch if we are crouching,
+        /// or crouch if we are not.
+        ///
+        /// Uncrouching is more complicated because we need to check
+        /// for obstacles above the player.
+        /// </summary>
         private void ToggleStance()
         {
             if (_crouching)
@@ -217,7 +230,11 @@ namespace PlayerMovement
 
             StanceChanged?.Invoke(this, GetEventArgs());
         }
-
+        
+        /// <summary>
+        /// Get a new event args object.
+        /// </summary>
+        /// <returns>PlayerMovementEventArgs with prepopulated values.</returns>
         private PlayerMovementEventArgs GetEventArgs()
         {
             var args = new PlayerMovementEventArgs();
