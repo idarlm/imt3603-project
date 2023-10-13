@@ -11,39 +11,42 @@ public class HiddenObjectListener : PuzzleTrigger
     private bool isFetched = false;
     [SerializeField] Vector3 offset;
 
-    private void Start() {
+    private void Start()
+    {
         startPos = transform.position;
         trigger.Triggered += moveObject;
     }
 
-    private void Update() {
-        if (isMoved) {
+    private void Update()
+    {
+        if (isMoved)
+        {
             transform.position = Vector3.Lerp(transform.position, startPos + offset, Time.deltaTime);
         }
 
-        if (isFetched) {
+        if (isFetched)
+        {
             transform.parent.GetChild(1).gameObject.SetActive(false);
+            FireTriggered(this, EventArgs.Empty);
         }
 
-        if (isMoved && isFetched) {
-            transform.position = Vector3.Lerp(transform.position, startPos + offset, Time.deltaTime);
-            /*
-            FireTriggered(this, EventArgs.Empty);
-            Debug.Log("DoorTrigger fired");
-            */
-        }
 
     }
 
-    void moveObject(object obj, EventArgs args) {
+    void moveObject(object obj, EventArgs args)
+    {
 
         Debug.Log(trigger.name);
 
-        if(!isMoved) {
+        if (!isMoved)
+        {
             isMoved = true;
-        } else {
+        }
+        else
+        {
             isFetched = true;
         }
 
     }
+
 }

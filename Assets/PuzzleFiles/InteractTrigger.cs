@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 
 public class InteractTrigger : PuzzleTrigger {
 
-    private bool isTriggered = false;
     private bool inRange = false;
 
     private void Update() {
@@ -20,6 +19,14 @@ public class InteractTrigger : PuzzleTrigger {
         if (other.gameObject.name == "Player") { 
             inRange = true;
             Debug.Log("In range");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "Player")
+        {
+            inRange = false;
         }
     }
 
