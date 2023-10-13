@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ListenerObject : MonoBehaviour
+public class DoorObjectListener : MonoBehaviour
 {
     public PuzzleTrigger trigger;
     [SerializeField] Vector3 offset;
