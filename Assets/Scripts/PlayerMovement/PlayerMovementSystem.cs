@@ -344,7 +344,7 @@ namespace PlayerMovement
                     StanceChanged?.Invoke(this, GetEventArgs());
                     break;
                 default:
-                    Debug.LogError($"The event handler for \"{e}\" is not implemented.");
+                    Debug.LogWarning($"The event handler for \"{e}\" is not implemented.");
                     break;
             }
         }
