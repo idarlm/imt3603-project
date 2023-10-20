@@ -63,8 +63,8 @@ namespace PlayerMovement
             }
 
             // MOVING THE OBJECT
-            // torque is handled by sort of a PID controller but without the integral.
-            // so a PD controller. But it's also kind of shit.
+            // torque is determined by a sort of PID controller but without the I.
+            // so a PD controller.
             // force is determined using only the error. so a P controller.
 
             // calculate force.
@@ -85,7 +85,7 @@ namespace PlayerMovement
 
             // calculate torque.
             // desired angle is always 0.
-            // real angle is the angle between inverse normal vector of 
+            // real angle is the angle between the inverted normal vector of 
             // the surface being pushed and fwd.
             var rotError = angle; // error
             rotError *= 1f;
