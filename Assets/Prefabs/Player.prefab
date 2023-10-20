@@ -134,7 +134,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.4
   m_SkinWidth: 0.01
@@ -166,27 +166,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3d2491ac1f32440aceebad67de8119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableJump: 1
+  enableCrouch: 1
   gravity: 10
   jumpSpeed: 5
+  jumpDelay: 0
+  landingSpeedPenalty: 0.5
   sprintSpeed: 10
   turnRate: 360
   turnEventThreshold: 120
   standingSettings:
     speed: 7
-    acceleration: 15
-    deceleration: 10
+    acceleration: 25
+    deceleration: 25
     controllerHeight: 2
     controllerCenter: {x: 0, y: 0, z: 0}
   crouchingSettings:
     speed: 5
-    acceleration: 10
-    deceleration: 10
+    acceleration: 20
+    deceleration: 20
     controllerHeight: 1
     controllerCenter: {x: 0, y: -0.5, z: 0}
   cameraTransform: {fileID: 0}
   interpolatedBody: {fileID: 2400750777599125005}
   pushTarget: {fileID: 0}
-  shouldCrouch: 0
 --- !u!54 &5295772876714970960
 Rigidbody:
   m_ObjectHideFlags: 0

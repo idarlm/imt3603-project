@@ -1,12 +1,14 @@
 using System;
-using System.Collections.Generic;
 using PlayerInput;
 using StateMachine;
 using UnityEngine;
 
 namespace PlayerMovement
 {
-
+    /// <summary>
+    /// Holds and controls state for the player character, 
+    /// and uses MovementHandler to perform movement operations.
+    /// </summary>
     [RequireComponent(typeof(MovementHandler))]
     public class PlayerMovementSystem : MonoBehaviour
     {
@@ -78,12 +80,15 @@ namespace PlayerMovement
         public event EventHandler<PlayerMovementEventArgs> Jumped;
         public event EventHandler<PlayerMovementEventArgs> StanceChanged;
 
-        // Fields 
+        // Fields
+        public bool enableJump = true;
+        public bool enableCrouch = true;
+
         [SerializeField] internal float gravity = 10f;
         [SerializeField] internal float jumpSpeed = 5f;
         [Tooltip("How long to wait until jumping after jump button is pressed.")]
         [SerializeField] internal float jumpDelay = 0f;
-        [Tooltip("How much speed should the player lose when landing (0-1).")]
+        [Tooltip("How much speed should the player lose when landing [0-1].")]
         [SerializeField] internal float landingSpeedPenalty = 0.5f;
         [SerializeField] internal float sprintSpeed = 5f;
 
@@ -93,7 +98,7 @@ namespace PlayerMovement
         [SerializeField] private StanceSettings standingSettings;
         [SerializeField] private StanceSettings crouchingSettings;
 
-        [Tooltip("When Camera Transform is assigned the player will move based on camera direction.")]
+        [Tooltip("When Camera Transform is assigned, the player will move based on camera direction.")]
         [SerializeField] private Transform cameraTransform; // used to determine forward direction
         [Tooltip("Used to smoothly move child objects each frame, instead of only on fixed update tics.")]
         [SerializeField] private Transform interpolatedBody; // used to smoothly move the body of the player
@@ -116,15 +121,23 @@ namespace PlayerMovement
 
         // stance
         private bool _crouching;
-        public  bool shouldCrouch;
+        internal bool shouldCrouch;
         
-        // Public Methods
+        // Internal Methods
+        /// <summary>
+        /// Change the selected movement state.
+        /// </summary>
+        /// <param name="newState">State to change to.</param>
         internal void ChangeState(PlayerMovementState newState)
         {
             // Debug.Log($"Changing movement state: {_stateMachine.CurrentState} -> {newState}");
             _stateMachine.ChangeState(newState);
         }
 
+        /// <summary>
+        /// Get the movement settings for the current stance.
+        /// </summary>
+        /// <returns>StanceSettings by reference</returns>
         internal ref StanceSettings GetStanceSettings()
         {
             if (_crouching)
@@ -148,9 +161,9 @@ namespace PlayerMovement
         {
             // input handling
             _inputValues.joystick = _inputController.LeftJoystickXY();
-            _inputValues.jump    |= _inputController.Jump().IsPressed();
+            _inputValues.jump    |= _inputController.Jump().IsPressed() && enableJump;
             _inputValues.push    |= canPush && _inputController.Interact().IsPressed();
-            _inputValues.crouch  |= _inputController.Crouch().IsPressed();
+            _inputValues.crouch  |= _inputController.Crouch().IsPressed() && enableCrouch;
             _inputValues.sprint   = _inputController.Sprint().IsHeld();
 
             // Interpolate body
