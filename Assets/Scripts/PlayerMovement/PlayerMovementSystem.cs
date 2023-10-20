@@ -53,7 +53,7 @@ namespace PlayerMovement
         /// </summary>
         public float CurrentSpeed => HorizontalVelocity.magnitude;
         /// <summary>
-        /// Is the player falling?
+        /// Is the player currently falling?
         /// </summary>
         public bool Falling { get; internal set; }
         /// <summary>
@@ -98,7 +98,7 @@ namespace PlayerMovement
 
         // Events
         /// <summary>
-        /// Fired when the player starts falling.
+        /// Fired when the player loses contact with the ground.
         /// </summary>
         public event EventHandler<PlayerMovementEventArgs> StartFalling;
         /// <summary>
@@ -110,7 +110,10 @@ namespace PlayerMovement
         /// </summary>
         public event EventHandler<PlayerMovementEventArgs> PrepareJump;
         /// <summary>
-        /// Fired when the player jumps.
+        /// Fired when the player jumps. 
+        /// The StartFalling event will normally be fired after this,
+        /// unless the jump is blocked and the player does not lose contact
+        /// with the ground.
         /// </summary>
         public event EventHandler<PlayerMovementEventArgs> Jumped;
         /// <summary>

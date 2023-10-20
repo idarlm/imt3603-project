@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace PlayerMovement
@@ -7,17 +6,42 @@ namespace PlayerMovement
     [RequireComponent(typeof(CharacterController))]
     public class MovementHandler : MonoBehaviour
     {
-        // Public properties
+        /// <summary>
+        /// The CharacterController to use when performing movement.
+        /// </summary>
         public CharacterController Controller { get; private set; }
 
+        /// <summary>
+        /// The velocity of last Move operation.
+        /// </summary>
         public Vector3 Velocity => Controller.velocity;
+        /// <summary>
+        /// The previous velocity value.
+        /// This can be useful when needing to check the velocity from
+        /// before an event happened, such as when the player has landed.
+        /// </summary>
         public Vector3 OldVelocity { get; private set; }
 
+        /// <summary>
+        /// Is the player currently on the ground?
+        /// </summary>
         public bool Grounded => Controller.isGrounded || _groundCheck;
+        /// <summary>
+        /// Should the player stick to the ground?
+        /// </summary>
         public bool ShouldStick { get; private set; }
 
-        // Public fields
+        /// <summary>
+        /// The distance to use when checking if the player should
+        /// stick to the ground.
+        /// </summary>
+        [Tooltip("The distance to use when checking if the player should stick to the ground.")]
         public float StickyThreshold = 0.4f;
+        /// <summary>
+        /// The radius to use when checking 
+        /// if the player should stick to the ground.
+        /// </summary>
+        [Tooltip("The radius to use when checking if the player should stick to the ground.")]
         public float StickyRadius = 0.2f;
 
         // Private fields
@@ -43,7 +67,10 @@ namespace PlayerMovement
             }
         }
         
-        // Public methods
+        /// <summary>
+        /// Moves the player and updates state.
+        /// </summary>
+        /// <param name="movement">Vector to move by.</param>
         public void Move(Vector3 movement)
         {
             OldVelocity = Controller.velocity;
@@ -63,7 +90,7 @@ namespace PlayerMovement
             
             Controller.Move(movement);
 
-            // Perform additional ground check because unity is ass
+            // Perform additional ground check - Prevents bug when landing in slopes
             Ray r = new(transform.position, Vector3.down);
             float dist = (Controller.height * 0.5f) + Controller.skinWidth - Controller.radius;
             _groundCheck = ShouldStick = Physics.SphereCast(r, Controller.radius, dist);
@@ -73,12 +100,28 @@ namespace PlayerMovement
             ShouldStick = Physics.SphereCast(r, StickyRadius, dist);
         }
 
+        /// <summary>
+        /// Use the supplied velocity during the next Move call.
+        /// The velocity will be multiplied by deltaTime during the call to Move.
+        /// 
+        /// When called multiple times during one frame,
+        /// the latest supplied value will be used.
+        /// </summary>
+        /// <param name="velocity">Velocity to use during next move.</param>
         public void SetVelocity(Vector3 velocity)
         {
             _setVelocity = true;
             _setVelocityVector = velocity;
         }
 
+        /// <summary>
+        /// Add the supplied velocity during the next call to Move.
+        /// The velocity will be multiplied by deltaTime during the call to Move.
+        /// 
+        /// When called multiple times in one frame,
+        /// the sum of all added velocities will be used.
+        /// </summary>
+        /// <param name="velocity"></param>
         public void AddVelocity(Vector3 velocity)
         {
             _addVelocity = true;
