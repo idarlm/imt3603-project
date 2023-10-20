@@ -11,13 +11,19 @@ namespace PlayerMovement
         private Rigidbody _target;
         private bool _detachFromTarget;
 
-        float minDist = 0.2f;
         float maxDist = 0.5f;
+        float minDist = 0.2f;
         float maxAngle = 45f;
         float distance = 1f;
+        float surfaceDistance = 1f;
         float angle = 0f;
 
+        float pushForce = 75f;
+
         readonly float turnRate = 1f;
+        readonly float speed = 3.5f;
+
+        float prevRotError = 0f;
 
         public override void Enter(PlayerMovementSystem context)
         {
@@ -38,6 +44,7 @@ namespace PlayerMovement
             var fwd = Vector3.ProjectOnPlane(targetDir, Vector3.up);
             fwd.Normalize();
             var rgt = -Vector3.Cross(fwd, Vector3.up);
+            distance = Vector3.Distance(_target.position, context.transform.position);
 
             context.Forward = fwd;  // update orientation of player
 
@@ -46,37 +53,52 @@ namespace PlayerMovement
             var ray = new Ray(context.transform.position, targetDir);
             if (col.Raycast(ray, out var hit, 5f))
             {
-                distance = hit.distance - context.Handler.Controller.radius;
-                angle = Vector3.Angle(fwd, -hit.normal);
+                surfaceDistance = hit.distance - context.Handler.Controller.radius;
+                angle = Vector3.SignedAngle(fwd, -hit.normal, Vector3.up);
             }
 
-            if (distance > maxDist || angle > maxAngle)
+            if (surfaceDistance > maxDist || Mathf.Abs(angle) > maxAngle || _target.velocity.magnitude > speed)
             {
                 _detachFromTarget = true;
             }
 
-            // Apply force to target
-            var forceF = Mathf.Clamp01(context.GetStanceSettings().speed * 0.5f - context.CurrentSpeed);
-            Vector3 force = fwd * (input.y * forceF * 20);
-            _target.AddForce(force, ForceMode.Force);
+            // MOVING THE OBJECT
+            // torque is handled by sort of a PID controller but without the integral.
+            // so a PD controller. But it's also kind of shit.
+            // force is determined using only the error. so a P controller.
 
-            // Apply torque
-            if (_target.angularVelocity.magnitude < turnRate)
-                _target.AddTorque(-input.x * 20f * Vector3.up, ForceMode.Force);
+            // calculate force.
+            // desired position is current position rotated by turnRate,
+            // and translated by forward direction * speed.
+            var rotatedDir = Vector3.RotateTowards(fwd, rgt, input.x * turnRate * Time.deltaTime, 0).normalized;
+            var desiredPos = rotatedDir * (distance/* + 0.2f - surfaceDistance*/);     // rotation
+            desiredPos += rotatedDir * speed * input.y * Time.deltaTime; // translation
+            desiredPos += context.transform.position;
 
-            var movement = distance < minDist ? Vector3.zero : _target.velocity * Time.deltaTime;
-            movement += input.x
-                        * Time.deltaTime
-                        * Vector3.Distance(_target.position, context.transform.position)
-                        * _target.angularVelocity.magnitude
-                        * rgt;
+            var posError = desiredPos - _target.position;
+            posError *= 20f;
 
-            if (context.Handler.ShouldStick)
-            {
-                movement += Vector3.down;
-            }
+            posError = posError.magnitude > 1 ? posError.normalized : posError;
 
-            //movement = Vector3.Project(movement, fwd);
+            var forceF = Mathf.Clamp01(speed - _target.velocity.magnitude);
+            _target.AddForce(posError * pushForce * forceF);
+
+            // calculate torque.
+            // desired angle is always 0.
+            // real angle is the angle between inverse normal vector of 
+            // the surface being pushed and fwd.
+            var rotError = angle; // error
+            rotError *= 1f;
+
+            var rotROC = rotError - prevRotError; // rate of change estimate
+            rotROC *= 0.5f;
+
+            prevRotError = rotError;
+
+            _target.AddTorque(Vector3.up * -Mathf.Clamp(rotError + rotROC, -1f, 1f) * pushForce);
+
+            // Move player along with pushed object
+            var movement = Vector3.Project(_target.velocity, fwd.normalized) * Time.deltaTime;
 
             context.Handler.Move(movement);
         }
