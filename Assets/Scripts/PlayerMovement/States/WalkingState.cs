@@ -14,11 +14,13 @@ namespace PlayerMovement
 
             var input = context.Input;
 
+            // Crouching
             if (input.crouch)
             {
                 context.ChangeState(new CrouchingState());
             }
 
+            // Jumping
             if (input.jump)
             {
                 _jumpTimer = context.jumpDelay;
@@ -35,22 +37,30 @@ namespace PlayerMovement
                 context.ChangeState(new PlayerFallingState());
             }
 
+            // Sprinting
             if (input.sprint)
             {
                 context.ChangeState(new SprintingState());
             }
 
+            // Push object
             if (input.push)
             {
                 var ray = new Ray(context.transform.position, context.Forward);
+                var hits = Physics.SphereCastAll(
+                    ray: ray,
+                    radius: 1f,
+                    maxDistance: 1.5f,
+                    layerMask: LayerMask.NameToLayer("Player")
+                    );
 
-                if (Physics.SphereCast(ray: ray, radius: 0.5f, maxDistance: 1f, hitInfo: out var hit))
+                foreach (var hit in hits)
                 {
-                    var rb = hit.rigidbody;
-                    if (rb)
+                    if (hit.rigidbody)
                     {
-                        context.pushTarget = rb;
+                        context.pushTarget = hit.rigidbody;
                         context.ChangeState(new PushingObjectState());
+                        break;
                     }
                 }
             }
