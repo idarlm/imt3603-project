@@ -10,6 +10,11 @@ public class LeverListener : MonoBehaviour
 
     private void Start() {
         trigger.Triggered += activateLever;
+
+        Debug.Log(trigger.name);
+
+        Debug.Log(GetComponent<Renderer>());
+
         GetComponent<Renderer>().enabled = false;
     }
 
