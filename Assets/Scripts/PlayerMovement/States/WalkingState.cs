@@ -47,9 +47,11 @@ namespace PlayerMovement
             if (input.push)
             {
                 var ray = new Ray(context.transform.position, context.Forward);
-                var hits = Physics.RaycastAll(
+                var hits = Physics.SphereCastAll(
                     ray: ray,
-                    maxDistance: 1.5f
+                    radius: 1f,
+                    maxDistance: 1.5f,
+                    layerMask: LayerMask.NameToLayer("Player")
                     );
 
                 foreach (var hit in hits)
