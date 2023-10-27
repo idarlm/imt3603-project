@@ -1,12 +1,14 @@
 using System;
-using System.Collections.Generic;
 using PlayerInput;
 using StateMachine;
 using UnityEngine;
 
 namespace PlayerMovement
 {
-
+    /// <summary>
+    /// Holds and controls state for the player character, 
+    /// and uses MovementHandler to perform movement operations.
+    /// </summary>
     [RequireComponent(typeof(MovementHandler))]
     public class PlayerMovementSystem : MonoBehaviour
     {
@@ -32,19 +34,40 @@ namespace PlayerMovement
             public float speed;
             public float acceleration;
             public float deceleration;
+            [Space(10)]
             public float controllerHeight;
             public Vector3 controllerCenter;
         }
 
         // Public properties
+        /// <summary>
+        /// The current velocity of the player.
+        /// </summary>
         public Vector3 Velocity => _handler.Velocity;
+        /// <summary>
+        /// The current velocity of the player projected on the horizontal plane.
+        /// </summary>
         public Vector3 HorizontalVelocity => Vector3.ProjectOnPlane(_handler.Velocity, Vector3.up);
+        /// <summary>
+        /// The current horizontal speed of the player.
+        /// </summary>
         public float CurrentSpeed => HorizontalVelocity.magnitude;
+        /// <summary>
+        /// Is the player currently falling?
+        /// </summary>
         public bool Falling { get; internal set; }
+        /// <summary>
+        /// The attached MovementHandler object.
+        /// </summary>
         public MovementHandler Handler => _handler;
 
+        /// <summary>
+        /// The forward direction of the player.
+        /// </summary>
         public Vector3 Forward { get; set; }
-
+        /// <summary>
+        /// The forward direction of the camera, projected on the horizontal plane.
+        /// </summary>
         public Vector3 CameraForward
         {
             get
@@ -57,7 +80,9 @@ namespace PlayerMovement
                 return transform.forward;
             }
         }
-
+        /// <summary>
+        /// The right direction of the camera, projected on the horizontal plane.
+        /// </summary>
         public Vector3 CameraRight
         {
             get
@@ -72,28 +97,62 @@ namespace PlayerMovement
         }
 
         // Events
+        /// <summary>
+        /// Fired when the player loses contact with the ground.
+        /// </summary>
         public event EventHandler<PlayerMovementEventArgs> StartFalling;
+        /// <summary>
+        /// Fired when the player regains contact with the ground.
+        /// </summary>
         public event EventHandler<PlayerMovementEventArgs> Landed;
+        /// <summary>
+        /// Fired when the player is preparing to jump.
+        /// </summary>
         public event EventHandler<PlayerMovementEventArgs> PrepareJump;
+        /// <summary>
+        /// Fired when the player jumps. 
+        /// The StartFalling event will normally be fired after this,
+        /// unless the jump is blocked and the player does not lose contact
+        /// with the ground.
+        /// </summary>
         public event EventHandler<PlayerMovementEventArgs> Jumped;
+        /// <summary>
+        /// Fired when the player changes stance.
+        /// </summary>
         public event EventHandler<PlayerMovementEventArgs> StanceChanged;
 
-        // Fields 
+        // Fields
+        [Tooltip("Should the player be able to jump?")]
+        public bool enableJump = true;
+        [Tooltip("Should the player be able to crouch?")]
+        public bool enableCrouch = true;
+
+        [Space(10)]
+
         [SerializeField] internal float gravity = 10f;
         [SerializeField] internal float jumpSpeed = 5f;
         [Tooltip("How long to wait until jumping after jump button is pressed.")]
         [SerializeField] internal float jumpDelay = 0f;
-        [Tooltip("How much speed should the player lose when landing (0-1).")]
+        [Tooltip("How much speed should the player lose when landing [0-1].")]
+        [Range(0f, 1f)]
         [SerializeField] internal float landingSpeedPenalty = 0.5f;
-        [SerializeField] internal float sprintSpeed = 5f;
 
+        [Space(10)]
+
+        [SerializeField] internal float sprintSpeed = 5f;
         [SerializeField] internal float turnRate = 180f;
         [SerializeField] internal float turnEventThreshold = 120f;
-        
+
+        [Space(10)]
+
+        [Tooltip("StanceSettings to be used when the player is standing.")]
         [SerializeField] private StanceSettings standingSettings;
+        [Tooltip("StanceSettings to be used when the player is crouching.")]
         [SerializeField] private StanceSettings crouchingSettings;
 
-        [Tooltip("When Camera Transform is assigned the player will move based on camera direction.")]
+        [Space(10)]
+
+        [Tooltip("When Camera Transform is assigned, the player will move based on camera direction.")]
         [SerializeField] private Transform cameraTransform; // used to determine forward direction
         [Tooltip("Used to smoothly move child objects each frame, instead of only on fixed update tics.")]
         [SerializeField] private Transform interpolatedBody; // used to smoothly move the body of the player
@@ -116,15 +175,23 @@ namespace PlayerMovement
 
         // stance
         private bool _crouching;
-        public  bool shouldCrouch;
+        internal bool shouldCrouch;
         
-        // Public Methods
+        // Internal Methods
+        /// <summary>
+        /// Change the selected movement state.
+        /// </summary>
+        /// <param name="newState">State to change to.</param>
         internal void ChangeState(PlayerMovementState newState)
         {
             // Debug.Log($"Changing movement state: {_stateMachine.CurrentState} -> {newState}");
             _stateMachine.ChangeState(newState);
         }
 
+        /// <summary>
+        /// Get the movement settings for the current stance.
+        /// </summary>
+        /// <returns>StanceSettings by reference</returns>
         internal ref StanceSettings GetStanceSettings()
         {
             if (_crouching)
@@ -148,9 +215,9 @@ namespace PlayerMovement
         {
             // input handling
             _inputValues.joystick = _inputController.LeftJoystickXY();
-            _inputValues.jump    |= _inputController.Jump().IsPressed();
+            _inputValues.jump    |= _inputController.Jump().IsPressed() && enableJump;
             _inputValues.push    |= canPush && _inputController.Interact().IsPressed();
-            _inputValues.crouch  |= _inputController.Crouch().IsPressed();
+            _inputValues.crouch  |= _inputController.Crouch().IsPressed() && enableCrouch;
             _inputValues.sprint   = _inputController.Sprint().IsHeld();
 
             // Interpolate body
@@ -277,7 +344,7 @@ namespace PlayerMovement
                     StanceChanged?.Invoke(this, GetEventArgs());
                     break;
                 default:
-                    Debug.LogError($"The event handler for \"{e}\" is not implemented.");
+                    Debug.LogWarning($"The event handler for \"{e}\" is not implemented.");
                     break;
             }
         }
