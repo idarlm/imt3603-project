@@ -15,6 +15,7 @@ namespace PlayerMovement
         /// The velocity of last Move operation.
         /// </summary>
         public Vector3 Velocity => Controller.velocity;
+
         /// <summary>
         /// The previous velocity value.
         /// This can be useful when needing to check the velocity from
@@ -26,10 +27,21 @@ namespace PlayerMovement
         /// Is the player currently on the ground?
         /// </summary>
         public bool Grounded => Controller.isGrounded || _groundCheck;
+
         /// <summary>
         /// Should the player stick to the ground?
         /// </summary>
         public bool ShouldStick { get; private set; }
+
+        /// <summary>
+        /// The slope angle of the surface the player is standing on.
+        /// </summary>
+        public float GroundAngle { get => Vector3.Angle(_groundNormal, Vector3.up); }
+
+        /// <summary>
+        /// The normal vector of the surface the player is standing on.
+        /// </summary>
+        public Vector3 GroundNormal { get => _groundNormal; }
 
         /// <summary>
         /// The distance to use when checking if the player should
@@ -64,6 +76,19 @@ namespace PlayerMovement
             if (hit.controller.collisionFlags.HasFlag(CollisionFlags.Below))
             {
                 _groundNormal = hit.normal;
+                var ang = Vector3.Angle(_groundNormal, Vector3.up);
+                
+                if(Physics.Raycast(
+                    origin: transform.position, 
+                    direction: Vector3.down, 
+                    maxDistance: Controller.height * 0.5f + StickyThreshold,
+                    hitInfo: out var rchit
+                    ))
+                {
+                    _groundNormal = ang < Vector3.Angle(rchit.normal, Vector3.up) 
+                        ? _groundNormal 
+                        : rchit.normal;
+                }
             }
         }
         

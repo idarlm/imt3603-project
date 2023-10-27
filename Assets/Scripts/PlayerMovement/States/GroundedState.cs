@@ -80,7 +80,7 @@ namespace PlayerMovement
             var handler = context.Handler;
             bool grounded = handler.Grounded || handler.ShouldStick;
 
-            if (!grounded)
+            if (!grounded || handler.GroundAngle > handler.Controller.slopeLimit)
             {
                 context.ChangeState(new PlayerFallingState());
                 return;

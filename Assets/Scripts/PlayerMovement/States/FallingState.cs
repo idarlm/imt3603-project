@@ -41,12 +41,21 @@ namespace PlayerMovement
             Vector3 movement = handler.Velocity * dt;
             movement += Vector3.down * (context.gravity * dt * dt);
 
+            // Slide if we are in a steep slope
+            if (handler.Grounded)
+            {
+                var acceleration = Vector3.ProjectOnPlane(Vector3.down, handler.GroundNormal);
+                acceleration *= context.gravity * dt * dt;
+                movement += acceleration;
+            }
+
             handler.Move(movement);
         }
 
         public override void HandleInput(PlayerMovementSystem context)
         {
-            if (context.Handler.Grounded)
+            var handler = context.Handler;
+            if (handler.Grounded && handler.GroundAngle <= handler.Controller.slopeLimit)
             {
                 context.ChangeState(new WalkingState());
             }
