@@ -73,11 +73,16 @@ namespace PlayerMovement
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
+            // Update ground normal
             if (hit.controller.collisionFlags.HasFlag(CollisionFlags.Below))
             {
+                // Get ground normal from collission
                 _groundNormal = hit.normal;
                 var ang = Vector3.Angle(_groundNormal, Vector3.up);
                 
+                // Check if there is a more reasonable ground normal.
+                // This removes a lot of volatility when walking over
+                // sharp edges, such as when climbing stairs.
                 if(Physics.Raycast(
                     origin: transform.position, 
                     direction: Vector3.down, 
