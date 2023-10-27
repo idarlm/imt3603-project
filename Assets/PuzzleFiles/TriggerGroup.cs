@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class TriggerGroup : PuzzleTrigger
 {
@@ -32,6 +33,7 @@ public class TriggerGroup : PuzzleTrigger
         if (allActivated) {
             FireTriggered(this, EventArgs.Empty);
             Debug.Log("TriggerGroup fired");
+            index = 0;
         }
     }
 }
