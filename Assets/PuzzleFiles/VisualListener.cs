@@ -7,6 +7,7 @@ public class VisualListener : PuzzleTrigger
 {
     public PuzzleTrigger trigger;
     private int i = 0;
+    [SerializeField] GameObject correctkey;
 
     private void Start() {
         trigger.Triggered += changeVisual;
@@ -27,6 +28,8 @@ public class VisualListener : PuzzleTrigger
 
 
             if (enabledState) {
+                Debug.Log(transform.GetChild(i).name);
+               
 
                 transform.GetChild(i).GetComponent<Renderer>().enabled = false;
                 if (i != transform.childCount - 1) {
@@ -37,20 +40,20 @@ public class VisualListener : PuzzleTrigger
                     transform.GetChild(i).GetComponent<Renderer>().enabled = true;
                 }
 
+                Debug.Log(transform.GetChild(i).name);
 
-                /*
-                if (transform.GetChild(i).gameObject == correctKey) {
+                if (transform.GetChild(i).name == correctkey.name) {
                     FireTriggered(this, EventArgs.Empty);
                     Debug.Log("VisualListener fired");
                 } else {
                     FireTriggeredFinished(this, EventArgs.Empty);
                     Debug.Log("VisualListener finished");
                 }
-                */
 
             }
 
         }
+
 
     }
 }

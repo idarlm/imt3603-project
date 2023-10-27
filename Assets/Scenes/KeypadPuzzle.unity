@@ -251,6 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trigger: {fileID: 1196146672}
+  correctkey: {fileID: 1620650808}
 --- !u!23 &148883558
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -480,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trigger: {fileID: 359366929}
+  correctkey: {fileID: 909928681}
 --- !u!23 &317060733
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -637,9 +639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggers:
-  - {fileID: 2133198370}
-  - {fileID: 1196146672}
-  - {fileID: 359366929}
+  - {fileID: 665227083}
+  - {fileID: 148883557}
+  - {fileID: 317060732}
   correctKeys:
   - {fileID: 1472367515}
   - {fileID: 1620650808}
@@ -1084,6 +1086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trigger: {fileID: 2133198370}
+  correctkey: {fileID: 1472367515}
 --- !u!23 &665227084
 MeshRenderer:
   m_ObjectHideFlags: 0
