@@ -53,7 +53,7 @@ namespace PlayerInput
 
         public Vector2 RightJoystickXY()
         {
-            return (_pcController.RightJoystickXY() + _gameController.RightJoystickXY()).normalized;
+            return (_pcController.RightJoystickXY() + _gameController.RightJoystickXY());
         }
 
         public IPlayerInput.IButton Left()
