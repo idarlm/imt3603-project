@@ -54,11 +54,6 @@ namespace PlayerMovement
                 var acceleration = Vector3.ProjectOnPlane(Vector3.down, handler.GroundNormal);
                 acceleration *= context.gravity * dt * dt;
 
-                //remove the vertical component of the acceleration
-                //since it is already handled earlier.
-                //also helps prevent a bug that slingshots the player.
-                acceleration = Vector3.ProjectOnPlane(acceleration, Vector3.up);
-
                 movement += acceleration;
             }
 
