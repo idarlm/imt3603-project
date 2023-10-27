@@ -1,0 +1,2541 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &262821588877843198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6931263201262578462, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7183854011749636119}
+  - component: {fileID: 6253079655764070173}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7183854011749636119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6183635850115224395, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262821588877843198}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.8026174, y: -1.3737726, z: -0.98499584}
+  m_LocalScale: {x: 1.0767546, y: 0.71204203, z: 0.71204203}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2687878797151032021}
+  - {fileID: 7329847250746902134}
+  - {fileID: 447108027688489043}
+  m_Father: {fileID: 3624873167231326767}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &6253079655764070173
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8967496611254927596, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262821588877843198}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.00172019, y: 0.0012669563, z: 0.0008062124}
+  m_Size: 5.2214236
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.08688316
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 5403113853117407091}
+  - screenRelativeHeight: 0.01
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3528252062359575371}
+  m_Enabled: 1
+--- !u!1 &469232318678488796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8663726241114798187, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 460736702909222001}
+  - component: {fileID: 656421358765171830}
+  - component: {fileID: 6342623542379420148}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 19
+  m_IsActive: 1
+--- !u!4 &460736702909222001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8829012131825932183, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469232318678488796}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00000057183, y: 0.000029281, z: 0.000022903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4499594623016820990}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &656421358765171830
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6804902465098548986, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469232318678488796}
+  m_Mesh: {fileID: 4300000, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!23 &6342623542379420148
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4482484245547230738, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469232318678488796}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 790537484c3f2a842bdd9ef0d114f0be, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &491133069279818200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6615690308423072388, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8418405136997954337}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8418405136997954337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 9158229911015084723, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491133069279818200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.071001, y: -0.013951, z: -0.41998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1685062988417613098}
+  - {fileID: 2929881358031999424}
+  - {fileID: 2367456339256382361}
+  - {fileID: 939988557557470745}
+  - {fileID: 8222526402128229255}
+  m_Father: {fileID: 4499594623016820990}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &563092895552804121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2124529455891661133, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1101517228726505387}
+  - component: {fileID: 6878138638466422796}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1101517228726505387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6675048440904182639, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563092895552804121}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.2921982, y: 2.010566, z: -0.09849739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2759246181606690308}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6878138638466422796
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2982605525200643876, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563092895552804121}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300006, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &850153516123640683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4780029745018802664, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 168081672919923926}
+  - component: {fileID: 9137953825683213868}
+  - component: {fileID: 4796448459113480061}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 19
+  m_IsActive: 1
+--- !u!4 &168081672919923926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5413090827826949367, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850153516123640683}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00000057183, y: 0.000029281, z: 0.000022903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4499594623016820990}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &9137953825683213868
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7761381934441431536, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850153516123640683}
+  m_Mesh: {fileID: 4300002, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!23 &4796448459113480061
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4819444017885850931, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850153516123640683}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 790537484c3f2a842bdd9ef0d114f0be, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &990047631201103446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2809675718517047942, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4499594623016820990}
+  - component: {fileID: 2715193847729259350}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4499594623016820990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8255017779133955603, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990047631201103446}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.89, y: -1.3737726, z: -0.98499584}
+  m_LocalScale: {x: 1.1657951, y: 0.71204203, z: 0.71204203}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8418405136997954337}
+  - {fileID: 168081672919923926}
+  - {fileID: 460736702909222001}
+  m_Father: {fileID: 3624873167231326767}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &2715193847729259350
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3075289829093168111, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990047631201103446}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.00172019, y: 0.0012669563, z: 0.0008062124}
+  m_Size: 5.2214236
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.08688316
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 4796448459113480061}
+  - screenRelativeHeight: 0.01
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6342623542379420148}
+  m_Enabled: 1
+--- !u!1 &1084138536074003354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 932974493880372792, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 230426674806672043}
+  - component: {fileID: 5794999214070819984}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &230426674806672043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7275008482580190785, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084138536074003354}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.2204237, y: 0.17870378, z: -0.098496735}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2687878797151032021}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &5794999214070819984
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1077841976021188857, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084138536074003354}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300008, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &1234992782541577468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8795604063330540149, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 644557446663830271}
+  - component: {fileID: 2346362897471288398}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &644557446663830271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7538034941351258727, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234992782541577468}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.3362274, y: 0.18570602, z: -0.12022525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2759246181606690308}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &2346362897471288398
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4560866319206140270, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234992782541577468}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &1552099119638635054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8539483343255105008, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 587174612664623482}
+  - component: {fileID: 4972297205312716778}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &587174612664623482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4191959115073122136, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552099119638635054}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.2204237, y: 0.17870378, z: -0.098496735}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3253006656815299908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &4972297205312716778
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 771321500503985690, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552099119638635054}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300008, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &1590224447897726878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5708977945359619912, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1685062988417613098}
+  - component: {fileID: 3036828791870621815}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1685062988417613098
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2638160621346198513, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590224447897726878}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.056575775, y: 1.5140525, z: 0.40702128}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8418405136997954337}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &3036828791870621815
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1913332670151252131, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590224447897726878}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300012, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &1665340773741391661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3758718393669395093, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1909493005412436752}
+  - component: {fileID: 8399152834452483515}
+  - component: {fileID: 8238710237316655390}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 19
+  m_IsActive: 1
+--- !u!4 &1909493005412436752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4707850687463695834, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665340773741391661}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00000057183, y: 0.000029281, z: 0.000022903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8091476814576365709}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &8399152834452483515
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3474861922271218841, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665340773741391661}
+  m_Mesh: {fileID: 4300002, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!23 &8238710237316655390
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1446219963860648648, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665340773741391661}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 790537484c3f2a842bdd9ef0d114f0be, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1799353284173396877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5321490426119072036, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2759246181606690308}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2759246181606690308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5045669367271932233, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799353284173396877}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.071001, y: -0.013951, z: -0.41998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4142777921189566100}
+  - {fileID: 1101517228726505387}
+  - {fileID: 644557446663830271}
+  - {fileID: 835187519942797159}
+  - {fileID: 818475577888037082}
+  m_Father: {fileID: 8091476814576365709}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1836391016715095875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3624873167231326767}
+  m_Layer: 0
+  m_Name: large roof wall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3624873167231326767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836391016715095875}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7183854011749636119}
+  - {fileID: 4499594623016820990}
+  - {fileID: 6718823222518541813}
+  - {fileID: 8091476814576365709}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1890199135471367344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7684247547091631699, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1701055906583268873}
+  - component: {fileID: 6787707841527482323}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1701055906583268873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6961117017531452664, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890199135471367344}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.056575775, y: 1.5140525, z: 0.40702128}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2687878797151032021}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6787707841527482323
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5244113788063914073, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890199135471367344}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300012, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &2103766758481140409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4259460753341372715, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8946886995773744717}
+  - component: {fileID: 7006959686012512505}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8946886995773744717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6393208987000337113, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103766758481140409}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.056575775, y: 1.5140525, z: 0.40702128}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3253006656815299908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &7006959686012512505
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3069207539555725191, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103766758481140409}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300012, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &2652942448258941563
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3866730425058251495, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 818475577888037082}
+  - component: {fileID: 3462528716623255461}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &818475577888037082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3976404664119173860, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652942448258941563}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.2204237, y: 0.17870378, z: -0.098496735}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2759246181606690308}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &3462528716623255461
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2181672942671134526, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652942448258941563}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300008, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &2977196683540991427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 824378811185514598, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2977026994976980708}
+  - component: {fileID: 5380788851386378992}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2977026994976980708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4793706154173114122, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977196683540991427}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.165451, y: 1.9686276, z: -0.09849739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2687878797151032021}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &5380788851386378992
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5812771636252847626, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977196683540991427}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300010, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &3068046725189646577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8527353867656694222, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4142777921189566100}
+  - component: {fileID: 5967960408902054852}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4142777921189566100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4889278167324323757, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3068046725189646577}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.056575775, y: 1.5140525, z: 0.40702128}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2759246181606690308}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &5967960408902054852
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8940103331739018152, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3068046725189646577}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300012, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &3345099403044676384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1891258481405513128, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 939988557557470745}
+  - component: {fileID: 3312187678105331673}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &939988557557470745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8789091103126919076, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3345099403044676384}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.165451, y: 1.9686276, z: -0.09849739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8418405136997954337}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &3312187678105331673
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5691529761293273043, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3345099403044676384}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300010, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &3364359900931717351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2893918107682436489, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3253006656815299908}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3253006656815299908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8263955524296291521, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3364359900931717351}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.071001, y: -0.013951, z: -0.41998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8946886995773744717}
+  - {fileID: 3367021935751782482}
+  - {fileID: 4712214933455915926}
+  - {fileID: 1848087577806730751}
+  - {fileID: 587174612664623482}
+  m_Father: {fileID: 6718823222518541813}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3383462964611978112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3680239627399362598, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 835187519942797159}
+  - component: {fileID: 6535819571285197440}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &835187519942797159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6576901957334590276, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383462964611978112}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.165451, y: 1.9686276, z: -0.09849739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2759246181606690308}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6535819571285197440
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6699952462323967413, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383462964611978112}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300010, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &3398676185737448409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 235692516317441763, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8222526402128229255}
+  - component: {fileID: 5792190157797051540}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8222526402128229255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7674541719301827604, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3398676185737448409}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.2204237, y: 0.17870378, z: -0.098496735}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8418405136997954337}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &5792190157797051540
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7620847622511541732, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3398676185737448409}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300008, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &3980698861305063398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6906475880787177812, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 447108027688489043}
+  - component: {fileID: 1992290324435964219}
+  - component: {fileID: 3528252062359575371}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 19
+  m_IsActive: 1
+--- !u!4 &447108027688489043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8449985498459712722, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3980698861305063398}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00000057183, y: 0.000029281, z: 0.000022903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7183854011749636119}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1992290324435964219
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7097630740286112071, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3980698861305063398}
+  m_Mesh: {fileID: 4300000, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!23 &3528252062359575371
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8881074036052875329, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3980698861305063398}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 790537484c3f2a842bdd9ef0d114f0be, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4244196045916714031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5568681260900794774, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6718823222518541813}
+  - component: {fileID: 8610226210151281426}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6718823222518541813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4045195271700291675, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4244196045916714031}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 1.8442497, z: -1.0300007}
+  m_LocalScale: {x: 0.71204203, y: 0.71204203, z: 0.71204203}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3253006656815299908}
+  - {fileID: 3505500023677393891}
+  - {fileID: 3259604961971728992}
+  m_Father: {fileID: 3624873167231326767}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!205 &8610226210151281426
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2489421207400875984, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4244196045916714031}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.00172019, y: 0.0012669563, z: 0.0008062124}
+  m_Size: 5.2214236
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.08688316
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2943588876153457031}
+  - screenRelativeHeight: 0.01
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2225695604344966162}
+  m_Enabled: 1
+--- !u!1 &4438421961905090460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2005141509562139907, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1848087577806730751}
+  - component: {fileID: 4221858857167953730}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1848087577806730751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5670177802168444135, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438421961905090460}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.165451, y: 1.9686276, z: -0.09849739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3253006656815299908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &4221858857167953730
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5320830970941474871, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438421961905090460}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300010, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &4908878669102813664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6689594156656978433, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2929881358031999424}
+  - component: {fileID: 5878619603571987489}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2929881358031999424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3586323132098588088, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4908878669102813664}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.2921982, y: 2.010566, z: -0.09849739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8418405136997954337}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &5878619603571987489
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6883875345708439733, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4908878669102813664}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300006, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &6350152578758090705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 308871409142993819, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7819122751080798807}
+  - component: {fileID: 3140085475397850926}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7819122751080798807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3023457594487296496, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6350152578758090705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.3362274, y: 0.18570602, z: -0.12022525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2687878797151032021}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &3140085475397850926
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 468288700436106120, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6350152578758090705}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &6927577534348481955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2800718645096582687, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2687878797151032021}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2687878797151032021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4595846364756969247, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6927577534348481955}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.071001, y: -0.013951, z: -0.41998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1701055906583268873}
+  - {fileID: 8663979393817144337}
+  - {fileID: 7819122751080798807}
+  - {fileID: 2977026994976980708}
+  - {fileID: 230426674806672043}
+  m_Father: {fileID: 7183854011749636119}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6979900882821616971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2140279346036082619, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8663979393817144337}
+  - component: {fileID: 5846079239876189114}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8663979393817144337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4792690819416277809, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6979900882821616971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.2921982, y: 2.010566, z: -0.09849739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2687878797151032021}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &5846079239876189114
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5962937150715983234, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6979900882821616971}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300006, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &7072014310809065453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3082226729289260423, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4712214933455915926}
+  - component: {fileID: 4157459278743012427}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4712214933455915926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4914607760288387356, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072014310809065453}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.3362274, y: 0.18570602, z: -0.12022525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3253006656815299908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &4157459278743012427
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4226550161315198476, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072014310809065453}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &7237049322747936640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8483241204927527364, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2660765892475471649}
+  - component: {fileID: 5069858557948155147}
+  - component: {fileID: 348213853185676755}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 19
+  m_IsActive: 1
+--- !u!4 &2660765892475471649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 519121210095760273, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237049322747936640}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00000057183, y: 0.000029281, z: 0.000022903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8091476814576365709}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5069858557948155147
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6524739412442722849, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237049322747936640}
+  m_Mesh: {fileID: 4300000, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!23 &348213853185676755
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4034497566782368572, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237049322747936640}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 790537484c3f2a842bdd9ef0d114f0be, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7665624472393891362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6678846048671880593, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7329847250746902134}
+  - component: {fileID: 2452127576297695813}
+  - component: {fileID: 5403113853117407091}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 19
+  m_IsActive: 1
+--- !u!4 &7329847250746902134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4960428945542091763, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665624472393891362}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00000057183, y: 0.000029281, z: 0.000022903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7183854011749636119}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2452127576297695813
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7804274434445360506, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665624472393891362}
+  m_Mesh: {fileID: 4300002, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!23 &5403113853117407091
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2430840719130857102, guid: 3b3edd0c644103843bf2be1b88e5415d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5452885688270443847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665624472393891362}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 790537484c3f2a842bdd9ef0d114f0be, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8145034334283164784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6948632787802541530, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3367021935751782482}
+  - component: {fileID: 5304187323584612971}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3367021935751782482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1582793323348370506, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8145034334283164784}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.2921982, y: 2.010566, z: -0.09849739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3253006656815299908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &5304187323584612971
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3167552532829180934, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8145034334283164784}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300006, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1 &8364137548196347427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5464325701170048625, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8091476814576365709}
+  - component: {fileID: 3947418556325274207}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8091476814576365709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7663139553335130041, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8364137548196347427}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.8012505, z: -0.9260006}
+  m_LocalScale: {x: 0.71204203, y: 0.71204203, z: 0.71204203}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2759246181606690308}
+  - {fileID: 1909493005412436752}
+  - {fileID: 2660765892475471649}
+  m_Father: {fileID: 3624873167231326767}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &3947418556325274207
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 9080545999925680494, guid: 480ffc555e68a6a4792af75d89c7a895,
+    type: 3}
+  m_PrefabInstance: {fileID: 2191329174162053698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8364137548196347427}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.00172019, y: 0.0012669563, z: 0.0008062124}
+  m_Size: 5.2214236
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.08688316
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8238710237316655390}
+  - screenRelativeHeight: 0.01
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 348213853185676755}
+  m_Enabled: 1
+--- !u!1 &8553931149394782285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5813224675644107965, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3259604961971728992}
+  - component: {fileID: 97610181186815703}
+  - component: {fileID: 2225695604344966162}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_LOD1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 19
+  m_IsActive: 1
+--- !u!4 &3259604961971728992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5299998588603493954, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8553931149394782285}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00000057183, y: 0.000029281, z: 0.000022903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6718823222518541813}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &97610181186815703
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 763910270848682290, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8553931149394782285}
+  m_Mesh: {fileID: 4300000, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!23 &2225695604344966162
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3179453540550140313, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8553931149394782285}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 790537484c3f2a842bdd9ef0d114f0be, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8668242203057110361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3566234222604216441, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3505500023677393891}
+  - component: {fileID: 8161956587140996417}
+  - component: {fileID: 2943588876153457031}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 19
+  m_IsActive: 1
+--- !u!4 &3505500023677393891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5832255446090422519, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8668242203057110361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00000057183, y: 0.000029281, z: 0.000022903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6718823222518541813}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &8161956587140996417
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2942352352177789219, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8668242203057110361}
+  m_Mesh: {fileID: 4300002, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!23 &2943588876153457031
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5845389749662289141, guid: 995807af79f4d3d4f86243ac18b28c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468913143523665073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8668242203057110361}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 790537484c3f2a842bdd9ef0d114f0be, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8681626394307660971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 844377667178153120, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2367456339256382361}
+  - component: {fileID: 7561461321072821472}
+  m_Layer: 0
+  m_Name: Medieval_RoofWall_MedA_Collision_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2367456339256382361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2339640081515623944, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8681626394307660971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.3362274, y: 0.18570602, z: -0.12022525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8418405136997954337}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &7561461321072821472
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3182892540902108807, guid: a02718d6f55f4104291514309ce08dcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2429827552965189359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8681626394307660971}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 32a98b25cba5f6e4e90c2f9c75531fb0, type: 3}
+--- !u!1001 &2191329174162053698
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3624873167231326767}
+    m_Modifications:
+    - target: {fileID: 5464325701170048625, guid: 480ffc555e68a6a4792af75d89c7a895,
+        type: 3}
+      propertyPath: m_Name
+      value: Medieval_RoofWall_MedA (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663139553335130041, guid: 480ffc555e68a6a4792af75d89c7a895,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663139553335130041, guid: 480ffc555e68a6a4792af75d89c7a895,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.627001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663139553335130041, guid: 480ffc555e68a6a4792af75d89c7a895,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.924
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663139553335130041, guid: 480ffc555e68a6a4792af75d89c7a895,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663139553335130041, guid: 480ffc555e68a6a4792af75d89c7a895,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663139553335130041, guid: 480ffc555e68a6a4792af75d89c7a895,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663139553335130041, guid: 480ffc555e68a6a4792af75d89c7a895,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663139553335130041, guid: 480ffc555e68a6a4792af75d89c7a895,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663139553335130041, guid: 480ffc555e68a6a4792af75d89c7a895,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663139553335130041, guid: 480ffc555e68a6a4792af75d89c7a895,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 480ffc555e68a6a4792af75d89c7a895, type: 3}
+--- !u!1001 &2429827552965189359
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3624873167231326767}
+    m_Modifications:
+    - target: {fileID: 2809675718517047942, guid: a02718d6f55f4104291514309ce08dcf,
+        type: 3}
+      propertyPath: m_Name
+      value: Medieval_RoofWall_MedA (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255017779133955603, guid: a02718d6f55f4104291514309ce08dcf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255017779133955603, guid: a02718d6f55f4104291514309ce08dcf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.451978
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255017779133955603, guid: a02718d6f55f4104291514309ce08dcf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.865005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255017779133955603, guid: a02718d6f55f4104291514309ce08dcf,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255017779133955603, guid: a02718d6f55f4104291514309ce08dcf,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255017779133955603, guid: a02718d6f55f4104291514309ce08dcf,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255017779133955603, guid: a02718d6f55f4104291514309ce08dcf,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255017779133955603, guid: a02718d6f55f4104291514309ce08dcf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255017779133955603, guid: a02718d6f55f4104291514309ce08dcf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255017779133955603, guid: a02718d6f55f4104291514309ce08dcf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a02718d6f55f4104291514309ce08dcf, type: 3}
+--- !u!1001 &3468913143523665073
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3624873167231326767}
+    m_Modifications:
+    - target: {fileID: 4045195271700291675, guid: 995807af79f4d3d4f86243ac18b28c72,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045195271700291675, guid: 995807af79f4d3d4f86243ac18b28c72,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045195271700291675, guid: 995807af79f4d3d4f86243ac18b28c72,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045195271700291675, guid: 995807af79f4d3d4f86243ac18b28c72,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045195271700291675, guid: 995807af79f4d3d4f86243ac18b28c72,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045195271700291675, guid: 995807af79f4d3d4f86243ac18b28c72,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045195271700291675, guid: 995807af79f4d3d4f86243ac18b28c72,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045195271700291675, guid: 995807af79f4d3d4f86243ac18b28c72,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045195271700291675, guid: 995807af79f4d3d4f86243ac18b28c72,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045195271700291675, guid: 995807af79f4d3d4f86243ac18b28c72,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568681260900794774, guid: 995807af79f4d3d4f86243ac18b28c72,
+        type: 3}
+      propertyPath: m_Name
+      value: Medieval_RoofWall_MedA (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 995807af79f4d3d4f86243ac18b28c72, type: 3}
+--- !u!1001 &5452885688270443847
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3624873167231326767}
+    m_Modifications:
+    - target: {fileID: 6183635850115224395, guid: 3b3edd0c644103843bf2be1b88e5415d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.8026174
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183635850115224395, guid: 3b3edd0c644103843bf2be1b88e5415d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.451978
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183635850115224395, guid: 3b3edd0c644103843bf2be1b88e5415d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.865005
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183635850115224395, guid: 3b3edd0c644103843bf2be1b88e5415d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183635850115224395, guid: 3b3edd0c644103843bf2be1b88e5415d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183635850115224395, guid: 3b3edd0c644103843bf2be1b88e5415d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183635850115224395, guid: 3b3edd0c644103843bf2be1b88e5415d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183635850115224395, guid: 3b3edd0c644103843bf2be1b88e5415d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183635850115224395, guid: 3b3edd0c644103843bf2be1b88e5415d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183635850115224395, guid: 3b3edd0c644103843bf2be1b88e5415d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931263201262578462, guid: 3b3edd0c644103843bf2be1b88e5415d,
+        type: 3}
+      propertyPath: m_Name
+      value: Medieval_RoofWall_MedA (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3b3edd0c644103843bf2be1b88e5415d, type: 3}
