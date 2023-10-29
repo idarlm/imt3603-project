@@ -15,7 +15,10 @@ namespace AIController
         public Waypoint TargetWaypoint;
         public Vector3 LastKnownTargetPosition;
         public float TimeSincePlayerSeen;
-        public PlayerIlluminationMeasurer PlayerIllumination;
+        public IlluminationChannel PlayerIllumination;
         public float Alertness;
+        public Animator ratAnimator;
+        public float runSpeed;
+        public float walkSpeed;
     }
 }

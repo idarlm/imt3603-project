@@ -4,11 +4,19 @@ using UnityEngine;
 
 namespace AIController
 {
+    public enum AIStateLabel
+    {
+        Chasing,
+        Patrolling,
+        Idle
+    }
+    
+    
     public abstract class AIState : IState<AIContext>
     {
-        public virtual string GetName()
+        public virtual AIStateLabel GetLabel()
         {
-            return "";
+            return AIStateLabel.Idle;
         }
         protected float SqrDistanceToTarget(AIContext context, Vector3 targetPosition)
         {
@@ -31,16 +39,21 @@ namespace AIController
         protected bool CanSeeLimb(AIContext context, HumanBodyBones bone)
         {
             var thisPosition = context.Agent.transform.position;
-            var playerPosition = context.PlayerAnimator.GetBoneTransform(bone).position;// context.Target.position;
-            Physics.Raycast(thisPosition , (playerPosition-thisPosition) , out var playerRay);
-            Debug.DrawLine(thisPosition, playerPosition);
-            Debug.DrawRay(thisPosition,(playerPosition-thisPosition));
-            if ((playerPosition - thisPosition).magnitude - playerRay.distance < 0.55 &&
-                context.PlayerIllumination.GetIllumination(bone) > 5.0f)
+            var limbPosition = context.PlayerAnimator.GetBoneTransform(bone).position;// context.Target.position;
+            Physics.Raycast(thisPosition , (limbPosition-thisPosition) , out var playerRay);
+            Debug.DrawLine(thisPosition, limbPosition);
+            Debug.DrawRay(thisPosition,(limbPosition-thisPosition));
+            if ((limbPosition - thisPosition).magnitude - playerRay.distance < 0.55 &&
+                context.PlayerIllumination.GetIllumination(limbPosition, bone) > 5.0f)
             {
-                Debug.Log( "Bone:" + bone + "    Illumination:" + context.PlayerIllumination.GetIllumination(bone));
+                // Debug.Log( "Bone:" + bone + "    Illumination:" + context.PlayerIllumination.GetIllumination(limbPosition, bone));
             }
-            return (playerPosition - thisPosition).magnitude - playerRay.distance < 0.55 && context.PlayerIllumination.GetIllumination(bone) > context.Alertness;
+            return (limbPosition - thisPosition).magnitude - playerRay.distance < 0.55 && context.PlayerIllumination.GetIllumination(limbPosition, bone) > context.Alertness;
+        }
+
+        public virtual float GetSpeedPercentage(AIContext context)
+        {
+            throw new System.NotImplementedException();
         }
 
         public virtual void Enter(AIContext context)

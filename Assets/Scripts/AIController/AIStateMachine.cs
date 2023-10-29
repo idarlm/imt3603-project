@@ -4,34 +4,37 @@ using Pathing;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace AIController
 {
     public class AIStateMachine : StateMachineMono<AIContext>
     {
-        [SerializeField] private string currentStateSerialized;
+        [SerializeField] private AIStateLabel currentStateSerialized;
         private IState<AIContext> _currentState;
         private AIContext _context;
         [SerializeField] private Waypoint entryWaypoint;
-
-        [SerializeField] private string chaseState;
-
         [SerializeField] private Transform target;
         [SerializeField] private Animator playerAnimator;
-        [SerializeField] private PlayerIlluminationMeasurer playerIllumination;
+        [SerializeField] private Animator ratAnimator;
+        [SerializeField] private float walkSpeed = 3.0f;
+        [SerializeField] private float runSpeed = 5.0f;
         
         private void Start()
         {
             this.
             _context = new AIContext
             {
-                PlayerIllumination = playerIllumination,
+                PlayerIllumination = IlluminationChannel.Instance,
                 PlayerAnimator = playerAnimator,
                 StateMachine = this,
                 TargetWaypoint = entryWaypoint,
                 Agent = GetComponent<NavMeshAgent>(),
                 Target = target.transform,
-                Alertness = 5.0f
+                Alertness = 5.0f,
+                ratAnimator = ratAnimator,
+                walkSpeed =  walkSpeed,
+                runSpeed = runSpeed
             };
             ChangeState(StateFactory.CreateState(currentStateSerialized));
         }
@@ -39,14 +42,15 @@ namespace AIController
         public void ChangeState(AIState nextState)
         {
             base.ChangeState(nextState);
-            _currentState = nextState;
-            _currentState.Enter(_context);
-            currentStateSerialized = nextState.GetName();
+            // _currentState = nextState;
+            // _currentState.Enter(_context);
+            currentStateSerialized = nextState.GetLabel();
         }
 
         private void Update()
         {
-            _currentState?.Update(_context);
+            Execute(_context);
+            //_currentState?.Update(_context);
         }
     }
     
