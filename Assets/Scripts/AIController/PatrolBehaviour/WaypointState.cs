@@ -20,7 +20,15 @@ namespace AIController.PatrolBehaviour
         {
             _squareSwapDistance = _swapDistance * _swapDistance;
             context.Agent.speed = context.walkSpeed;
-            context.Agent.destination = context.TargetWaypoint.GetPosition();
+            if (context.TargetWaypoint)
+            {
+                context.Agent.destination = context.TargetWaypoint.GetPosition();
+            }
+            else
+            {
+                context.Agent.destination = context.startPosition;
+            }
+            
             context.ratAnimator.SetBool(IsPatrolling, true);
         }
 
@@ -48,38 +56,47 @@ namespace AIController.PatrolBehaviour
         
         public override void Update(AIContext context)
         {
-            context.ratAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
-            if (IsCloseToPlayer(context, 30.0f) && CanSeePlayer(context) )
+            if (context.TargetWaypoint)
             {
-                context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Chasing));
-            }
-            else
-            {
-                if (IsCloseToWaypoint(context))
+                context.ratAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
+                if (IsCloseToPlayer(context, 30.0f) && CanSeePlayer(context) )
                 {
-                    var oldWaypoint = context.TargetWaypoint;
-                    if (context.TargetWaypoint.isEndpoint)
+                    context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Chasing));
+                }
+                else
+                {
+                    if (IsCloseToWaypoint(context))
                     {
-                        _reverseOrder = !_reverseOrder;
-                    }
-                    if (!_reverseOrder)
-                    {
-                        context.TargetWaypoint = context.TargetWaypoint.GetNext();
-                    }
-                    else
-                    {
-                        context.TargetWaypoint = context.TargetWaypoint.GetPrevious();
-                    }
-                    context.Agent.destination = context.TargetWaypoint.GetPosition();
-                    if (oldWaypoint.isEndpoint)
-                    {
-                        var idleState = new AIController.IdleBehaviour.IdleState();
-                        idleState.SetCountdown(5f, AIStateLabel.Patrolling);
-                        context.StateMachine.ChangeState(idleState);
+                        var oldWaypoint = context.TargetWaypoint;
+                        if (context.TargetWaypoint.isEndpoint)
+                        {
+                            _reverseOrder = !_reverseOrder;
+                        }
+                        if (!_reverseOrder)
+                        {
+                            context.TargetWaypoint = context.TargetWaypoint.GetNext();
+                        }
+                        else
+                        {
+                            context.TargetWaypoint = context.TargetWaypoint.GetPrevious();
+                        }
+                        context.Agent.destination = context.TargetWaypoint.GetPosition();
+                        if (oldWaypoint.isEndpoint)
+                        {
+                            var idleState = new AIController.IdleBehaviour.IdleState();
+                            idleState.SetCountdown(5f, AIStateLabel.Patrolling);
+                            context.StateMachine.ChangeState(idleState);
+                        }
                     }
                 }
             }
-            
+            else
+            {
+                if (Vector3.ProjectOnPlane(context.startPosition - context.Agent.transform.position, Vector3.up).sqrMagnitude < 1f)
+                {
+                    context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Idle));
+                }
+            }
         }
     }
 }

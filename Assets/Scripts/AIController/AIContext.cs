@@ -20,5 +20,6 @@ namespace AIController
         public Animator ratAnimator;
         public float runSpeed;
         public float walkSpeed;
+        public Vector3 startPosition;
     }
 }

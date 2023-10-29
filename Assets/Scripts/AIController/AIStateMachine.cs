@@ -37,7 +37,8 @@ namespace AIController
                 Alertness = 5.0f,
                 ratAnimator = ratAnimator,
                 walkSpeed =  walkSpeed,
-                runSpeed = runSpeed
+                runSpeed = runSpeed,
+                startPosition = transform.position
             };
             ChangeState(StateFactory.CreateState(currentStateSerialized));
         }

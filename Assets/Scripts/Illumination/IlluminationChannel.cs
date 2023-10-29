@@ -20,7 +20,6 @@ namespace Illumination
             {
                 if (_instance == null)
                 {
-                    Debug.Log("IlluminationChannel instantiated");
                     _instance = new IlluminationChannel();
                     _illumination = new PlayerIllumination();
                 }
