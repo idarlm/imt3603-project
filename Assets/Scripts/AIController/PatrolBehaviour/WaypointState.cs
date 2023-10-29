@@ -8,7 +8,6 @@ namespace AIController.PatrolBehaviour
     { 
         private float _swapDistance = 2.0f;
         private float _squareSwapDistance;
-        private bool _reverseOrder = false;
         private static readonly int IsPatrolling = Animator.StringToHash("isPatrolling");
         private static readonly int MovementPercentage = Animator.StringToHash("movementPercentage");
 
@@ -70,9 +69,9 @@ namespace AIController.PatrolBehaviour
                         var oldWaypoint = context.TargetWaypoint;
                         if (context.TargetWaypoint.isEndpoint)
                         {
-                            _reverseOrder = !_reverseOrder;
+                            context._reverseOrder = !context._reverseOrder;
                         }
-                        if (!_reverseOrder)
+                        if (!context._reverseOrder)
                         {
                             context.TargetWaypoint = context.TargetWaypoint.GetNext();
                         }

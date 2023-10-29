@@ -21,5 +21,6 @@ namespace AIController
         public float runSpeed;
         public float walkSpeed;
         public Vector3 startPosition;
+        public bool _reverseOrder = false;
     }
 }
