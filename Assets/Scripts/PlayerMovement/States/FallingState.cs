@@ -36,17 +36,34 @@ namespace PlayerMovement
         public override void Update(PlayerMovementSystem context)
         {
             var handler = context.Handler;
-            
             float dt = Time.fixedDeltaTime;
+
+            // preserve velocity and accelerate downwards
             Vector3 movement = handler.Velocity * dt;
             movement += Vector3.down * (context.gravity * dt * dt);
+
+            // Slide if we are in a steep slope
+            if (handler.Grounded)
+            {
+                // prevent the player from sliding upwards.
+                // this stops the player from being launched into
+                // the air due to preserving velocity added by the
+                // collision resolver.
+                movement.y = Mathf.Min(0f, movement.y);
+
+                var acceleration = Vector3.ProjectOnPlane(Vector3.down, handler.GroundNormal);
+                acceleration *= context.gravity * dt * dt;
+
+                movement += acceleration;
+            }
 
             handler.Move(movement);
         }
 
         public override void HandleInput(PlayerMovementSystem context)
         {
-            if (context.Handler.Grounded)
+            var handler = context.Handler;
+            if (handler.Grounded && handler.GroundAngle <= handler.Controller.slopeLimit)
             {
                 context.ChangeState(new WalkingState());
             }
