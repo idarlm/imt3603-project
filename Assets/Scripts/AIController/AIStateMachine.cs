@@ -2,6 +2,7 @@
 using Illumination;
 using Pathing;
 using StateMachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -19,6 +20,8 @@ namespace AIController
         [SerializeField] private Animator ratAnimator;
         [SerializeField] private float walkSpeed = 3.0f;
         [SerializeField] private float runSpeed = 5.0f;
+        public AttackDetector attackDetector;
+        public Transform visionTransform;
         
         private void Start()
         {

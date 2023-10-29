@@ -48,7 +48,12 @@ namespace AIController
             {
                 // Debug.Log( "Bone:" + bone + "    Illumination:" + context.PlayerIllumination.GetIllumination(limbPosition, bone));
             }
-            return (limbPosition - thisPosition).magnitude - playerRay.distance < 0.55 && context.PlayerIllumination.GetIllumination(limbPosition, bone) > context.Alertness;
+
+            var rawStimuli = context.PlayerIllumination.GetIllumination(limbPosition, bone);
+            var attenuatedStimuli = OcularSimulator.AttenuateByDistance(playerRay.distance, rawStimuli);
+            attenuatedStimuli = OcularSimulator.AttenuateByFOV(context.StateMachine.visionTransform.forward,
+                (limbPosition - thisPosition), attenuatedStimuli);
+            return (limbPosition - thisPosition).magnitude - playerRay.distance < 0.55 && attenuatedStimuli > context.Alertness;
         }
 
         public virtual float GetSpeedPercentage(AIContext context)
