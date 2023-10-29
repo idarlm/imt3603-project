@@ -22,6 +22,8 @@ namespace AIController
         [SerializeField] private float runSpeed = 5.0f;
         public AttackDetector attackDetector;
         public Transform visionTransform;
+        public Transform headBone;
+        public RatIKController IKController;
         
         private void Start()
         {
@@ -56,6 +58,7 @@ namespace AIController
             Execute(_context);
             //_currentState?.Update(_context);
         }
+        
     }
     
 }

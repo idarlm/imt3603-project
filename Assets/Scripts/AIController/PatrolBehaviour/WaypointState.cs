@@ -43,7 +43,7 @@ namespace AIController.PatrolBehaviour
         
         public override float GetSpeedPercentage(AIContext context)
         {
-            return context.Agent.speed / context.walkSpeed;
+            return context.Agent.velocity.magnitude / context.walkSpeed;
         }
 
 
@@ -55,12 +55,15 @@ namespace AIController.PatrolBehaviour
         
         public override void Update(AIContext context)
         {
+            context.ratAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
             if (context.TargetWaypoint)
             {
                 context.ratAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
                 if (IsCloseToPlayer(context, 30.0f) && CanSeePlayer(context) )
                 {
-                    context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Chasing));
+                    var idle = new AIController.IdleBehaviour.IdleState();
+                    idle.SetCountdown(2f, AIStateLabel.Patrolling);
+                    context.StateMachine.ChangeState(idle);
                 }
                 else
                 {

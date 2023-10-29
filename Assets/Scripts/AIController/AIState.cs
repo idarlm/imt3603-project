@@ -36,6 +36,14 @@ namespace AIController
                    CanSeeLimb(context, HumanBodyBones.RightHand);
         }
 
+        protected bool PlayerIsBehind(AIContext context, float distance)
+        {
+            var agentToPlayer = context.Target.position - context.Agent.transform.position;
+            var cosine = Vector3.Dot(context.Agent.transform.forward.normalized,
+                agentToPlayer.normalized);
+            return cosine < 0 && agentToPlayer.magnitude < distance;
+        }
+
         protected bool CanSeeLimb(AIContext context, HumanBodyBones bone)
         {
             var thisPosition = context.Agent.transform.position;

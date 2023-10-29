@@ -13,6 +13,7 @@ namespace AIController.ChaseBehaviour
         private float attackTimer;
         private bool grabbingPlayer;
         private static readonly int IsGrabbing = Animator.StringToHash("isGrabbing");
+        private static readonly int LostSightOfPlayer = Animator.StringToHash("lostSightOfPlayer");
 
         public override AIStateLabel GetLabel()
         {
@@ -29,6 +30,8 @@ namespace AIController.ChaseBehaviour
         
         public override void Enter(AIContext context)
         {
+            context.StateMachine.IKController.SetLookAtTarget(context.LastKnownTargetPosition);
+            context.StateMachine.IKController.EnableLookAt();
             context.Agent.speed = context.runSpeed;
             context.Agent.destination = context.Target.position;
             context.ratAnimator.SetBool(IsChasing, true);
@@ -38,6 +41,7 @@ namespace AIController.ChaseBehaviour
 
         public override void Exit(AIContext context)
         {
+            context.StateMachine.IKController.DisableLookAt();
             context.ratAnimator.SetBool(IsChasing, false);
             context.StateMachine.attackDetector.OnPlayerOverlap -= DetectGrab;
         }
@@ -49,14 +53,16 @@ namespace AIController.ChaseBehaviour
 
         public override float GetSpeedPercentage(AIContext context)
         {
-            return context.Agent.speed / context.runSpeed;
+            return context.Agent.velocity.magnitude / context.runSpeed;
         }
 
         public override void Update(AIContext context)
         {
+            context.StateMachine.IKController.SetLookAtTarget(context.Target.position);
             context.ratAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
             if (CanSeePlayer(context))
             {
+                context.StateMachine.IKController.EnableLookAt();
                 context.Agent.destination = context.Target.position;
                 context.TimeSincePlayerSeen = 0.0f;
                 if (IsCloseToPlayer(context, 3f) && !context.ratAnimator.GetBool(IsAttacking))
@@ -65,12 +71,15 @@ namespace AIController.ChaseBehaviour
                     context.Agent.isStopped = true;
                     attackTimer = 2.0f;
                 }
+                context.ratAnimator.SetBool(LostSightOfPlayer, false);
             }
             else
             {
+                context.ratAnimator.SetBool(LostSightOfPlayer, true);
                 context.TimeSincePlayerSeen += Time.deltaTime;
+                // context.StateMachine.IKController.DisableLookAt();
             }
-            if (context.TimeSincePlayerSeen > 3.0)
+            if (context.TimeSincePlayerSeen > 5.0)
             {
                 context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Patrolling));
             }
@@ -80,6 +89,15 @@ namespace AIController.ChaseBehaviour
                 context.ratAnimator.SetBool(IsAttacking, false);
                 context.ratAnimator.SetBool(IsGrabbing, false);
                 context.Agent.isStopped = false;
+            }
+            else
+            {
+                context.Agent.transform.forward = Vector3.Lerp(
+                    context.Agent.transform.forward,
+                    Vector3.ProjectOnPlane(
+                        context.Target.position - context.Agent.transform.position, Vector3.up),
+                    Time.deltaTime * 5
+                    );
             }
 
             if (grabbingPlayer)
