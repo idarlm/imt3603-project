@@ -7,9 +7,9 @@ namespace AIController.IdleBehaviour
     class IdleState : AIState
     {
         private static readonly int IsIdle = Animator.StringToHash("isIdle");
-        private float _idleTime = 0f;
+        private float _idleTime;
         private AIStateLabel _nextState;
-        private bool _temporary = false;
+        private bool _temporary;
         private float _seenPlayerInSeconds;
         private static readonly int IsBehind = Animator.StringToHash("playerIsBehind");
 
@@ -31,11 +31,7 @@ namespace AIController.IdleBehaviour
             context.ratAnimator.SetBool(IsIdle, false);
             context.Agent.isStopped = false;
         }
-
-        public override void HandleInput(AIContext context)
-        {
-            
-        }
+        
 
         public void SetCountdown(float idleTime, AIStateLabel nextState)
         {
