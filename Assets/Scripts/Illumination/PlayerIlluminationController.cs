@@ -16,7 +16,7 @@ namespace Illumination
         // Update is called once per frame
         private void LateUpdate()
         {
-            IlluminationChannel.Instance.ResetIllumination();
+            IlluminationManager.Instance.ResetIllumination();
         }
     }
 }

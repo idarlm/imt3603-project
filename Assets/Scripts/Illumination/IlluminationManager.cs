@@ -3,24 +3,26 @@ using UnityEngine;
 
 namespace Illumination
 {
-    public sealed class IlluminationChannel
+    public sealed class IlluminationManager
     {
          //TODO: Make event driven
         private static PlayerIllumination _illumination;
+
+        public const float ReferenceIllumination = 100f;
         
         public event Action<Vector3, HumanBodyBones> OnIlluminationRequest;
 
-        private static IlluminationChannel _instance;
+        private static IlluminationManager _instance;
         
-        private IlluminationChannel() {}
+        private IlluminationManager() {}
         
-        public static IlluminationChannel Instance
+        public static IlluminationManager Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new IlluminationChannel();
+                    _instance = new IlluminationManager();
                     _illumination = new PlayerIllumination();
                 }
                 return _instance;
@@ -39,23 +41,21 @@ namespace Illumination
                     break;
                 case HumanBodyBones.RightHand: _illumination.RightHandIllumination += illumination;
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(limb), limb, null);
             }
         }
 
         private float GetIlluminationNoUpdate(HumanBodyBones limb)
         {
-            switch (limb)
+            return limb switch
             {
-                case HumanBodyBones.Head:
-                    return _illumination.HeadIllumination;
-                case HumanBodyBones.Chest:
-                    return _illumination.ChestIllumination;
-                case HumanBodyBones.LeftHand:  
-                    return _illumination.LeftHandIllumination;
-                case HumanBodyBones.RightHand:
-                    return _illumination.RightHandIllumination;
-            }
-            return 0.0f;
+                HumanBodyBones.Head => _illumination.HeadIllumination,
+                HumanBodyBones.Chest => _illumination.ChestIllumination,
+                HumanBodyBones.LeftHand => _illumination.LeftHandIllumination,
+                HumanBodyBones.RightHand => _illumination.RightHandIllumination,
+                _ => 0.0f
+            };
         }
 
         public void ResetIllumination()
