@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
+
 
 namespace AIController
 {
@@ -19,18 +21,20 @@ namespace AIController
         [SerializeField] private Animator playerAnimator;
         [SerializeField] private Animator ratAnimator;
         [SerializeField] private float walkSpeed = 3.0f;
-        [SerializeField] private float runSpeed = 5.0f;
+        [SerializeField] private float runSpeed = 6.0f;
         public AttackDetector attackDetector;
         public Transform visionTransform;
-        public Transform headBone;
         public RatIKController IKController;
+        public float FOV;
         
         private void Start()
         {
-            this.
+            var sound = GetComponent<AudioSource>();
+            ;
+            sound.time = Random.Range(0, sound.clip.length);
             _context = new AIContext
             {
-                PlayerIllumination = IlluminationChannel.Instance,
+                PlayerIllumination = IlluminationManager.Instance,
                 PlayerAnimator = playerAnimator,
                 StateMachine = this,
                 TargetWaypoint = entryWaypoint,
@@ -48,15 +52,12 @@ namespace AIController
         public void ChangeState(AIState nextState)
         {
             base.ChangeState(nextState);
-            // _currentState = nextState;
-            // _currentState.Enter(_context);
             currentStateSerialized = nextState.GetLabel();
         }
 
         private void Update()
         {
             Execute(_context);
-            //_currentState?.Update(_context);
         }
         
     }

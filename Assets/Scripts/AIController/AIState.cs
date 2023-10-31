@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace AIController
 {
+    /// <summary>
+    /// Label indicating the use case of a particular state.
+    /// </summary>
     public enum AIStateLabel
     {
         Chasing,
@@ -11,23 +14,46 @@ namespace AIController
         Idle
     }
     
-    
+       
+    /// <summary>
+    /// Base class for other AIStates. Provides methods that are utilized by several states, such as
+    /// functions allowing visual detection of a player character.
+    /// </summary>
     public abstract class AIState : IState<AIContext>
     {
+        /// <summary>
+        /// Returns the AIStateLabel associated with the particular AIState implementation.
+        /// </summary>
+        /// <returns></returns>
         public virtual AIStateLabel GetLabel()
         {
             return AIStateLabel.Idle;
         }
-        protected float SqrDistanceToTarget(AIContext context, Vector3 targetPosition)
+        
+        private float SqrDistanceToTarget(AIContext context, Vector3 targetPosition)
         {
             return (context.Agent.transform.position - targetPosition).sqrMagnitude;
         }
+        
+        
+        /// <summary>
+        /// Checks whether the player is within a sphere with radius equal to thresholdDistance
+        /// </summary>
+        /// <param name="context">Current AIContext</param>
+        /// <param name="thresholdDistance">radius of sphere where player presence is detected</param>
+        /// <returns></returns>
         protected bool IsCloseToPlayer(AIContext context, float thresholdDistance)
         {
             return SqrDistanceToTarget(context, context.Target.position) < thresholdDistance * thresholdDistance;
         }
 
-        //TODO: More intelligent logic for player detection
+        
+        /// <summary>
+        /// Returns true if there is a clear line of sight from the AI's visualTransform object and the player's
+        /// hands, head or chest, provided said limb is sufficiently lit.
+        /// </summary>
+        /// <param name="context">Current AIContext</param>
+        /// <returns></returns>
         protected bool CanSeePlayer(AIContext context)
         {
             return CanSeeLimb(context, HumanBodyBones.Head) || 
@@ -36,57 +62,69 @@ namespace AIController
                    CanSeeLimb(context, HumanBodyBones.RightHand);
         }
 
+        
+        /// <summary>
+        /// Returns true if the player is behind the AI, defined as any position any that would project onto the
+        /// negative region of the AI's forward axis.
+        /// </summary>
+        /// <param name="context">Current AIContext</param>
+        /// <param name="distance">How close the player has to be in game units</param>
+        /// <returns>True if the player is behind the AI within the given distance</returns>
         protected bool PlayerIsBehind(AIContext context, float distance)
         {
-            var agentToPlayer = context.Target.position - context.Agent.transform.position;
-            var cosine = Vector3.Dot(context.Agent.transform.forward.normalized,
+            var transform = context.Agent.transform;
+            var agentToPlayer = context.Target.position - transform.position;
+            var cosine = Vector3.Dot(
+                transform.forward.normalized,
                 agentToPlayer.normalized);
             return cosine < 0 && agentToPlayer.magnitude < distance;
         }
 
+        
+        /// <summary>
+        /// Checks whether a limb is in line of sight, and whether the limb provides enough visual stimuli
+        /// for the AI to be detected.
+        /// </summary>
+        /// <param name="context">current AIContext</param>
+        /// <param name="bone">which bone to check for visibility</param>
+        /// <returns></returns>
         protected bool CanSeeLimb(AIContext context, HumanBodyBones bone)
         {
-            var thisPosition = context.Agent.transform.position;
+            var thisPosition = context.StateMachine.visionTransform.position;
             var limbPosition = context.PlayerAnimator.GetBoneTransform(bone).position;// context.Target.position;
             Physics.Raycast(thisPosition , (limbPosition-thisPosition) , out var playerRay);
-            Debug.DrawLine(thisPosition, limbPosition);
-            Debug.DrawRay(thisPosition,(limbPosition-thisPosition));
-            if ((limbPosition - thisPosition).magnitude - playerRay.distance < 0.55 &&
-                context.PlayerIllumination.GetIllumination(limbPosition, bone) > 5.0f)
-            {
-                // Debug.Log( "Bone:" + bone + "    Illumination:" + context.PlayerIllumination.GetIllumination(limbPosition, bone));
-            }
-
+            
+            
             var rawStimuli = context.PlayerIllumination.GetIllumination(limbPosition, bone);
             var attenuatedStimuli = OcularSimulator.AttenuateByDistance(playerRay.distance, rawStimuli);
-            attenuatedStimuli = OcularSimulator.AttenuateByFOV(context.StateMachine.visionTransform.forward,
-                (limbPosition - thisPosition), attenuatedStimuli);
-            return (limbPosition - thisPosition).magnitude - playerRay.distance < 0.55 && attenuatedStimuli > context.Alertness;
+            attenuatedStimuli = OcularSimulator.AttenuateByFOV(
+                context.StateMachine.visionTransform.forward, 
+                (limbPosition - thisPosition), 
+                context.StateMachine.FOV, 
+                attenuatedStimuli
+                );
+            var canSeeLimb = (limbPosition - thisPosition).magnitude - playerRay.distance < 0.55 &&
+                             attenuatedStimuli >= context.Alertness;
+            if (canSeeLimb)
+            {
+                Debug.DrawLine(thisPosition, limbPosition, Color.white*(attenuatedStimuli/50f));
+            }
+            return canSeeLimb;
         }
 
-        public virtual float GetSpeedPercentage(AIContext context)
-        {
-            throw new System.NotImplementedException();
-        }
+        /// <summary>
+        /// Returns the current movement speed relative to the maximum possible movement speed for the current state
+        /// </summary>
+        /// <param name="context">The current AI context</param>
+        /// <returns>float - percentage of movement speed in range [0, 1] </returns>
+        public abstract float GetSpeedPercentage(AIContext context);
 
-        public virtual void Enter(AIContext context)
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract void Enter(AIContext context);
 
-        public virtual void Exit(AIContext context)
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract void Exit(AIContext context);
 
-        public virtual void HandleInput(AIContext context)
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual void HandleInput(AIContext context) {}
 
-        public virtual void Update(AIContext context)
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract void Update(AIContext context);
     }
 }

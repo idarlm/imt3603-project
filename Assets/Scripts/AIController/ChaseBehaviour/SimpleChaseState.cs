@@ -46,11 +46,6 @@ namespace AIController.ChaseBehaviour
             context.StateMachine.attackDetector.OnPlayerOverlap -= DetectGrab;
         }
 
-        public override void HandleInput(AIContext context)
-        {
-            
-        }
-
         public override float GetSpeedPercentage(AIContext context)
         {
             return context.Agent.velocity.magnitude / context.runSpeed;
