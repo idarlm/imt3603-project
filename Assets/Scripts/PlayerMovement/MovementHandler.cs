@@ -123,7 +123,11 @@ namespace PlayerMovement
             // Perform additional ground check - Prevents bug when landing in slopes
             Ray r = new(transform.position, Vector3.down);
             float dist = (Controller.height * 0.5f) + Controller.skinWidth - Controller.radius;
-            _groundCheck = ShouldStick = Physics.SphereCast(r, Controller.radius, dist);
+            _groundCheck = ShouldStick = Physics.SphereCast(
+                ray: r, 
+                radius: Controller.radius, 
+                maxDistance: dist,
+                layerMask: LayerMask.NameToLayer("Player"));
 
             // Check if we should stick to the ground
             dist = (Controller.height * 0.5f) + StickyThreshold;
