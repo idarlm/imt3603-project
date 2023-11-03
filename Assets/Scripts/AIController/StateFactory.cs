@@ -1,17 +1,22 @@
 ﻿using System;
 using AIController.ChaseBehaviour;
+using AIController.IdleBehaviour;
 using AIController.PatrolBehaviour;
 
 namespace AIController
 {
+
+
+
     public static class StateFactory
     {
-        public static AIState CreateState(string stateName)
+        public static AIState CreateState(AIStateLabel stateName)
         {
             switch (stateName)
             {
-                case "WaypointState": return new WaypointState();
-                case "SimpleFollowerState": return new SimpleFollowerState();
+                case AIStateLabel.Patrolling: return new WaypointState();
+                case AIStateLabel.Chasing: return new SimpleChaseState();
+                case AIStateLabel.Idle: return new IdleState();
                 default: throw new Exception("No such chase state");
             }
         }

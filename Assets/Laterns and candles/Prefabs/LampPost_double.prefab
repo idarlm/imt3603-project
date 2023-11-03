@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4099705087226302}
   - component: {fileID: 33856662768992098}
   - component: {fileID: 23084144258610668}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Latern4 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 212140481896793780}
   - component: {fileID: 95737835408969102}
   - component: {fileID: 114869251064634074}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: red_flame_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 212708048439972568}
   - component: {fileID: 95122859695078172}
   - component: {fileID: 114721450966744626}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: red_flame_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 4943262655845802}
   - component: {fileID: 33442899379465716}
   - component: {fileID: 23179435434647782}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Latern4.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,9 +506,10 @@ GameObject:
   - component: {fileID: 4828154360092568}
   - component: {fileID: 33573732861823854}
   - component: {fileID: 23864396541593772}
-  - component: {fileID: 8408320231409276542}
-  - component: {fileID: 6161565036499485751}
-  m_Layer: 0
+  - component: {fileID: 4562503375972028217}
+  - component: {fileID: 3899282978198687874}
+  - component: {fileID: 5127912899084717363}
+  m_Layer: 1
   m_Name: Cylinder.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +581,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!108 &8408320231409276542
+--- !u!108 &4562503375972028217
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -591,20 +592,20 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.7325833, b: 0.5330188, a: 1}
-  m_Intensity: 5
+  m_Color: {r: 1, g: 0.7673963, b: 0.4481132, a: 1}
+  m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.4
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -642,7 +643,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &6161565036499485751
+--- !u!114 &3899282978198687874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -665,6 +666,18 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &5127912899084717363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529112073181282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d051f326b742b2a0385a5366ccf277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1548592667832756
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,7 +689,7 @@ GameObject:
   - component: {fileID: 4334593667792958}
   - component: {fileID: 33971877315926950}
   - component: {fileID: 23028904160536160}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Latern4 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -763,7 +776,7 @@ GameObject:
   - component: {fileID: 4342320881262598}
   - component: {fileID: 33870494747348240}
   - component: {fileID: 23662449296450938}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Candle3.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -846,7 +859,7 @@ GameObject:
   - component: {fileID: 4091421794675986}
   - component: {fileID: 33175423940786860}
   - component: {fileID: 23403242894941882}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Candle3.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,9 +942,10 @@ GameObject:
   - component: {fileID: 4499784949736260}
   - component: {fileID: 33696681818853604}
   - component: {fileID: 23464778270104014}
-  - component: {fileID: 5480823983668944014}
-  - component: {fileID: 8861588549668612915}
-  m_Layer: 0
+  - component: {fileID: 4042707041793121733}
+  - component: {fileID: 5921545147935055292}
+  - component: {fileID: 1901869890001834789}
+  m_Layer: 1
   m_Name: Cylinder.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1003,7 +1017,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!108 &5480823983668944014
+--- !u!108 &4042707041793121733
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1014,20 +1028,20 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.77545184, b: 0.6273585, a: 1}
-  m_Intensity: 5
+  m_Color: {r: 1, g: 0.7565564, b: 0.4481132, a: 1}
+  m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.36
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -1065,7 +1079,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &8861588549668612915
+--- !u!114 &5921545147935055292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1088,6 +1102,18 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &1901869890001834789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822493419166252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d051f326b742b2a0385a5366ccf277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1832565859434926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,7 +1125,7 @@ GameObject:
   - component: {fileID: 4390636749216116}
   - component: {fileID: 33136295928017920}
   - component: {fileID: 23154082408932510}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Latern4.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
