@@ -47,11 +47,7 @@ namespace Illumination
             }
             
         }
-
-        private static float AverageOfColor(Color color)
-        {
-            return (float)(0.33 * color.r + 0.33 * color.g + 0.33 * color.b);
-        }
+        
 
         private float CalculatePointLightIllumination(Vector3 limbPosition)
         {
@@ -62,7 +58,7 @@ namespace Illumination
                 Physics.Raycast(position , (limbPosition-position) , out var playerRay);
                 if (playerRay.distance + 0.5 - (limbPosition - position).magnitude > 0.0f)
                 {
-                    var contribution = AttenuateSquare(sqrDistance) * _light.intensity * AverageOfColor(_light.color);
+                    var contribution = AttenuateSquare(sqrDistance) * _light.intensity * _light.color.grayscale;
                     Debug.DrawLine(position, playerRay.point, _light.color * (contribution/_light.intensity));
                     return contribution;
                 }
@@ -78,7 +74,7 @@ namespace Illumination
             if (playerRay.distance + 0.5 - directionalRayCastDistance > 0.0f)
             {
                 Debug.DrawLine(position, playerRay.point, _light.color * _light.intensity);
-                return _light.intensity * AverageOfColor(_light.color) * directionalIntensity;
+                return _light.intensity * _light.color.grayscale * directionalIntensity;
             }
             return 0;
         }
