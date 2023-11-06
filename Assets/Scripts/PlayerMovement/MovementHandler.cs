@@ -161,6 +161,11 @@ namespace PlayerMovement
             _addVelocity = true;
             _addVelocityVector += velocity;
         }
+
+        public void SetControllerEnabled(bool enabled)
+        {
+            Controller.enabled = enabled;
+        }
         
     }
 
