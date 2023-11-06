@@ -1,5 +1,6 @@
 using System;
 using PlayerInput;
+using Snapshot;
 using StateMachine;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace PlayerMovement
     /// and uses MovementHandler to perform movement operations.
     /// </summary>
     [RequireComponent(typeof(MovementHandler))]
-    public class PlayerMovementSystem : MonoBehaviour
+    public class PlayerMovementSystem : MonoBehaviour, ISnapshotable
     {
         internal struct InputValues
         {
@@ -376,6 +377,22 @@ namespace PlayerMovement
                     Debug.LogWarning($"The event handler for \"{e}\" is not implemented.");
                     break;
             }
+        }
+
+        public void OnTakeSnapshot(IWorldSnapshot ws)
+        {
+            ws.AddSnapshotOf(this)
+                .Add("test", "Test string");
+        }
+
+        public void OnLoadSnapshot(IWorldSnapshot ws)
+        {
+            Freeze = true;
+
+            var snap = ws.LoadSnapshotOf(this);
+            Debug.Log(snap.GetString("test"));
+
+            Freeze = false;
         }
     }
     
