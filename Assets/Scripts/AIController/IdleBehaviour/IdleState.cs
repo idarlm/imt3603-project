@@ -47,7 +47,7 @@ namespace AIController.IdleBehaviour
         
         public override void Update(AIContext context)
         {
-            if (IsCloseToPlayer(context, 30f) && CanSeePlayer(context))
+            if (IsCloseToPlayer(context, 30f) && CanLocatePlayer(context))
             {
                 context.LastKnownTargetPosition = context.Target.position;
                 _seenPlayerInSeconds += Time.deltaTime;
@@ -61,7 +61,7 @@ namespace AIController.IdleBehaviour
                 _seenPlayerInSeconds = Math.Max(_seenPlayerInSeconds -= Time.deltaTime, 0f);
             }
 
-            if (IsCloseToPlayer(context, 3f) && PlayerIsBehind(context, 3f))
+            if (PlayerIsBehind(context, 5f))
             {
                 context.ratAnimator.SetBool(IsBehind, true);
             }

@@ -46,7 +46,7 @@ namespace Illumination
             }
         }
 
-        private float GetIlluminationNoUpdate(HumanBodyBones limb)
+        public float GetIlluminationNoUpdate(HumanBodyBones limb)
         {
             return limb switch
             {
@@ -58,6 +58,21 @@ namespace Illumination
             };
         }
 
+        private void ZeroLimb(HumanBodyBones limb)
+        {
+            switch (limb)
+            {
+                case HumanBodyBones.Head: _illumination.HeadIllumination = 0f;
+                    break;
+                case HumanBodyBones.Chest: _illumination.ChestIllumination = 0f;
+                    break;
+                case HumanBodyBones.LeftHand: _illumination.LeftHandIllumination = 0f;
+                    break;
+                case HumanBodyBones.RightHand: _illumination.RightHandIllumination = 0f;
+                    break;
+            }
+        }
+
         public void ResetIllumination()
         {
             _illumination = new PlayerIllumination();
@@ -67,8 +82,9 @@ namespace Illumination
         {
             var illumination = GetIlluminationNoUpdate(limb);
             
-            if (illumination >= -1.0f) //TODO: Dirty flag
+            if (illumination == -1.0f) //TODO: Dirty flag
             {
+                ZeroLimb(limb);
                 OnIlluminationRequest?.Invoke(limbPosition, limb);
                 return GetIlluminationNoUpdate(limb);
             }

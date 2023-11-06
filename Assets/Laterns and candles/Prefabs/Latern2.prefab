@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 114505329217091988}
   - component: {fileID: 846013135616521519}
   - component: {fileID: 2995560670839038360}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: red_flame_0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 4533944226828724}
   - component: {fileID: 33269012990689728}
   - component: {fileID: 23315500312916418}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Latern2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 4103651567181238}
   - component: {fileID: 33171175419828488}
   - component: {fileID: 23706471748971810}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Glass2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 4307632184835536}
   - component: {fileID: 33501721349203296}
   - component: {fileID: 23872781157618054}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Candle2.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
