@@ -55,7 +55,7 @@ namespace AIController.ChaseBehaviour
         {
             context.StateMachine.IKController.SetLookAtTarget(context.Target.position);
             context.ratAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
-            if (CanSeePlayer(context))
+            if (CanLocatePlayer(context))
             {
                 context.StateMachine.IKController.EnableLookAt();
                 context.Agent.destination = context.Target.position;
