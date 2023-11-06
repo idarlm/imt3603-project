@@ -10,6 +10,7 @@ public class HiddenObjectListener : PuzzleTrigger
     private bool isMoved = false;
     private bool isFetched = false;
     [SerializeField] Vector3 offset;
+    [SerializeField] GameObject key;
 
     private void Start()
     {
@@ -26,7 +27,7 @@ public class HiddenObjectListener : PuzzleTrigger
 
         if (isFetched)
         {
-            transform.parent.GetChild(1).gameObject.SetActive(false);
+            key.SetActive(false);
             FireTriggered(this, EventArgs.Empty);
         }
 

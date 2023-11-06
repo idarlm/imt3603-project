@@ -153,9 +153,9 @@ namespace PlayerMovement
         [Space(10)]
 
         [Tooltip("When Camera Transform is assigned, the player will move based on camera direction.")]
-        [SerializeField] private Transform cameraTransform; // used to determine forward direction
+        [SerializeField] private Transform cameraTransform;
         [Tooltip("Used to smoothly move child objects each frame, instead of only on fixed update tics.")]
-        [SerializeField] private Transform interpolatedBody; // used to smoothly move the body of the player
+        [SerializeField] private Transform interpolatedBody;
         private Vector3 _oldPosition; // used for interpolation
     
         // Fields ralating to object pushing
