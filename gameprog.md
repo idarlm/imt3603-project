@@ -5,10 +5,10 @@
 - Thea Urke Remøy
 
 ## Links
-[Game Design Document](https://mousedevs.atlassian.net/wiki/spaces/GP/pages/393429/Game+Design+Document)
-[Art Design Document](https://mousedevs.atlassian.net/wiki/spaces/GP/pages/884737/Art+Design+Document)
-[Player Movement System](https://mousedevs.atlassian.net/wiki/spaces/GP/pages/3833857/PlayerMovementSystem)
-[Puzzle document](https://mousedevs.atlassian.net/wiki/spaces/GP/pages/2654209/Puzzles)
+[Game Design Document](https://mousedevs.atlassian.net/wiki/spaces/GP/pages/393429/Game+Design+Document) <br>
+[Art Design Document](https://mousedevs.atlassian.net/wiki/spaces/GP/pages/884737/Art+Design+Document) <br>
+[Player Movement System](https://mousedevs.atlassian.net/wiki/spaces/GP/pages/3833857/PlayerMovementSystem) <br>
+[Puzzle document](https://mousedevs.atlassian.net/wiki/spaces/GP/pages/2654209/Puzzles) <br>
 
 ## Gameplay Video
 
