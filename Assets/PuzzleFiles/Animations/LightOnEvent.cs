@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleOnEvent : AnimateOnEvent {
-
-    public ParticleSystem ps;
-
+public class LightOnEvent : AnimateOnEvent
+{
+    public Light light;
 
     protected override void Update() {
         base.Update();
@@ -13,12 +12,10 @@ public class ParticleOnEvent : AnimateOnEvent {
 
     protected override void Animate() {
 
-        ParticleSystem.EmissionModule em = ps.emission;
-
         if (isActive) {
-            em.enabled = true;
+            light.enabled = true;
         } else {
-            em.enabled = false;
+            light.enabled = false;
         }
     }
 }

@@ -17,16 +17,19 @@ public class TriggerGroup : PuzzleTrigger
 
         foreach (var trigger in triggers) {
             trigger.Triggered += OnTriggered;
+            trigger.TriggeredFinished = OnTriggeredFinished;
             activated.Add(false);
         }
     }
 
     private void OnTriggered(object sender, EventArgs args) {
 
-        activated[index] = true;
-        index++;
-
         for(var i=0; i < triggers.Length; i++) {
+            if (triggers[i] == sender) {
+                Debug.Log("index = " + i);
+                activated[i] = true;
+            }
+
             allActivated = activated[i] &= true;
         }
 
@@ -36,4 +39,22 @@ public class TriggerGroup : PuzzleTrigger
             index = 0;
         }
     }
+
+    
+    private void OnTriggeredFinished(object sender, EventArgs args) {
+
+        Debug.Log("Trigger finished in TriggerGroup");
+
+        for (var i = 0; i < triggers.Length; i++) {
+            if (triggers[i] == sender) {
+                activated[i] = false;
+            }
+
+            allActivated = activated[i] |= false;
+        }
+
+        
+    }
+    
+    
 }
