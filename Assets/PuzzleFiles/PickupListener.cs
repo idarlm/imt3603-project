@@ -6,11 +6,9 @@ using UnityEngine;
 public class PickupListener : PuzzleTrigger
 {
     public PuzzleTrigger trigger;
-    private bool isActive;
 
     private void Start() {
         trigger.Triggered += pickupObject;
-        isActive = transform.gameObject.activeSelf;
     }
 
 
