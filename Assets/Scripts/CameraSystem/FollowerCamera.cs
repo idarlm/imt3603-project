@@ -1,12 +1,11 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.XR;
 using PlayerInput;
+using Snapshot;
 
 namespace CameraSystem
 {
-    public class FollowerCamera : MonoBehaviour
+    public class FollowerCamera : MonoBehaviour, ISnapshotable
 {
     
     public float distanceToTargetObject = 8;
@@ -154,5 +153,23 @@ namespace CameraSystem
         _cameraYaw -= controllerXYDelta.x + targetObjectHorizontalMovement;
         _cameraPitch = Math.Max(Math.Min(_cameraPitch -= controllerXYDelta.y, .5f),- 1.25f);
     }
-}
+
+        public void OnMakeSnapshot(IWorldSnapshot ws)
+        {
+            ws.AddSnapshotOf(this)
+                .Add("trgtPos", _lookAtTargetPosition)
+                .Add("camYaw", _cameraYaw)
+                .Add("camPitch", _cameraPitch)
+                .Add("front", _front);
+        }
+
+        public void OnLoadSnapshot(IWorldSnapshot ws)
+        {
+            var s = ws.LoadSnapshotOf(this);
+            _lookAtTargetPosition = s.GetVector3("trgtPos");
+            _cameraYaw = s.GetFloat("camYaw");
+            _cameraPitch = s.GetFloat("camPitch");
+            _front = s.GetVector3("front");
+        }
+    }
 }
