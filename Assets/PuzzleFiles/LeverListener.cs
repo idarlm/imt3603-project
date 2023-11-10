@@ -12,10 +12,16 @@ public class LeverListener : MonoBehaviour
         trigger.Triggered += activateLever;
 
         Debug.Log(trigger.name);
+        Debug.Log(transform.GetChild(0).gameObject.name);
 
+        /*
         Debug.Log(GetComponent<Renderer>());
 
         GetComponent<Renderer>().enabled = false;
+        */
+
+        
+        
     }
 
 
@@ -23,7 +29,9 @@ public class LeverListener : MonoBehaviour
 
         Debug.Log("Nå kjører vi Lever");
 
-        GetComponent<Renderer>().enabled = true;
+        //GetComponent<Renderer>().enabled = true;
+
+        transform.GetChild(0).gameObject.SetActive(true);
 
     }
 }

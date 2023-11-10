@@ -20,8 +20,6 @@ public class KeypadListener : PuzzleTrigger
 
     private void OnTriggered(object sender, EventArgs args) {
 
-        Debug.Log("Hei");
-
 
         for (var i = 0; i < 4; i++) {
             var key1Object = triggers[0].transform.GetChild(i);
