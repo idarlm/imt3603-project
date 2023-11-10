@@ -221,7 +221,8 @@ MonoBehaviour:
   attackDetector: {fileID: 6969237914880709224}
   visionTransform: {fileID: 7509522013545349865}
   IKController: {fileID: 1508264510319329167}
-  FOV: 180
+  horizontalFOV: 150
+  verticalFOV: 100
 --- !u!82 &2501770213386307978
 AudioSource:
   m_ObjectHideFlags: 0
@@ -327,6 +328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7509522013545349865}
+  - component: {fileID: 4193908714323558817}
   m_Layer: 0
   m_Name: VisionTransform
   m_TagString: Untagged
@@ -342,13 +344,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2730747881440559543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00000021395522, y: -0.20272338, z: 0.000000059604645}
+  m_LocalRotation: {x: 0.26572368, y: -3.0610822e-12, z: 6.576747e-12, w: 0.9640492}
+  m_LocalPosition: {x: 0.00000026288035, y: -0.20272309, z: -0.00000023841858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2597084961113501530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4193908714323558817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2730747881440559543}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa4713138541c3a459f0bd3ffea01a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FOV: 180
 --- !u!1 &3586651578731182038
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +443,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0, y: 0, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4027977149707149265
 GameObject:

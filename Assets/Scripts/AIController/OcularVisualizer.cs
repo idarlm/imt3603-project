@@ -6,40 +6,35 @@ using UnityEngine;
 
 public class OcularVisualizer : MonoBehaviour
 {
-    private Vector3 horizontalDirection;
-    private Vector3 verticalDirection;
+    private Vector3 axis;
     public float FOV;
 
     void Start()
     {
         var forward = transform.forward;
-        horizontalDirection = new Vector3(forward.x, forward.y, forward.z);
+        axis = new Vector3(forward.x, forward.y, forward.z);
     }
     void Update()
     {
-        for (int i = 0; i < 360; i++)
+        for (int j = 0; j < 36; j++)
         {
-            horizontalDirection = Quaternion.AngleAxis(i, Vector3.up) * transform.forward;
-            verticalDirection = Quaternion.AngleAxis(i, Vector3.right) * transform.forward;
-            Debug.DrawLine(
-                transform.position, 
-                transform.position + horizontalDirection * 5,
-                Color.red* OcularSimulator.AttenuateByFOV(
-                    transform.forward, 
-                    horizontalDirection, 
-                    FOV, 
-                    1)
-            );
-            Debug.DrawLine(
-                transform.position, 
-                transform.position + verticalDirection * 5,
-                Color.red* OcularSimulator.AttenuateByFOV(
-                    transform.forward, 
-                    verticalDirection, 
-                    FOV, 
-                    1)
-            );
+            for (int i = 0; i < 36; i++)
+            {
+                axis = Quaternion.AngleAxis(i*10, 
+                    Quaternion.AngleAxis(j * 10, transform.forward) * transform.up
+                    ) * transform.forward;
+                Debug.DrawLine(
+                    transform.position, 
+                    transform.position + axis * 5,
+                    Color.red* OcularSimulator.AttenuateByFOV(
+                        transform, 
+                        axis, 
+                        FOV, 
+                        1)
+                );
+            }
         }
+        
     }
 }
 

@@ -7,6 +7,8 @@
 ## Links
 [Puzzle document](https://mousedevs.atlassian.net/wiki/spaces/GP/pages/2654209/Puzzles)
 
+## Gameplay Video
+
 ## Development process
 
 #### Strengths and weaknesses with unity

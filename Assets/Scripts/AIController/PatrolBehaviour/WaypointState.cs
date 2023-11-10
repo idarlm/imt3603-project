@@ -59,7 +59,7 @@ namespace AIController.PatrolBehaviour
             if (context.TargetWaypoint)
             {
                 context.ratAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
-                if (IsCloseToPlayer(context, 30.0f) && CanSeePlayer(context) )
+                if (IsCloseToPlayer(context, 30.0f) && CanLocatePlayer(context) )
                 {
                     var idle = new AIController.IdleBehaviour.IdleState();
                     idle.SetCountdown(2f, AIStateLabel.Patrolling);

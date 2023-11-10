@@ -96,6 +96,22 @@ namespace PlayerMovement
             }
         }
 
+        /// <summary>
+        /// Disables the movement system and allows for position to be manipulated
+        /// directly.
+        /// 
+        /// This also disables the CharacterContoller which means there is no collission
+        /// detection until the movement system is unfrozen.
+        /// </summary>
+        public bool Freeze 
+        { 
+            get => _freeze; 
+            set {
+                _handler.SetControllerEnabled(value);
+                _freeze = value;
+            }
+        }
+
         // Events
         /// <summary>
         /// Fired when the player loses contact with the ground.
@@ -176,6 +192,9 @@ namespace PlayerMovement
         // stance
         private bool _crouching;
         internal bool shouldCrouch;
+
+        // allow the system to be disabled
+        private bool _freeze;
         
         // Internal Methods
         /// <summary>
@@ -213,6 +232,11 @@ namespace PlayerMovement
         // Handle player input and interpolation every frame
         private void Update()
         {
+            if (_freeze)
+            {
+                return;
+            }
+
             // input handling
             _inputValues.joystick = _inputController.LeftJoystickXY();
             _inputValues.jump    |= _inputController.Jump().IsPressed() && enableJump;
@@ -231,6 +255,11 @@ namespace PlayerMovement
         // Perform movement behaviour in sync with physics updates 
         private void FixedUpdate()
         {
+            if (_freeze)
+            {
+                return;
+            }
+
             // set old position
             // used to interpolate body transform
             _oldPosition = transform.position;

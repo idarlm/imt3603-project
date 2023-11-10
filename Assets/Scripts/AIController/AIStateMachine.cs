@@ -3,8 +3,10 @@ using Illumination;
 using Pathing;
 using StateMachine;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -15,7 +17,7 @@ namespace AIController
     {
         [SerializeField] private AIStateLabel currentStateSerialized;
         private IState<AIContext> _currentState;
-        private AIContext _context;
+        private AIContext _context = new AIContext();
         [SerializeField] private Waypoint entryWaypoint;
         [SerializeField] private Transform target;
         [SerializeField] private Animator playerAnimator;
@@ -25,12 +27,12 @@ namespace AIController
         public AttackDetector attackDetector;
         public Transform visionTransform;
         public RatIKController IKController;
-        public float FOV;
+        [FormerlySerializedAs("FOV")] public float horizontalFOV;
+        public float verticalFOV;
         
         private void Start()
         {
             var sound = GetComponent<AudioSource>();
-            ;
             sound.time = Random.Range(0, sound.clip.length);
             _context = new AIContext
             {
@@ -40,7 +42,7 @@ namespace AIController
                 TargetWaypoint = entryWaypoint,
                 Agent = GetComponent<NavMeshAgent>(),
                 Target = target.transform,
-                Alertness = 5.0f,
+                Alertness = 3.0f,
                 ratAnimator = ratAnimator,
                 walkSpeed =  walkSpeed,
                 runSpeed = runSpeed,
@@ -59,6 +61,34 @@ namespace AIController
         {
             Execute(_context);
         }
+
+        private void OnDrawGizmos()
+        {
+            Handles.Label(visionTransform.position + Vector3.up, currentStateSerialized.ToString());
+            Handles.Label((visionTransform.position + (Vector3.up * 1.5f)), _context.stimuli.ToString());
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            
+            Handles.DrawWireArc(visionTransform.position, visionTransform.up, visionTransform.forward, horizontalFOV/2, 5);
+            Handles.DrawWireArc(visionTransform.position, visionTransform.up, visionTransform.forward, -horizontalFOV/2, 5);
+            Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(horizontalFOV/2, visionTransform.up) * visionTransform.forward * 5);
+            Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(-horizontalFOV/2, visionTransform.up) * visionTransform.forward * 5);
+            
+            Handles.DrawWireArc(visionTransform.position, visionTransform.right, visionTransform.forward, verticalFOV/2, 5);
+            Handles.DrawWireArc(visionTransform.position, visionTransform.right, visionTransform.forward, -verticalFOV/2, 5);
+            Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(verticalFOV/2, visionTransform.right) * visionTransform.forward * 5);
+            Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(-verticalFOV/2, visionTransform.right) * visionTransform.forward * 5);
+        }
+
+        // void OnGUI()
+        // {
+        //     if (Application.isEditor)
+        //     {
+        //         GUI.Label()
+        //     }
+        // }
         
     }
     

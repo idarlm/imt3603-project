@@ -11,7 +11,8 @@ namespace AIController
     {
         Chasing,
         Patrolling,
-        Idle
+        Idle,
+        Debug
     }
     
        
@@ -54,12 +55,14 @@ namespace AIController
         /// </summary>
         /// <param name="context">Current AIContext</param>
         /// <returns></returns>
-        protected bool CanSeePlayer(AIContext context)
+        protected bool CanLocatePlayer(AIContext context)
         {
-            return CanSeeLimb(context, HumanBodyBones.Head) || 
-                   CanSeeLimb(context, HumanBodyBones.Chest) ||
-                   CanSeeLimb(context, HumanBodyBones.LeftHand) ||
-                   CanSeeLimb(context, HumanBodyBones.RightHand);
+            context.stimuli = 0;
+            CanSeeLimb(context, HumanBodyBones.Head);
+            CanSeeLimb(context, HumanBodyBones.Chest);
+            CanSeeLimb(context, HumanBodyBones.LeftHand);
+            CanSeeLimb(context, HumanBodyBones.RightHand);
+            return context.stimuli > 0.5;
         }
 
         
@@ -90,25 +93,25 @@ namespace AIController
         /// <returns></returns>
         protected bool CanSeeLimb(AIContext context, HumanBodyBones bone)
         {
-            var thisPosition = context.StateMachine.visionTransform.position;
+            var observationPosition = context.StateMachine.visionTransform.position;
             var limbPosition = context.PlayerAnimator.GetBoneTransform(bone).position;// context.Target.position;
-            Physics.Raycast(thisPosition , (limbPosition-thisPosition) , out var playerRay);
-            
+            Physics.Raycast(observationPosition , (limbPosition-observationPosition) , out var playerRay);
             
             var rawStimuli = context.PlayerIllumination.GetIllumination(limbPosition, bone);
-            var attenuatedStimuli = OcularSimulator.AttenuateByDistance(playerRay.distance, rawStimuli);
+            var attenuatedStimuli = OcularSimulator.AttenuateByDistance((observationPosition-limbPosition).magnitude, rawStimuli);
             attenuatedStimuli = OcularSimulator.AttenuateByFOV(
-                context.StateMachine.visionTransform.forward, 
-                (limbPosition - thisPosition), 
-                context.StateMachine.FOV, 
+                context.StateMachine.visionTransform, 
+                (limbPosition - observationPosition), 
+                context.StateMachine.horizontalFOV, 
                 attenuatedStimuli
                 );
-            var canSeeLimb = (limbPosition - thisPosition).magnitude - playerRay.distance < 0.55 &&
-                             attenuatedStimuli >= context.Alertness;
-            if (canSeeLimb)
+            var canSeeLimb = (limbPosition - observationPosition).magnitude - playerRay.distance < 0.55;
+            Debug.DrawLine(observationPosition, limbPosition, Color.white * (attenuatedStimuli / context.Alertness));
+            if(canSeeLimb)
             {
-                Debug.DrawLine(thisPosition, limbPosition, Color.white*(attenuatedStimuli/50f));
+                context.stimuli += attenuatedStimuli;
             }
+        
             return canSeeLimb;
         }
 
