@@ -1,24 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleOnEvent : AnimateOnEvent {
+public class ParticleOnEvent : PuzzleTrigger {
 
     public ParticleSystem ps;
+    public PuzzleTrigger trigger;
 
-
-    protected override void Update() {
-        base.Update();
+    private void Start() {
+        trigger.Triggered += changeParticle;
     }
 
-    protected override void Animate() {
+    void changeParticle(object obj, EventArgs args) {
 
         ParticleSystem.EmissionModule em = ps.emission;
 
-        if (isActive) {
+        if (!em.enabled) {
             em.enabled = true;
+            FireTriggered(this, EventArgs.Empty);
+            Debug.Log("changeParticle fired");
         } else {
             em.enabled = false;
+            FireTriggeredFinished(this, EventArgs.Empty);
+            Debug.Log("changeParticle fired");
         }
+
     }
 }

@@ -10,16 +10,16 @@ public class InteractTrigger : PuzzleTrigger {
     private bool interacted = false;
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.E) && inRange && !interacted) {
+        if (Input.GetKeyDown(KeyCode.E) && inRange) { // && !interacted) {
             FireTriggered(this, EventArgs.Empty);
             Debug.Log("InteractTrigger fired");
             interacted = true;
 
-        } else if (Input.GetKeyDown(KeyCode.E) && inRange && interacted) {
+        } /* else if (Input.GetKeyDown(KeyCode.E) && inRange && interacted) {
             FireTriggeredFinished(this, EventArgs.Empty);
             Debug.Log("InteractTrigger finished");
             interacted = false;
-        }
+        }*/
     }
 
     private void OnTriggerEnter(Collider other) {

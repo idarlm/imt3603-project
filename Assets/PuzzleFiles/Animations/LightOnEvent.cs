@@ -1,21 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightOnEvent : AnimateOnEvent
+public class LightOnEvent : PuzzleTrigger
 {
     public Light light;
+    public PuzzleTrigger trigger;
 
-    protected override void Update() {
-        base.Update();
+    private void Start() {
+        trigger.Triggered += changeLight;
     }
 
-    protected override void Animate() {
 
-        if (isActive) {
+    void changeLight(object obj, EventArgs args) {
+
+        if (!light.enabled) {
             light.enabled = true;
-        } else {
+            FireTriggered(this, EventArgs.Empty);
+            Debug.Log("changeLight fired");
+        } else { 
             light.enabled = false;
+            FireTriggeredFinished(this, EventArgs.Empty);
+            Debug.Log("changeLight fired");
         }
+
     }
+
 }
