@@ -1,5 +1,6 @@
 using System;
 using PlayerInput;
+using Snapshot;
 using StateMachine;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace PlayerMovement
     /// and uses MovementHandler to perform movement operations.
     /// </summary>
     [RequireComponent(typeof(MovementHandler))]
-    public class PlayerMovementSystem : MonoBehaviour
+    public class PlayerMovementSystem : MonoBehaviour, ISnapshotable
     {
         internal struct InputValues
         {
@@ -43,15 +44,15 @@ namespace PlayerMovement
         /// <summary>
         /// The current velocity of the player.
         /// </summary>
-        public Vector3 Velocity => _handler.Velocity;
+        public Vector3 Velocity { get => _handler.Velocity; set => Handler.SetVelocity(value); }
         /// <summary>
         /// The current velocity of the player projected on the horizontal plane.
         /// </summary>
-        public Vector3 HorizontalVelocity => Vector3.ProjectOnPlane(_handler.Velocity, Vector3.up);
+        public Vector3 HorizontalVelocity { get => Vector3.ProjectOnPlane(_handler.Velocity, Vector3.up); }
         /// <summary>
         /// The current horizontal speed of the player.
         /// </summary>
-        public float CurrentSpeed => HorizontalVelocity.magnitude;
+        public float CurrentSpeed { get => HorizontalVelocity.magnitude; }
         /// <summary>
         /// Is the player currently falling?
         /// </summary>
@@ -59,7 +60,7 @@ namespace PlayerMovement
         /// <summary>
         /// The attached MovementHandler object.
         /// </summary>
-        public MovementHandler Handler => _handler;
+        public MovementHandler Handler { get => _handler; }
 
         /// <summary>
         /// The forward direction of the player.
@@ -107,7 +108,7 @@ namespace PlayerMovement
         { 
             get => _freeze; 
             set {
-                _handler.SetControllerEnabled(value);
+                _handler.SetControllerEnabled(!value);
                 _freeze = value;
             }
         }
@@ -376,6 +377,27 @@ namespace PlayerMovement
                     Debug.LogWarning($"The event handler for \"{e}\" is not implemented.");
                     break;
             }
+        }
+
+        public void OnMakeSnapshot(IWorldSnapshot ws)
+        {
+            ws.AddSnapshotOf(this)
+                .Add("velocity", Velocity)
+                .Add("fwd", Forward);
+        }
+
+        public void OnLoadSnapshot(IWorldSnapshot ws)
+        {
+            Freeze = true;
+
+            var snap = ws.LoadSnapshotOf(this);
+            if (snap == null)
+                return;
+
+            Handler.SetVelocity(snap.GetVector3("velocity"));
+            Forward = snap.GetVector3("fwd");
+
+            Freeze = false;
         }
     }
     
