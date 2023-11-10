@@ -154,6 +154,10 @@ namespace CameraSystem
         _cameraPitch = Math.Max(Math.Min(_cameraPitch -= controllerXYDelta.y, .5f),- 1.25f);
     }
 
+        /// <summary>
+        /// Saves the current sate of the camera into the provided world snapshot.
+        /// </summary>
+        /// <param name="ws"></param>
         public void OnMakeSnapshot(IWorldSnapshot ws)
         {
             ws.AddSnapshotOf(this)
@@ -163,9 +167,16 @@ namespace CameraSystem
                 .Add("front", _front);
         }
 
+        /// <summary>
+        /// Loads the state of the camera from the provided world snapshot.
+        /// </summary>
+        /// <param name="ws"></param>
         public void OnLoadSnapshot(IWorldSnapshot ws)
         {
             var s = ws.LoadSnapshotOf(this);
+            if (s == null)
+                return;
+
             _lookAtTargetPosition = s.GetVector3("trgtPos");
             _cameraYaw = s.GetFloat("camYaw");
             _cameraPitch = s.GetFloat("camPitch");
