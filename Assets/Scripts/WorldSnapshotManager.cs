@@ -11,7 +11,7 @@ namespace Snapshot {
     {
         /// <summary>
         /// Create a snapshot of all snapshotable GameObjects in the current scene.
-        /// The snapshot is serializable and can be written to a file.
+        /// The snapshot should be serializable.
         /// </summary>
         /// <returns>IWorldSnapshot containing the world state.</returns>
         public static IWorldSnapshot MakeSnapshot()
@@ -42,14 +42,18 @@ namespace Snapshot {
         }
 
         /// <summary>
-        /// 
+        /// Loads the state stored in the world snapshot
         /// </summary>
         /// <param name="snapshot"></param>
         public static void LoadSnapshot(IWorldSnapshot snapshot)
         {
-            // reload scene
+            Debug.Log("Loading world snapshot...");
+            var ts = System.DateTime.Now;
+
+            // reload scene?
 
             // Get list of all non-static GameObjects using LINQ
+            // (i love LINQ)
             var scene = SceneManager.GetActiveScene();
             var objs =
                 from obj in scene.GetRootGameObjects()
@@ -61,6 +65,8 @@ namespace Snapshot {
             {
                 obj.BroadcastMessage("OnLoadSnapshot", snapshot, SendMessageOptions.DontRequireReceiver);
             }
+
+            Debug.Log($"World snapshot loaded in {System.DateTime.Now - ts}");
         }
     }
 
@@ -70,7 +76,7 @@ namespace Snapshot {
     /// </summary>
     public interface ISnapshotable
     {
-        void OnTakeSnapshot(IWorldSnapshot ws);
+        void OnMakeSnapshot(IWorldSnapshot ws);
         void OnLoadSnapshot(IWorldSnapshot ws);
     }
 
@@ -124,7 +130,7 @@ namespace Snapshot {
             _timestamp = timestamp;
         }
 
-        private readonly List<ObjectSnapshot> _objects;
+        private readonly List<ObjectSnapshot> _objects = new();
         private readonly System.DateTime _timestamp;
 
         public void Add(IObjectSnapshotWriter obj)
@@ -137,6 +143,7 @@ namespace Snapshot {
         {
             // Create a unique and persistent name for the object
             var name = GetFullName(m);
+            Debug.Log($"Creating snapshot of: {name}");
             
             // Take snapshot of transform
             var snap = new ObjectSnapshot();
@@ -153,15 +160,22 @@ namespace Snapshot {
         public IObjectSnapshotReader LoadSnapshotOf(MonoBehaviour obj)
         {
             var name = GetFullName(obj);
+            Debug.Log($"Loading snapshot of: {name}");
 
-            // Find snapshot of object with given name
+            // Find snapshot of object with given root
             var s = from o in _objects
                        where o.GetString("__NAME") == name
                        select o;
 
-            var snapshot = (IObjectSnapshotReader)s;
+            if (s.Count() == 0)
+            {
+                Debug.LogWarning($"Could not find snapshot of: {name}");
+                return null;
+            }
 
-            // Load transform snapshot state
+            var snapshot = s.FirstOrDefault();
+
+            // Load transform snapshot state - this is inefficient but convenient
             obj.transform.position = snapshot.GetVector3("__TRANSFORM_POS");
             obj.transform.localScale = snapshot.GetVector3("__TRANSFORM_SCALE");
             obj.transform.rotation = snapshot.GetQuaternion("__TRANSFORM_ROT");
@@ -264,10 +278,10 @@ namespace Snapshot {
 
             foreach ( var c in components )
             {
-                success &= _floats.TryGetValue($"__QUATERNION_X_{key}", out float value);
+                success &= _floats.TryGetValue($"__QUATERNION_{c}_{key}", out float value);
 
                 if (success) {
-                    vals.Add(key, value);
+                    vals.Add(c, value);
                 }
             }
 
@@ -306,11 +320,11 @@ namespace Snapshot {
 
             foreach (var c in components)
             {
-                success &= _floats.TryGetValue($"__QUATERNION_X_{key}", out float value);
+                success &= _floats.TryGetValue($"__VECTOR3_{c}_{key}", out float value);
 
                 if (success)
                 {
-                    vals.Add(key, value);
+                    vals.Add(c, value);
                 }
             }
 
