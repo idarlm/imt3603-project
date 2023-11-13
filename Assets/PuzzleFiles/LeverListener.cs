@@ -9,29 +9,11 @@ public class LeverListener : MonoBehaviour
     public PuzzleTrigger trigger;
 
     private void Start() {
-        trigger.Triggered += activateLever;
-
-        Debug.Log(trigger.name);
-        Debug.Log(transform.GetChild(0).gameObject.name);
-
-        /*
-        Debug.Log(GetComponent<Renderer>());
-
-        GetComponent<Renderer>().enabled = false;
-        */
-
-        
-        
+        trigger.Triggered += ActivateLever;  
     }
 
 
-    void activateLever(object obj, EventArgs args) {
-
-        Debug.Log("Nå kjører vi Lever");
-
-        //GetComponent<Renderer>().enabled = true;
-
+    void ActivateLever(object obj, EventArgs args) {
         transform.GetChild(0).gameObject.SetActive(true);
-
     }
 }

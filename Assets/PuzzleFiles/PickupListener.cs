@@ -8,11 +8,11 @@ public class PickupListener : PuzzleTrigger
     public PuzzleTrigger trigger;
 
     private void Start() {
-        trigger.Triggered += pickupObject;
+        trigger.Triggered += PickupObject;
     }
 
 
-    void pickupObject(object obj, EventArgs args) {
+    void PickupObject(object obj, EventArgs args) {
 
         Debug.Log(gameObject.name);
 

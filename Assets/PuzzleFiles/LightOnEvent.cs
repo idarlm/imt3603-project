@@ -9,11 +9,10 @@ public class LightOnEvent : PuzzleTrigger
     public PuzzleTrigger trigger;
 
     private void Start() {
-        trigger.Triggered += changeLight;
+        trigger.Triggered += ChangeLight;
     }
 
-
-    void changeLight(object obj, EventArgs args) {
+    void ChangeLight(object obj, EventArgs args) {
 
         if (!light.enabled) {
             light.enabled = true;
