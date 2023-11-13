@@ -13,7 +13,7 @@ public class VisualListener : PuzzleTrigger
         trigger.Triggered += changeVisual;
 
         for(i = 1; i < transform.childCount; i++) {
-            transform.GetChild(i).GetComponent<Renderer>().enabled = false;
+            transform.GetChild(i).gameObject.SetActive(false);
         }
 
     }
@@ -24,20 +24,20 @@ public class VisualListener : PuzzleTrigger
 
         for (i = 0; i < transform.childCount; i++) {
 
-            var enabledState = transform.GetChild(i).GetComponent<Renderer>().enabled;
+            var enabledState = transform.GetChild(i).gameObject.activeSelf;
 
 
             if (enabledState) {
                 Debug.Log(transform.GetChild(i).name);
                
 
-                transform.GetChild(i).GetComponent<Renderer>().enabled = false;
+                transform.GetChild(i).gameObject.SetActive(false);
                 if (i != transform.childCount - 1) {
                     i++;
-                    transform.GetChild(i).GetComponent<Renderer>().enabled = true;
+                    transform.GetChild(i).gameObject.SetActive(true);
                 } else {
                     i = 0;
-                    transform.GetChild(i).GetComponent<Renderer>().enabled = true;
+                    transform.GetChild(i).gameObject.SetActive(true);
                 }
 
                 Debug.Log(transform.GetChild(i).name);

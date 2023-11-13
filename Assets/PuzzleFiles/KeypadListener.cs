@@ -24,18 +24,18 @@ public class KeypadListener : PuzzleTrigger
         for (var i = 0; i < 4; i++) {
             var key1Object = triggers[0].transform.GetChild(i);
             Debug.Log(key1Object.name);
-            Debug.Log(key1Object.GetComponent<Renderer>().enabled);
-            if (key1Object.GetComponent<Renderer>().enabled && key1Object.name == correctKeys[0].name) {
+            Debug.Log(key1Object.gameObject.activeSelf);
+            if (key1Object.gameObject.activeSelf && key1Object.name == correctKeys[0].name) {
                 key1 = true;
             }
 
             var key2Object = triggers[1].transform.GetChild(i);
-            if (key2Object.GetComponent<Renderer>().enabled && key2Object.name == correctKeys[1].name) {
+            if (key2Object.gameObject.activeSelf && key2Object.name == correctKeys[1].name) {
                 key2 = true;
             }
 
             var key3Object = triggers[2].transform.GetChild(i);
-            if (key3Object.GetComponent<Renderer>().enabled && key3Object.name == correctKeys[2].name) {
+            if (key3Object.gameObject.activeSelf && key3Object.name == correctKeys[2].name) {
                 key3 = true;
             }
 
@@ -58,18 +58,18 @@ public class KeypadListener : PuzzleTrigger
         for (var i = 0; i < 4; i++) {
             var key1Object = triggers[0].transform.GetChild(i);
             Debug.Log(key1Object.name);
-            Debug.Log(key1Object.GetComponent<Renderer>().enabled);
-            if (key1Object.GetComponent<Renderer>().enabled && key1Object.name != correctKeys[0].name && key1 == true) {
+            Debug.Log(key1Object.gameObject.activeSelf);
+            if (key1Object.gameObject.activeSelf && key1Object.name != correctKeys[0].name && key1 == true) {
                 key1 = false;
             }
 
             var key2Object = triggers[1].transform.GetChild(i);
-            if (key2Object.GetComponent<Renderer>().enabled && key2Object.name != correctKeys[1].name && key2 == true) {
+            if (key2Object.gameObject.activeSelf && key2Object.name != correctKeys[1].name && key2 == true) {
                 key2 = false;
             }
 
             var key3Object = triggers[2].transform.GetChild(i);
-            if (key3Object.GetComponent<Renderer>().enabled && key3Object.name != correctKeys[2].name && key3 == true) {
+            if (key3Object.gameObject.activeSelf && key3Object.name != correctKeys[2].name && key3 == true) {
                 key3 = false;
             }
 
