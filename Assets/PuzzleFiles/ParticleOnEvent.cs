@@ -9,21 +9,21 @@ public class ParticleOnEvent : PuzzleTrigger {
     public PuzzleTrigger trigger;
 
     private void Start() {
-        trigger.Triggered += changeParticle;
+        trigger.Triggered += ChangeParticle;
     }
 
-    void changeParticle(object obj, EventArgs args) {
+    void ChangeParticle(object obj, EventArgs args) {
 
         ParticleSystem.EmissionModule em = ps.emission;
 
         if (!em.enabled) {
             em.enabled = true;
             FireTriggered(this, EventArgs.Empty);
-            Debug.Log("changeParticle fired");
+            Debug.Log("ChangeParticle fired");
         } else {
             em.enabled = false;
             FireTriggeredFinished(this, EventArgs.Empty);
-            Debug.Log("changeParticle fired");
+            Debug.Log("ChangeParticle fired");
         }
 
     }

@@ -9,7 +9,6 @@ using UnityEngine.XR;
 public class TriggerGroup : PuzzleTrigger
 {
     public PuzzleTrigger[] triggers;
-    private int index = 0;
     private List<bool> activated = new List<bool>();
     private bool allActivated = false;
 
