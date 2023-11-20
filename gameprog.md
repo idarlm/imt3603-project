@@ -14,6 +14,19 @@
 
 ## Development process
 
+### Work Distribution Matrix
+| | André | Idar | Thea | Marthe |
+|----|----|----|----|----|
+|Tracks & Track Generation|Most| Touched | Touched | Touched | 
+|Wall of Death|Most|Some| | Touched |  
+|Player Movement & Rotation|Some|Touched| | Most | 
+|PowerUps| | All | | | 
+|Spectator|All| | | | 
+|3D Modelling| | | All | | 
+|Sound Design| | | All | | 
+|Sound System| | Some | Most | | 
+|UI| Some | Some | Some | Some | 
+
 #### Strengths and weaknesses with unity
 
 #### How you controlled process and communication systems during development
