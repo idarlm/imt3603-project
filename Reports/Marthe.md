@@ -1,17 +1,17 @@
-#Video
+# Video
 * A **video** showing off the **code** that is tightinly integrated with the game engine that is difficult to see from the text of the programming.
 
-#Discussion
-##Good code
+# Discussion
+## Good code
 A link to, and discussion of, code you consider **good**.
 - Animation
 - Trigger group
 
-##Bad code
+## Bad code
 A link to, and discussion of, code you consider **bad**.
 - Keypad puzzle
 
-##Reflection
+## Reflection
 A personal **reflection** about the key concepts you learnt during the course.
 - Started without any knowledge
 - Some people in the group had experience with Unity
