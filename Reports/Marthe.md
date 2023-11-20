@@ -1,7 +1,6 @@
-# Video
+## Video
 * A **video** showing off the **code** that is tightinly integrated with the game engine that is difficult to see from the text of the programming.
 
-# Discussion
 ## Good code
 A link to, and discussion of, code you consider **good**.
 - Animation
