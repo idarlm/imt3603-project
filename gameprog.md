@@ -15,6 +15,7 @@
 ## Development process
 
 ### Work Distribution Matrix
+(MÅ ENDRES, har bare blitt kopiert inn fra noen andre)
 | | André | Idar | Thea | Marthe |
 |----|----|----|----|----|
 |Tracks & Track Generation|Most| Touched | Touched | Touched | 
