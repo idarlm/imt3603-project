@@ -9,7 +9,6 @@ using UnityEngine.XR;
 public class TriggerGroup : PuzzleTrigger
 {
     public PuzzleTrigger[] triggers;
-    private int index = 0;
     private List<bool> activated = new List<bool>();
     private bool allActivated = false;
 
@@ -23,17 +22,27 @@ public class TriggerGroup : PuzzleTrigger
 
     private void OnTriggered(object sender, EventArgs args) {
 
-        activated[index] = true;
-        index++;
-
         for(var i=0; i < triggers.Length; i++) {
-            allActivated = activated[i] &= true;
+            if (triggers[i] == sender) {
+                Debug.Log("index = " + i);
+                if (!activated[i]) {
+                    activated[i] = true;
+                } else {
+                    activated[i] = false;
+                }
+                
+            }
+        }
+
+        if (activated.All(t => t)) {
+            allActivated = true;
         }
 
         if (allActivated) {
             FireTriggered(this, EventArgs.Empty);
             Debug.Log("TriggerGroup fired");
-            index = 0;
         }
     }
+    
+    
 }

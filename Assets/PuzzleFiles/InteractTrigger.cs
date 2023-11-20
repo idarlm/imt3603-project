@@ -18,14 +18,12 @@ public class InteractTrigger : PuzzleTrigger {
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.name == "Player") { 
             inRange = true;
-            Debug.Log("In range");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "Player")
-        {
+        if (other.gameObject.name == "Player") {
             inRange = false;
         }
     }
