@@ -127,11 +127,13 @@ namespace Snapshot {
     {
         public WorldSnapshot(System.DateTime timestamp)
         {
-            _timestamp = timestamp;
+            this.timestamp = timestamp;
+            scene = SceneManager.GetActiveScene().name;
         }
 
         private readonly List<ObjectSnapshot> _objects = new();
-        private readonly System.DateTime _timestamp;
+        public readonly System.DateTime timestamp;
+        public readonly string scene;
 
         public void Add(IObjectSnapshotWriter obj)
         {
