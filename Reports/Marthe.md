@@ -17,3 +17,4 @@ A personal **reflection** about the key concepts you learnt during the course.
 - Learned more about the logic, connecting objects with scripts and triggers, c#
 - Too high ambitions
 - Hard to follow and understand everything the other groupmembers did, because of limited knowledge and limited time to learn everything
+- Had help starting puzzles
