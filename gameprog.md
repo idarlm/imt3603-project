@@ -1,8 +1,8 @@
-## Group members
-- Andrè Marthinsen
-- Idar Løkset Mykløy
-- Marthe Sjaaeng
-- Thea Urke Remøy
+## Group members and Individual Reports
+- [Andrè Marthinsen](Reports/André.md)
+- [Idar Løkset Mykløy](Reports/Idar.md)
+- [Thea Urke Remøy](Reports/Thea.md)
+- [Marthe Sjaaeng](Reports/Marthe.md)
 
 ## Links
 [Game Design Document](https://mousedevs.atlassian.net/wiki/spaces/GP/pages/393429/Game+Design+Document) <br>
