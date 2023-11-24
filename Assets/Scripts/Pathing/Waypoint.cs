@@ -1,5 +1,6 @@
 using System;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -76,14 +77,16 @@ namespace Pathing
         private void DrawDirections(Color next, Color previous, Color node, float nodeRadius = 0.5f, float length = 0.5f)
         {
             length = Math.Clamp(length, 0, 1);
+            var position = transform.position;
             Gizmos.color = node;
-            Gizmos.DrawSphere(transform.position, nodeRadius);
+            Gizmos.DrawSphere(position, nodeRadius);
             if (nextWaypoint != null)
             {
+                var nextPosition = nextWaypoint.transform.position;
                 Gizmos.color = next;
-                var midwayPoint = Vector3.Lerp(transform.position, nextWaypoint.transform.position, length);
-                Gizmos.DrawLine(transform.position, midwayPoint);
-                Vector3 arrowheadDirection = (nextWaypoint.transform.position - transform.position).normalized;
+                var midwayPoint = Vector3.Lerp(transform.position, nextPosition, length);
+                Gizmos.DrawLine(position, midwayPoint);
+                Vector3 arrowheadDirection = (nextPosition - position).normalized;
                 Vector3 arrowheadLeft = Quaternion.Euler(0, 160, 0) * arrowheadDirection;
                 Vector3 arrowheadRight = Quaternion.Euler(0, -160, 0) * arrowheadDirection;
                 Gizmos.DrawRay(midwayPoint, arrowheadLeft);
@@ -94,7 +97,7 @@ namespace Pathing
                 Gizmos.color = previous;
                 Gizmos.DrawLine(
                     transform.position, 
-                    Vector3.Lerp(transform.position, previousWaypoint.transform.position, length)
+                    Vector3.Lerp(position, previousWaypoint.transform.position, length)
                     );
             }
         }
@@ -103,10 +106,22 @@ namespace Pathing
         public void OnDrawGizmos()
         {
             DrawDirections(
-                Color.red.WithAlpha(0.1f),
-                Color.blue.WithAlpha(0.1f),
-                Color.white.WithAlpha(0.1f)
+                Color.red.WithAlpha(0.25f),
+                Color.blue.WithAlpha(0.25f),
+                Color.white.WithAlpha(0.25f)
                 );
+            var position = transform.position;
+            if (nextWaypoint != null && nextWaypoint == this)
+            {
+                
+                Gizmos.DrawIcon(position,"warning", true);
+                Handles.Label(position + Vector3.up, "Next waypoint cannot be self");
+            }
+            if(previousWaypoint != null && previousWaypoint == this)
+            {
+                Gizmos.DrawIcon(position, "warning", true);
+                Handles.Label(position + Vector3.up, "Previous waypoint cannot be self");
+            }
         }
 
         public void OnDrawGizmosSelected()
@@ -122,7 +137,6 @@ namespace Pathing
 
             if (previousWaypoint != null)
             {
-
                 Gizmos.color = Color.blue;
                 Gizmos.DrawWireSphere(previousWaypoint.transform.position, 1f);
             }
