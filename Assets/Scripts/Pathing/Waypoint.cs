@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -69,6 +71,62 @@ namespace Pathing
             previousWaypoint = next.GetPrevious();
             next.GetPrevious().SetNext(this);
             next.SetPrevious(this);
+        }
+
+        private void DrawDirections(Color next, Color previous, Color node, float nodeRadius = 0.5f, float length = 0.5f)
+        {
+            length = Math.Clamp(length, 0, 1);
+            Gizmos.color = node;
+            Gizmos.DrawSphere(transform.position, nodeRadius);
+            if (nextWaypoint != null)
+            {
+                Gizmos.color = next;
+                var midwayPoint = Vector3.Lerp(transform.position, nextWaypoint.transform.position, length);
+                Gizmos.DrawLine(transform.position, midwayPoint);
+                Vector3 arrowheadDirection = (nextWaypoint.transform.position - transform.position).normalized;
+                Vector3 arrowheadLeft = Quaternion.Euler(0, 160, 0) * arrowheadDirection;
+                Vector3 arrowheadRight = Quaternion.Euler(0, -160, 0) * arrowheadDirection;
+                Gizmos.DrawRay(midwayPoint, arrowheadLeft);
+                Gizmos.DrawRay(midwayPoint, arrowheadRight);
+            }
+            if( previousWaypoint != null)
+            {
+                Gizmos.color = previous;
+                Gizmos.DrawLine(
+                    transform.position, 
+                    Vector3.Lerp(transform.position, previousWaypoint.transform.position, length)
+                    );
+            }
+        }
+
+
+        public void OnDrawGizmos()
+        {
+            DrawDirections(
+                Color.red.WithAlpha(0.1f),
+                Color.blue.WithAlpha(0.1f),
+                Color.white.WithAlpha(0.1f)
+                );
+        }
+
+        public void OnDrawGizmosSelected()
+        {
+            DrawDirections(
+                Color.red, Color.blue,Color.white, 1, 0.9f
+                );
+            if(nextWaypoint != null)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(nextWaypoint.transform.position, 1f);
+            }
+
+            if (previousWaypoint != null)
+            {
+
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(previousWaypoint.transform.position, 1f);
+            }
+               
         }
     }
 }
