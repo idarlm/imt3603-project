@@ -14,7 +14,7 @@ A link to, and discussion of, code you consider **bad**.
 - Keypad puzzle
   - Was originally created to to switch between different objects
   - Was later decided to use a cube that could rotate on interaction
-  - Decided not to change the code because of time, and rather wright about it in the report
+  - Decided not to change the code because of time, and rather write about it in the report
 
 ## Reflection
 A personal **reflection** about the key concepts you learnt during the course.
