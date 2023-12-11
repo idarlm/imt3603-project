@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class snap : MonoBehaviour
 {
-    IWorldSnapshot snapshot;
+    WorldSnapshot snapshot;
 
     // Update is called once per frame
     void Update()
