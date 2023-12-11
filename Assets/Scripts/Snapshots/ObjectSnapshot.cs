@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +36,7 @@ namespace Snapshot
     /// The implementation of this is not super safe or performant, but since it uses interfaces
     /// the implementation (or the entire class itself) could be replaced in the future while staying backwards compatible.
     /// </summary>
+    [Serializable]
     class ObjectSnapshot : IObjectSnapshotWriter, IObjectSnapshotReader
     {
         // Maps to store key and value pairs
