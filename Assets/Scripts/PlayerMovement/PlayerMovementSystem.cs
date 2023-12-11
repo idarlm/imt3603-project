@@ -379,21 +379,33 @@ namespace PlayerMovement
             }
         }
 
-        public void OnMakeSnapshot(IWorldSnapshot ws)
+        /// <summary>
+        /// Creates a snapshot containing the current state of the object.
+        /// </summary>
+        /// <param name="ws"></param>
+        public void OnMakeSnapshot(IWorldSnapshotWriter ws)
         {
             ws.AddSnapshotOf(this)
                 .Add("velocity", Velocity)
                 .Add("fwd", Forward);
         }
 
-        public void OnLoadSnapshot(IWorldSnapshot ws)
+        /// <summary>
+        /// Loads object state from a snapshot reader.
+        /// </summary>
+        /// <param name="ws"></param>
+        public void OnLoadSnapshot(IWorldSnapshotReader ws)
         {
+            // Disable CharacterController to allow for direct
+            // manipulation of position values.
             Freeze = true;
 
+            // load snapshot
             var snap = ws.LoadSnapshotOf(this);
             if (snap == null)
                 return;
 
+            // read values
             Handler.SetVelocity(snap.GetVector3("velocity"));
             Forward = snap.GetVector3("fwd");
 
