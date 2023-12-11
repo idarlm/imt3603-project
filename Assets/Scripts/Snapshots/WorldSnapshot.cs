@@ -45,15 +45,17 @@ namespace Snapshot
     [Serializable]
     public class WorldSnapshot : IWorldSnapshotWriter, IWorldSnapshotReader
     {
-        public WorldSnapshot(System.DateTime timestamp)
+        public WorldSnapshot(DateTime timestamp)
         {
             this.timestamp = timestamp;
             scene = SceneManager.GetActiveScene().name;
         }
 
-        private readonly List<ObjectSnapshot> _objects = new();
-        public readonly System.DateTime timestamp;
-        public readonly string scene;
+        // TODO: replace timestamp with serializable type
+        [SerializeField] public DateTime timestamp;
+        [SerializeField] public string scene;
+
+        [SerializeField] private List<ObjectSnapshot> _objects = new();
 
         public void Add(IObjectSnapshotWriter obj)
         {
@@ -69,12 +71,12 @@ namespace Snapshot
 
             // Take snapshot of transform
             var snap = new ObjectSnapshot();
-            snap.Add("__NAME", name);
-            snap.Add("__TRANSFORM_POS", m.transform.position);
-            snap.Add("__TRANSFORM_SCALE", m.transform.localScale);
-            snap.Add("__TRANSFORM_ROT", m.transform.rotation);
+            snap.name = name;
+            snap.position = m.transform.position;
+            snap.scale = m.transform.localScale;
+            snap.rotation = m.transform.rotation;
 
-            _objects.Add(snap);
+            Add(snap);
 
             return snap;
         }
@@ -86,7 +88,7 @@ namespace Snapshot
 
             // Find snapshot of object with given root
             var s = from o in _objects
-                    where o.GetString("__NAME") == name
+                    where o.name == name
                     select o;
 
             if (s.Count() == 0)
@@ -98,9 +100,9 @@ namespace Snapshot
             var snapshot = s.FirstOrDefault();
 
             // Load transform snapshot state - this is inefficient but convenient
-            obj.transform.position = snapshot.GetVector3("__TRANSFORM_POS");
-            obj.transform.localScale = snapshot.GetVector3("__TRANSFORM_SCALE");
-            obj.transform.rotation = snapshot.GetQuaternion("__TRANSFORM_ROT");
+            obj.transform.position = snapshot.position;
+            obj.transform.localScale = snapshot.scale;
+            obj.transform.rotation = snapshot.rotation;
 
             // TODO: make this safe
             return snapshot;

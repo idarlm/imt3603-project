@@ -46,7 +46,6 @@ namespace Snapshot {
 
             // Log stats
             Debug.Log($"World snapshot made in {System.DateTime.Now - timeStamp}");
-            Debug.Log($"Snapshot data: {JsonUtility.ToJson(ws)}");
 
             return ws;
         }

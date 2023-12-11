@@ -29,6 +29,17 @@ namespace Snapshot
         public Quaternion GetQuaternion(string key);
     }
 
+    [Serializable]
+    struct SnapshotProperty
+    {
+        public string name;
+        public Vector3 vecValue;
+        public Quaternion quatValue;
+        public float floatValue;
+        public int intValue;
+        public string stringValue;
+    }
+
     /// <summary>
     /// ObjectSnapshot objects allow data to be stored in dictionaries. 
     /// Using the reader and writer interfaces, it acts like a key/value store.
@@ -40,140 +51,95 @@ namespace Snapshot
     class ObjectSnapshot : IObjectSnapshotWriter, IObjectSnapshotReader
     {
         // Maps to store key and value pairs
-        private readonly Dictionary<string, string> _strings = new();
-        private readonly Dictionary<string, float> _floats = new();
-        private readonly Dictionary<string, int> _ints = new();
+        [SerializeField] public string name;
+        [SerializeField] public Vector3 position;
+        [SerializeField] public Quaternion rotation;
+        [SerializeField] public Vector3 scale;
 
+        //private readonly Dictionary<string, string> _strings = new();
+        //private readonly Dictionary<string, float> _floats = new();
+        //private readonly Dictionary<string, int> _ints = new();
+
+        [SerializeField] private SnapshotProperty[] _properties = new SnapshotProperty[0];
+
+        // Pre-allocating the array and resizing it exponentially would be faster
+        // but that would be an optimization for the future.
+        private void addProperty(SnapshotProperty property)
+        {
+            var l = _properties.Length;
+            var newArray = new SnapshotProperty[l + 1];
+            for (int i = 0; i < l; i ++)
+            {
+                newArray[i] = _properties[i];
+            }
+            newArray[l] = property;
+
+            _properties = newArray;
+        }
+
+        private SnapshotProperty findProperty(string name)
+        {
+            foreach (var p in _properties)
+            {
+                if (p.name == name) return p;
+            }
+
+            return new SnapshotProperty { name = "NOT FOUND" };
+        }
 
         public IObjectSnapshotWriter Add(string key, float value)
         {
-            _floats.Add(key, value);
+            addProperty(new SnapshotProperty { name = key, floatValue = value });
             return this;
         }
 
         public IObjectSnapshotWriter Add(string key, int value)
         {
-            _ints.Add(key, value);
+            addProperty(new SnapshotProperty { name = key, intValue = value });
             return this;
         }
 
         public IObjectSnapshotWriter Add(string key, Quaternion value)
         {
-            _floats.Add($"__QUATERNION_X_{key}", value.x);
-            _floats.Add($"__QUATERNION_Y_{key}", value.y);
-            _floats.Add($"__QUATERNION_Z_{key}", value.z);
-            _floats.Add($"__QUATERNION_W_{key}", value.w);
+            addProperty(new SnapshotProperty { name = key, quatValue = value });
             return this;
         }
 
         public IObjectSnapshotWriter Add(string key, string value)
         {
-            _strings.Add(key, value);
+            addProperty(new SnapshotProperty { name = key, stringValue = value });
             return this;
         }
 
         public IObjectSnapshotWriter Add(string key, Vector3 value)
         {
-            _floats.Add($"__VECTOR3_X_{key}", value.x);
-            _floats.Add($"__VECTOR3_Y_{key}", value.y);
-            _floats.Add($"__VECTOR3_Z_{key}", value.z);
+            addProperty(new SnapshotProperty { name = key, vecValue = value });
             return this;
         }
 
         public float GetFloat(string key)
         {
-            var success = _floats.TryGetValue(key, out float result);
-            if (success) return result;
-            else
-            {
-                Debug.LogWarning("Could not find float with key \"{key}\".");
-                return default;
-            }
+            return findProperty(key).floatValue;
         }
 
         public int GetInt(string key)
         {
-            var success = _ints.TryGetValue(key, out int result);
-            if (success) return result;
-            else
-            {
-                Debug.LogWarning("Could not find int with key \"{key}\".");
-                return default;
-            }
+            return findProperty(key).intValue;
         }
 
         public Quaternion GetQuaternion(string key)
         {
-            var success = true;
-            Quaternion q = new();
-
-            string[] components = { "X", "Y", "Z", "W" };
-            Dictionary<string, float> vals = new();
-
-            foreach (var c in components)
-            {
-                success &= _floats.TryGetValue($"__QUATERNION_{c}_{key}", out float value);
-
-                if (success)
-                {
-                    vals.Add(c, value);
-                }
-            }
-
-            if (success)
-            {
-                q.x = vals["X"];
-                q.y = vals["Y"];
-                q.z = vals["Z"];
-                q.w = vals["W"];
-
-                return q;
-            }
-
-            Debug.LogWarning($"Could not find Quaternion with key \"{key}\"");
-            return default;
+            return findProperty(key).quatValue;
         }
 
         public string GetString(string key)
         {
-            var success = _strings.TryGetValue(key, out string result);
-            if (success) return result;
-            else
-            {
-                Debug.LogWarning("Could not find string with key \"{key}\".");
-                return default;
-            }
+            return findProperty(key).stringValue;
         }
 
         public Vector3 GetVector3(string key)
         {
-            var success = true;
-            Vector3 vec = new();
-
-            string[] components = { "X", "Y", "Z" };
-            Dictionary<string, float> vals = new();
-
-            foreach (var c in components)
-            {
-                success &= _floats.TryGetValue($"__VECTOR3_{c}_{key}", out float value);
-
-                if (success)
-                {
-                    vals.Add(c, value);
-                }
-            }
-
-            if (success)
-            {
-                vec.x = vals["X"];
-                vec.y = vals["Y"];
-                vec.z = vals["Z"];
-
-                return vec;
-            }
-
-            Debug.LogWarning($"Could not find Vector3 with key \"{key}\".");
-            return default;
+            return findProperty(key).vecValue;
         }
     }
 }
