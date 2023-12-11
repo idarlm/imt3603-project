@@ -132,7 +132,7 @@ namespace Pathing
             if(nextWaypoint != null)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(nextWaypoint.transform.position, 1f);
+                Gizmos.DrawWireSphere(nextWaypoint.transform.position, 1.1f);
             }
 
             if (previousWaypoint != null)

@@ -21,14 +21,14 @@ namespace Illumination
             RightHandIllumination = rightHand;
         }
 
-        public static PlayerIllumination operator+ (PlayerIllumination a, PlayerIllumination b)
+        public static PlayerIllumination operator+ (PlayerIllumination lhs, PlayerIllumination rhs)
         {
-            var sum = a;
-            a.RightHandIllumination += b.RightHandIllumination;
-            a.LeftHandIllumination += b.LeftHandIllumination;
-            a.HeadIllumination += b.HeadIllumination;
-            a.ChestIllumination += b.ChestIllumination;
-            return a;
+            var sum = lhs;
+            lhs.RightHandIllumination += rhs.RightHandIllumination;
+            lhs.LeftHandIllumination += rhs.LeftHandIllumination;
+            lhs.HeadIllumination += rhs.HeadIllumination;
+            lhs.ChestIllumination += rhs.ChestIllumination;
+            return lhs;
         }
     }
 }
