@@ -70,6 +70,12 @@ namespace AIController
 
         private void OnDrawGizmosSelected()
         {
+            if (this.entryWaypoint != null)
+            {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawLine(transform.position, entryWaypoint.transform.position);
+                Gizmos.DrawWireSphere(entryWaypoint.transform.position, 1f);
+            }
             
             Handles.DrawWireArc(visionTransform.position, visionTransform.up, visionTransform.forward, horizontalFOV/2, 5);
             Handles.DrawWireArc(visionTransform.position, visionTransform.up, visionTransform.forward, -horizontalFOV/2, 5);
@@ -81,14 +87,6 @@ namespace AIController
             Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(verticalFOV/2, visionTransform.right) * visionTransform.forward * 5);
             Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(-verticalFOV/2, visionTransform.right) * visionTransform.forward * 5);
         }
-
-        // void OnGUI()
-        // {
-        //     if (Application.isEditor)
-        //     {
-        //         GUI.Label()
-        //     }
-        // }
         
     }
     
