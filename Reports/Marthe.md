@@ -7,7 +7,7 @@ A **video** showing off the **code** that is tightinly integrated with the game 
 ## Good code
 A link to, and discussion of, code you consider **good**.
 - Animation code
-https://github.com/idarlm/imt3603-project/blob/e66721fe202b8c21dbed1a644c7376566f558405/Assets/PuzzleFiles/Animations/AnimateOnEvent.cs
+[Animation code](https://github.com/idarlm/imt3603-project/blob/e66721fe202b8c21dbed1a644c7376566f558405/Assets/PuzzleFiles/Animations/AnimateOnEvent.cs#L7-L34)
 - Trigger group
 
 ## Bad code
