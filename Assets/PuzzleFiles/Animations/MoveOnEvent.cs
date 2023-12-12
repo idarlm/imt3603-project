@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveOnEvent : AnimateOnEvent {
     [SerializeField] Vector3 offset;
-    [SerializeField] int closingTime;
+    [SerializeField] float closingTime;
 
     protected override void Update() {
         base.Update();

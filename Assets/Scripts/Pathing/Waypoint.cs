@@ -74,6 +74,8 @@ namespace Pathing
             next.SetPrevious(this);
         }
 
+        
+        
         private void DrawDirections(Color next, Color previous, Color node, float nodeRadius = 0.5f, float length = 0.5f)
         {
             length = Math.Clamp(length, 0, 1);
