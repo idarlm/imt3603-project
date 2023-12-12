@@ -11,41 +11,22 @@ public class VisibilityUI : MonoBehaviour
     private PlayerIllumination playerIllumination;
     [SerializeField] PlayerIlluminationController playerIlluminationController;
     [SerializeField] Image visibilityImage;
-    [SerializeField] Sprite playerVisible;
-    [SerializeField] Sprite playerNotVisible;
 
 
     private void Start()
     {
         playerIllumination = playerIlluminationController.GetIllumination();
         illuminationSum = (playerIllumination.LeftHandIllumination + playerIllumination.RightHandIllumination +
-            playerIllumination.HeadIllumination + playerIllumination.ChestIllumination) * 2;
+            playerIllumination.HeadIllumination + playerIllumination.ChestIllumination) / 0.5f;
     }
 
     private void Update()
     {
         playerIllumination = playerIlluminationController.GetIllumination();
         illuminationSum = (playerIllumination.LeftHandIllumination + playerIllumination.RightHandIllumination +
-            playerIllumination.HeadIllumination + playerIllumination.ChestIllumination) * 2;
+            playerIllumination.HeadIllumination + playerIllumination.ChestIllumination) / 0.5f;
 
-        if(illuminationSum >= 1)
-        {
-            SetVisibleImage();
-            visibilityImage.color = visibilityImage.color.WithAlpha(Mathf.Lerp(0.5f, 1.0f, illuminationSum));
-        } else
-        {
-            SetNotVisibleImage();
-            visibilityImage.color = visibilityImage.color.WithAlpha(Mathf.Lerp(1.0f, 0.5f, illuminationSum));
-        }
-    }
-    
-    public void SetVisibleImage()
-    {
-        visibilityImage.sprite = playerVisible;
-    }
+       visibilityImage.color = visibilityImage.color.WithAlpha(illuminationSum);
 
-    public void SetNotVisibleImage()
-    {
-        visibilityImage.sprite = playerNotVisible;
     }
 }

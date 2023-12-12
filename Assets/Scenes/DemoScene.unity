@@ -11043,6 +11043,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 201922178274231163, guid: 9b3fc57205d463d46a78ae3bfcc8f228,
+        type: 3}
+      propertyPath: playerIlluminationController
+      value: 
+      objectReference: {fileID: 1545942324}
+    - target: {fileID: 1715503870355844343, guid: 9b3fc57205d463d46a78ae3bfcc8f228,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715503870355844343, guid: 9b3fc57205d463d46a78ae3bfcc8f228,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -11
+      objectReference: {fileID: 0}
     - target: {fileID: 2480792230226790840, guid: 9b3fc57205d463d46a78ae3bfcc8f228,
         type: 3}
       propertyPath: m_Name
@@ -23675,6 +23690,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1545942324 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 324325899436798352, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
+    type: 3}
+  m_PrefabInstance: {fileID: 636489836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191229167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489a58b183e88234d9ec08d739a947b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1546451238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8484426735953121136, guid: f26fdd3a6ffca7c42859493a30a8b5ef,
