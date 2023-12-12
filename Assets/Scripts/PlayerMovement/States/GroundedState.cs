@@ -67,7 +67,7 @@ namespace PlayerMovement
             // the current velocity and is used to scale the acceleration.
             // It is equivalent to the Proportional part of a PID controller.
             // We don't really need the Integral and Derivative parts for this.
-            var delta = stanceSettings.speed * targetDirection - handler.Velocity;
+            var delta = stanceSettings.speed * targetDirection - context.HorizontalVelocity;
             if (delta.sqrMagnitude > 1.0f) delta.Normalize();
 
             movement += stanceSettings.acceleration * Time.deltaTime * Time.deltaTime * delta;
@@ -85,6 +85,8 @@ namespace PlayerMovement
             }
 
             handler.Move(movement);
+
+            // rotate direction of player model
             context.Forward = Vector3.RotateTowards(
                 current: context.Forward, 
                 target: context.HorizontalVelocity.normalized, 

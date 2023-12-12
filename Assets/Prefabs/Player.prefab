@@ -124,22 +124,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableJump: 1
   enableCrouch: 1
-  gravity: 10
+  gravity: 7
   jumpSpeed: 5
   jumpDelay: 0
   landingSpeedPenalty: 0.5
-  sprintSpeed: 10
+  sprintSpeed: 7
   turnRate: 360
   turnEventThreshold: 120
   standingSettings:
     speed: 5
-    acceleration: 10
+    acceleration: 15
     deceleration: 25
     controllerHeight: 2
     controllerCenter: {x: 0, y: 0, z: 0}
   crouchingSettings:
-    speed: 5
-    acceleration: 20
+    speed: 3.5
+    acceleration: 10
     deceleration: 20
     controllerHeight: 1
     controllerCenter: {x: 0, y: -0.5, z: 0}

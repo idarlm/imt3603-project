@@ -8283,7 +8283,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 0.25
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -9064,39 +9064,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
-      propertyPath: turnRate
-      value: 360
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: sprintSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 619586354}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: interpolatedBody
-      value: 
-      objectReference: {fileID: 1844505027}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: standingSettings.speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: crouchingSettings.speed
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 1034280559241627406, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
       propertyPath: m_Enabled
@@ -9181,11 +9151,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8218954484654295882, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9181637267880973049, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
