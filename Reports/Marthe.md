@@ -31,3 +31,4 @@ After learning about Unity I had to start participating in the actual coding of 
 - Hard to follow and understand everything the other groupmembers did, because of limited knowledge and limited time to learn everything
 - Had help starting puzzles
 - Had to revise much of the code, because of new and better knowledge. Made new generic scripts. Did this myself
+  - Made prefabs three times, could have used less time with this if I had gotten proper feedback from the group earlier.

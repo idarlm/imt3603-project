@@ -29,6 +29,7 @@ namespace AIController
         public RatIKController IKController;
         [FormerlySerializedAs("FOV")] public float horizontalFOV;
         public float verticalFOV;
+        [SerializeField] public Cage cage;
         
         private void Start()
         {
@@ -77,6 +78,13 @@ namespace AIController
                 Gizmos.DrawWireSphere(entryWaypoint.transform.position, 1f);
             }
             
+            if (this.cage != null)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(transform.position, cage.GetAITargetPosition());
+                Gizmos.DrawWireSphere(cage.GetAITargetPosition(), 1f);
+            }
+            
             Handles.DrawWireArc(visionTransform.position, visionTransform.up, visionTransform.forward, horizontalFOV/2, 5);
             Handles.DrawWireArc(visionTransform.position, visionTransform.up, visionTransform.forward, -horizontalFOV/2, 5);
             Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(horizontalFOV/2, visionTransform.up) * visionTransform.forward * 5);
@@ -86,6 +94,8 @@ namespace AIController
             Handles.DrawWireArc(visionTransform.position, visionTransform.right, visionTransform.forward, -verticalFOV/2, 5);
             Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(verticalFOV/2, visionTransform.right) * visionTransform.forward * 5);
             Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(-verticalFOV/2, visionTransform.right) * visionTransform.forward * 5);
+            
+            
         }
         
     }

@@ -8,18 +8,8 @@ using UnityEngine.UIElements;
 public class InteractTrigger : PuzzleTrigger {
 
     private bool inRange = false;
-    [SerializeField] InteractionTextUI canvasUI;
 
     private void Update() {
-
-        if(inRange)
-        {
-            canvasUI.ShowUI();
-            Debug.Log("In range");
-        } else
-        {
-            canvasUI.CloseUI();
-        }
 
         if (Input.GetKeyDown(KeyCode.E) && inRange) {
             FireTriggered(this, EventArgs.Empty);
@@ -30,6 +20,7 @@ public class InteractTrigger : PuzzleTrigger {
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.name == "Player") { 
             inRange = true;
+            InteractionTextUI.ShowUI();
         }
     }
 
@@ -37,6 +28,7 @@ public class InteractTrigger : PuzzleTrigger {
     {
         if (other.gameObject.name == "Player") {
             inRange = false;
+            InteractionTextUI.CloseUI();
         }
     }
 

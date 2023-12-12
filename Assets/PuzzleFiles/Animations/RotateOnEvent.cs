@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RotateOnEvent : AnimateOnEvent {
     [SerializeField] float animationTime;
-    [SerializeField] int closingTime;
+    [SerializeField] float closingTime;
     [SerializeField] Vector3 axis;
     [SerializeField] float angle;
     quaternion startAngle;

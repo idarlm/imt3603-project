@@ -7,11 +7,13 @@ public class InteractionTextUI : MonoBehaviour
 {
     private Camera mainCamera;
     [SerializeField] private TextMeshProUGUI interactText;
+    private static TextMeshProUGUI instance;
 
     
     private void Start()
     {
         mainCamera = Camera.main;
+        instance = interactText;
         interactText.text = " ";
     }
 
@@ -24,13 +26,13 @@ public class InteractionTextUI : MonoBehaviour
     }
 
 
-    public void ShowUI()
+    public static void ShowUI()
     {
-        interactText.text = "Press [E] to interact";
+        instance.text = "Press [E] to interact";
     }
 
-    public void CloseUI()
+    public static void CloseUI()
     {
-        interactText.text = " ";
+        instance.text = " ";
     }
 }
