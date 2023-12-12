@@ -36,6 +36,7 @@ A link to, and discussion of, code you consider **bad**.
     - Hard to keep track of many gameobjects, and what objesct is the right one
   - Was later decided to use a cube that could rotate on interaction
   - Decided not to change the code because of time, and rather write about it in the report
+  - To improve it: Use rotation animation, and set a "right rotation" field and check if it matches. Would only need as many cubes as symbols we want in the passcode, a lot less resources.
 
 ## Reflection
 A personal **reflection** about the key concepts you learnt during the course.
