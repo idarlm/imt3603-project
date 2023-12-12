@@ -1,3 +1,21 @@
+|Description | min | def | max |
+|----|----|----|----|
+|Gameplay video | 5 | 10 | 20 |
+|Code video | 0 | 10 | 15 |
+|Good Code  | 10 | 20 | 30 |
+|Bad Code | 10 | 20 | 30 |
+|Development process | 10 | 20 | 30 |
+|Reflection | 10 | 20 | 30 |
+
+|Description | My Weight |
+|----|----|----|----|
+|Gameplay video | 10 |
+|Code video | 5 |
+|Good Code  | 20 |
+|Bad Code | 20 |
+|Development process | 20 |
+|Reflection | 25 |
+
 ## Video
 A **video** showing off the **code** that is tightinly integrated with the game engine that is difficult to see from the text of the programming.
 - Linking objects to puzzle files
