@@ -57,8 +57,20 @@ namespace PlayerMovement
             movement.y = Mathf.Min(movement.y, 0);
 
             // calculate acceleration and deceleration
-            movement += CalculateAcceleration(context);
-            movement -= CalculateDeceleration(context);
+            var input = context.Input.joystick;
+
+            // targetDirection is the desired direction of movement
+            var targetDirection = input.x * context.CameraRight
+                + input.y * context.CameraForward;
+
+            // delta is the difference between the desired velocity and
+            // the current velocity and is used to scale the acceleration.
+            // It is equivalent to the Proportional part of a PID controller.
+            // We don't really need the Integral and Derivative parts for this.
+            var delta = stanceSettings.speed * targetDirection - handler.Velocity;
+            if (delta.sqrMagnitude > 1.0f) delta.Normalize();
+
+            movement += stanceSettings.acceleration * Time.deltaTime * Time.deltaTime * delta;
 
             // apply movement penalty when landing
             if(landed)
@@ -73,6 +85,11 @@ namespace PlayerMovement
             }
 
             handler.Move(movement);
+            context.Forward = Vector3.RotateTowards(
+                current: context.Forward, 
+                target: context.HorizontalVelocity.normalized, 
+                maxRadiansDelta: context.turnRate * Mathf.Deg2Rad * Time.deltaTime,
+                maxMagnitudeDelta: 0f);
         }
 
         public override void HandleInput(PlayerMovementSystem context)
@@ -87,50 +104,5 @@ namespace PlayerMovement
             }
         }
 
-        private Vector3 CalculateAcceleration(PlayerMovementSystem context)
-        {
-            var dt = Time.fixedDeltaTime;
-            var input = context.Input.joystick;
-
-            // joystick deadzone
-            input = input.sqrMagnitude > 0.1f ? input : Vector2.zero;
-            input.Normalize();
-
-            // calculate new direction
-            var currentDir = context.Forward;
-            var targetDirection = (context.CameraForward * input.y
-                                  +context.CameraRight   * input.x).normalized;
-
-            var dir = Vector3.RotateTowards(currentDir, targetDirection, context.turnRate * Mathf.Deg2Rad * dt, 0f);
-            context.Forward = dir;
-
-            // return acceleration in new direction
-            return targetDirection * (stanceSettings.acceleration * input.sqrMagnitude * dt * dt);
-        }
-
-        private Vector3 CalculateDeceleration(PlayerMovementSystem context)
-        {
-            var dt = Time.fixedDeltaTime;
-            var input = context.Input.joystick;
-
-            // limit speed
-            var horizontalVelocity = Vector3.ProjectOnPlane(context.Velocity, Vector3.up);
-            var speedLimitF = Mathf.Clamp(horizontalVelocity.sqrMagnitude / (Mathf.Pow(stanceSettings.speed, 2)), 0, 1f);
-
-            var deceleration = context.Velocity * (stanceSettings.acceleration * speedLimitF);
-
-            // calculate decel direction
-            var decelDir = context.Forward * (input.sqrMagnitude > 0.1f ? 1 : 0) - horizontalVelocity.normalized;
-
-            deceleration -= decelDir * stanceSettings.deceleration;
-
-            if((deceleration * dt).sqrMagnitude > context.Velocity.sqrMagnitude)
-            {
-                deceleration = context.Velocity / dt;
-            }
-
-            // return deceleration
-            return deceleration * dt * dt;
-        }
     }
 }
