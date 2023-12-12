@@ -14,22 +14,31 @@ A link to, and discussion of, code you consider **good**.
 A link to, and discussion of, code you consider **bad**.
 - Keypad puzzle
   - Was originally created to to switch between different objects
+    - Many gameobjects needed with this method, what would happend if we wanted a longer passcode and more symbols to choose between?
+    - Hard to keep track of many gameobjects, and what objesct is the right one
   - Was later decided to use a cube that could rotate on interaction
   - Decided not to change the code because of time, and rather write about it in the report
 
 ## Reflection
 A personal **reflection** about the key concepts you learnt during the course.
 - Started without any knowledge<br>
-I started this course with no knowledge about game programming. I also had no previous experience with Unity or other game engines, so it took some time to learn how to use it.
+I started this course with no knowledge about game programming. I also had no previous experience with Unity or other game engines, so it took some time to learn how to use it and get into the logic of game programming.
 
 - Some people in the group had experience with Unity<br>
-In our group we had two people with no previous knowledge, including me, and two who had some expirience with Unity and game programming. Because of this, we had set some high expectations for our game, but understood that some of us had to do more work than others because of our mixed knowledge. In the time we had to work with the game, I used a lot of time in the beggining to try and understand what Unity was and how to use it.
-Consepts I learned about Unity was for example its itegrated input system for movement and interactions. However, this was not one of my taskt in the project. I also learned making game objects, serializable fields that's visible in Unity, making prefabs and adding materials. 
-After learning about Unity I had to start participating in the actual coding of our game, and I felt it was very hard to know where to begin. Me and the other group member with no previous knowledge was in charge of implementing the puzzles of our game. This included coming up with puzzles that we thought was doable for us.
+In our group we had two people with no previous knowledge, including me, and two who already had some expirience with Unity and game programming. Because of this, we had set some high expectations for our game, but understood that some of us had to do more work than others because of our mixed knowledge. In the time we had to work with the game, I used a lot of time in the begining to try and understand what Unity was and how to use it.
+Consepts I learned about Unity was for example its itegrated input system for movement and interactions. However, this was not one of my taskt in the project. I also learned making game objects, serializable fields that's visible in Unity, making prefabs and adding materials to gameobjects. I would say my knowledge about Unity at the end of the projects is very limited still, because I used my time on what I specifically needed to know to do my own parts of the game. 
 
-- Learned more about the logic, connecting objects with scripts and triggers, c#, gameobjects, prefabs, scenes
+After learning about Unity I had to start participating in the actual coding of our game, and I felt it was very hard to know where to begin. Me and the other group member with no previous knowledge was in charge of implementing the puzzles of our game. We both came up with puzzle-ideas that we thought were doable for us, and tried watching videos to know where to start. However, others in the group wanted us to implement the puzzle code in a way that was not easy to learn with simple videos and with the short amout of time we had. Because of this, we got a little help starting out, and some ideas from the other members on how to implement the puzzles.
+When implementing the puzzles, I got more and more familiar with the game logic and Unity. I found it hard in the begining to juggle all the different gameobjects, and understand what was missing from serializable fields and scripts, but I got a hang of it in the end. I saw much improvement in my debugging skills and understanding errors.
+
+Throughout the process of implementing the puzzles, we tried communicating with the other group members to get their input. We often got feedback that stated our work was fine, and to continue to implement the other puzzles we had planned to do. However, after we had implemented all puzzles, we were told to do it in another and better way. Myself and my puzzle-companion were originally happy and proud of everything we had managed to do, and it would have worked fine even though it was not the best code. While my puzzle-companion started on another task, I had to revise much of the code. I rewrote about half of the code we had, this was a tiresom job, especially because it could have been done from the start, if we just had gotten better feedback. In this process I learned more about combining scripts and inheriting, and wrote new generic code to use for more than just the puzzles. The animations code I wrote about earlier is an example of this. Because I basically wrote the puzzles code two times, I got much more practice with the logic, and connecting objects with scripts and triggers. Every puzzle was also made in their own scene in Unity, so I learned how to use them aswell. 
+
+
+
+
+Throughout the whole project I have learned coding C#.
+
+
+
 - Too high ambitions
-- Hard to follow and understand everything the other groupmembers did, because of limited knowledge and limited time to learn everything
-- Had help starting puzzles
-- Had to revise much of the code, because of new and better knowledge. Made new generic scripts. Did this myself
-  - Made prefabs three times, could have used less time with this if I had gotten proper feedback from the group earlier.
+
