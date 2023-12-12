@@ -1,14 +1,15 @@
 using Illumination;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class VisibilityUI : MonoBehaviour
 {
-    // private bool visible = true;
-    private Vector4 playerIllumination;
-    private Transform leftHand;
+    private PlayerIllumination playerIllumination;
+    private float illuminationSum;
+    [SerializeField] PlayerIlluminationController playerIlluminationController;
     [SerializeField] Image visibilityImage;
     [SerializeField] Sprite playerVisible;
     [SerializeField] Sprite playerNotVisible;
@@ -16,8 +17,18 @@ public class VisibilityUI : MonoBehaviour
 
     private void Start()
     {
-       // playerIllumination;
-        //leftHand = PlayerIlluminationController.leftHand;
+        playerIllumination = playerIlluminationController.GetIllumination();
+        illuminationSum = (playerIllumination.LeftHandIllumination + playerIllumination.RightHandIllumination +
+            playerIllumination.HeadIllumination + playerIllumination.ChestIllumination) * 2;
+    }
+
+    private void Update()
+    {
+        playerIllumination = playerIlluminationController.GetIllumination();
+        illuminationSum = (playerIllumination.LeftHandIllumination + playerIllumination.RightHandIllumination +
+            playerIllumination.HeadIllumination + playerIllumination.ChestIllumination) * 2;
+
+        visibilityImage.color = visibilityImage.color.WithAlpha(Mathf.Clamp01(illuminationSum));
     }
 
     public void SetVisibleImage()
