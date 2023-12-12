@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 1749520599}
-  previousWaypoint: {fileID: 654783606}
+  previousWaypoint: {fileID: 1267456063}
   isEndpoint: 0
 --- !u!65 &654783607
 BoxCollider:
@@ -1668,7 +1668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 945071411}
-  previousWaypoint: {fileID: 1147474084}
+  previousWaypoint: {fileID: 2023689347}
   isEndpoint: 0
 --- !u!65 &1147474085
 BoxCollider:
@@ -1927,7 +1927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 654783606}
-  previousWaypoint: {fileID: 1267456063}
+  previousWaypoint: {fileID: 945071411}
   isEndpoint: 0
 --- !u!65 &1267456064
 BoxCollider:
@@ -2568,7 +2568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 2023689347}
-  previousWaypoint: {fileID: 1749520599}
+  previousWaypoint: {fileID: 654783606}
   isEndpoint: 0
 --- !u!65 &1749520600
 BoxCollider:
@@ -3185,7 +3185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 1147474084}
-  previousWaypoint: {fileID: 2023689347}
+  previousWaypoint: {fileID: 1749520599}
   isEndpoint: 0
 --- !u!65 &2023689348
 BoxCollider:

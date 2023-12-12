@@ -158,7 +158,7 @@ namespace CameraSystem
         /// Saves the current sate of the camera into the provided world snapshot.
         /// </summary>
         /// <param name="ws"></param>
-        public void OnMakeSnapshot(IWorldSnapshot ws)
+        public void OnMakeSnapshot(IWorldSnapshotWriter ws)
         {
             ws.AddSnapshotOf(this)
                 .Add("trgtPos", _lookAtTargetPosition)
@@ -171,7 +171,7 @@ namespace CameraSystem
         /// Loads the state of the camera from the provided world snapshot.
         /// </summary>
         /// <param name="ws"></param>
-        public void OnLoadSnapshot(IWorldSnapshot ws)
+        public void OnLoadSnapshot(IWorldSnapshotReader ws)
         {
             var s = ws.LoadSnapshotOf(this);
             if (s == null)

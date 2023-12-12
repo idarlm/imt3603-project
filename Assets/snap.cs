@@ -1,23 +1,48 @@
-using Snapshot;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using System.IO;
 
-public class snap : MonoBehaviour
+namespace Snapshot
 {
-    IWorldSnapshot snapshot;
-
-    // Update is called once per frame
-    void Update()
+    public class Snap : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.F5))
-        {
-            snapshot = WorldSnapshotManager.MakeSnapshot();
-        }
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MouseGame");
+        string filename = "snapshot.json";
 
-        if (Input.GetKeyDown(KeyCode.F9) && snapshot != null)
+        // Update is called once per frame
+        void Update()
         {
-            WorldSnapshotManager.LoadSnapshot(snapshot);
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                var snap = WorldSnapshotManager.MakeSnapshot();
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                    File.Create(Path.Combine(path, filename)).Close();
+                }
+
+                File.WriteAllText(Path.Combine(path, filename), JsonUtility.ToJson(snap));
+            }
+
+            if (Input.GetKeyDown(KeyCode.F9))
+            {
+                string text;
+                try
+                {
+                    text = File.ReadAllText(Path.Combine(path, filename));
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                    return;
+                }
+
+
+                var snap = JsonUtility.FromJson<WorldSnapshot>(text);
+
+                WorldSnapshotManager.LoadSnapshot(snap);
+            }
         }
     }
 }
