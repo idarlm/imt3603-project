@@ -28,11 +28,13 @@ public class InteractionTextUI : MonoBehaviour
 
     public static void ShowUI()
     {
-        instance.text = "Press [E] to interact";
+        if (instance != null)
+            instance.text = "Press [E] to interact";
     }
 
     public static void CloseUI()
     {
-        instance.text = " ";
+        if (instance != null)
+            instance.text = " ";
     }
 }
