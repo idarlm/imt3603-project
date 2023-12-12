@@ -19,15 +19,8 @@ namespace AIController.PatrolBehaviour
         {
             _squareSwapDistance = _swapDistance * _swapDistance;
             context.Agent.speed = context.walkSpeed;
-            if (context.TargetWaypoint)
-            {
-                context.Agent.destination = context.TargetWaypoint.GetPosition();
-            }
-            else
-            {
-                context.Agent.destination = context.startPosition;
-            }
-            
+            context.Agent.destination = 
+                context.TargetWaypoint ? context.TargetWaypoint.GetPosition() : context.startPosition;
             context.ratAnimator.SetBool(IsPatrolling, true);
         }
 
@@ -74,14 +67,8 @@ namespace AIController.PatrolBehaviour
                         {
                             context._reverseOrder = !context._reverseOrder;
                         }
-                        if (!context._reverseOrder)
-                        {
-                            context.TargetWaypoint = context.TargetWaypoint.GetNext();
-                        }
-                        else
-                        {
-                            context.TargetWaypoint = context.TargetWaypoint.GetPrevious();
-                        }
+                        context.TargetWaypoint = 
+                            !context._reverseOrder ? context.TargetWaypoint.GetNext() : context.TargetWaypoint.GetPrevious();
                         context.Agent.destination = context.TargetWaypoint.GetPosition();
                         if (oldWaypoint.isEndpoint)
                         {
