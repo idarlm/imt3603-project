@@ -1,3 +1,4 @@
+using Illumination;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,9 @@ using UnityEngine.UI;
 
 public class VisibilityUI : MonoBehaviour
 {
-    private bool visible = true;
+    // private bool visible = true;
+    private Vector4 playerIllumination;
+    private Transform leftHand;
     [SerializeField] Image visibilityImage;
     [SerializeField] Sprite playerVisible;
     [SerializeField] Sprite playerNotVisible;
@@ -13,24 +16,17 @@ public class VisibilityUI : MonoBehaviour
 
     private void Start()
     {
-        ChangeImage();
+       // playerIllumination;
+        //leftHand = PlayerIlluminationController.leftHand;
     }
 
-    
-    private void Update()
+    public void SetVisibleImage()
     {
-        ChangeImage();
+        visibilityImage.sprite = playerVisible;
     }
 
-    private void ChangeImage()
+    public void SetNotVisibleImage()
     {
-        if (visible)
-        {
-            visibilityImage.sprite = playerVisible;
-        }
-        else
-        {
-            visibilityImage.sprite = playerNotVisible;
-        }
+        visibilityImage.sprite = playerNotVisible;
     }
 }
