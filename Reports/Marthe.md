@@ -8,7 +8,7 @@
 |Reflection | 10 | 20 | 30 |
 
 |Description | My Weight |
-|----|----|----|----|
+|----|----|
 |Gameplay video | 10 |
 |Code video | 5 |
 |Good Code  | 20 |
