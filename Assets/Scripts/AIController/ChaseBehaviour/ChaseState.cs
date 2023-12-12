@@ -65,11 +65,16 @@ namespace AIController.ChaseBehaviour
                 // _grabbingPlayer = false;
                 _grabTimer += Time.deltaTime;
                 _player.transform.position = context.StateMachine.attackDetector.transform.position;
-                if (_grabTimer >= 2f)
+                if (_grabTimer >= 4f)
                 {
-                    _player.transform.position = Vector3.zero;
+                    var cage = context.StateMachine.cage;
+                    _player.transform.position = cage.GetPlayerTargetPosition();
                     _player.Freeze = false;
                     context.ratAnimator.SetBool(IsGrabbing, false);
+                    
+                    context.Agent.transform.position = cage.GetAITargetPosition();
+                    cage.ResetCage();
+                    
                     context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Patrolling));
                 }
             }
