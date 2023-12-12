@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 934115508408219569}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.689987, y: -0.26045322, z: 29.080433}
+  m_LocalPosition: {x: -24.689987, y: -1, z: 29.080433}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 1205825965242509890}
   - component: {fileID: 3248905548594852974}
   - component: {fileID: 4871980862598436867}
+  - component: {fileID: 702635517588773765}
   m_Layer: 0
   m_Name: PressurePlateVisual
   m_TagString: Untagged
@@ -132,6 +133,27 @@ MonoBehaviour:
   trigger: {fileID: 1927034834782583972}
   offset: {x: 0, y: -0.1, z: 0}
   closingTime: 0
+--- !u!65 &702635517588773765
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2250835199632388230}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2744787009583691241
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +181,7 @@ Transform:
   m_GameObject: {fileID: 2744787009583691241}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 0.6}
+  m_LocalPosition: {x: -5, y: 0.1, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -211,6 +233,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SymbolRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 7343639806381451391, guid: a44ee9f7aedba2d4ea0ee19e513fcf7d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7343639806381598859, guid: a44ee9f7aedba2d4ea0ee19e513fcf7d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7343639806381613989, guid: a44ee9f7aedba2d4ea0ee19e513fcf7d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7420265610473970056, guid: a44ee9f7aedba2d4ea0ee19e513fcf7d,
         type: 3}
