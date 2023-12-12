@@ -9138,6 +9138,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
+      propertyPath: gravity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
+        type: 3}
+      propertyPath: jumpSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
+        type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 619586354}
@@ -19835,6 +19845,21 @@ PrefabInstance:
     - target: {fileID: 5455746667610218589, guid: 5d1f24532983d244e95704c3dfcf3aa3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848028424977583706, guid: 5d1f24532983d244e95704c3dfcf3aa3,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848028424977583706, guid: 5d1f24532983d244e95704c3dfcf3aa3,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7037811894506593904, guid: 5d1f24532983d244e95704c3dfcf3aa3,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7134951714638214151, guid: 5d1f24532983d244e95704c3dfcf3aa3,
