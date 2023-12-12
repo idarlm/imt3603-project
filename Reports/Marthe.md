@@ -10,11 +10,11 @@
 |Description | My Weight |
 |----|----|
 |Gameplay video | 10 |
-|Code video | 5 |
+|Code video | 0 |
 |Good Code  | 20 |
 |Bad Code | 20 |
 |Development process | 20 |
-|Reflection | 25 |
+|Reflection | 30 |
 
 ## Video
 A **video** showing off the **code** that is tightinly integrated with the game engine that is difficult to see from the text of the programming.
