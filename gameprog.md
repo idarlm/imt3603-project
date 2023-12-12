@@ -28,7 +28,8 @@
 |3D Modelling| All | | | | 
 |Sound Design| | | | | 
 |Sound System| | | | | 
-|UI/Main menu/Loading screen| | | All | | 
+|UI| | Touched | All | | 
+|Main menu/Loading screen| | | All | | 
 
 #### Strengths and weaknesses with unity
 ##### Strengths:
