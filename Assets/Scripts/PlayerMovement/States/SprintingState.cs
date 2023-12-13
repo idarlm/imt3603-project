@@ -76,7 +76,8 @@ namespace PlayerMovement
 
             handler.Move(movement * Time.deltaTime);
 
-            context.Forward = context.HorizontalVelocity.normalized;
+            context.Forward = (context.HorizontalVelocity + targetVelocity).normalized;
+            //context.Forward = context.HorizontalVelocity.normalized;
 
             _jumpTimer -= Time.deltaTime;
         }

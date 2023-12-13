@@ -87,11 +87,18 @@ namespace PlayerMovement
             handler.Move(movement);
 
             // rotate direction of player model
-            context.Forward = Vector3.RotateTowards(
-                current: context.Forward, 
-                target: context.HorizontalVelocity.normalized, 
-                maxRadiansDelta: context.turnRate * Mathf.Deg2Rad * Time.deltaTime,
-                maxMagnitudeDelta: 0f);
+            var modelDir = context.HorizontalVelocity + targetDirection;
+            if(modelDir.sqrMagnitude > 1f) {
+                context.Forward = Vector3.RotateTowards(
+                    current: context.Forward, 
+                    target: modelDir.normalized, 
+                    maxRadiansDelta: context.turnRate * Mathf.Deg2Rad * Time.deltaTime,
+                    maxMagnitudeDelta: 0f);
+            } else {
+                // this was originally just hacky way to make the character stop faster
+                // but it worked quite well so it stays
+                handler.Move(Vector3.zero);
+            }
         }
 
         public override void HandleInput(PlayerMovementSystem context)
