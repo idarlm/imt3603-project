@@ -83,7 +83,7 @@ namespace PlayerMovement
             {
                 movement += Vector3.down;
             }
-
+            movement += Time.deltaTime * Time.deltaTime * context.gravity * Vector3.down;
             handler.Move(movement);
 
             // rotate direction of player model
