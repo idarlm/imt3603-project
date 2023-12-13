@@ -17,7 +17,7 @@
 |Reflection | 30 |
 
 ## Video
-A **video** showing off the **code** that is tightinly integrated with the game engine that is difficult to see from the text of the programming.
+A **video** showing off the **code** that is tightinly integrated with the game engine that is difficult to see from the text of the programming.<br>
 I have decided not to do a video, because i feel there is no specific Unity game engine functionalities we have used that is not somewhat visible through the code files.
 
 ## Good code
