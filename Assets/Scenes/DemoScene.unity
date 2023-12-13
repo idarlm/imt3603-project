@@ -3829,27 +3829,42 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 843968711}
     m_Modifications:
     - target: {fileID: 934115508408219569, guid: 4364e4f9820289141bd78a1c29a968d3,
         type: 3}
       propertyPath: m_Name
       value: PressurePlatePuzzleDone
       objectReference: {fileID: 0}
+    - target: {fileID: 4093205356051800626, guid: 4364e4f9820289141bd78a1c29a968d3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093205356051800626, guid: 4364e4f9820289141bd78a1c29a968d3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.347
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093205356051800626, guid: 4364e4f9820289141bd78a1c29a968d3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.92
+      objectReference: {fileID: 0}
     - target: {fileID: 5474851053306793292, guid: 4364e4f9820289141bd78a1c29a968d3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.95
+      value: 6.864648
       objectReference: {fileID: 0}
     - target: {fileID: 5474851053306793292, guid: 4364e4f9820289141bd78a1c29a968d3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.64
+      value: -5.59633
       objectReference: {fileID: 0}
     - target: {fileID: 5474851053306793292, guid: 4364e4f9820289141bd78a1c29a968d3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 53.34641
+      value: 24.52641
       objectReference: {fileID: 0}
     - target: {fileID: 5474851053306793292, guid: 4364e4f9820289141bd78a1c29a968d3,
         type: 3}
@@ -3859,17 +3874,17 @@ PrefabInstance:
     - target: {fileID: 5474851053306793292, guid: 4364e4f9820289141bd78a1c29a968d3,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5474851053306793292, guid: 4364e4f9820289141bd78a1c29a968d3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5474851053306793292, guid: 4364e4f9820289141bd78a1c29a968d3,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5474851053306793292, guid: 4364e4f9820289141bd78a1c29a968d3,
         type: 3}
@@ -3891,6 +3906,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4364e4f9820289141bd78a1c29a968d3, type: 3}
+--- !u!4 &231913292 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5474851053306793292, guid: 4364e4f9820289141bd78a1c29a968d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 231913291}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &243666663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12434,6 +12455,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1191122992}
+  - {fileID: 231913292}
   - {fileID: 1593495467}
   - {fileID: 75188977}
   - {fileID: 8143147415373415959}
@@ -34680,4 +34702,3 @@ SceneRoots:
   - {fileID: 506426025}
   - {fileID: 1348552674}
   - {fileID: 2096402170}
-  - {fileID: 231913291}
