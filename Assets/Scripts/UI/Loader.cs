@@ -1,29 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class Loader
 {
-
+    // Enum representing different scenes in the game
     public enum Scene
     {
         MainMenuScene,
-        DemoScene, //må byttes ut senere med level
+        DemoScene, //The actual gamelevel
         LoadingScene
     }
 
+
+    // Private static variable to store the target scene to load
     private static Scene targetScene;
 
+
+    /*
+     *  Function to initiate the loading of a specified scene
+     */
     public static void Load(Scene targetScene)
     {
+        // Set the target scene
         Loader.targetScene = targetScene;
-        SceneManager.LoadScene(Scene.LoadingScene.ToString());
-        
-    }
 
+        // Load the loading scene
+        SceneManager.LoadScene(Scene.LoadingScene.ToString());
+
+    }
+    
+    // Callback function called when the loading scene has finished loading
     public static void LoaderCallback()
     {
+        // Load the target scene
         SceneManager.LoadScene(targetScene.ToString());
     }
 }
