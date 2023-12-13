@@ -6,6 +6,7 @@ namespace PlayerMovement
     {
         private float _jumpTimer = 0;
         private bool _shouldJump = false;
+        private bool _canSprint = false;
 
         // Set possible state transitions when walking
         public override void HandleInput(PlayerMovementSystem context)
@@ -38,7 +39,7 @@ namespace PlayerMovement
             }
 
             // Sprinting
-            if (input.sprint)
+            if (input.sprint && _canSprint)
             {
                 context.ChangeState(new SprintingState());
             }
@@ -71,6 +72,9 @@ namespace PlayerMovement
             base.Update(context);
 
             _jumpTimer -= Time.deltaTime;
+
+            // only allow sprinting when we are walking at near max speed
+            _canSprint = context.HorizontalVelocity.magnitude > 0.9f * stanceSettings.speed;
         }
     }
 }
