@@ -356,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trigger: {fileID: 1927034834782583972}
   offset: {x: 0, y: 3, z: 0}
-  closingTime: 2
+  closingTime: 0
 --- !u!4 &7183052465602618594 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7420265610473970056, guid: a44ee9f7aedba2d4ea0ee19e513fcf7d,
