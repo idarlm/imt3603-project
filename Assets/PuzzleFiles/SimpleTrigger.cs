@@ -19,7 +19,7 @@ public class SimpleTrigger : PuzzleTrigger
             
         } 
     }
-
+    /*
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "Player") {
@@ -32,5 +32,5 @@ public class SimpleTrigger : PuzzleTrigger
             }
         }
     }
-
+    */
 }
