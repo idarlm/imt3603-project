@@ -18,15 +18,20 @@
 
 ## Video
 A **video** showing off the **code** that is tightinly integrated with the game engine that is difficult to see from the text of the programming.
+I have decided not to do a video, because i feel there is no specific Unity game engine functionalities we have used that is not somewhat visible through the code files.
+
+## Good code
+A link to, and discussion of, code you consider **good**.
+[Animation code](https://github.com/idarlm/imt3603-project/blob/e66721fe202b8c21dbed1a644c7376566f558405/Assets/PuzzleFiles/Animations/AnimateOnEvent.cs#L7-L34)
+I have implemented animation code to use on doors, walls, etc. to rotate and move. The code is implemented in a way to easily make new animations, for example shrink something. All that is needed is a new code that inherit the AnimationOnEvent class, and shrink the targeted object.
+
+The AnimateOnEvent class is an abstrach class, this means that the class is restricted and you can't create objects with it. To access it, it must be inherited. It's functionallity is to activate and deactivate animations through child classes. This is done with the "isActive" bool when triggers start and finishes. The two classes that inherit from AnimateOnEvent are RotateOnEvent and MoveOnEvent. "Link to rotate and move code".
+- Trigger group
+
 - Linking objects to puzzle files
 - Puzzle integration
 - Prefabs made from the other prefabs, easy to put inside the world
 
-## Good code
-A link to, and discussion of, code you consider **good**.
-- Animation code
-[Animation code](https://github.com/idarlm/imt3603-project/blob/e66721fe202b8c21dbed1a644c7376566f558405/Assets/PuzzleFiles/Animations/AnimateOnEvent.cs#L7-L34)
-- Trigger group
 
 ## Bad code
 A link to, and discussion of, code you consider **bad**.
