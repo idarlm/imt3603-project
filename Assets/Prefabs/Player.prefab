@@ -380,6 +380,7 @@ MonoBehaviour:
   jumpDelay: 0
   landingSpeedPenalty: 0.5
   sprintSpeed: 7
+  sprintTurnRate: 15
   turnRate: 360
   turnEventThreshold: 120
   standingSettings:
