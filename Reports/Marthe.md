@@ -1,12 +1,3 @@
-|Description | min | def | max |
-|----|----|----|----|
-|Gameplay video | 5 | 10 | 20 |
-|Code video | 0 | 10 | 15 |
-|Good Code  | 10 | 20 | 30 |
-|Bad Code | 10 | 20 | 30 |
-|Development process | 10 | 20 | 30 |
-|Reflection | 10 | 20 | 30 |
-
 |Description | My Weight |
 |----|----|
 |Gameplay video | 10 |
@@ -17,19 +8,19 @@
 |Reflection | 30 |
 
 ## Video
-A **video** showing off the **code** that is tightinly integrated with the game engine that is difficult to see from the text of the programming.<br>
 I have decided not to do a video, because i feel there is no specific Unity game engine functionalities we have used that is not somewhat visible through the code files.
 
 ## Good code
-A link to, and discussion of, code you consider **good**.<br>
-I have implemented animation code to use on doors, walls, etc. to rotate and move. The code is implemented in a way to easily make new animations, for example shrink something. All that is needed is a new code that inherit the AnimationOnEvent class, and shrink the targeted object by changing its scale using something like written below.
+I have implemented animation code to use on doors, walls, etc. to rotate and move. The code is implemented in a way that make it easier make new animations and have them activated on a fireTrigger. For example, to shrink something, all that is needed is a new code that inherit the AnimationOnEvent class, and shrink the targeted object by changing its scale using something like written below.
 ```cs
 transform.localScale += new Vector3(x, y, z);
 ```
+You would the connect the shrink script to the object you want to shrink, and in our case, we have an interaction script that fires a trigger when pressing E, that could be connected to a parent object.
 
-The AnimateOnEvent class is an abstract class, this means that the class is restricted and you can't create objects with it. To access it, it must be inherited. It's functionallity is to activate and deactivate animations through child classes. This is done with the "isActive" bool when triggers starts and finishes, as you can see in [this code](https://github.com/idarlm/imt3603-project/blob/e66721fe202b8c21dbed1a644c7376566f558405/Assets/PuzzleFiles/Animations/AnimateOnEvent.cs#L7-L34). The two classes that inherit from AnimateOnEvent are RotateOnEvent and MoveOnEvent. "Link to rotate and move code". 
-MoveOnEvent 
-MoveOnEvent originally used AnimateOnEvent's TriggerDeactivated function, when the trigger finished, but the trigger finish was removed because I didn't want it anymore.
+The AnimateOnEvent class is an abstract class, this means that the class is restricted and you can't create objects with it. To access it, it must be inherited. It's functionallity is to activate and deactivate animations through child classes. This is done with the "isActive" bool when triggers starts and finishes, as you can see in [this code](https://github.com/idarlm/imt3603-project/blob/e66721fe202b8c21dbed1a644c7376566f558405/Assets/PuzzleFiles/Animations/AnimateOnEvent.cs#L7-L34). In the update function, we continuously call the Animate function, where the function body is difined differently in each of the animation scripts. The two classes that inherit from AnimateOnEvent are RotateOnEvent and MoveOnEvent. The AnimationOnEvent class contains shared and reusable code that other scripts can inherit, instead of repeating code in all the scripts.
+
+MoveOnEvent is one of the classes that inherit the AnimateOnEvent class. I is a simple script that moves the object based on the input in a serializable field. A serializable field is a field that shows in the game engine, and takes input from there. This script originally listened to the "isActive" when "TriggerDeactivated" ran, but I removed the fireTriggerFinished in another script, because i changed my mind on an objects behaviour. So right now, the "TriggerDeactivated" funtion in AnimateOnEvent is not used, but it is integrated for easy use if we were to continue developing our game. You can see that the body of Animate in MoveOnEvent contains actions for when "isActive" is true, and also if it's not because of the previous functionality I had on the object. 
+
 - Trigger group
 
 - Linking objects to puzzle files
@@ -38,7 +29,6 @@ MoveOnEvent originally used AnimateOnEvent's TriggerDeactivated function, when t
 
 
 ## Bad code
-A link to, and discussion of, code you consider **bad**.
 - Keypad puzzle
   - Was originally created to to switch between different objects
     - Many gameobjects needed with this method, what would happend if we wanted a longer passcode and more symbols to choose between?
@@ -48,11 +38,11 @@ A link to, and discussion of, code you consider **bad**.
   - To improve it: Use rotation animation, and set a "right rotation" field and check if it matches. Would only need as many cubes as symbols we want in the passcode, a lot less resources.
 
 ## Reflection
-A personal **reflection** about the key concepts you learnt during the course.
 - Started without any knowledge<br>
 I started this course with no knowledge about game programming. I also had no previous experience with Unity or other game engines, so it took some time to learn how to use it and get into the logic of game programming.
 
 - Some people in the group had experience with Unity<br>
+
 In our group we had two people with no previous knowledge, including me, and two who already had some expirience with Unity and game programming. Because of this, we had set some high expectations for our game, but understood that some of us had to do more work than others because of our mixed knowledge. In the time we had to work with the game, I used a lot of time in the begining to try and understand what Unity was and how to use it.
 Consepts I learned about Unity was for example its itegrated input system for movement and interactions. However, this was not one of my taskt in the project. I also learned making game objects, serializable fields that's visible in Unity, making prefabs and adding materials to gameobjects. I would say my knowledge about Unity at the end of the projects is very limited still, because I used my time on what I specifically needed to know to do my own parts of the game. 
 
