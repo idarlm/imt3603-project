@@ -65,7 +65,7 @@ namespace PlayerMovement
             // acceleration
             var targetVelocity = input.joystick.x * context.CameraRight
                 + input.joystick.y * context.CameraForward;
-            targetVelocity = Vector3.RotateTowards(context.HorizontalVelocity.normalized, targetVelocity, Mathf.Deg2Rad * Time.deltaTime * context.turnRate, 0f) * context.sprintSpeed;
+            targetVelocity = Vector3.RotateTowards(context.HorizontalVelocity.normalized, targetVelocity, Mathf.Deg2Rad * context.sprintTurnRate, 0f) * context.sprintSpeed;
             var delta = targetVelocity - context.HorizontalVelocity;
 
             var movement = context.Velocity;

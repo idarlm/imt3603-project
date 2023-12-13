@@ -157,6 +157,11 @@ namespace PlayerMovement
         [Space(10)]
 
         [SerializeField] internal float sprintSpeed = 5f;
+        [SerializeField] internal float sprintTurnRate = 60f;
+
+        [Space(10)]
+
+        [InspectorName("modelTurnRate")] 
         [SerializeField] internal float turnRate = 180f;
         [SerializeField] internal float turnEventThreshold = 120f;
 
