@@ -21,7 +21,7 @@
 | | André | Idar | Thea | Marthe |
 |----|----|----|----|----|
 |Puzzle Logic| | Touched | Half | Half | 
-|Puzzle prefabs| | | | All |  
+|Puzzle prefabs & integration| | | | All |  
 |Player Movement & Rotation| | All | | | 
 |AI| All | | | | 
 |Camera system| All | | | | 
