@@ -6801,7 +6801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextWaypoint: {fileID: 905872276}
   previousWaypoint: {fileID: 1234463120}
-  isEndpoint: 1
+  isEndpoint: 0
 --- !u!23 &477292694
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7971,6 +7971,7 @@ GameObject:
   - component: {fileID: 587198947}
   - component: {fileID: 587198946}
   - component: {fileID: 587198945}
+  - component: {fileID: 587198948}
   m_Layer: 0
   m_Name: Terrain_(0.00, -100.00, -1000.00)
   m_TagString: Untagged
@@ -8052,6 +8053,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &587198948
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587198944}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &595327122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13452,7 +13469,7 @@ Transform:
   m_GameObject: {fileID: 905872274}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 82.4, y: -20.64, z: -31.43}
+  m_LocalPosition: {x: 40.65, y: -14.87, z: -31.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22608,7 +22625,7 @@ PrefabInstance:
     - target: {fileID: 3869765716043416592, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.499714
+      value: -25.25
       objectReference: {fileID: 0}
     - target: {fileID: 3869765716043416592, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}

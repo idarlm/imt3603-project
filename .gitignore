@@ -27,6 +27,9 @@
 .vs/
 .vsconfig
 
+# VS Code
+.vscode/
+
 # Jetbrains
 .idea/
 
