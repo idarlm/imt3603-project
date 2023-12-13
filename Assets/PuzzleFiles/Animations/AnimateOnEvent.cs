@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class AnimateOnEvent : MonoBehaviour 
 {
     public PuzzleTrigger trigger;
-    protected bool isActive = false;
+    protected bool isActive = false;    //variable used to determine behavior in animation scripts
     protected Vector3 startPos;
 
     protected virtual void Start() {
@@ -17,7 +17,7 @@ public abstract class AnimateOnEvent : MonoBehaviour
     }
 
     protected virtual void Update() {
-        Animate();
+        Animate();  //continuously 
     }
 
     void TriggerActivated(object obj, EventArgs args) {
