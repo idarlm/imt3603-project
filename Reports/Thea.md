@@ -10,6 +10,8 @@
 ## Good code
 What I define as good code: clean, easy to read, not over complicated, modular...
 
+- TriggerGroup -> all check
+
 - interactionTextUI
     - Lateupdate for the UI text
     - teksta følge kamera
