@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class VisibilityUI : MonoBehaviour
 {
     private static float stamina; // Variable representing how much stamina the player has
+    private static float _previousIllumination;
     private float illuminationSum; // Variable to sum the illumination of different body parts
     private PlayerIllumination playerIllumination; // Reference to the player's illumination data
     [SerializeField] PlayerIlluminationController playerIlluminationController; // Reference to the player's illumination controller
@@ -18,16 +19,21 @@ public class VisibilityUI : MonoBehaviour
 
         // Get the player's illumination data during each frame
         playerIllumination = playerIlluminationController.GetIllumination();
+        
 
         // Recalculate the sum of illumination from different body parts
         illuminationSum = (playerIllumination.LeftHandIllumination + playerIllumination.RightHandIllumination +
             playerIllumination.HeadIllumination + playerIllumination.ChestIllumination) / 0.5f;
+
+        
+        illuminationSum = Mathf.Lerp(_previousIllumination, illuminationSum, Time.deltaTime * 5f);
 
         // Adjust the alpha of the UI image based on the player's illumination level
         visibilityImage.color = visibilityImage.color.WithAlpha(illuminationSum);
 
         // Lerping the stamina bar based on the stamina timer
         staminaBar.value = Mathf.Lerp(0f, 1f, stamina);
+        _previousIllumination = illuminationSum;
     }
 
     /*
