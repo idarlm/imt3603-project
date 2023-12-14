@@ -87,8 +87,9 @@ namespace PlayerMovement
             handler.Move(movement);
 
             // rotate direction of player model
-            var modelDir = context.HorizontalVelocity + targetDirection;
-            if(modelDir.sqrMagnitude > 1f) {
+            //var modelDir = context.HorizontalVelocity + targetDirection;
+            var modelDir = Vector3.Slerp(targetDirection, context.HorizontalVelocity, context.CurrentSpeed / stanceSettings.speed);
+            if(modelDir.sqrMagnitude > 0.1f) {
                 context.Forward = Vector3.RotateTowards(
                     current: context.Forward, 
                     target: modelDir.normalized, 
