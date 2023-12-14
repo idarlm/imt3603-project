@@ -30,6 +30,7 @@
 |Sound System| | | | | 
 |UI| | Touched | All | | 
 |Main menu/Loading screen| | | All | | 
+|Save/Snapshot system| | All | | |
 
 #### Strengths and weaknesses with unity
 ##### Strengths:

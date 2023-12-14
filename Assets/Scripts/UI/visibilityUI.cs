@@ -16,15 +16,6 @@ public class VisibilityUI : MonoBehaviour
     private void Start()
     {
         staminaTimer = 1f; // Test variable initialization, 1 for full bar
-
-        /*
-        // Get the player's illumination at the start of the game
-        playerIllumination = playerIlluminationController.GetIllumination();
-
-        // Calculating the sum of the different illuminated bodyparts
-        illuminationSum = (playerIllumination.LeftHandIllumination + playerIllumination.RightHandIllumination +
-            playerIllumination.HeadIllumination + playerIllumination.ChestIllumination) / 0.5f;
-        */
     }
 
     private void Update()
