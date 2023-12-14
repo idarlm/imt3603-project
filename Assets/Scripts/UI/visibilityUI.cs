@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class VisibilityUI : MonoBehaviour
 {
-    private float staminaTimer; // Test variable representing a timer for stamina (temporary)
+    private static float stamina; // Variable representing how much stamina the player has
     private float illuminationSum; // Variable to sum the illumination of different body parts
     private PlayerIllumination playerIllumination; // Reference to the player's illumination data
     [SerializeField] PlayerIlluminationController playerIlluminationController; // Reference to the player's illumination controller
@@ -13,14 +13,8 @@ public class VisibilityUI : MonoBehaviour
     [SerializeField] Slider staminaBar; // UI slider representing stamina bar
 
 
-    private void Start()
-    {
-        staminaTimer = 1f; // Test variable initialization, 1 for full bar
-    }
-
     private void Update()
     {
-        staminaTimer -= 0.001f; // Test variable update to drain stamina bar
 
         // Get the player's illumination data during each frame
         playerIllumination = playerIlluminationController.GetIllumination();
@@ -33,6 +27,14 @@ public class VisibilityUI : MonoBehaviour
         visibilityImage.color = visibilityImage.color.WithAlpha(illuminationSum);
 
         // Lerping the stamina bar based on the stamina timer
-        staminaBar.value = Mathf.Lerp(0f, 1f, staminaTimer);
+        staminaBar.value = Mathf.Lerp(0f, 1f, stamina);
+    }
+
+    /*
+     *  Function for updating the staminaTimer
+     */
+    public static void StaminaTimer(float stamina)
+    {
+        VisibilityUI.stamina = stamina;
     }
 }
