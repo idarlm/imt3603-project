@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.XR;
 
 public class TriggerGroup : PuzzleTrigger
 {
@@ -14,17 +10,22 @@ public class TriggerGroup : PuzzleTrigger
 
     private void Start() {
 
+        // Going through all triggers and subscribing to an event
         foreach (var trigger in triggers) {
             trigger.Triggered += OnTriggered;
-            activated.Add(false);
+            activated.Add(false); // Filling the activated list with false for each trigger
         }
     }
 
     private void OnTriggered(object sender, EventArgs args) {
 
+        // Going through the triggers 
         for(var i=0; i < triggers.Length; i++) {
+
+            // Finding the triggered trigger
             if (triggers[i] == sender) {
-                Debug.Log("index = " + i);
+               
+                // Updating the activated bool for that trigger
                 if (!activated[i]) {
                     activated[i] = true;
                 } else {
@@ -34,13 +35,14 @@ public class TriggerGroup : PuzzleTrigger
             }
         }
 
+        // Checking if all the bools in the activated list is set to true
         if (activated.All(t => t)) {
             allActivated = true;
         }
 
+        // Firing an event if all are activated
         if (allActivated) {
             FireTriggered(this, EventArgs.Empty);
-            Debug.Log("TriggerGroup fired");
         }
     }
     
