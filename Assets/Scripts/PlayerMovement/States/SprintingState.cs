@@ -80,7 +80,7 @@ namespace PlayerMovement
             targetVelocity = Vector3.RotateTowards(context.HorizontalVelocity.normalized, targetVelocity, Mathf.Deg2Rad * context.sprintTurnRate, 0f) * context.sprintSpeed;
             var delta = targetVelocity - context.HorizontalVelocity;
 
-            var movement = context.Velocity;
+            var movement = context.HorizontalVelocity;
             movement += Time.deltaTime * 0.5f * stanceSettings.acceleration * delta;
 
             if(handler.ShouldStick)
