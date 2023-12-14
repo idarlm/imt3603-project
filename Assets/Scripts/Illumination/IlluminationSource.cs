@@ -16,6 +16,12 @@ namespace Illumination
             Activate();
         }
 
+        private void OnDestroy()
+        {
+            Deactivate();
+        }
+
+
         private float AttenuateSquare(float squareDistanceFromLight)
         {
             return (float)Math.Pow((_rangeSquared - squareDistanceFromLight) / _rangeSquared, 2);
@@ -23,28 +29,32 @@ namespace Illumination
 
         private void CalculateLimbIllumination(Vector3 limbPosition, HumanBodyBones limb)
         {
-            switch (_light.type)
+            if (_light != null)
             {
-                case LightType.Point:
+                switch (_light.type)
                 {
-                    IlluminationManager.Instance.AddIllumination(
-                        CalculatePointLightIllumination(limbPosition), 
-                        limb);
-                }
-                    break;
-                case LightType.Directional:
-                {
-                    IlluminationManager.Instance.AddIllumination(
-                        CalculateDirectionalIllumination(limbPosition), 
-                        limb);
-                }
-                    break;
-                default:
-                {
+                    case LightType.Point:
+                    {
+                        IlluminationManager.Instance.AddIllumination(
+                            CalculatePointLightIllumination(limbPosition), 
+                            limb);
+                    }
+                        break;
+                    case LightType.Directional:
+                    {
+                        IlluminationManager.Instance.AddIllumination(
+                            CalculateDirectionalIllumination(limbPosition), 
+                            limb);
+                    }
+                        break;
+                    default:
+                    {
                     
+                    }
+                        break;
                 }
-                    break;
             }
+            
             
         }
         
