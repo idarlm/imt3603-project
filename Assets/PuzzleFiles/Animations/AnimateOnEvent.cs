@@ -17,7 +17,7 @@ public abstract class AnimateOnEvent : MonoBehaviour
     }
 
     protected virtual void Update() {
-        Animate();  //continuously 
+        Animate();  //continuously run 
     }
 
     void TriggerActivated(object obj, EventArgs args) {
