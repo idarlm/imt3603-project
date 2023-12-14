@@ -24,6 +24,7 @@ MoveOnEvent is one of the classes that inherit the AnimateOnEvent class. I is a 
 - Trigger group
 Another smart script that me and my puzzle-partner in the group integrated were TriggerGroup. This script listenes for an event from several triggers, before it is allowed to fire an event itself. 
 - Linking objects to puzzle files
+- What is good code? Reusable (rotate on event + animate on event), Understandable.
 - Puzzle integration
 - Prefabs made from the other prefabs, easy to put inside the world
 
@@ -36,6 +37,7 @@ Another smart script that me and my puzzle-partner in the group integrated were 
   - Was later decided to use a cube that could rotate on interaction
   - Decided not to change the code because of time, and rather write about it in the report
   - To improve it: Use rotation animation, and set a "right rotation" field and check if it matches. Would only need as many cubes as symbols we want in the passcode, a lot less resources.
+  - What is bad code?
 
 ## Reflection
 - Started without any knowledge<br>
