@@ -158,6 +158,10 @@ namespace PlayerMovement
 
         [SerializeField] internal float sprintSpeed = 5f;
         [SerializeField] internal float sprintTurnRate = 60f;
+        [SerializeField] internal float stamina = 10f;
+        [Tooltip("How long to wait before stamina starts regenerating.")]
+        [SerializeField] internal float staminaCooldown = 3f;
+        internal float currentStamina, staminaRegenTime;
 
         [Space(10)]
 
@@ -231,7 +235,8 @@ namespace PlayerMovement
             // set up dependencies
             _handler = GetComponent<MovementHandler>();
             _stateMachine = new(new WalkingState());
-
+            
+            currentStamina = stamina;
             Forward = transform.forward;
         }
         
@@ -256,6 +261,9 @@ namespace PlayerMovement
 
             // Make sure state machine is not null
             _stateMachine ??= new(new WalkingState());
+
+            // Update stamina bar
+            VisibilityUI.StaminaTimer(currentStamina / stamina);
         }
         
         // Perform movement behaviour in sync with physics updates 
@@ -283,6 +291,12 @@ namespace PlayerMovement
             
             // clear input flags
             _inputValues.ClearFlags();
+
+            // regenerate stamina
+            if (_stateMachine.CurrentState.GetType() != typeof(SprintingState) && Time.time > staminaRegenTime) {
+                currentStamina += Time.deltaTime;
+                currentStamina = Mathf.Clamp(currentStamina, 0f, stamina);
+            }
         }
 
         /// <summary>
