@@ -1,6 +1,4 @@
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace PlayerMovement
 {
@@ -13,6 +11,12 @@ namespace PlayerMovement
         {
             base.Enter(context);
             stanceSettings.speed = context.sprintSpeed;
+        }
+
+        public override void Exit(PlayerMovementSystem context)
+        {
+            base.Exit(context);
+            context.staminaRegenTime = Time.time + context.staminaCooldown;
         }
 
         internal override void OnStanceChanged(object sender, PlayerMovementEventArgs args)
@@ -38,14 +42,22 @@ namespace PlayerMovement
                 _jumpTimer = context.jumpDelay;
 
                 context.FireEvent(PlayerMovementEvent.PrepareJump);
+                return;
             }
 
-            if (_shouldJump && _jumpTimer <= 0)
+            if (_shouldJump && _jumpTimer <= 0f)
             {
                 input.jump = true;
                 context.Input = input;
 
                 context.ChangeState(new PlayerFallingState());
+                return;
+            }
+
+            if (context.currentStamina <= 0f)
+            {
+                context.ChangeState(new WalkingState());
+                return;
             }
         }
 
@@ -80,6 +92,7 @@ namespace PlayerMovement
             //context.Forward = context.HorizontalVelocity.normalized;
 
             _jumpTimer -= Time.deltaTime;
+            context.currentStamina -= Time.deltaTime;
         }
 
     }

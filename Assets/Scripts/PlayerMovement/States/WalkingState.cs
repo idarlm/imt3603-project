@@ -74,7 +74,7 @@ namespace PlayerMovement
             _jumpTimer -= Time.deltaTime;
 
             // only allow sprinting when we are walking at near max speed
-            _canSprint = context.HorizontalVelocity.magnitude > 0.9f * stanceSettings.speed;
+            _canSprint = context.HorizontalVelocity.magnitude > 0.9f * stanceSettings.speed && context.currentStamina > 0f;
         }
     }
 }
