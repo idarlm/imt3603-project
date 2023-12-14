@@ -6,31 +6,18 @@ public class SimpleTrigger : PuzzleTrigger
 
     private bool isTriggered = false;
 
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter(Collider other) {
+
+        // On entering a box collider, check if collider is player
         if (other.gameObject.name == "Player") 
         {
-            if (!isTriggered)
+            if (!isTriggered)   //if box collider is not already triggered, fire an event and set isTriggered to true
             {
                 FireTriggered(this, EventArgs.Empty);
-                Debug.Log("SimpleTrigger fired");
                 isTriggered = true;
             } 
             
         } 
     }
-    /*
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.name == "Player") {
-
-            if (isTriggered)
-            {
-                FireTriggeredFinished(this, EventArgs.Empty);
-                Debug.Log("SimpleTrigger done firing");
-                isTriggered = false;
-            }
-        }
-    }
-    */
+   
 }

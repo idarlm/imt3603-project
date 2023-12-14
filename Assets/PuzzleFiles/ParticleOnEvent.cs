@@ -8,6 +8,9 @@ public class ParticleOnEvent : PuzzleTrigger {
     public ParticleSystem ps;
     public PuzzleTrigger trigger;
 
+    /*
+     * Function to disable and enable particle emission
+     */
     private void Start() {
         trigger.Triggered += ChangeParticle;
     }
