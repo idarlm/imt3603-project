@@ -19,14 +19,10 @@ public class ParticleOnEvent : PuzzleTrigger {
 
         ParticleSystem.EmissionModule em = ps.emission;
 
-        if (!em.enabled) {
-            em.enabled = true;
-            FireTriggered(this, EventArgs.Empty);
-            Debug.Log("ChangeParticle fired");
+        if (!em.enabled) {  //check if emission is disabled
+            em.enabled = true;  //enable emission
         } else {
-            em.enabled = false;
-            FireTriggeredFinished(this, EventArgs.Empty);
-            Debug.Log("ChangeParticle fired");
+            em.enabled = false; //disable emission
         }
 
     }
