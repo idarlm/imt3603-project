@@ -13,6 +13,9 @@ public class LeverListener : MonoBehaviour
     }
 
 
+    /*
+     *  Function to activate the object
+     */
     void ActivateLever(object obj, EventArgs args) {
         transform.GetChild(0).gameObject.SetActive(true);
     }

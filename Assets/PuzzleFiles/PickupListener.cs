@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class PickupListener : PuzzleTrigger
 {
@@ -12,14 +9,14 @@ public class PickupListener : PuzzleTrigger
     }
 
 
+    /*
+     *  Function for disabling object after interacting with it to simulate picking it up
+     */
     void PickupObject(object obj, EventArgs args) {
-
-        Debug.Log(gameObject.name);
 
         transform.gameObject.SetActive(false);
 
         FireTriggered(this, EventArgs.Empty);
-        Debug.Log("PickupListener fired");
 
     }
 }
