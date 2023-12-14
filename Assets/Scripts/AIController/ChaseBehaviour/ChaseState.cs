@@ -1,3 +1,5 @@
+using FX;
+using FX.Effects;
 using PlayerMovement;
 using StateMachine;
 using Unity.VisualScripting;
@@ -27,6 +29,7 @@ namespace AIController.ChaseBehaviour
         {
             if (_attackTimer > 0f)
             {
+                PostProcessingQue.Instance.QueEffect(new FadeToColor(Color.black, 4f));
                 player.Freeze = true;
                 _player = player;
                 _grabbingPlayer = true;
@@ -35,6 +38,8 @@ namespace AIController.ChaseBehaviour
         
         public override void Enter(AIContext context)
         {
+            PostProcessingQue.Instance.QueEffect(new Fear(5));
+            
             context.StateMachine.IKController.SetLookAtTarget(context.LastKnownTargetPosition);
             context.StateMachine.IKController.EnableLookAt();
             context.Agent.speed = context.runSpeed;
@@ -76,6 +81,7 @@ namespace AIController.ChaseBehaviour
                     cage.ResetCage();
                     
                     context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Patrolling));
+                    PostProcessingQue.Instance.QueEffect(new FadeToColor(Color.white, 4f));
                 }
             }
             else
