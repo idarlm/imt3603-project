@@ -20,13 +20,13 @@ namespace AIController.IdleBehaviour
         {
             
             context.StateMachine.IKController.DisableLookAt();
-            context.ratAnimator.SetBool(IsDebugging, true);
+            context.RatAnimator.SetBool(IsDebugging, true);
             context.Agent.isStopped = true;
         }
 
         public override void Exit(AIContext context)
         {
-            context.ratAnimator.SetBool(IsDebugging, false);
+            context.RatAnimator.SetBool(IsDebugging, false);
         }
         
         

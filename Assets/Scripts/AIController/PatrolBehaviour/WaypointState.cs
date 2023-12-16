@@ -18,15 +18,15 @@ namespace AIController.PatrolBehaviour
         public override void Enter(AIContext context)
         {
             _squareSwapDistance = _swapDistance * _swapDistance;
-            context.Agent.speed = context.walkSpeed;
+            context.Agent.speed = context.WalkSpeed;
             context.Agent.destination = 
-                context.TargetWaypoint ? context.TargetWaypoint.GetPosition() : context.startPosition;
-            context.ratAnimator.SetBool(IsPatrolling, true);
+                context.TargetWaypoint ? context.TargetWaypoint.GetPosition() : context.StartPosition;
+            context.RatAnimator.SetBool(IsPatrolling, true);
         }
 
         public override void Exit(AIContext context)
         {
-            context.ratAnimator.SetBool(IsPatrolling, false);
+            context.RatAnimator.SetBool(IsPatrolling, false);
         }
 
         public override void HandleInput(AIContext context)
@@ -36,7 +36,7 @@ namespace AIController.PatrolBehaviour
         
         public override float GetSpeedPercentage(AIContext context)
         {
-            return context.Agent.velocity.magnitude / context.walkSpeed;
+            return context.Agent.velocity.magnitude / context.WalkSpeed;
         }
 
 
@@ -48,10 +48,10 @@ namespace AIController.PatrolBehaviour
         
         public override void Update(AIContext context)
         {
-            context.ratAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
+            context.RatAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
             if (context.TargetWaypoint)
             {
-                context.ratAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
+                context.RatAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
                 if (IsCloseToPlayer(context, 30.0f) && CanLocatePlayer(context) )
                 {
                     var idle = new AIController.IdleBehaviour.IdleState();
@@ -65,10 +65,10 @@ namespace AIController.PatrolBehaviour
                         var oldWaypoint = context.TargetWaypoint;
                         if (context.TargetWaypoint.isEndpoint)
                         {
-                            context._reverseOrder = !context._reverseOrder;
+                            context.ReverseOrder = !context.ReverseOrder;
                         }
                         context.TargetWaypoint = 
-                            !context._reverseOrder ? context.TargetWaypoint.GetNext() : context.TargetWaypoint.GetPrevious();
+                            !context.ReverseOrder ? context.TargetWaypoint.GetNext() : context.TargetWaypoint.GetPrevious();
                         context.Agent.destination = context.TargetWaypoint.GetPosition();
                         if (oldWaypoint.isEndpoint)
                         {
@@ -81,7 +81,7 @@ namespace AIController.PatrolBehaviour
             }
             else
             {
-                if (Vector3.ProjectOnPlane(context.startPosition - context.Agent.transform.position, Vector3.up).sqrMagnitude < 1f)
+                if (Vector3.ProjectOnPlane(context.StartPosition - context.Agent.transform.position, Vector3.up).sqrMagnitude < 1f)
                 {
                     context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Idle));
                 }

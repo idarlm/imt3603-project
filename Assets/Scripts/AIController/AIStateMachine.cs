@@ -1,4 +1,5 @@
 ﻿using System;
+using AIController.Settings;
 using Illumination;
 using Pathing;
 using PlayerMovement;
@@ -16,49 +17,48 @@ namespace AIController
 {
     public class AIStateMachine : StateMachineMono<AIContext>
     {
-        [SerializeField] private AIStateLabel currentStateSerialized;
+        [SerializeField] private AIStateLabel startState;
+        [SerializeField] private Waypoint entryWaypoint;
+        [SerializeField] private Animator ratAnimator;
+        [SerializeField] public Cage cage;
+
         private IState<AIContext> _currentState;
         private AIContext _context = new AIContext();
-        [SerializeField] private Waypoint entryWaypoint;
-        [SerializeField] private Transform target;
-        [SerializeField] private Animator playerAnimator;
-        [SerializeField] private Animator ratAnimator;
-        [SerializeField] private float walkSpeed = 3.0f;
-        [SerializeField] private float runSpeed = 6.0f;
+        
         public AttackDetector attackDetector;
         public Transform visionTransform;
         public RatIKController IKController;
-        [FormerlySerializedAs("FOV")] public float horizontalFOV;
-        public float verticalFOV;
-        [SerializeField] public Cage cage;
-        [SerializeField] public PlayerMovementSystem playerMovementSystem;
-        [SerializeField] public float motionDetectionBonus = 20f;
         
         private void Start()
         {
+            // Randomizes sound playback start position to avoid phase issues
             var sound = GetComponent<AudioSource>();
             sound.time = Random.Range(0, sound.clip.length);
+            
             _context = new AIContext
             {
+                MotionDetectionBonus = AISettingsManager.Instance.PlayerMovementDetectionBonus,
                 PlayerIllumination = IlluminationManager.Instance,
-                PlayerAnimator = playerAnimator,
+                PlayerMovement = AISettingsManager.Instance.Player,
+                PlayerAnimator = AISettingsManager.Instance.PlayerAnimator,
                 StateMachine = this,
                 TargetWaypoint = entryWaypoint,
                 Agent = GetComponent<NavMeshAgent>(),
-                Target = target.transform,
+                Target = AISettingsManager.Instance.Player.transform,
                 Alertness = 3.0f,
-                ratAnimator = ratAnimator,
-                walkSpeed =  walkSpeed,
-                runSpeed = runSpeed,
-                startPosition = transform.position
+                RatAnimator = ratAnimator,
+                WalkSpeed =  AISettingsManager.Instance.WalkSpeed,
+                RunSpeed = AISettingsManager.Instance.RunSpeed,
+                StartPosition = transform.position
             };
-            ChangeState(StateFactory.CreateState(currentStateSerialized));
+            
+            ChangeState(StateFactory.CreateState(startState));
         }
 
         public void ChangeState(AIState nextState)
         {
             base.ChangeState(nextState);
-            currentStateSerialized = nextState.GetLabel();
+            startState = nextState.GetLabel();
         }
 
         private void Update()
@@ -68,35 +68,40 @@ namespace AIController
 
         private void OnDrawGizmos()
         {
-            Handles.Label(visionTransform.position + Vector3.up, currentStateSerialized.ToString());
-            Handles.Label((visionTransform.position + (Vector3.up * 1.5f)), _context.stimuli.ToString());
+            var position = visionTransform.position;
+            Handles.Label(position + Vector3.up, startState.ToString());
+            Handles.Label(position + Vector3.up * 1.5f, _context.Stimuli.ToString());
         }
 
         private void OnDrawGizmosSelected()
         {
-            if (this.entryWaypoint != null)
+            if (entryWaypoint != null)
             {
+                var waypointPosition = entryWaypoint.transform.position;
                 Gizmos.color = Color.cyan;
-                Gizmos.DrawLine(transform.position, entryWaypoint.transform.position);
-                Gizmos.DrawWireSphere(entryWaypoint.transform.position, 1f);
+                Gizmos.DrawLine(transform.position, waypointPosition);
+                Gizmos.DrawWireSphere(waypointPosition, 1f);
             }
             
-            if (this.cage != null)
+            if (cage != null)
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(transform.position, cage.GetAITargetPosition());
                 Gizmos.DrawWireSphere(cage.GetAITargetPosition(), 1f);
             }
+            var position = visionTransform.position;
+            var up = visionTransform.up;
+            var forward = visionTransform.forward;
+            var right = visionTransform.right;
+            Handles.DrawWireArc(position, up, forward, _context.HorizontalFOV/2, 5);
+            Handles.DrawWireArc(position, up, forward, -_context.HorizontalFOV/2, 5);
+            Handles.DrawLine(position, position +  Quaternion.AngleAxis(_context.HorizontalFOV/2, up) * forward * 5);
+            Handles.DrawLine(position, position +  Quaternion.AngleAxis(-_context.HorizontalFOV/2, up) * forward * 5);
             
-            Handles.DrawWireArc(visionTransform.position, visionTransform.up, visionTransform.forward, horizontalFOV/2, 5);
-            Handles.DrawWireArc(visionTransform.position, visionTransform.up, visionTransform.forward, -horizontalFOV/2, 5);
-            Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(horizontalFOV/2, visionTransform.up) * visionTransform.forward * 5);
-            Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(-horizontalFOV/2, visionTransform.up) * visionTransform.forward * 5);
-            
-            Handles.DrawWireArc(visionTransform.position, visionTransform.right, visionTransform.forward, verticalFOV/2, 5);
-            Handles.DrawWireArc(visionTransform.position, visionTransform.right, visionTransform.forward, -verticalFOV/2, 5);
-            Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(verticalFOV/2, visionTransform.right) * visionTransform.forward * 5);
-            Handles.DrawLine(visionTransform.position, visionTransform.position +  Quaternion.AngleAxis(-verticalFOV/2, visionTransform.right) * visionTransform.forward * 5);
+            Handles.DrawWireArc(position, right, forward, _context.VerticalFOV/2, 5);
+            Handles.DrawWireArc(position, right, forward, -_context.VerticalFOV/2, 5);
+            Handles.DrawLine(position, position +  Quaternion.AngleAxis(_context.VerticalFOV/2, right) * forward * 5);
+            Handles.DrawLine(position, position +  Quaternion.AngleAxis(-_context.VerticalFOV/2, right) * forward * 5);
             
             
         }

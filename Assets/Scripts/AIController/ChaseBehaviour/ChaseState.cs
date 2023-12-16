@@ -42,9 +42,9 @@ namespace AIController.ChaseBehaviour
             
             context.StateMachine.IKController.SetLookAtTarget(context.LastKnownTargetPosition);
             context.StateMachine.IKController.EnableLookAt();
-            context.Agent.speed = context.runSpeed;
+            context.Agent.speed = context.RunSpeed;
             context.Agent.destination = context.Target.position;
-            context.ratAnimator.SetBool(IsChasing, true);
+            context.RatAnimator.SetBool(IsChasing, true);
 
             context.StateMachine.attackDetector.OnPlayerOverlap += DetectGrab;
         }
@@ -52,21 +52,21 @@ namespace AIController.ChaseBehaviour
         public override void Exit(AIContext context)
         {
             context.StateMachine.IKController.DisableLookAt();
-            context.ratAnimator.SetBool(IsChasing, false);
+            context.RatAnimator.SetBool(IsChasing, false);
             context.StateMachine.attackDetector.OnPlayerOverlap -= DetectGrab;
             context.Agent.isStopped = false;
         }
 
         public override float GetSpeedPercentage(AIContext context)
         {
-            return context.Agent.velocity.magnitude / context.runSpeed;
+            return context.Agent.velocity.magnitude / context.RunSpeed;
         }
 
         public override void Update(AIContext context)
         {
             if (_grabbingPlayer)
             {
-                context.ratAnimator.SetBool(IsGrabbing, true);
+                context.RatAnimator.SetBool(IsGrabbing, true);
                 // _grabbingPlayer = false;
                 _grabTimer += Time.deltaTime;
                 _player.transform.position = context.StateMachine.attackDetector.transform.position;
@@ -75,7 +75,7 @@ namespace AIController.ChaseBehaviour
                     var cage = context.StateMachine.cage;
                     _player.transform.position = cage.GetPlayerTargetPosition();
                     _player.Freeze = false;
-                    context.ratAnimator.SetBool(IsGrabbing, false);
+                    context.RatAnimator.SetBool(IsGrabbing, false);
                     
                     context.Agent.transform.position = cage.GetAITargetPosition();
                     cage.ResetCage();
@@ -86,26 +86,26 @@ namespace AIController.ChaseBehaviour
             }
             else
             {
-                context.ratAnimator.SetBool(IsGrabbing, false);
+                context.RatAnimator.SetBool(IsGrabbing, false);
                 context.StateMachine.IKController.SetLookAtTarget(context.Target.position);
-                context.ratAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
+                context.RatAnimator.SetFloat(MovementPercentage, GetSpeedPercentage(context));
                 
                 if (CanLocatePlayer(context))
                 {
                     context.StateMachine.IKController.EnableLookAt();
                     context.Agent.destination = context.Target.position;
                     context.TimeSincePlayerSeen = 0.0f;
-                    if (IsCloseToPlayer(context, 3f) && !context.ratAnimator.GetBool(IsAttacking))
+                    if (IsCloseToPlayer(context, 3f) && !context.RatAnimator.GetBool(IsAttacking))
                     {
-                        context.ratAnimator.SetBool(IsAttacking, true);
+                        context.RatAnimator.SetBool(IsAttacking, true);
                         context.Agent.isStopped = true;
                         _attackTimer = 2.0f;
                     }
-                    context.ratAnimator.SetBool(LostSightOfPlayer, false);
+                    context.RatAnimator.SetBool(LostSightOfPlayer, false);
                 }
                 else
                 {
-                    context.ratAnimator.SetBool(LostSightOfPlayer, true);
+                    context.RatAnimator.SetBool(LostSightOfPlayer, true);
                     context.TimeSincePlayerSeen += Time.deltaTime;
                     // context.StateMachine.IKController.DisableLookAt();
                 }
@@ -116,8 +116,8 @@ namespace AIController.ChaseBehaviour
                 _attackTimer -= Time.deltaTime;
                 if (_attackTimer < 0f)
                 {
-                    context.ratAnimator.SetBool(IsAttacking, false);
-                    context.ratAnimator.SetBool(IsGrabbing, false);
+                    context.RatAnimator.SetBool(IsAttacking, false);
+                    context.RatAnimator.SetBool(IsGrabbing, false);
                     context.Agent.isStopped = false;
                 }
                 else

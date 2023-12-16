@@ -58,17 +58,17 @@ namespace AIController
         /// <returns></returns>
         protected bool CanLocatePlayer(AIContext context)
         {
-            context.stimuli = 0;
+            context.Stimuli = 0;
             
             CanSeeLimb(context, HumanBodyBones.Head);
             CanSeeLimb(context, HumanBodyBones.Chest);
             CanSeeLimb(context, HumanBodyBones.LeftHand);
             CanSeeLimb(context, HumanBodyBones.RightHand);
-            var movementBonus = context.StateMachine.motionDetectionBonus * 
-                                context.StateMachine.playerMovementSystem.CurrentSpeed /
-                                  context.StateMachine.playerMovementSystem.standingSettings.speed;
-            context.stimuli *= Mathf.Max(movementBonus, 1);
-            return context.stimuli > 0.5;
+            var movementBonus = context.MotionDetectionBonus * 
+                                context.PlayerMovement.CurrentSpeed /
+                                  context.PlayerMovement.standingSettings.speed;
+            context.Stimuli *= Mathf.Max(movementBonus, 1);
+            return context.Stimuli > 0.5;
         }
 
         
@@ -108,14 +108,14 @@ namespace AIController
             attenuatedStimuli = OcularSimulator.AttenuateByFOV(
                 context.StateMachine.visionTransform, 
                 (limbPosition - observationPosition), 
-                context.StateMachine.horizontalFOV, 
+                context.HorizontalFOV, 
                 attenuatedStimuli
                 );
             var canSeeLimb = (limbPosition - observationPosition).magnitude - playerRay.distance < 0.55;
             Debug.DrawLine(observationPosition, limbPosition, Color.white * (attenuatedStimuli / context.Alertness));
             if(canSeeLimb)
             {
-                context.stimuli += attenuatedStimuli;
+                context.Stimuli += attenuatedStimuli;
             }
         
             return canSeeLimb;

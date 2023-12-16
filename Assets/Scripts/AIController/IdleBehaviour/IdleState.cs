@@ -21,14 +21,14 @@ namespace AIController.IdleBehaviour
         {
             context.StateMachine.IKController.SetLookAtTarget(context.Target);
             context.StateMachine.IKController.DisableLookAt();
-            context.ratAnimator.SetBool(IsIdle, true);
+            context.RatAnimator.SetBool(IsIdle, true);
             context.Agent.isStopped = true;
         }
 
         public override void Exit(AIContext context)
         {
             context.StateMachine.IKController.DisableLookAt();
-            context.ratAnimator.SetBool(IsIdle, false);
+            context.RatAnimator.SetBool(IsIdle, false);
             context.Agent.isStopped = false;
         }
         
@@ -63,11 +63,11 @@ namespace AIController.IdleBehaviour
 
             if (PlayerIsBehind(context, 5f))
             {
-                context.ratAnimator.SetBool(IsBehind, true);
+                context.RatAnimator.SetBool(IsBehind, true);
             }
             else
             {
-                context.ratAnimator.SetBool(IsBehind, false);
+                context.RatAnimator.SetBool(IsBehind, false);
             }
             
             if (_temporary)
