@@ -1,6 +1,7 @@
 ﻿using System;
 using Illumination;
 using Pathing;
+using PlayerMovement;
 using StateMachine;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -30,6 +31,8 @@ namespace AIController
         [FormerlySerializedAs("FOV")] public float horizontalFOV;
         public float verticalFOV;
         [SerializeField] public Cage cage;
+        [SerializeField] public PlayerMovementSystem playerMovementSystem;
+        [SerializeField] public float motionDetectionBonus = 20f;
         
         private void Start()
         {

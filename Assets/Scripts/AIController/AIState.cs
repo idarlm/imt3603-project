@@ -1,4 +1,5 @@
-﻿using Illumination;
+﻿using System;
+using Illumination;
 using StateMachine;
 using UnityEngine;
 
@@ -58,10 +59,15 @@ namespace AIController
         protected bool CanLocatePlayer(AIContext context)
         {
             context.stimuli = 0;
+            
             CanSeeLimb(context, HumanBodyBones.Head);
             CanSeeLimb(context, HumanBodyBones.Chest);
             CanSeeLimb(context, HumanBodyBones.LeftHand);
             CanSeeLimb(context, HumanBodyBones.RightHand);
+            var movementBonus = context.StateMachine.motionDetectionBonus * 
+                                context.StateMachine.playerMovementSystem.CurrentSpeed /
+                                  context.StateMachine.playerMovementSystem.standingSettings.speed;
+            context.stimuli *= Mathf.Max(movementBonus, 1);
             return context.stimuli > 0.5;
         }
 

@@ -37,12 +37,8 @@ namespace AIController.IdleBehaviour
         
         public override void Update(AIContext context)
         {
-            context.stimuli = 0;
-            CanSeeLimb(context,HumanBodyBones.LeftHand);
-            CanSeeLimb(context,HumanBodyBones.RightHand);
-            CanSeeLimb(context,HumanBodyBones.Head);
-            CanSeeLimb(context,HumanBodyBones.Chest);
-            
+            CanLocatePlayer(context);
+
         }
     }
 }

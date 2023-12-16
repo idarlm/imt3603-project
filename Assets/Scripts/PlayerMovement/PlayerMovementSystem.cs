@@ -172,7 +172,7 @@ namespace PlayerMovement
         [Space(10)]
 
         [Tooltip("StanceSettings to be used when the player is standing.")]
-        [SerializeField] private StanceSettings standingSettings;
+        [SerializeField] internal StanceSettings standingSettings;
         [Tooltip("StanceSettings to be used when the player is crouching.")]
         [SerializeField] private StanceSettings crouchingSettings;
 

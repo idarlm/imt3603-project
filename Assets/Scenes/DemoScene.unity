@@ -2371,6 +2371,16 @@ PrefabInstance:
       objectReference: {fileID: 1118593071}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
+      propertyPath: motionDetectionBonus
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: playerMovementSystem
+      value: 
+      objectReference: {fileID: 1545942325}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
       propertyPath: currentStateSerialized
       value: 3
       objectReference: {fileID: 0}
@@ -2670,6 +2680,16 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 1118593071}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: motionDetectionBonus
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: playerMovementSystem
+      value: 
+      objectReference: {fileID: 1545942325}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
       propertyPath: currentStateSerialized
@@ -16654,6 +16674,16 @@ PrefabInstance:
       objectReference: {fileID: 1118593071}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
+      propertyPath: motionDetectionBonus
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: playerMovementSystem
+      value: 
+      objectReference: {fileID: 1545942325}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
       propertyPath: currentStateSerialized
       value: 2
       objectReference: {fileID: 0}
@@ -27159,6 +27189,11 @@ PrefabInstance:
       objectReference: {fileID: 1118593071}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
+      propertyPath: motionDetectionBonus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
       propertyPath: currentStateSerialized
       value: 2
       objectReference: {fileID: 0}
@@ -27551,7 +27586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionalRayCastDistance: 100
-  directionalIntensity: 1
+  directionalIntensity: 2
 --- !u!1 &615000231
 GameObject:
   m_ObjectHideFlags: 0
@@ -28556,6 +28591,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
+      propertyPath: sprintSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
+        type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 619586354}
@@ -28602,17 +28642,17 @@ PrefabInstance:
     - target: {fileID: 5277396822397759764, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.52
+      value: 18.31942
       objectReference: {fileID: 0}
     - target: {fileID: 5277396822397759764, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14.05
+      value: -18.182158
       objectReference: {fileID: 0}
     - target: {fileID: 5277396822397759764, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -35.21
+      value: -38.230183
       objectReference: {fileID: 0}
     - target: {fileID: 5277396822397759764, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
         type: 3}
@@ -32859,6 +32899,16 @@ PrefabInstance:
       objectReference: {fileID: 1118593071}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
+      propertyPath: motionDetectionBonus
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: playerMovementSystem
+      value: 
+      objectReference: {fileID: 1545942325}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
       propertyPath: currentStateSerialized
       value: 1
       objectReference: {fileID: 0}
@@ -35114,6 +35164,16 @@ PrefabInstance:
       objectReference: {fileID: 1118593071}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
+      propertyPath: motionDetectionBonus
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: playerMovementSystem
+      value: 
+      objectReference: {fileID: 1545942325}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
       propertyPath: currentStateSerialized
       value: 1
       objectReference: {fileID: 0}
@@ -36213,6 +36273,11 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 1118593071}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: playerMovementSystem
+      value: 
+      objectReference: {fileID: 1545942325}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
       propertyPath: currentStateSerialized
@@ -37348,6 +37413,16 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 1118593071}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: motionDetectionBonus
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: playerMovementSystem
+      value: 
+      objectReference: {fileID: 1545942325}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
       propertyPath: currentStateSerialized
@@ -58328,6 +58403,16 @@ PrefabInstance:
       objectReference: {fileID: 1118593071}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
+      propertyPath: motionDetectionBonus
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: playerMovementSystem
+      value: 
+      objectReference: {fileID: 1545942325}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
       propertyPath: currentStateSerialized
       value: 2
       objectReference: {fileID: 0}
@@ -61101,6 +61186,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 489a58b183e88234d9ec08d739a947b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1545942325 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 642060533905121347, guid: 85bdfaf5606742b41bc5cbd34a988e5a,
+    type: 3}
+  m_PrefabInstance: {fileID: 636489836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191229167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3d2491ac1f32440aceebad67de8119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1546451238 stripped
@@ -66229,6 +66326,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
+      propertyPath: cage
+      value: 
+      objectReference: {fileID: 208242924}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1545942311}
@@ -66247,6 +66349,11 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 1118593071}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: playerMovementSystem
+      value: 
+      objectReference: {fileID: 1545942325}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
       propertyPath: currentStateSerialized
