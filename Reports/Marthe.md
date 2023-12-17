@@ -33,20 +33,27 @@ Another smart script that me and my puzzle-partner in the group integrated were 
 
 ## Bad code
 - Keypad puzzle
-  - Was originally created to to switch between different objects
+  - Was originally created to to switch between four different objects.
     - Many gameobjects needed with this method, what would happend if we wanted a longer passcode and more symbols to choose between?
-    - Hard to keep track of many gameobjects, and what objesct is the right one
-  - Was later decided to use a cube that could rotate on interaction
-  - Decided not to change the code because of time, and rather write about it in the report
-  - To improve it: Use rotation animation, and set a "right rotation" field and check if it matches. Would only need as many cubes as symbols we want in the passcode, a lot less resources.
-  - What is bad code?
+    - Hard to keep track of many gameobjects, and what object is the right one.
+  - Was later decided to use a cube that could rotate on interaction to display up to six different symbols.
+  - Decided not to change the code because of lack of time, and rather write about it in the report.
+  - To improve it: Use already existing rotation animation script, and set a "right rotation" field and check if it matches. Would only need as many cubes as symbols we want in the passcode, a lot less resources.
  
 Some of the code that me and another group member wrote that I think was bad was the code for the Keypad puzzle, where you need to interact with a cube to set in the right number sequence to open the castle door. Not only is the code badly implemented, but the puzzle idea as well. 
-We originally planned a puzzle that had three spots for one out of four different symbols. I admit we didn't think all to well through the implementation of this, and relised all too late that we could have done it much easier and better. 
-The objects in Unity are set up like this:<br>
+We originally planned a puzzle that had three spots for one out of four different symbols. I admit we didn't think all to well through the implementation of this, and realised all too late that we could have done it much easier and better. 
+The objects hierarchy in Unity are set up like this:<br>
 ![image](https://github.com/idarlm/imt3603-project/assets/127052202/acd0e5e2-261c-4a12-ba21-9772a21e1fb2)
 
 The Keys object has the KeypadListener script attached to it, Key1 has the InteractTrigger script, and Key1Visual has the VisualListener script attached. Inside Key1Visual are four objects of the same number-cube, just rotated to display either 1, 2, 3 or 4. Key2 and Key3 are just as Key1. Already we can tell that there are a lot of redundant game objects that consume unnecessary resources.
+As mentioned the keypad puzzle was created for switching between four different objects within the game environment. Our approach involved creating numerous game objects to represent each possible sumbol/number, resulting in a complex system that posed challanges for scalability and maintenance. However, we made all of the code for the puzzle to work, and felt we had too little time left to change it. 
+
+I will try to explain our code solution for that specific puzzle, and talk about desired changes of we were to revide the code.
+The InteractTrigger script is a simple script that fires a trigger when the player are in range of the objects box collider and presses E. The script VisualListener are connected to each Key*N*Visual, and it is the script that switches the visual of the symbols.
+In [this](https://github.com/idarlm/imt3603-project/blob/10034c7e6441a1469f4d9b398fc671bf1193c672/Assets/PuzzleFiles/VisualListener.cs#L11-L21) code we start by subscribing to the ChangeVisual method that listens to the triggered event in InteractTrigger. We then deactivate three of the four children (cubes with number 1-4) so that the number 1 cube is the only one active and visible. 
+The ChangeVisual method is where we change what cube is active and visible. In [this](https://github.com/idarlm/imt3603-project/blob/10034c7e6441a1469f4d9b398fc671bf1193c672/Assets/PuzzleFiles/VisualListener.cs#L25-L572) for-loop we go through all the four children of Key*N*Visual and getting the active-state of the "i" number child. Furthermore, if the child is the active one, we set it to not active. Then, if the child we are currently on is not the last of the four children, the next child is set to active. If it is the last one, we reset the index "i" and set the first child to active. After the change in symbol is made, we then check if the new active child matches with the game object we have set as the correct key in a serializable field in Unity that belongs to the script. In our game puzzle, we have set the right symbols as 3 for Key1Visual, 1 for Key2Visual and 4 for Key4Visual. If the new active child and the "correctKey" matches, we fire an event. If not, we stop the trigger.
+
+Now that I have explained the workings of changing between the four objects in every one of the three number slots (key slots), I move on to the KeypadListener script. This script handles ...
 
 
 ## Reflection
