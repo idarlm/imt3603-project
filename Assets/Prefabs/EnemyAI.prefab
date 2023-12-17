@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 471104965925669663}
@@ -211,18 +211,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f15415f4c104294866116d230d4fb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStateSerialized: 2
+  startState: 1
   entryWaypoint: {fileID: 0}
-  target: {fileID: 0}
-  playerAnimator: {fileID: 0}
   ratAnimator: {fileID: 6463381377597769178}
-  walkSpeed: 3
-  runSpeed: 6
+  cage: {fileID: 0}
   attackDetector: {fileID: 6969237914880709224}
   visionTransform: {fileID: 7509522013545349865}
   IKController: {fileID: 1508264510319329167}
-  horizontalFOV: 150
-  verticalFOV: 100
 --- !u!82 &2501770213386307978
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1091,6 +1086,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807301960334963860, guid: c3c315bc592a0ed4b994d64ae79e81c3,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+        'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
+        'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
+        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
+        'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'mixamo.com'"
       objectReference: {fileID: 0}
     - target: {fileID: 2807301960334963860, guid: c3c315bc592a0ed4b994d64ae79e81c3,
         type: 3}

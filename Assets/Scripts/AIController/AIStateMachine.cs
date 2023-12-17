@@ -25,6 +25,9 @@ namespace AIController
         private IState<AIContext> _currentState;
         private AIContext _context = new AIContext();
         
+        
+        public float DetectionPercentage => _context.Stimuli / AISettingsManager.Instance.PlayerDetectionThreshold;
+        
         public AttackDetector attackDetector;
         public Transform visionTransform;
         public RatIKController IKController;
@@ -63,7 +66,8 @@ namespace AIController
                     VerticalFOV = AISettingsManager.Instance.VerticalFOV,
                     MaxDetectionRange = AISettingsManager.Instance.MaxDetectionRange,
                     DetectionThreshold = AISettingsManager.Instance.PlayerDetectionThreshold,
-                    AttackDistance = AISettingsManager.Instance.AttackDistance
+                    AttackDistance = AISettingsManager.Instance.AttackDistance,
+                    HearingBonus = AISettingsManager.Instance.HearingBonus,
                 };
             }
             else

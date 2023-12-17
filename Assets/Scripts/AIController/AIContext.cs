@@ -30,5 +30,6 @@ namespace AIController
         public float HorizontalFOV;
         public float VerticalFOV;
         public float AttackDistance;
+        public float HearingBonus;
     }
 }

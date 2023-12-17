@@ -70,6 +70,13 @@ namespace AIController.Settings
             get => _attackDistance;
         }
         
+        private float _hearingBonus = 10f;
+        public float HearingBonus
+        {
+            set => _hearingBonus = Math.Max(value, 0);
+            get => _hearingBonus;
+        }
+        
         public bool AllFieldsInitialized()
         {
             return PlayerAnimator != null && Player != null;

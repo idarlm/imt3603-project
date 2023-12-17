@@ -61,12 +61,24 @@ namespace AIController
             CanSeeLimb(context, HumanBodyBones.Chest);
             CanSeeLimb(context, HumanBodyBones.LeftHand);
             CanSeeLimb(context, HumanBodyBones.RightHand);
-            var movementBonus = context.MotionDetectionBonus * 
-                                context.PlayerMovement.CurrentSpeed /
-                                  context.PlayerMovement.standingSettings.speed;
+            var movementCoefficient = context.PlayerMovement.CurrentSpeed / context.PlayerMovement.standingSettings.speed;
+            var movementBonus = context.MotionDetectionBonus * movementCoefficient;
             context.Stimuli *= Mathf.Max(movementBonus, 1);
+            // if the player is moving faster than running. Ignores sight lines.
+            AddStimuliFromHearing(context);
             return context.Stimuli > context.DetectionThreshold;
         }
+
+        protected void AddStimuliFromHearing(AIContext context)
+        {
+            var movementCoefficient = Mathf.Max(context.PlayerMovement.CurrentSpeed / (context.PlayerMovement.standingSettings.speed / 2) - 1, 0);
+            movementCoefficient = OcularSimulator.AttenuateByDistance(
+                (context.StateMachine.visionTransform.position - context.Target.position).magnitude,
+                movementCoefficient);
+            context.Stimuli += Mathf.Max(0, movementCoefficient) * context.HearingBonus; 
+        }
+        
+        
 
         
         /// <summary>
@@ -83,7 +95,7 @@ namespace AIController
             var cosine = Vector3.Dot(
                 transform.forward.normalized,
                 agentToPlayer.normalized);
-            return cosine < 0 && agentToPlayer.magnitude < distance;
+            return cosine < 0 && agentToPlayer.magnitude < distance && context.Stimuli > 0;
         }
 
         

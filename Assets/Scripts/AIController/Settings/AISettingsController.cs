@@ -8,6 +8,7 @@ namespace AIController.Settings
     {
         [SerializeField] private float maxDetectionRange = 30f;
         [SerializeField] private float playerMovementDetectionBonus = 20f;
+        [SerializeField] [Range(0,100)] private float hearingBonus = 5f;
         [SerializeField] private float playerDetectionThreshold = 0.5f;
         [SerializeField] private PlayerMovementSystem player;
         [SerializeField] private Animator playerAnimator;
@@ -30,6 +31,7 @@ namespace AIController.Settings
             settingsManager.VerticalFOV = verticalFOV;
             settingsManager.HorizontalFOV = horizontalFOV;
             settingsManager.AttackDistance = attackDistance;
+            settingsManager.HearingBonus = hearingBonus;
         }
 
         private void OnDrawGizmos()
