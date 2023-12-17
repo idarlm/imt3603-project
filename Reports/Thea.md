@@ -8,7 +8,9 @@
 |Reflection | 30 |
 
 ## Good code
-- TriggerGroup -> all check
+
+### [TriggerGroup.cs]()
+I consider this code good as it is clean easy to read and is an important part of the puzzles. This code makes it possible to connect multiple puzzles or parts of puzzles together and only fire an event when all of them have been completed. At the tsart of the game it subsribes all the triggers to an event and adds as many false as there are triggers to a list. If a trigger is triggered it will find the right trigger and check if it is activated or not, so that it the puzzle only gets completed if all the parts are activated. One part of the code that I consider particulary good is the check if all the triggers are activated. 
 
 ```cs
 if (activated.All(t => t)) {
@@ -16,40 +18,80 @@ if (activated.All(t => t)) {
         }
 ```
 
-- interactionTextUI
-    - Lateupdate for the UI text
-    - teksta følge kamera
-    - static
-    - Show and Close can be used in diferent parts of code, kunne enkelt vårte oppdatert til å ta inn paramter og såtte custom text på ulike ting.
-    - null checks
-    - bad: singleton istaden? hardkoda text, ingen error sjekk kamera, image istaden med setActive?
+Instead of having to loop through the entire list we used the "All" method, which makes the code consise and easy to read. It also stops as soon as one of the items is false saving resources.
+
+
+
+### [InteractionTextUI]()
+For the UI when it comes to the text connected to interactable obejcts it is attached to the player. The UI text is coded so that it will follow the camera. This is done inside an LateUpdate function so that it happens after all the updates, which means the text will follow the player after it has been updated. The camera is not being checked if its null before setting the rotation.
+```cs
+ private void LateUpdate()
+    {
+        // Get the rotation of the main camera
+        var rotation = mainCamera.transform.rotation;
+
+        // Make the UI element look at the camera while maintaining its direction
+        transform.LookAt(transform.position + rotation * Vector3.forward,
+            rotation * Vector3.up);
+    }
+ ```
+The text UI reference is fetched by using serialzeField, (link til linje 7), and then there is a static variable called instance (link til linje 8) that will be set to the Txt UI. This code also has to sttic functions to show and close the text. Using static is something I consider good code. This way one can call these functions from other scripts to decide when you want to show the text.
+Both the ShowUI and CloseUI functions(link til funksjonane) makes sure that the instance is set before trying to update the text, so that if there is no instance ther will not be any errors. 
+The ShowUI function could easily be improved by giving it a paramteter so that the text could be set to whatever best fits based on where the function is called, and no string given having a default string. As of now the text is hardcoded which I do not consider good code. Another thing that could possible improve the code is using an UI image instead of just text so that the text would be easier to read. And instead of just changing the text betweent he hardcoded text to a empty string, acticvating and disabling the text instead to save resources. 
+
   
-- loader
-    - Enum og .toString so ingen skrivefeil, lett og legge til flere level/scene
-    - clean, lett leselig
-    - static class -> modularity
-    - bad: dependent på scenemanger i unity so må passe på at scenene ligge der i rett rekkefølge?
+### [Loader.cs]()
+In the loader script used for loading scenes I have created and Enum containing all the scenes. This I consider good code as it is easy to update and maintain  the code as well as making it less likely for an error to happen based on a spelling error. When loading a scene you can just use the enum and add ".ToString()"(link til loadscene linje).
+```cs
+public enum Scene
+    {
+        MainMenuScene,
+        DemoScene, //The actual gamelevel
+        LoadingScene
+    }
+```
+In addition to being very readable and clean the Loader script has a static class which makes the code modular which is also considered good code.
+The code is however dependent on Unitys scenemanger so one have to make sure that the scenes are added to the build settings for the loading to work.
   
-- mainmenuUI
-    - Serializefield, easy to add new buttons
-    - lambda in the click listeners, easy to read
-    - Using the num to easily load the right startscene
-    - clean ,readable, easy to add new buttons or change button behavior.
-    - add button for saved games, so if there exists a saved game the button play button
-      changes text to restart, and a second button called load from save is avaiable.
-    - bad: quit -> close right away no confirm message.
+### [MainMenuUI]()
+The main menu code is maybe the cleanest code I have written in this project. It is very clean and readbale, as well as it is very easy to update if new functionalities were to be added.
+For the buttons I used serialzeField, which makes it easy to connect the UI buttons to the script and easy to make a new serialzeField and button.
+```cs
+    [SerializeField] private Button playButton; // Button component to start game
+    [SerializeField] private Button quitButton; // Button component to quit game
+```
+For the buttons logic they have onclick listeners, with lambda functions which makes them easy to read, easy to update and easy to add new buttons with it getting messy. 
+lambda in the click listeners, easy to read. Using the enum to easily load the right startscene
+```cs
+     playButton.onClick.AddListener(() =>
+        {
+            // Call the Load function from the Loader class to load the game scene
+            Loader.Load(Loader.Scene.DemoScene);
+        });
+```
+The onclick listners are inside an Awake function (link til linje 9), so that they get initialized before the game starts, this will ensure that the buttons are clickable as soon as they have loaded on the screen.
+We talked about adding a load from save function to our game but did not have the time. Adding a button for this owuld be really easy as we could easily have a third button which would only work if there was a save, and could change the play buttons text to be restart instead of start using the same method as we did in the interaction text script(link til der ej sette teksta til interact).
+One thing that could be imrpoved is the quit button. As of now it just quits the game with no warning could update to have a confirmation.
  
-- visibilityUI
+### [VisibilityUI]()
+```cs
+    public static void StaminaTimer(float stamina)
+    {
+        VisibilityUI.stamina = stamina;
+    }
+```
+
+```cs
+    staminaBar.value = Mathf.Lerp(0f, 1f, stamina);
+```
 
 
-Både og:
+## Bad code
 - interacttrigger
     - good: clean, easy to read, using UI system to display/close text, and event system
     - input.keydown instead of the playerinput system
     - checking gameObject name -> what if multiplayer? also not good to hardcode string
-
-## Bad code
-   
+      
 - keypadlistener
     - repeat code
     - hard to read
