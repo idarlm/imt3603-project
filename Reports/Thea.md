@@ -72,39 +72,55 @@ lambda in the click listeners, easy to read. Using the enum to easily load the r
 The onclick listners are inside an Awake function (link til linje 9), so that they get initialized before the game starts, this will ensure that the buttons are clickable as soon as they have loaded on the screen.
 We talked about adding a load from save function to our game but did not have the time. Adding a button for this owuld be really easy as we could easily have a third button which would only work if there was a save, and could change the play buttons text to be restart instead of start using the same method as we did in the interaction text script(link til der ej sette teksta til interact).
 One thing that could be imrpoved is the quit button. As of now it just quits the game with no warning could update to have a confirmation.
- 
-### [VisibilityUI]()
-```cs
-    public static void StaminaTimer(float stamina)
-    {
-        VisibilityUI.stamina = stamina;
-    }
-```
-
-```cs
-    staminaBar.value = Mathf.Lerp(0f, 1f, stamina);
-```
 
 
 ## Bad code
-- interacttrigger
-    - good: clean, easy to read, using UI system to display/close text, and event system
-    - input.keydown instead of the playerinput system
-    - checking gameObject name -> what if multiplayer? also not good to hardcode string
-      
-- keypadlistener
-    - repeat code
-    - hard to read
-    - hardcoded for loop
-    - bad variablenames
-    - triggers.transform.getchil confusing.
-    - dynamic triggers and correct key array, but hardcoded three keys.
-    - good: serializefield so we can easily change correct keys in unity, triggers, the logic of all true fire
-  
-- visualListener
-    - Hard to read
-    - transform.getchile.gamobject... ka e d for noke? utydelig kode
-    - indexen?
+
+### [InteractTrigger.cs]()
+Although the interactTrigge script is easy to read it does have some issues that made me consider it as bad code. 
+```cs
+ if (Input.GetKeyDown(KeyCode.E) && inRange) {
+            FireTriggered(this, EventArgs.Empty);
+        }
+```
+When checking if the player is interacting we are using Input.GetKeyDown, which isn't necessarily bad code in it self, but considering that we have a whole script dedicated to playerinput, it should have been incorporated there and then used here, so that it would be more maintainable and easier to update across all the scripts.
+
+The other issue that makes me consider this code as bad is our collision check.
+```cs
+if (other.gameObject.name == "Player") {
+```
+First of all its bad practice using hardcoded strings, in addition to using the same string in both the OnTriggerEnter and OnTriggerExit functions(link til linje 17 og 26). Here we should have used a const instead so that we could easily update it without having any errors related to spelling errors. It would also be more correct to use tags. Another problem with this check is if we were to update the game for multiplayer. Using a tag could work, but then we wouldnt know which player interacted with the object.
+
+### [KeypadListener.cs]() & [VisualListener.cs]()
+These scripts I consider bad code. They are connected to the same puzzle, which is the puzzle with three symbols that need to match for an event to fire. The logic of this puzzle was hard to code which is reflected in the code. We coded it so that each interactable object in the puzzle loops between four game objects. This is not the best solution as it takes up more resources and the code gets more confusing. If we had time we would have changed it to use one gameobject and then change that objects rotation. This would have improved both the scripts, as we would not need all the repeating code.
+
+The code in KeypadListener is not that easy to read and has a lot of repeating code. OnTriggered and OnTriggeredFinished is almost identical(link) in addition to the code inside the for loop in these functions.  Fix it by double for loop, instead of checking manually for each key. If check to check if all true similar to the one in triggergroup(link til triggergourp).
+
+
+Dynamic triggers and correct key array, but hardcoded three keys.  This is not flexible if we wanted to have puzzles with less or more symbols than three. It is also pointless for the arrays to be dynamic if they are only gonna contain three items anyway. Something that is good however is the use of serializefield so we can easily change correct keys and triggers in Unity.
+```cs
+    public PuzzleTrigger[] triggers; // List of all the triggers
+    [SerializeField] GameObject[] correctKeys; 
+    private bool key1 = false, key2 = false, key3 = false; 
+    private Transform key1Object, key2Object, key3Object; // The object for each symbol
+```
+
+Hardcoded for loop is considered bad practice. Why is it four? Four is the number of symbols each object has to rotate between. This should have been put in a variable so it would be clear what it was, as well as to make it easier to update.
+```cs
+    for (var i = 0; i < 4; i++) {
+```
+
+Bad variablenames and confusing code that does not make it easier. key2Object does not give a lot of information to the reader. We had trouble comming up with good variable names as we were not quite sure what the different parts of such a puzzle is called, so we ended on keys and used this everywhere. Later we realized it was a bad name since we actually have keys in some puzzles. The bad variable name combined with the confusing code that comes after makes it hard to undrstand what exactly is going on.
+```cs
+    key2Object = triggers[1].transform.GetChild(i);
+```
+This was one of the biggest issues in the VisualListener script as well.
+```cs
+     transform.GetChild(i).gameObject.SetActive(false);
+```
+The code above is repeated all the time but its confusing what this actually is. 
+
+
 
 ## Reflection
 At the beginning of this course, game development was completely new to me. The entire process, from understanding the game engine to learning a new programming language, presented a steep learning curve. In our group of four students, two, including myself, had no prior experience, while the other two possessed varying levels of experience. This dynamic introduced challenges, particularly as the experienced members set ambitious goals.
