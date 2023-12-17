@@ -16679,6 +16679,11 @@ PrefabInstance:
       objectReference: {fileID: 1545942311}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
+      propertyPath: startState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
       propertyPath: entryWaypoint
       value: 
       objectReference: {fileID: 0}
@@ -24730,13 +24735,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad092bcca4fc4088a31ec1c5cedfdc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDetectionRange: 5
+  maxDetectionRange: 30
   playerMovementDetectionBonus: 20
   playerDetectionThreshold: 0.5
   player: {fileID: 1545942325}
   playerAnimator: {fileID: 1118593071}
   runSpeed: 6
-  walkSpeed: 12
+  walkSpeed: 3
+  verticalFOV: 90
+  horizontalFOV: 180
 --- !u!4 &448461286
 Transform:
   m_ObjectHideFlags: 0
@@ -27243,6 +27250,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1545942311}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: startState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
       propertyPath: entryWaypoint
@@ -36339,6 +36351,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1545942311}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: startState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
       propertyPath: entryWaypoint
@@ -58472,6 +58489,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1545942311}
+    - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
+        type: 3}
+      propertyPath: startState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2323524480578821972, guid: 12aa9f19af231d94c82e2d942c040bc0,
         type: 3}
       propertyPath: entryWaypoint

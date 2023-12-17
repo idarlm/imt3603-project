@@ -1,19 +1,20 @@
-﻿using PlayerMovement;
+﻿using System;
+using PlayerMovement;
 using UnityEngine;
 
 namespace AIController.Settings
 {
     public class AISettingsController : MonoBehaviour
     {
-        [SerializeField] private float maxDetectionRange = 5f;
+        [SerializeField] private float maxDetectionRange = 30f;
         [SerializeField] private float playerMovementDetectionBonus = 20f;
         [SerializeField] private float playerDetectionThreshold = 0.5f;
         [SerializeField] private PlayerMovementSystem player;
         [SerializeField] private Animator playerAnimator;
-        [SerializeField] private float runSpeed = 6.0f;
-        [SerializeField] private float walkSpeed = 3.0f;
-        [SerializeField] private float verticalFOV = 90f;
-        [SerializeField] private float horizontalFOV = 180f;
+        [SerializeField] [Range(0,20)] private float runSpeed = 6.0f;
+        [SerializeField] [Range(0,20)] private float walkSpeed = 3.0f;
+        [SerializeField] [Range(0,180)] private float verticalFOV = 90f;
+        [SerializeField] [Range(0,180)] private float horizontalFOV = 180f;
         
         void Start()
         {
@@ -27,6 +28,15 @@ namespace AIController.Settings
             settingsManager.WalkSpeed = walkSpeed;
             settingsManager.VerticalFOV = verticalFOV;
             settingsManager.HorizontalFOV = horizontalFOV;
+        }
+
+        private void OnDrawGizmos()
+        {
+            var settingsManager = AISettingsManager.Instance;
+            settingsManager.VerticalFOV = verticalFOV;
+            settingsManager.HorizontalFOV = horizontalFOV;
+            settingsManager.MaxDetectionRange = maxDetectionRange;
+            settingsManager.PlayerDetectionThreshold = playerDetectionThreshold;
         }
     }
 }

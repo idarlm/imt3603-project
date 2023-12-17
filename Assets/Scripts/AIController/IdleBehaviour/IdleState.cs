@@ -47,7 +47,7 @@ namespace AIController.IdleBehaviour
         
         public override void Update(AIContext context)
         {
-            if (IsCloseToPlayer(context, 30f) && CanLocatePlayer(context))
+            if (IsCloseToPlayer(context) && CanLocatePlayer(context))
             {
                 context.LastKnownTargetPosition = context.Target.position;
                 _seenPlayerInSeconds += Time.deltaTime;

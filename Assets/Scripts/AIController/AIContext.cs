@@ -12,6 +12,8 @@ namespace AIController
         public float MotionDetectionBonus;
         public AIStateMachine StateMachine;
         public PlayerMovementSystem PlayerMovement;
+        public float MaxDetectionRange;
+        public float DetectionThreshold;
         public Transform Target { set; get; }
         public Animator PlayerAnimator;
         public Waypoint TargetWaypoint;

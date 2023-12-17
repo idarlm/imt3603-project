@@ -32,11 +32,7 @@ namespace AIController
             return AIStateLabel.Idle;
         }
         
-        private float SqrDistanceToTarget(AIContext context, Vector3 targetPosition)
-        {
-            return (context.Agent.transform.position - targetPosition).sqrMagnitude;
-        }
-        
+
         
         /// <summary>
         /// Checks whether the player is within a sphere with radius equal to thresholdDistance
@@ -44,9 +40,10 @@ namespace AIController
         /// <param name="context">Current AIContext</param>
         /// <param name="thresholdDistance">radius of sphere where player presence is detected</param>
         /// <returns></returns>
-        protected bool IsCloseToPlayer(AIContext context, float thresholdDistance)
+        protected bool IsCloseToPlayer(AIContext context)
         {
-            return SqrDistanceToTarget(context, context.Target.position) < thresholdDistance * thresholdDistance;
+            var squareDistanceThreshold = context.MaxDetectionRange * context.MaxDetectionRange;
+            return squareDistanceThreshold > Vector3.SqrMagnitude(context.Agent.transform.position - context.Target.position);
         }
 
         
@@ -68,7 +65,7 @@ namespace AIController
                                 context.PlayerMovement.CurrentSpeed /
                                   context.PlayerMovement.standingSettings.speed;
             context.Stimuli *= Mathf.Max(movementBonus, 1);
-            return context.Stimuli > 0.5;
+            return context.Stimuli > context.DetectionThreshold;
         }
 
         

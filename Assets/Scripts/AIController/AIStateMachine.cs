@@ -17,7 +17,7 @@ namespace AIController
 {
     public class AIStateMachine : StateMachineMono<AIContext>
     {
-        [SerializeField] private AIStateLabel startState;
+        [SerializeField] private AIStateLabel startState = AIStateLabel.Patrolling;
         [SerializeField] private Waypoint entryWaypoint;
         [SerializeField] private Animator ratAnimator;
         [SerializeField] public Cage cage;
@@ -49,7 +49,11 @@ namespace AIController
                 RatAnimator = ratAnimator,
                 WalkSpeed =  AISettingsManager.Instance.WalkSpeed,
                 RunSpeed = AISettingsManager.Instance.RunSpeed,
-                StartPosition = transform.position
+                StartPosition = transform.position,
+                HorizontalFOV = AISettingsManager.Instance.HorizontalFOV,
+                VerticalFOV = AISettingsManager.Instance.VerticalFOV,
+                MaxDetectionRange = AISettingsManager.Instance.MaxDetectionRange,
+                DetectionThreshold = AISettingsManager.Instance.PlayerDetectionThreshold
             };
             
             ChangeState(StateFactory.CreateState(startState));
@@ -70,7 +74,7 @@ namespace AIController
         {
             var position = visionTransform.position;
             Handles.Label(position + Vector3.up, startState.ToString());
-            Handles.Label(position + Vector3.up * 1.5f, _context.Stimuli.ToString());
+            Handles.Label( position + Vector3.up * 1.5f, "Detection: " + Math.Round(_context.Stimuli * 100f / AISettingsManager.Instance.PlayerDetectionThreshold) + "%");
         }
 
         private void OnDrawGizmosSelected()
@@ -89,19 +93,26 @@ namespace AIController
                 Gizmos.DrawLine(transform.position, cage.GetAITargetPosition());
                 Gizmos.DrawWireSphere(cage.GetAITargetPosition(), 1f);
             }
+            
             var position = visionTransform.position;
             var up = visionTransform.up;
             var forward = visionTransform.forward;
             var right = visionTransform.right;
-            Handles.DrawWireArc(position, up, forward, _context.HorizontalFOV/2, 5);
-            Handles.DrawWireArc(position, up, forward, -_context.HorizontalFOV/2, 5);
-            Handles.DrawLine(position, position +  Quaternion.AngleAxis(_context.HorizontalFOV/2, up) * forward * 5);
-            Handles.DrawLine(position, position +  Quaternion.AngleAxis(-_context.HorizontalFOV/2, up) * forward * 5);
             
-            Handles.DrawWireArc(position, right, forward, _context.VerticalFOV/2, 5);
-            Handles.DrawWireArc(position, right, forward, -_context.VerticalFOV/2, 5);
-            Handles.DrawLine(position, position +  Quaternion.AngleAxis(_context.VerticalFOV/2, right) * forward * 5);
-            Handles.DrawLine(position, position +  Quaternion.AngleAxis(-_context.VerticalFOV/2, right) * forward * 5);
+            var horizontalFOV = AISettingsManager.Instance.HorizontalFOV;
+            var verticalFOV = AISettingsManager.Instance.VerticalFOV;
+            
+            Handles.DrawWireArc(position, up, forward, horizontalFOV/2, 5);
+            Handles.DrawWireArc(position, up, forward, -horizontalFOV/2, 5);
+            Handles.DrawLine(position, position +  Quaternion.AngleAxis(horizontalFOV/2, up) * forward * 5);
+            Handles.DrawLine(position, position +  Quaternion.AngleAxis(-horizontalFOV/2, up) * forward * 5);
+            
+            Handles.DrawWireArc(position, right, forward, verticalFOV/2, 5);
+            Handles.DrawWireArc(position, right, forward, -verticalFOV/2, 5);
+            Handles.DrawLine(position, position +  Quaternion.AngleAxis(verticalFOV/2, right) * forward * 5);
+            Handles.DrawLine(position, position +  Quaternion.AngleAxis(-verticalFOV/2, right) * forward * 5);
+            
+            Handles.DrawWireDisc(position, Vector3.up, AISettingsManager.Instance.MaxDetectionRange);
             
             
         }
