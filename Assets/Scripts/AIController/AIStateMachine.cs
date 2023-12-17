@@ -17,7 +17,7 @@ namespace AIController
 {
     public class AIStateMachine : StateMachineMono<AIContext>
     {
-        [SerializeField] private AIStateLabel startState = AIStateLabel.Patrolling;
+        [FormerlySerializedAs("startState")] [SerializeField] private AIStateLabel currentStateLabel = AIStateLabel.Patrolling;
         [SerializeField] private Waypoint entryWaypoint;
         [SerializeField] private Animator ratAnimator;
         [SerializeField] public Cage cage;
@@ -26,7 +26,17 @@ namespace AIController
         private AIContext _context = new AIContext();
         
         
-        public float DetectionPercentage => _context.Stimuli / AISettingsManager.Instance.PlayerDetectionThreshold;
+        public float DetectionPercentage
+        {
+            get
+            {
+                if (_context == null || currentStateLabel == AIStateLabel.Chasing)
+                {
+                    return 0;
+                }
+                return Mathf.Clamp(_context.Stimuli / AISettingsManager.Instance.PlayerDetectionThreshold, 0,1);
+            }
+        }
         
         public AttackDetector attackDetector;
         public Transform visionTransform;
@@ -39,7 +49,7 @@ namespace AIController
             sound.time = Random.Range(0, sound.clip.length);
             
             InitContext();
-            ChangeState(StateFactory.CreateState(startState));
+            ChangeState(StateFactory.CreateState(currentStateLabel));
         }
         
 
@@ -80,7 +90,7 @@ namespace AIController
         public void ChangeState(AIState nextState)
         {
             base.ChangeState(nextState);
-            startState = nextState.GetLabel();
+            currentStateLabel = nextState.GetLabel();
         }
 
         private void Update()
@@ -96,7 +106,7 @@ namespace AIController
         private void OnDrawGizmos()
         {
             var position = visionTransform.position;
-            Handles.Label(position + Vector3.up, startState.ToString());
+            Handles.Label(position + Vector3.up, currentStateLabel.ToString());
             Handles.Label( position + Vector3.up * 1.5f, "Detection: " + Math.Round(_context.Stimuli * 100f / AISettingsManager.Instance.PlayerDetectionThreshold) + "%");
         }
 
