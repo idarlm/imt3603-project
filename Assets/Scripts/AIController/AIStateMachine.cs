@@ -35,29 +35,43 @@ namespace AIController
             var sound = GetComponent<AudioSource>();
             sound.time = Random.Range(0, sound.clip.length);
             
-            _context = new AIContext
-            {
-                MotionDetectionBonus = AISettingsManager.Instance.PlayerMovementDetectionBonus,
-                PlayerIllumination = IlluminationManager.Instance,
-                PlayerMovement = AISettingsManager.Instance.Player,
-                PlayerAnimator = AISettingsManager.Instance.PlayerAnimator,
-                StateMachine = this,
-                TargetWaypoint = entryWaypoint,
-                Agent = GetComponent<NavMeshAgent>(),
-                Target = AISettingsManager.Instance.Player.transform,
-                Alertness = 3.0f,
-                RatAnimator = ratAnimator,
-                WalkSpeed =  AISettingsManager.Instance.WalkSpeed,
-                RunSpeed = AISettingsManager.Instance.RunSpeed,
-                StartPosition = transform.position,
-                HorizontalFOV = AISettingsManager.Instance.HorizontalFOV,
-                VerticalFOV = AISettingsManager.Instance.VerticalFOV,
-                MaxDetectionRange = AISettingsManager.Instance.MaxDetectionRange,
-                DetectionThreshold = AISettingsManager.Instance.PlayerDetectionThreshold
-            };
-            
+            InitContext();
             ChangeState(StateFactory.CreateState(startState));
         }
+        
+
+        private void InitContext()
+        {
+            if (AISettingsManager.Instance.AllFieldsInitialized())
+            {
+                _context = new AIContext
+                {
+                    MotionDetectionBonus = AISettingsManager.Instance.PlayerMovementDetectionBonus,
+                    PlayerIllumination = IlluminationManager.Instance,
+                    PlayerMovement = AISettingsManager.Instance.Player,
+                    PlayerAnimator = AISettingsManager.Instance.PlayerAnimator,
+                    StateMachine = this,
+                    TargetWaypoint = entryWaypoint,
+                    Agent = GetComponent<NavMeshAgent>(),
+                    Target = AISettingsManager.Instance.Player.transform,
+                    Alertness = 3.0f,
+                    RatAnimator = ratAnimator,
+                    WalkSpeed =  AISettingsManager.Instance.WalkSpeed,
+                    RunSpeed = AISettingsManager.Instance.RunSpeed,
+                    StartPosition = transform.position,
+                    HorizontalFOV = AISettingsManager.Instance.HorizontalFOV,
+                    VerticalFOV = AISettingsManager.Instance.VerticalFOV,
+                    MaxDetectionRange = AISettingsManager.Instance.MaxDetectionRange,
+                    DetectionThreshold = AISettingsManager.Instance.PlayerDetectionThreshold,
+                    AttackDistance = AISettingsManager.Instance.AttackDistance
+                };
+            }
+            else
+            {
+                _context = null;
+            }
+        }
+        
 
         public void ChangeState(AIState nextState)
         {
@@ -67,6 +81,11 @@ namespace AIController
 
         private void Update()
         {
+            if (_context == null)
+            {
+                InitContext();
+                return;
+            }
             Execute(_context);
         }
 

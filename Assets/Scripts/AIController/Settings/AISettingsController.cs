@@ -15,6 +15,7 @@ namespace AIController.Settings
         [SerializeField] [Range(0,20)] private float walkSpeed = 3.0f;
         [SerializeField] [Range(0,180)] private float verticalFOV = 90f;
         [SerializeField] [Range(0,180)] private float horizontalFOV = 180f;
+        [SerializeField] [Range(1,10)] private float attackDistance = 2f;
         
         void Start()
         {
@@ -28,6 +29,7 @@ namespace AIController.Settings
             settingsManager.WalkSpeed = walkSpeed;
             settingsManager.VerticalFOV = verticalFOV;
             settingsManager.HorizontalFOV = horizontalFOV;
+            settingsManager.AttackDistance = attackDistance;
         }
 
         private void OnDrawGizmos()

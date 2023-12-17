@@ -40,9 +40,9 @@ namespace AIController
         /// <param name="context">Current AIContext</param>
         /// <param name="thresholdDistance">radius of sphere where player presence is detected</param>
         /// <returns></returns>
-        protected bool IsCloseToPlayer(AIContext context)
+        protected bool IsCloseToPlayer(AIContext context, float thresholdDistance)
         {
-            var squareDistanceThreshold = context.MaxDetectionRange * context.MaxDetectionRange;
+            var squareDistanceThreshold = thresholdDistance * thresholdDistance;
             return squareDistanceThreshold > Vector3.SqrMagnitude(context.Agent.transform.position - context.Target.position);
         }
 

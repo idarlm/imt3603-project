@@ -29,5 +29,6 @@ namespace AIController
         public float Stimuli = 0;
         public float HorizontalFOV;
         public float VerticalFOV;
+        public float AttackDistance;
     }
 }

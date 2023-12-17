@@ -95,7 +95,7 @@ namespace AIController.ChaseBehaviour
                     context.StateMachine.IKController.EnableLookAt();
                     context.Agent.destination = context.Target.position;
                     context.TimeSincePlayerSeen = 0.0f;
-                    if (IsCloseToPlayer(context) && !context.RatAnimator.GetBool(IsAttacking))
+                    if (IsCloseToPlayer(context, context.AttackDistance) && !context.RatAnimator.GetBool(IsAttacking))
                     {
                         context.RatAnimator.SetBool(IsAttacking, true);
                         context.Agent.isStopped = true;

@@ -63,6 +63,18 @@ namespace AIController.Settings
             get => _horizontalFOV;
         }
         
+        private float _attackDistance = 2f;
+        public float AttackDistance
+        {
+            set => _attackDistance = Math.Max(value, 1);
+            get => _attackDistance;
+        }
+        
+        public bool AllFieldsInitialized()
+        {
+            return PlayerAnimator != null && Player != null;
+        }
+        
         
     }
 }
