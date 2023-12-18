@@ -53,7 +53,7 @@ namespace AIController.ChaseBehaviour
                 context.Agent.enabled = true;
                 
                 context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Patrolling));
-                PostProcessingQue.Instance.QueEffect(new FadeToColor(Color.white, 4f));
+                PostProcessingQue.Instance.QueEffect(new FadeToColor(Color.white, 1f));
             }
         }
     }
