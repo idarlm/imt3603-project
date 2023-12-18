@@ -3,9 +3,9 @@
 |Gameplay video | 10 |
 |Code video | 0 |
 |Good Code  | 20 |
-|Bad Code | 20 |
-|Development process | 20 |
-|Reflection | 30 |
+|Bad Code | 30 |
+|Development process | 15 |
+|Reflection | 25 |
 
 ## Video
 I have decided not to do a video, because i feel there is no specific Unity game engine functionalities we have used that is not somewhat visible through the code files.
@@ -51,9 +51,19 @@ As mentioned the keypad puzzle was created for switching between four different 
 I will try to explain our code solution for that specific puzzle, and talk about desired changes of we were to revide the code.
 The InteractTrigger script is a simple script that fires a trigger when the player are in range of the objects box collider and presses E. The script VisualListener are connected to each Key*N*Visual, and it is the script that switches the visual of the symbols.
 In [this](https://github.com/idarlm/imt3603-project/blob/10034c7e6441a1469f4d9b398fc671bf1193c672/Assets/PuzzleFiles/VisualListener.cs#L11-L21) code we start by subscribing to the ChangeVisual method that listens to the triggered event in InteractTrigger. We then deactivate three of the four children (cubes with number 1-4) so that the number 1 cube is the only one active and visible. 
-The ChangeVisual method is where we change what cube is active and visible. In [this](https://github.com/idarlm/imt3603-project/blob/10034c7e6441a1469f4d9b398fc671bf1193c672/Assets/PuzzleFiles/VisualListener.cs#L25-L572) for-loop we go through all the four children of Key*N*Visual and getting the active-state of the "i" number child. Furthermore, if the child is the active one, we set it to not active. Then, if the child we are currently on is not the last of the four children, the next child is set to active. If it is the last one, we reset the index "i" and set the first child to active. After the change in symbol is made, we then check if the new active child matches with the game object we have set as the correct key in a serializable field in Unity that belongs to the script. In our game puzzle, we have set the right symbols as 3 for Key1Visual, 1 for Key2Visual and 4 for Key4Visual. If the new active child and the "correctKey" matches, we fire an event. If not, we stop the trigger.
+The ChangeVisual method is where we change what cube is active and visible. In [this](https://github.com/idarlm/imt3603-project/blob/bbcf8f6c311bbd8daff77b89a38ce6f6aa021984/Assets/PuzzleFiles/VisualListener.cs#L25-L29) for-loop we go through all the four children of Key*N*Visual, and get the active-state of the "i" number child. Furthermore, in [this](https://github.com/idarlm/imt3603-project/blob/bbcf8f6c311bbd8daff77b89a38ce6f6aa021984/Assets/PuzzleFiles/VisualListener.cs#L31-L33) if-check if the child is the active one, we set it to not active. Then, if the child we are currently on is not the last of the four children, the next child is set to active. If it is the last one, we reset the index "i" and set the first child to active, as you can see in [this](https://github.com/idarlm/imt3603-project/blob/bbcf8f6c311bbd8daff77b89a38ce6f6aa021984/Assets/PuzzleFiles/VisualListener.cs#L34-L40) code. After the change in symbol is made, we then check if the new active child matches with the game object we have set as the correct key in a serializable field in Unity that belongs to the script. In our game puzzle, we have set the right symbols as 3 for Key1Visual, 1 for Key2Visual and 4 for Key4Visual. If the new active child and the "correctKey" matches, we fire an event. If not, we stop the trigger. [Here](https://github.com/idarlm/imt3603-project/blob/bbcf8f6c311bbd8daff77b89a38ce6f6aa021984/Assets/PuzzleFiles/VisualListener.cs#L43-L48) you can see the code for that. 
 
-Now that I have explained the workings of changing between the four objects in every one of the three number slots (key slots), I move on to the KeypadListener script. This script handles ...
+Now that I have explained the workings of changing between the four objects in every one of the three number slots (key slots), I move on to the KeypadListener script. This script listens to the events fired from each Key*N*Visual, and subscribes to two methods; OnTriggered and OnTriggeredFinished. I think that this code is hard to understand if you haven't written it yourself, and even then it is not easy to understand what is going on in the code.
+We can start by analyzing the variables used in this script. [Here](https://github.com/idarlm/imt3603-project/blob/fe4cade14c31fe7b1d77d414cfa4af357fc67ce0/Assets/PuzzleFiles/KeypadListener.cs#L7-L10) you can see that we've made a list of all the triggers, this contains each of the Key*N*Visual. We also have a serialized field of an array of game objects, where we put in the same correct keys (symbols/numbers) as we put in the VisualListener script for each Key*N*Visual. These need to be put in the correct order as well. Already there are a lot of game objects to keep track of in this code, so that the KeypadListener and VisualListener scripts can work together. The next variables holds values for each key, or pin, we have in our passcode. "key*N*" tell us if the keys are the correct key (symbol/number) at the moment, and the other holds the child of Key*N*Visual.
+
+Furthermore, in the code's start function we go through each of the triggers and subscribe to the class's two methods in a foreach loop. The OnTriggered method happens when the Key*N*Visual and its correct key matches and fires an event that triggers the method. [Here](https://github.com/idarlm/imt3603-project/blob/04c9317aaf36403b996f5f35a7d71fc38e49f4a3/Assets/PuzzleFiles/KeypadListener.cs#L24-L43) we go through all of the four different children of Key*N*Visual, and for each trigger in the array, which would also be key visual 1, 2 and 3, fetch their child number "i". We then check if that child is active (if its the one that is currently visible) and if its name is the same as the correspondent correct key's name. If so, we set its mathcing key*N* variable to true. After the for loop, we do an [if check](https://github.com/idarlm/imt3603-project/blob/04c9317aaf36403b996f5f35a7d71fc38e49f4a3/Assets/PuzzleFiles/KeypadListener.cs#L45-L49) on all the key*N* variables, if all of them are true, that means the right passcode combination has been set, and we then fire an event that the castle doors listenes to open up.
+
+
+
+
+- only one cube for each symbol we want in the passcode, and rotate it on interaction
+- shared serialized filed to store the correct sequenze of rotation that is the correct one
+- Logic would be much of the same, just try to make the two script work better together, and reduce amount of repeating code.
 
 
 ## Reflection
@@ -77,5 +87,5 @@ Throughout the whole project I have learned coding C#.
 
 
 
-- Too high ambitions
+- Too high ambitions because of 
 

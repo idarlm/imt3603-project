@@ -968,7 +968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trigger: {fileID: 3675708103996916961}
-  correctkey: {fileID: 5229194184158949064}
+  correctKey: {fileID: 5229194184158949064}
 --- !u!1 &2418727428334758528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,7 +1176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trigger: {fileID: 2346615287121367322}
-  correctkey: {fileID: 136101597460833702}
+  correctKey: {fileID: 136101597460833702}
 --- !u!1 &3454406906827241860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,7 +1301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trigger: {fileID: 6031272249377640363}
-  correctkey: {fileID: 6772725190700029340}
+  correctKey: {fileID: 6772725190700029340}
 --- !u!1 &3981981179406271495
 GameObject:
   m_ObjectHideFlags: 0
