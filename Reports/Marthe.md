@@ -46,33 +46,34 @@ Furthermore, in the code's start function we go through each of the triggers and
 The OnTriggeredFinished method happens when the fire trigger finishes if the active child is not the correct one. We then go through all the children, like in the OnTriggered method, and instead of checking of the child is the correct key we want, we check if its wrong and set the key*N* variables as false. As you can see [here](https://github.com/idarlm/imt3603-project/blob/04c9317aaf36403b996f5f35a7d71fc38e49f4a3/Assets/PuzzleFiles/KeypadListener.cs#L55-L71).
 The logic in the VisualListener and KeypadListener scripts are complicated, and we had to put our heads together and work hard to make sense of how we could achivve what we wanted.
 
+Now that I've explained how the logic of the keypad puzzle works and its scripts. I want to talk about what improvements I would have made if I had the time.
+<br>
 
+**1. Utilize existing rotation animation script:**
+- **Current issue:** Redundant game objects and unnecessary resources.
+- **Improvement:** Instead of having multiple cubes for each symbol, use an existing rotation animation script to turn the cube. Create a single cube for each pin in the passcode, and set a "right rotation" field to check if the cube's rotation matches the correct rotation for the number we want to display.
+<br>
 
-- To improve it: Use already existing rotation animation script, and set a "right rotation" field and check if it matches. Would only need as many cubes as symbols we want in the passcode, a lot less resources.
-- No hardcoded variables like key1, key2 and key3. This makes it harder to expand the puzzle.
-- only one cube for each symbol we want in the passcode, and rotate it on interaction
-- shared serialized filed to store the correct sequenze of rotation that is the correct one
-- Logic would be much of the same, just try to make the two script work better together, and reduce amount of repeating code and hardcoded variables.
+**2. Avoid hardcoded variables:**
+- **Current issue:** Hardcoded variables like key1, key2, and key3 make it difficult to expand the puzzle.
+- **Improvement:** Use a more flexible approach by avoiding hardcoded variables. For example a growing array.
+<br>
+
+**3. Shared serializable field for correct passcode sequence:**
+- **Current issue:** Complicated logic and challenges for scalability and maintenance.
+- **Improvement:** Implement a shared serializable field to store the correct sequence of rotations. This eliminates complicated logic and diffucilty in matching correct rotations in both the VisualListener and KeypadListener script.
+
+By implementing these improvements and ensuring that the changes work and are easier to understand by commenting the code, I could create a more efficient, maintainable and scalable Keypad puzzle in the game.
 
 
 ## Reflection
-I started this course with no knowledge about game programming. I also had no previous experience with Unity or other game engines, so it took some time to learn how to use it and get into the logic of game programming.
+I started this course with no knowledge about game programming. I also had no previous experience with Unity or other game engines, so it took some time to learn how to use it and get into the logic of game programming and developing.
 
-In our group we had two people with no previous knowledge, including me, and two who already had some expirience with Unity and game programming. Because of this, we had set some high expectations for our game, but understood that some of us had to do more work than others because of our mixed knowledge. In the time we had to work with the game, I used a lot of time in the begining to try and understand what Unity was and how to use it.
-Consepts I learned about Unity was for example its itegrated input system for movement and interactions. However, this was not one of my taskt in the project. I also learned making game objects, serializable fields that's visible in Unity, making prefabs and adding materials to gameobjects. I would say my knowledge about Unity at the end of the projects is very limited still, because I used my time on what I specifically needed to know to do my own parts of the game. 
+In our group we had two people with no previous knowledge, including me, and two who already had some expirience with Unity and game programming. Because of this, we ended up with too high ambitions because some more expirienced group members wanted to do something a bit more advanced. It wasn't exactly beginner friendly. However, we discussed and understood that some of us had to do more work than others because of our mixed knowledge. In the time we had to work with the game, I used a lot of time in the begining to try and understand what Unity was and how to use it.
+Consepts I learned about Unity was for example its itegrated input system for movement and interactions. However, this was not one of my task in the project. I also learned making game objects, serializable fields that's visible in Unity, making prefabs and adding materials to gameobjects. I would say my knowledge about Unity at the end of the projects is very limited still, because I used my time on what I specifically needed to know to do my own parts of the game. 
 
 After learning about Unity I had to start participating in the actual coding of our game, and I felt it was very hard to know where to begin. Me and the other group member with no previous knowledge was in charge of implementing the puzzles of our game. We both came up with puzzle-ideas that we thought were doable for us, and tried watching videos to know where to start. However, others in the group wanted us to implement the puzzle code in a way that was not easy to learn with simple videos and with the short amout of time we had. Because of this, we got a little help starting out, and some ideas from the other members on how to implement the puzzles.
-When implementing the puzzles, I got more and more familiar with the game logic and Unity. I found it hard in the begining to juggle all the different gameobjects, and understand what was missing from serializable fields and scripts, but I got a hang of it in the end. I saw much improvement in my debugging skills and understanding errors.
+When implementing the puzzles, I got more and more familiar with the game logic and Unity. I found it hard in the begining to juggle all the different game objects, and understand what was missing from serializable fields and scripts, but I got a hang of it in the end. I saw much improvement in my debugging skills and understanding errors, and how to fix them.
 
-Throughout the process of implementing the puzzles, we tried communicating with the other group members to get their input. We often got feedback that stated our work was fine, and to continue to implement the other puzzles we had planned to do. However, after we had implemented all puzzles, we were told to do it in another and better way. Myself and my puzzle-companion were originally happy and proud of everything we had managed to do, and it would have worked fine even though it was not the best code. While my puzzle-companion started on another task, I had to revise much of the code. I rewrote about half of the code we had and added all animations scripts and particle and light scripts. This was a tiresom job, especially because it could have been done from the start, if we just had gotten better feedback. In this process I learned more about combining scripts and inheriting, and wrote new generic code to use for more than just the puzzles. The animations code I wrote about earlier is an example of this. Because I basically wrote the puzzles code two times, I got much more practice with the logic, and connecting objects with scripts and triggers. Every puzzle was also made in their own scene in Unity, so I learned how to use them aswell. 
-
-
-
-
-Throughout the whole project I have learned coding C#.
-
-
-
-- Too high ambitions because of more expirienced group members wanted to do something a bit more advanced. Not beginner friendly.
-- Ended up doing a small amount of tasks in comparison to the more expirienced group members, because it took me the same time to do that one thing for them to do dubble the amount.
-
+Throughout the process of implementing the puzzles, we tried communicating with the other group members to get their input. We often got feedback that stated our work was fine, and to continue to implement the other puzzles we had planned to do. However, after we had implemented all puzzles, we were told to do it in another and better way. Myself and my puzzle-companion were originally happy and proud of everything we had managed to do, and it would have worked fine even though it was not the best code. While my puzzle-companion started on another task, I had to revise much of the code. I rewrote about half of the code we had, and added all animations scripts and particle and light scripts. This was a tiresom job, especially because it could have been done from the start, if we just had gotten better feedback. In this process I learned more about combining scripts and inheriting, and wrote new generic code to use for more than just the puzzles. The animations code I wrote about earlier is an example of this. Because I basically wrote the puzzles code two times, I got much more practice with the logic, and connecting objects with scripts and triggers. Every puzzle was also made in their own scene in Unity, so I learned how to use scenes aswell. 
+When I had managed to rewrite and improve the puzzles, I made prefabs of them, and put them into our game world. When doing so, I learned more about assets and materials, and understood how the prefabs in Unity worked (for example to remember to edit the actual prefab :D ). Throughout the whole project I also learned coding in C#.
