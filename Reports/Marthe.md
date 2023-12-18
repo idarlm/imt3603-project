@@ -8,7 +8,7 @@
 |Reflection | 20 |
 
 ## Video
-I have decided not to do a video, because i feel there is no specific Unity game engine functionalities we have used that is not somewhat visible through the code files.
+I have decided not to do a video, because i feel there is no specific Unity game engine functionalities I have used that is not somewhat visible through the code files.
 
 ## Good code
 I have implemented animation code to use on doors, walls, etc. to rotate and move. The code is implemented in a way that make it easier make new animations and have them activated on a fireTrigger. For example, to shrink something, all that is needed is a new code that inherit the AnimationOnEvent class, and shrink the targeted object by changing its scale using something like written below.
