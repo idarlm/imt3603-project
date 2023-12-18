@@ -1,11 +1,10 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using Utility;
 
-namespace FX.Effects
+namespace FX.Visual.Effects
 {
     public abstract class Effect
     {
@@ -59,15 +58,15 @@ namespace FX.Effects
 
     public class Fear : Effect
     {
-        public Fear (float TransitionTime = 0.5f)
+        public Fear (float transitionTime = 0.5f)
         {
-            this.TransitionTime = TransitionTime;
+            TransitionTime = transitionTime;
         }
         
         protected override void ApplyEffect(Volume volume) {
             if (volume.profile.TryGet<Vignette>(out var vignette))
             {
-                vignette.intensity.Override(0.5f * Math.Clamp (Easing.InCubic(ElapsedTime / TransitionTime),0f,1f));
+                vignette.intensity.Override(0.2f + 0.3f * Math.Clamp ( Easing.InCubic(ElapsedTime / TransitionTime),0f,1f));
             }
 
             if (volume.profile.TryGet<PaniniProjection>(out var panini))
@@ -84,19 +83,26 @@ namespace FX.Effects
     
     public class Calm : Effect
     {
-        public Calm (float TransitionTime = 0.5f)
+        public Calm (float transitionTime = 0.5f)
         {
-            this.TransitionTime = TransitionTime;
+            this.TransitionTime = transitionTime;
         }
         
         protected override void ApplyEffect(Volume volume) {
             if (volume.profile.TryGet<Vignette>(out var vignette))
             {
-                vignette.intensity.Override(1f - 0.7f * Math.Clamp (Easing.InCubic(ElapsedTime / TransitionTime),0f,1f));
+                vignette.intensity.Override(0.2f + 0.3f * Math.Clamp ( 1 - Easing.InCubic(ElapsedTime / TransitionTime),0f,1f));
+            }
+
+            if (volume.profile.TryGet<PaniniProjection>(out var panini))
+            {
+                panini.distance.Override(Math.Clamp( 1 - Easing.InCubic(ElapsedTime / TransitionTime),0f,1f));
+            }
+            
+            if(volume.profile.TryGet<Bloom>(out var bloom))
+            {
+                bloom.intensity.Override(5f * Math.Clamp( 1 - Easing.InCubic(ElapsedTime / TransitionTime),0f,1f));
             }
         }
     }
-    
-    
-    
 }

@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using FX.Effects;
+using FX.Visual.Effects;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-namespace FX
+namespace FX.Visual
 {
     
     public sealed class PostProcessingQue

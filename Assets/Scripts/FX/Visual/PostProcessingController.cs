@@ -1,8 +1,7 @@
-﻿using FX.Effects;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace FX
+namespace FX.Visual
 {
     public class PostProcessingController : MonoBehaviour
     {
@@ -11,15 +10,10 @@ namespace FX
         void Start()
         {
             _postProcessingQue = PostProcessingQue.Instance;
-            // _postProcessingQue.QueEffect(new Fear(5));
         }
         
         void Update()
         {
-            // if (_postProcessingQue.IsEmpty())
-            // {
-            //
-            // }
             _postProcessingQue.Progress(Time.deltaTime, volume);
         }
     }

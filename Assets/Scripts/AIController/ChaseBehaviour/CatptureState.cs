@@ -1,6 +1,8 @@
 ﻿using FX;
-using FX.Effects;
+using FX.Visual;
+using FX.Visual.Effects;
 using PlayerMovement;
+using UnityEditor;
 using UnityEngine;
 
 namespace AIController.ChaseBehaviour
@@ -20,6 +22,7 @@ namespace AIController.ChaseBehaviour
         public override void Enter(AIContext context)
         {
             context.RatAnimator.SetBool(IsGrabbing, true);
+            AIInteractionFXManager.Instance.OnPlayerGrabbed();
         }
         
         
@@ -53,7 +56,9 @@ namespace AIController.ChaseBehaviour
                 context.Agent.enabled = true;
                 
                 context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Patrolling));
-                PostProcessingQue.Instance.QueEffect(new FadeToColor(Color.white, 1f));
+                PostProcessingQue.Instance.QueEffect(new FadeToColor(Color.white, 4f));
+                PostProcessingQue.Instance.QueEffect(new Calm(6));
+                AIInteractionFXManager.Instance.OnPlayerCaptured();
             }
         }
     }

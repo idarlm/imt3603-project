@@ -17,6 +17,8 @@ namespace AIController
         Capture
     }
     
+    
+    
        
     /// <summary>
     /// Base class for other AIStates. Provides methods that are utilized by several states, such as
@@ -24,6 +26,9 @@ namespace AIController
     /// </summary>
     public abstract class AIState : IState<AIContext>
     {
+        
+        private static readonly int IsBehind = Animator.StringToHash("playerIsBehind");
+        
         /// <summary>
         /// Returns the AIStateLabel associated with the particular AIState implementation.
         /// </summary>
@@ -129,6 +134,23 @@ namespace AIController
             }
         
             return canSeeLimb;
+        }
+        
+        protected void CheckForPlayerBehind(AIContext context)
+        {
+            if (PlayerIsBehind(context, 5f))
+            {
+                context.RatAnimator.SetBool(IsBehind, true);
+            }
+            else
+            {
+                context.RatAnimator.SetBool(IsBehind, false);
+            }
+        }
+
+        protected void IdleTemporarily(AIContext context, float idleTime)
+        {
+            
         }
 
         /// <summary>

@@ -9,9 +9,9 @@ namespace AIController.IdleBehaviour
         private static readonly int IsIdle = Animator.StringToHash("isIdle");
         private float _idleTime;
         private AIStateLabel _nextState;
-        private bool _temporary;
+        private bool _idleStateIsTemporary;
         private float _seenPlayerInSeconds;
-        private static readonly int IsBehind = Animator.StringToHash("playerIsBehind");
+        
 
         public override AIStateLabel GetLabel()
         {
@@ -35,7 +35,7 @@ namespace AIController.IdleBehaviour
 
         public void SetCountdown(float idleTime, AIStateLabel nextState)
         {
-            _temporary = true;
+            _idleStateIsTemporary = true;
             _nextState = nextState;
             _idleTime = idleTime;
         }
@@ -44,9 +44,20 @@ namespace AIController.IdleBehaviour
         {
             return 1f;
         }
+
+        
         
         public override void Update(AIContext context)
         {
+            if (_idleStateIsTemporary)
+            {
+                if (_idleTime < 0f)
+                {
+                    context.StateMachine.ChangeState(StateFactory.CreateState(_nextState));
+                }
+                _idleTime -= Time.deltaTime;
+            }
+
             if (IsCloseToPlayer(context, context.MaxDetectionRange) && CanLocatePlayer(context))
             {
                 context.LastKnownTargetPosition = context.Target.position;
@@ -61,23 +72,8 @@ namespace AIController.IdleBehaviour
                 _seenPlayerInSeconds = Math.Max(_seenPlayerInSeconds -= Time.deltaTime, 0f);
             }
 
-            if (PlayerIsBehind(context, 5f))
-            {
-                context.RatAnimator.SetBool(IsBehind, true);
-            }
-            else
-            {
-                context.RatAnimator.SetBool(IsBehind, false);
-            }
+            CheckForPlayerBehind(context);
             
-            if (_temporary)
-            {
-                if (_idleTime < 0f)
-                {
-                    context.StateMachine.ChangeState(StateFactory.CreateState(_nextState));
-                }
-                _idleTime -= Time.deltaTime;
-            }
             
             if (_seenPlayerInSeconds > 0.0f)
             {

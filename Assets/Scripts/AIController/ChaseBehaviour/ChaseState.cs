@@ -1,5 +1,6 @@
 using FX;
-using FX.Effects;
+using FX.Visual;
+using FX.Visual.Effects;
 using PlayerMovement;
 using StateMachine;
 using Unity.VisualScripting;
@@ -26,7 +27,7 @@ namespace AIController.ChaseBehaviour
 
         private void DetectGrab(PlayerMovementSystem player)
         {
-            if (_attackTimer > 0f)
+            if (_attackTimer > 0f && !AIInteractionFXManager.Instance.IsPlayerGrabbed())
             {
                 PostProcessingQue.Instance.QueEffect(new FadeToColor(Color.black, 4f));
                 player.Freeze = true;
@@ -38,7 +39,10 @@ namespace AIController.ChaseBehaviour
         public override void Enter(AIContext context)
         {
             _context = context;
-            PostProcessingQue.Instance.QueEffect(new Fear(5));
+            
+            AIInteractionFXManager.Instance.OnPlayerDetected();
+            
+            PostProcessingQue.Instance.QueEffect(new Fear(3));
             
             context.StateMachine.IKController.SetLookAtTarget(context.LastKnownTargetPosition);
             context.StateMachine.IKController.EnableLookAt();
@@ -52,6 +56,8 @@ namespace AIController.ChaseBehaviour
         
         public override void Exit(AIContext context)
         {
+            AIInteractionFXManager.Instance.OnLostSightOfPlayer(); 
+            
             context.StateMachine.IKController.DisableLookAt();
             context.RatAnimator.SetBool(IsChasing, false);
             context.StateMachine.attackDetector.OnPlayerOverlap -= DetectGrab;

@@ -27982,6 +27982,7 @@ GameObject:
   - component: {fileID: 619586357}
   - component: {fileID: 619586358}
   - component: {fileID: 619586359}
+  - component: {fileID: 619586360}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -28180,7 +28181,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619586351}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ff09c6858e636407286ab113506e8feb, type: 3}
@@ -28188,7 +28189,7 @@ AudioSource:
   m_Volume: 0.231
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -28269,6 +28270,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &619586360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619586351}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ec9ceb23bc46cfa297dc9ba5b2e64b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicVolume: 1
+  fxVolume: 1
+  nearlySeenSting: {fileID: 8300000, guid: f6dbb0ca03157fc468a0e05ae6c7f510, type: 3}
+  nearlySeenStingVolume: 1
+  seenSting: {fileID: 8300000, guid: 4cdbcbd2fb3d9f8478a0fba2543f278d, type: 3}
+  seenStingVolume: 1
+  grabbedSound: {fileID: 8300000, guid: 7ccf6ea512911ad4b8c246b12e08705e, type: 3}
+  grabbedSoundVolume: 0.258
+  chaseMusic: {fileID: 8300000, guid: 1848e5c0f65bc1542a32b7b6c41f30a4, type: 3}
+  chaseMusicVolume: 1
+  calmMusic: {fileID: 8300000, guid: ff09c6858e636407286ab113506e8feb, type: 3}
+  calmMusicVolume: 1
+  audioMixer: {fileID: 0}
 --- !u!1001 &620953940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39775,6 +39801,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 994f56b5570aa7b4092221701ace4871, type: 3}
+--- !u!1 &1066638179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1066638181}
+  - component: {fileID: 1066638180}
+  m_Layer: 0
+  m_Name: AudioController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1066638180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066638179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ec9ceb23bc46cfa297dc9ba5b2e64b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicVolume: 1
+  fxVolume: 1
+  nearlySeenSting: {fileID: 8300000, guid: f6dbb0ca03157fc468a0e05ae6c7f510, type: 3}
+  nearlySeenStingVolume: 1
+  seenSting: {fileID: 8300000, guid: 4cdbcbd2fb3d9f8478a0fba2543f278d, type: 3}
+  seenStingVolume: 1
+  grabbedSound: {fileID: 8300000, guid: 7ccf6ea512911ad4b8c246b12e08705e, type: 3}
+  grabbedSoundVolume: 0.258
+  chaseMusic: {fileID: 8300000, guid: 1848e5c0f65bc1542a32b7b6c41f30a4, type: 3}
+  chaseMusicVolume: 1
+  calmMusic: {fileID: 8300000, guid: ff09c6858e636407286ab113506e8feb, type: 3}
+  calmMusicVolume: 1
+  audioMixer: {fileID: 24100000, guid: 8019096097e41014fa30492e65a0ad73, type: 2}
+--- !u!4 &1066638181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066638179}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1069048280
 GameObject:
   m_ObjectHideFlags: 0
@@ -78095,3 +78178,4 @@ SceneRoots:
   - {fileID: 1531856967}
   - {fileID: 446959791}
   - {fileID: 448461286}
+  - {fileID: 1066638181}
