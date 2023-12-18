@@ -14,6 +14,7 @@ namespace AIController
         {
             switch (stateName)
             {
+                case AIStateLabel.Inspecting: return new InspectLocation();
                 case AIStateLabel.Patrolling: return new PatrolState();
                 case AIStateLabel.Chasing: return new ChaseState();
                 case AIStateLabel.Idle: return new IdleState();

@@ -10,6 +10,7 @@ namespace AIController
     /// </summary>
     public enum AIStateLabel
     {
+        Inspecting,
         Chasing,
         Patrolling,
         Idle,
@@ -147,11 +148,7 @@ namespace AIController
                 context.RatAnimator.SetBool(IsBehind, false);
             }
         }
-
-        protected void IdleTemporarily(AIContext context, float idleTime)
-        {
-            
-        }
+        
 
         /// <summary>
         /// Returns the current movement speed relative to the maximum possible movement speed for the current state

@@ -59,39 +59,7 @@ namespace AIController
         {
             AIInteractionFXManager.Instance.OnPlayerCapturedAction -= OnPlayerCaptured;
         }
-
-        private void InitContext()
-        {
-            if (AISettingsManager.Instance.AllFieldsInitialized())
-            {
-                _context = new AIContext
-                {
-                    MotionDetectionBonus = AISettingsManager.Instance.PlayerMovementDetectionBonus,
-                    PlayerIllumination = IlluminationManager.Instance,
-                    PlayerMovement = AISettingsManager.Instance.Player,
-                    PlayerAnimator = AISettingsManager.Instance.PlayerAnimator,
-                    StateMachine = this,
-                    TargetWaypoint = entryWaypoint,
-                    Agent = GetComponent<NavMeshAgent>(),
-                    Target = AISettingsManager.Instance.Player.transform,
-                    Alertness = 3.0f,
-                    RatAnimator = ratAnimator,
-                    WalkSpeed =  AISettingsManager.Instance.WalkSpeed,
-                    RunSpeed = AISettingsManager.Instance.RunSpeed,
-                    StartPosition = transform.position,
-                    HorizontalFOV = AISettingsManager.Instance.HorizontalFOV,
-                    VerticalFOV = AISettingsManager.Instance.VerticalFOV,
-                    MaxDetectionRange = AISettingsManager.Instance.MaxDetectionRange,
-                    DetectionThreshold = AISettingsManager.Instance.PlayerDetectionThreshold,
-                    AttackDistance = AISettingsManager.Instance.AttackDistance,
-                    HearingBonus = AISettingsManager.Instance.HearingBonus,
-                };
-            }
-            else
-            {
-                _context = null;
-            }
-        }
+        
 
         private void OnPlayerCaptured()
         {
@@ -106,6 +74,7 @@ namespace AIController
             base.ChangeState(nextState);
             currentStateLabel = nextState.GetLabel();
         }
+        
 
         private void Update()
         {
@@ -123,6 +92,10 @@ namespace AIController
             
             Execute(_context);
         }
+        
+        /**
+         * GIZMOS 
+         */
 
         private void OnDrawGizmos()
         {
@@ -169,6 +142,44 @@ namespace AIController
             Handles.DrawWireDisc(position, Vector3.up, AISettingsManager.Instance.MaxDetectionRange);
             
             
+        }
+        
+        
+        /**
+         * CONTEXT INITIALIZATION
+         */
+        
+        private void InitContext()
+        {
+            if (AISettingsManager.Instance.AllFieldsInitialized())
+            {
+                _context = new AIContext
+                {
+                    MotionDetectionBonus = AISettingsManager.Instance.PlayerMovementDetectionBonus,
+                    PlayerIllumination = IlluminationManager.Instance,
+                    PlayerMovement = AISettingsManager.Instance.Player,
+                    PlayerAnimator = AISettingsManager.Instance.PlayerAnimator,
+                    StateMachine = this,
+                    TargetWaypoint = entryWaypoint,
+                    Agent = GetComponent<NavMeshAgent>(),
+                    Target = AISettingsManager.Instance.Player.transform,
+                    Alertness = 3.0f,
+                    RatAnimator = ratAnimator,
+                    WalkSpeed =  AISettingsManager.Instance.WalkSpeed,
+                    RunSpeed = AISettingsManager.Instance.RunSpeed,
+                    StartPosition = transform.position,
+                    HorizontalFOV = AISettingsManager.Instance.HorizontalFOV,
+                    VerticalFOV = AISettingsManager.Instance.VerticalFOV,
+                    MaxDetectionRange = AISettingsManager.Instance.MaxDetectionRange,
+                    DetectionThreshold = AISettingsManager.Instance.PlayerDetectionThreshold,
+                    AttackDistance = AISettingsManager.Instance.AttackDistance,
+                    HearingBonus = AISettingsManager.Instance.HearingBonus,
+                };
+            }
+            else
+            {
+                _context = null;
+            }
         }
         
     }

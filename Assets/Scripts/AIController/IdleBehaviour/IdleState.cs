@@ -12,6 +12,7 @@ namespace AIController.IdleBehaviour
         private AIStateLabel _nextState;
         private bool _idleStateIsTemporary;
         private float _seenPlayerInSeconds;
+        private bool _possibleDetectionToHandle = false;
         
 
         public override AIStateLabel GetLabel()
@@ -75,15 +76,20 @@ namespace AIController.IdleBehaviour
 
             CheckForPlayerBehind(context);
             
-            
-            if (_seenPlayerInSeconds > 0.0f)
+            if (_seenPlayerInSeconds > 0.0f) //TODO: Strong candidate for a new state
             {
-                AIInteractionFXManager.Instance.OnLostSightOfPlayerNear();
+                _possibleDetectionToHandle = true;
                 context.StateMachine.IKController.SetLookAtTarget(context.LastKnownTargetPosition);
                 context.StateMachine.IKController.EnableLookAt();
             }
+            else if (_possibleDetectionToHandle)
+            {
+                context.Agent.destination = context.LastKnownTargetPosition;
+                context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Inspecting));
+            }
             else
             {
+                AIInteractionFXManager.Instance.OnLostSightOfPlayerNear();
                 context.StateMachine.IKController.DisableLookAt();
             }
         }

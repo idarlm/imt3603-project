@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f15415f4c104294866116d230d4fb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStateLabel: 1
+  currentStateLabel: 2
   entryWaypoint: {fileID: 0}
   ratAnimator: {fileID: 6463381377597769178}
   cage: {fileID: 0}
