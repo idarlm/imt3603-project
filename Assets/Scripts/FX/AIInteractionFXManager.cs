@@ -1,5 +1,8 @@
-﻿using FX.Audio;
+﻿using System;
+using FX.Audio;
 using FX.Visual;
+using FX.Visual.Effects;
+using UnityEngine;
 
 namespace FX
 {
@@ -16,6 +19,7 @@ namespace FX
         private int _nearDetections;
         public AudioController AudioController { set; get; }
         public PostProcessingController PostProcessingController { set; get; }
+        public Action OnPlayerCapturedAction { set; get; }
         
         
         
@@ -23,7 +27,7 @@ namespace FX
         
         public void OnPlayerNearlyDetected()
         {
-            if (!IsPlayerNearlyDetected() && !IsPlayerDetected())
+            if (!IsPlayerNearlyDetected() && !IsPlayerDetected() && !IsPlayerGrabbed())
             {
                 AudioController.PlayNearlySeenSting();
             }
@@ -44,8 +48,9 @@ namespace FX
         
         public void OnPlayerDetected()
         {
-            if (!IsPlayerDetected())
+            if (!IsPlayerDetected() && !IsPlayerGrabbed())
             {
+                PostProcessingQue.Instance.QueEffect(new Fear(3));
                 AudioController.PlaySeenSting();
                 AudioController.PlayChaseMusic();
             }
@@ -55,9 +60,12 @@ namespace FX
         public void OnLostSightOfPlayer()
         {
             _detections--;
-            if (!IsPlayerDetected() && !_isPlayerGrabbed)
+            if (!IsPlayerDetected() && !IsPlayerGrabbed())
             {
-                AudioController.PlayCalmMusic();
+                PostProcessingQue.Instance.QueEffect(new Calm(6));
+                AudioController.StopCurrentTrack(0.5f);
+                AudioController.PlayEscapedDetectionCue();
+                AudioController.PlayCalmMusic(3f);
             }
         }
         
@@ -70,6 +78,8 @@ namespace FX
         
         public void OnPlayerGrabbed()
         {
+            PostProcessingQue.Instance.QueEffect(new FadeToColor(Color.black, 4f));
+            AudioController.StopCurrentTrack(1f);
             AudioController.PlayGrabbedSound();
             _isPlayerGrabbed = true;
         }
@@ -81,12 +91,16 @@ namespace FX
         
         // Placed in cage
         
-        public void OnPlayerCaptured()
+        public void OnPlayerPlacedInCage()
         {
             _detections = 0;
             _isPlayerGrabbed = false;
             _nearDetections = 0;
-            AudioController.PlayCalmMusic();
+            
+            PostProcessingQue.Instance.QueEffect(new FadeToColor(Color.white, 4f));
+            PostProcessingQue.Instance.QueEffect(new Calm(6));
+            AudioController.PlayCalmMusic(4f);
+            OnPlayerCapturedAction?.Invoke();
         }
 
         

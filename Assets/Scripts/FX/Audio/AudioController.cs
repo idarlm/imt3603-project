@@ -66,6 +66,9 @@ namespace FX.Audio
         [SerializeField] private AudioClip calmMusic;
         [SerializeField] [Range(0,1)] private float calmMusicVolume = 1f;
         
+        [SerializeField] private AudioClip escapedDetectionCue;
+        [SerializeField] [Range(0,1)] private float escapedDetectionCueVolume = 1f;
+        
         [SerializeField]private AudioMixer audioMixer;
         
         private AudioSource _activeAudioSource;
@@ -91,7 +94,7 @@ namespace FX.Audio
             
             AIInteractionFXManager.Instance.AudioController = this;
             
-            PlayCalmMusic();
+            PlayCalmMusic(0);
         }
         
         void Update()
@@ -105,38 +108,6 @@ namespace FX.Audio
                 .ToList();
         }
         
-        
-        private void QueNewTrack(AudioClip track, float volume, float transitionTime = 0f)
-        {
-            _queuedAudioSource.clip = track;
-            _queuedAudioSource.volume = volume;
-            SwapQueuedToActive();
-            _activeAudioSource.Play();
-            
-            if (transitionTime > 0f)
-            {
-                FadeBetweenSources(_queuedAudioSource, _activeAudioSource, volume, transitionTime);
-            }
-            else
-            {
-                _queuedAudioSource.Stop();
-                _queuedAudioSource.volume = 0;
-                _activeAudioSource.volume = volume;
-            }
-        }
-        
-        
-        private void SwapQueuedToActive()
-        {
-            (_activeAudioSource, _queuedAudioSource) = (_queuedAudioSource, _activeAudioSource);
-        }
-        
-        
-        private void FadeBetweenSources(AudioSource sourceOne, AudioSource sourceTwo, float targetVolume, float transitionTime)
-        {
-            _audioFades.Add(new AudioFade(sourceOne, 0f, transitionTime, true));
-            _audioFades.Add(new AudioFade(sourceTwo, musicVolume * chaseMusicVolume, transitionTime));
-        }   
         
         
         public void PlayNearlySeenSting()
@@ -159,16 +130,49 @@ namespace FX.Audio
             _fxChannel.PlayOneShot(grabbedSound);
         }
         
-        
-        public void PlayChaseMusic()
+        public void PlayEscapedDetectionCue()
         {
-            QueNewTrack(chaseMusic, chaseMusicVolume * musicVolume, 1f);
+            _fxChannel.volume = escapedDetectionCueVolume;
+            _fxChannel.PlayOneShot(escapedDetectionCue);
         }
         
         
-        public void PlayCalmMusic()
+        public void PlayChaseMusic(float transitionTime = 1f)
         {
-            QueNewTrack(calmMusic, calmMusicVolume * musicVolume, 1f);
+            StartNewTrack(chaseMusic, chaseMusicVolume * musicVolume, transitionTime);
         }
+        
+        
+        public void PlayCalmMusic(float transitionTime = 1f)
+        {
+            StartNewTrack(calmMusic, calmMusicVolume * musicVolume, transitionTime);
+        }
+        
+        private void StartNewTrack(AudioClip track, float volume, float transitionTime = 0, float startVolume = 0f)
+        {
+            StopCurrentTrack(transitionTime);
+            
+            _queuedAudioSource.clip = track;
+            _queuedAudioSource.volume = startVolume;
+            (_activeAudioSource, _queuedAudioSource) = (_queuedAudioSource, _activeAudioSource);
+            _activeAudioSource.Play();
+            
+            _audioFades.Add(new AudioFade(_activeAudioSource, musicVolume * chaseMusicVolume, transitionTime));
+        }
+        
+        
+        public void StopCurrentTrack(float fadeOutTime = 0f)
+        {
+            if(fadeOutTime > 0f)
+            {
+                _audioFades.Add(new AudioFade(_activeAudioSource, 0f, fadeOutTime, true));
+            }
+            else
+            {
+                _activeAudioSource.Stop();
+            }
+        }
+
+
     }
 }

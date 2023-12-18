@@ -1,4 +1,5 @@
 ﻿using System;
+using FX;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -77,6 +78,7 @@ namespace AIController.IdleBehaviour
             
             if (_seenPlayerInSeconds > 0.0f)
             {
+                AIInteractionFXManager.Instance.OnLostSightOfPlayerNear();
                 context.StateMachine.IKController.SetLookAtTarget(context.LastKnownTargetPosition);
                 context.StateMachine.IKController.EnableLookAt();
             }

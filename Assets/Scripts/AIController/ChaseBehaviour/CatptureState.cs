@@ -55,10 +55,10 @@ namespace AIController.ChaseBehaviour
                 context.Agent.transform.position = cage.GetAITargetPosition();
                 context.Agent.enabled = true;
                 
-                context.StateMachine.ChangeState(StateFactory.CreateState(AIStateLabel.Patrolling));
-                PostProcessingQue.Instance.QueEffect(new FadeToColor(Color.white, 4f));
-                PostProcessingQue.Instance.QueEffect(new Calm(6));
-                AIInteractionFXManager.Instance.OnPlayerCaptured();
+                var tempIdle = new AIController.IdleBehaviour.IdleState();
+                tempIdle.SetCountdown(2f, AIStateLabel.Patrolling);
+                context.StateMachine.ChangeState(tempIdle);
+                AIInteractionFXManager.Instance.OnPlayerPlacedInCage();
             }
         }
     }

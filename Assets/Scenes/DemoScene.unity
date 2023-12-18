@@ -28294,6 +28294,8 @@ MonoBehaviour:
   chaseMusicVolume: 1
   calmMusic: {fileID: 8300000, guid: ff09c6858e636407286ab113506e8feb, type: 3}
   calmMusicVolume: 1
+  escapedDetectionCue: {fileID: 0}
+  escapedDetectionCueVolume: 1
   audioMixer: {fileID: 0}
 --- !u!1001 &620953940
 PrefabInstance:
@@ -39831,17 +39833,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicVolume: 1
-  fxVolume: 1
-  nearlySeenSting: {fileID: 8300000, guid: f6dbb0ca03157fc468a0e05ae6c7f510, type: 3}
+  fxVolume: 0
+  nearlySeenSting: {fileID: 8300000, guid: c739498bb4320064eb43430157c51a68, type: 3}
   nearlySeenStingVolume: 1
   seenSting: {fileID: 8300000, guid: 4cdbcbd2fb3d9f8478a0fba2543f278d, type: 3}
   seenStingVolume: 1
   grabbedSound: {fileID: 8300000, guid: 7ccf6ea512911ad4b8c246b12e08705e, type: 3}
-  grabbedSoundVolume: 0.258
+  grabbedSoundVolume: 1
   chaseMusic: {fileID: 8300000, guid: 1848e5c0f65bc1542a32b7b6c41f30a4, type: 3}
-  chaseMusicVolume: 1
+  chaseMusicVolume: 0.756
   calmMusic: {fileID: 8300000, guid: ff09c6858e636407286ab113506e8feb, type: 3}
   calmMusicVolume: 1
+  escapedDetectionCue: {fileID: 8300000, guid: 587e6727b10650440bc4f6b82849c5fe, type: 3}
+  escapedDetectionCueVolume: 0.506
   audioMixer: {fileID: 24100000, guid: 8019096097e41014fa30492e65a0ad73, type: 2}
 --- !u!4 &1066638181
 Transform:

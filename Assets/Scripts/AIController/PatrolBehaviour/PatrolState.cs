@@ -1,10 +1,11 @@
-﻿using LabMaterials;
+﻿using FX;
+using LabMaterials;
 using Pathing;
 using UnityEngine;
 
 namespace AIController.PatrolBehaviour
 {
-    class WaypointState : AIState
+    class PatrolState : AIState
     { 
         private float _swapDistance = 2.0f;
         private float _squareSwapDistance;
@@ -18,6 +19,7 @@ namespace AIController.PatrolBehaviour
         public override void Enter(AIContext context)
         {
             _squareSwapDistance = _swapDistance * _swapDistance;
+            context.Stimuli = 0;
             context.Agent.speed = context.WalkSpeed;
             context.Agent.destination = 
                 context.TargetWaypoint ? context.TargetWaypoint.GetPosition() : context.StartPosition;
@@ -56,6 +58,7 @@ namespace AIController.PatrolBehaviour
                 {
                     var idle = new AIController.IdleBehaviour.IdleState();
                     idle.SetCountdown(2f, AIStateLabel.Patrolling);
+                    AIInteractionFXManager.Instance.OnPlayerNearlyDetected();
                     context.StateMachine.ChangeState(idle);
                 }
                 else

@@ -9,6 +9,7 @@ namespace FX.Visual
         [SerializeField] private Volume volume;
         void Start()
         {
+            AIInteractionFXManager.Instance.PostProcessingController = this;
             _postProcessingQue = PostProcessingQue.Instance;
         }
         

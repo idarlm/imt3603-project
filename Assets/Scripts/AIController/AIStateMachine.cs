@@ -1,5 +1,6 @@
 ﻿using System;
 using AIController.Settings;
+using FX;
 using Illumination;
 using Pathing;
 using PlayerMovement;
@@ -24,6 +25,7 @@ namespace AIController
 
         private IState<AIContext> _currentState;
         private AIContext _context = new AIContext();
+        private float _coolDownTimer = 0;
         
         
         public float DetectionPercentage
@@ -44,6 +46,7 @@ namespace AIController
         
         private void Start()
         {
+            AIInteractionFXManager.Instance.OnPlayerCapturedAction += OnPlayerCaptured;
             // Randomizes sound playback start position to avoid phase issues
             var sound = GetComponent<AudioSource>();
             sound.time = Random.Range(0, sound.clip.length);
@@ -51,7 +54,11 @@ namespace AIController
             InitContext();
             ChangeState(StateFactory.CreateState(currentStateLabel));
         }
-        
+
+        private void OnDestroy()
+        {
+            AIInteractionFXManager.Instance.OnPlayerCapturedAction -= OnPlayerCaptured;
+        }
 
         private void InitContext()
         {
@@ -85,6 +92,13 @@ namespace AIController
                 _context = null;
             }
         }
+
+        private void OnPlayerCaptured()
+        {
+            ChangeState(StateFactory.CreateState(AIStateLabel.Patrolling));
+            _context.Stimuli = 0;
+            _coolDownTimer = 1f;
+        }
         
 
         public void ChangeState(AIState nextState)
@@ -100,6 +114,13 @@ namespace AIController
                 InitContext();
                 return;
             }
+
+            if (_coolDownTimer > 0)
+            {
+                _coolDownTimer -= Time.deltaTime;
+                return;
+            }
+            
             Execute(_context);
         }
 
