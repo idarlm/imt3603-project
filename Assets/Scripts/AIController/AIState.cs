@@ -13,7 +13,8 @@ namespace AIController
         Chasing,
         Patrolling,
         Idle,
-        Debug
+        Debug,
+        Capture
     }
     
        

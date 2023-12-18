@@ -20,7 +20,7 @@ namespace Pathing
             return playerTarget.position;
         }
 
-        public void ResetCage()
+        public void Reset()
         {
             cageTrigger.ToggleOff();
         }

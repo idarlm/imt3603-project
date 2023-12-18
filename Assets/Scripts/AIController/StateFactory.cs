@@ -18,6 +18,7 @@ namespace AIController
                 case AIStateLabel.Chasing: return new ChaseState();
                 case AIStateLabel.Idle: return new IdleState();
                 case AIStateLabel.Debug: return new DebugState();
+                case AIStateLabel.Capture: return new CaptureState();
                 default: throw new Exception("No such chase state");
             }
         }
