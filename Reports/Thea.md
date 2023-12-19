@@ -24,8 +24,8 @@ Instead of having to loop through the entire list we used the "All" method, whic
 
 
 
-### [InteractionTextUI]()
-For the UI when it comes to the text connected to interactable obejcts it is attached to the player. The UI text is coded so that it will follow the camera. This is done inside an LateUpdate function so that it happens after all the updates, which means the text will follow the player after it has been updated. The camera is not being checked if its null before setting the rotation.
+### [InteractionTextUI](https://github.com/idarlm/imt3603-project/blob/3e0b2834ba212859e982b9740c4ea8fd88c94f45/Assets/Scripts/UI/interactionTextUI.cs)
+The InteractionTextUI script is responsible for handling UI text associated with interactable objects. It is attached to the player, with the text designed to follow the camera's movement. This functionality is implemented within the LateUpdate function, ensuring that the text adapts to the player's position after all updates have occurred. Note that a null check on the mainCamera should have been implemented before setting the rotation and adjusting the position of the UI text in the function below.
 ```cs
  private void LateUpdate()
     {
@@ -37,9 +37,10 @@ For the UI when it comes to the text connected to interactable obejcts it is att
             rotation * Vector3.up);
     }
  ```
-The text UI reference is fetched by using serialzeField, (link til linje 7), and then there is a static variable called instance (link til linje 8) that will be set to the Txt UI. This code also has to sttic functions to show and close the text. Using static is something I consider good code. This way one can call these functions from other scripts to decide when you want to show the text.
-Both the ShowUI and CloseUI functions(link til funksjonane) makes sure that the instance is set before trying to update the text, so that if there is no instance ther will not be any errors. 
-The ShowUI function could easily be improved by giving it a paramteter so that the text could be set to whatever best fits based on where the function is called, and no string given having a default string. As of now the text is hardcoded which I do not consider good code. Another thing that could possible improve the code is using an UI image instead of just text so that the text would be easier to read. And instead of just changing the text betweent he hardcoded text to a empty string, acticvating and disabling the text instead to save resources. 
+The reference to the text UI is obtained using serialzeField ([Line 7]( https://github.com/idarlm/imt3603-project/blob/3e0b2834ba212859e982b9740c4ea8fd88c94f45/Assets/Scripts/UI/interactionTextUI.cs#L7)), and then assigned to a static variable named "instance” ([Line 8]( https://github.com/idarlm/imt3603-project/blob/3e0b2834ba212859e982b9740c4ea8fd88c94f45/Assets/Scripts/UI/interactionTextUI.cs#L8)). This script also includes two static functions, namely ShowUI ([Line 37-45]( https://github.com/idarlm/imt3603-project/blob/3e0b2834ba212859e982b9740c4ea8fd88c94f45/Assets/Scripts/UI/interactionTextUI.cs#L37-L45)) and CloseUI ([Line 51-50]( https://github.com/idarlm/imt3603-project/blob/3e0b2834ba212859e982b9740c4ea8fd88c94f45/Assets/Scripts/UI/interactionTextUI.cs#L51-L60)), which are called to display and hide the UI text. Declaring these functions as static simplifies their invocation from other scripts, facilitating control over the visibility of the text. Both functions ensure that the instance variable is not null before attempting to update the text, preventing potential errors when the no text UI exists.
+
+Although I consider the overall code good, there are areas that could be refined for further improvement. Specifically, the ShowUI function could benefit from a parameter, allowing dynamic text assignment based on the calling context, with a default string provided in case none is specified. Currently, the text is hardcoded, a practice I consider suboptimal. Additionally, instead of simply toggling between hardcoded text and an empty string, it may be more resource-efficient to activate and deactivate the text as needed. Furthermore, while it may not directly impact code quality, utilizing a UI image instead of plain text could possibly enhance the game by improving the readability of the displayed text ingame.
+
 
   
 ### [Loader.cs](https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/UI/Loader.cs)
@@ -54,7 +55,7 @@ public enum Scene
 ```
 Apart from its readability the Loader script exemplifies good coding practices by incorporating a static class, enhancing the modularity of the code. The LoaderCallback function ([Line 32-36]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/UI/Loader.cs#L32-L36)) in combination with the [LoaderCallback]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/UI/LoaderCallback.cs) script further ensures that a scene does not display before it completes loading. It's also important to note that the code relies on Unity's SceneManager, necessitating the addition of scenes to the build settings for the loading mechanism to function properly.
   
-### [MainMenuUI]()
+### [MainMenuUI](https://github.com/idarlm/imt3603-project/blob/17779c6f017a7e275f14ff4af043da5eb3ef36d2/Assets/Scripts/UI/MainMenuUI.cs)
 The MainMenuUI script is not only clean and easily comprehensible but also highly adaptable for future functionalities. Utilizing SerializeField for the buttons streamlines the connection between the UI buttons and the script, making it effortless to add new buttons through the creation of new SerializeField.
 ```cs
     [SerializeField] private Button playButton; // Button component to start game
@@ -80,13 +81,13 @@ While the InteractTrigger script is easy to read and the logic is good, there ar
             FireTriggered(this, EventArgs.Empty);
         }
 ```
-The code checks for player interaction using Input.GetKeyDown, which, while not inherently bad, would be more maintainable and easier to update if incorporated into our dedicated [player input script]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/PlayerInput/IPlayerInput.cs). That way, changes can be applied uniformly across all scripts.
+The code checks for player interaction using Input.GetKeyDown, which, while not inherently bad, would be more maintainable and easier to update if incorporated into our dedicated [player input]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/PlayerInput/IPlayerInput.cs) script. That way, changes can be applied uniformly across all scripts.
 ```cs
 if (other.gameObject.name == "Player") {
 ```
 The collision checks in both the OnTriggerEnter and OnTriggerExit functions ([Lines 15-30]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/PuzzleFiles/InteractTrigger.cs#L15-L30)) presents another concern. Using hardcoded strings is considered bad practice, and using the same string in both functions compounds the issue. Implementing a const would be preferable to be able to easily update the string without introducing errors related to spelling. Additionally, using tags instead of gameObjects names is a more applied practice. However, in the context of potential multiplayer updates, relying on tags could pose a challenge as it wouldn't differentiate which player interacted with the object.
 
-### [KeypadListener.cs]() & [VisualListener.cs]()
+### [KeypadListener.cs](https://github.com/idarlm/imt3603-project/blob/17779c6f017a7e275f14ff4af043da5eb3ef36d2/Assets/PuzzleFiles/KeypadListener.cs) & [VisualListener.cs](https://github.com/idarlm/imt3603-project/blob/17779c6f017a7e275f14ff4af043da5eb3ef36d2/Assets/PuzzleFiles/VisualListener.cs)
 These scripts I consider bad code. They are connected to the same puzzle, which is the puzzle with three symbols that need to match for an event to fire. The logic of this puzzle was hard to code which is reflected in the code. We coded it so that each interactable object in the puzzle loops between four game objects. This is not the best solution as it takes up more resources and the code gets more confusing. If we had time we would have changed it to use one gameobject and then change that objects rotation. This would have improved both the scripts, as we would not need all the repeating code.
 
 The code in KeypadListener is not that easy to read and has a lot of repeating code. OnTriggered and OnTriggeredFinished is almost identical(link) in addition to the code inside the for loop in these functions.  Fix it by double for loop, instead of checking manually for each key. If check to check if all true similar to the one in triggergroup(link til triggergourp).
