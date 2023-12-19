@@ -9,8 +9,10 @@
 
 ## Good code
 
-### [TriggerGroup.cs]()
-I consider this code good as it is clean easy to read and is an important part of the puzzles. This code makes it possible to connect multiple puzzles or parts of puzzles together and only fire an event when all of them have been completed. At the tsart of the game it subsribes all the triggers to an event and adds as many false as there are triggers to a list. If a trigger is triggered it will find the right trigger and check if it is activated or not, so that it the puzzle only gets completed if all the parts are activated. One part of the code that I consider particulary good is the check if all the triggers are activated. 
+### [TriggerGroup.cs](https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/PuzzleFiles/TriggerGroup.cs)
+The TriggerGroup.cs script is well-structured, making it easy to comprehend and a crucial component of the puzzle system. It enables the connection of multiple puzzles or puzzle elements, ensuring that an event is only triggered when all associated elements have been successfully completed.
+At the beginning of the game, the code subscribes all triggers to an event and initializes a list with as many Booleans set to ‘false’ as there are triggers ([Line 14-16]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/PuzzleFiles/TriggerGroup.cs#L14-L16)). When a trigger is triggered, the code identifies the corresponding trigger and examines the Boolean value in the activated list at the corresponding index ([Line 26]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/PuzzleFiles/TriggerGroup.cs#L26)). Depending on this status, the value is updated to either true or false. This mechanism ensures the puzzle element's ability to be both activated and deactivated ([Line 29-32]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/PuzzleFiles/TriggerGroup.cs#L29-L32)). Consequently, it guarantees that the puzzle is only marked as completed when all its components are activated. Notably, the code includes an efficient check for the activation status of all triggers:
+
 
 ```cs
 if (activated.All(t => t)) {
@@ -40,8 +42,8 @@ Both the ShowUI and CloseUI functions(link til funksjonane) makes sure that the 
 The ShowUI function could easily be improved by giving it a paramteter so that the text could be set to whatever best fits based on where the function is called, and no string given having a default string. As of now the text is hardcoded which I do not consider good code. Another thing that could possible improve the code is using an UI image instead of just text so that the text would be easier to read. And instead of just changing the text betweent he hardcoded text to a empty string, acticvating and disabling the text instead to save resources. 
 
   
-### [Loader.cs]()
-In the loader script used for loading scenes I have created and Enum containing all the scenes. This I consider good code as it is easy to update and maintain  the code as well as making it less likely for an error to happen based on a spelling error. When loading a scene you can just use the enum and add ".ToString()"(link til loadscene linje).
+### [Loader.cs](https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/UI/Loader.cs)
+The Loader script is another example of code I consider good, specifically designed for loading scenes and implementing a loading screen during the process. A part of the script I consider particularly good is the Enum containing all the scenes. Using an Enum simplifies code updates and maintenance, while also mitigating the risk of errors attributable to spelling mistakes. Loading scenes becomes a straightforward task by utilizing the Enum and appending ".ToString()" (Line [27]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/UI/Loader.cs#L27) and [35]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/UI/Loader.cs#L35)).
 ```cs
 public enum Scene
     {
@@ -50,8 +52,7 @@ public enum Scene
         LoadingScene
     }
 ```
-In addition to being very readable and clean the Loader script has a static class which makes the code modular which is also considered good code.
-The code is however dependent on Unitys scenemanger so one have to make sure that the scenes are added to the build settings for the loading to work.
+Apart from its readability the Loader script exemplifies good coding practices by incorporating a static class, enhancing the modularity of the code. The LoaderCallback function ([Line 32-36]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/UI/Loader.cs#L32-L36)) in combination with the [LoaderCallback]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/UI/LoaderCallback.cs) script further ensures that a scene does not display before it completes loading. It's also important to note that the code relies on Unity's SceneManager, necessitating the addition of scenes to the build settings for the loading mechanism to function properly.
   
 ### [MainMenuUI]()
 The main menu code is maybe the cleanest code I have written in this project. It is very clean and readbale, as well as it is very easy to update if new functionalities were to be added.
