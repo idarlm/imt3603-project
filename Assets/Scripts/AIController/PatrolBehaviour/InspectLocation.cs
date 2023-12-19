@@ -61,7 +61,8 @@ namespace AIController.PatrolBehaviour
             if (Vector3.SqrMagnitude(context.Agent.transform.position - context.LastKnownTargetPosition) < _squareSwapDistance)
             {
                 var idle = new IdleState();
-                idle.SetCountdown(2f, AIStateLabel.Patrolling);
+                idle.SetCountdown(4f, AIStateLabel.Patrolling);
+                context.Alertness = 1;
                 context.StateMachine.ChangeState(idle);
             }
         }

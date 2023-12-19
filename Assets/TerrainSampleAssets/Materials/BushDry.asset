@@ -204,7 +204,7 @@ Material:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SSSColor: {r: 0.9811321, g: 0.44997406, b: 0.26379493, a: 0}
-    - _Subsurface_Scattering_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Subsurface_Scattering_Color: {r: 1, g: 0.9669811, b: 0.9669811, a: 0}
     - _Thickness_Remap: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6718516905730014579

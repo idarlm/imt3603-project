@@ -18,9 +18,9 @@ namespace CameraSystem
     [SerializeField] private float targetObjectHeightOffset = 1.5f;
     [SerializeField] private float horizontalDrift = 0.1f;
     [SerializeField] private float lookAheadMaxDistance = 0.0f;
-    
-    
-    private float   _cameraYaw;
+
+
+    private float _cameraYaw;
     private float   _cameraPitch;
     private Vector3 _front;
     
@@ -37,11 +37,14 @@ namespace CameraSystem
         _playerInput = new CombinedInput();
         _previousMousePos = Input.mousePosition;
         _previousPlayerPos = targetObject.position;
-        _front = new Vector3(
-            (float)(Math.Cos(_cameraYaw) * Math.Cos(_cameraPitch)),
-            (float)Math.Sin(_cameraPitch),
-            (float)(Math.Cos(_cameraPitch) * Math.Sin(-_cameraYaw))
-        );
+        // _front = new Vector3(
+        //     (float)(Math.Cos(_cameraYaw) * Math.Cos(_cameraPitch)),
+        //     (float)Math.Sin(_cameraPitch),
+        //     (float)(Math.Cos(_cameraPitch) * Math.Sin(-_cameraYaw))
+        // );
+        _front = targetObject.transform.forward;
+        _cameraPitch = Mathf.Asin(_front.y);
+        _cameraYaw = -Mathf.Atan2(_front.z, _front.x);
         _lookAtTargetPosition = targetObject.transform.position;
     }
 

@@ -36,7 +36,7 @@ namespace FX
         
         public void OnLostSightOfPlayerNear()
         {
-            _nearDetections = Math.Max(--_nearDetections, 0);
+            _nearDetections = Math.Max(_nearDetections - 1, 0);
         }
         
         private bool IsPlayerNearlyDetected()

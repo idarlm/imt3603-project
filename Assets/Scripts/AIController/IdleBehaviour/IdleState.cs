@@ -8,12 +8,14 @@ namespace AIController.IdleBehaviour
     class IdleState : AIState
     {
         private static readonly int IsIdle = Animator.StringToHash("isIdle");
+        private static readonly int Alertness = Animator.StringToHash("alertness");
         private float _idleTime;
         private AIStateLabel _nextState;
         private bool _idleStateIsTemporary;
         private float _seenPlayerInSeconds;
         private bool _possibleDetectionToHandle = false;
         
+
 
         public override AIStateLabel GetLabel()
         {
@@ -51,6 +53,10 @@ namespace AIController.IdleBehaviour
         
         public override void Update(AIContext context)
         {
+            // If stimuli is higher than alertness, set alertness to stimuli, but max 1.
+            context.Alertness = Mathf.Min(Mathf.Max(context.Alertness, context.Stimuli), 1);
+            context.Alertness -= Time.deltaTime * 0.2f;
+            context.RatAnimator.SetFloat(Alertness, context.Alertness);
             if (_idleStateIsTemporary)
             {
                 if (_idleTime < 0f)

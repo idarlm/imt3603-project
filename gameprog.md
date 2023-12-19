@@ -20,16 +20,17 @@
 
 | | André | Idar | Thea | Marthe |
 |----|----|----|----|----|
-|Puzzle Logic| | Touched | Half | Half | 
-|Puzzle prefabs & integration| | | | All |  
-|Player Movement & Rotation| | All | | | 
-|AI| All | | | | 
-|Camera system| All | | | | 
-|3D Modelling| All | | | | 
-|Sound Design| | | | | 
-|Sound System| | | | | 
-|UI| | Touched | All | | 
-|Main menu/Loading screen| | | All | | 
+|Puzzle Logic| | Touched | Half | Half |
+|Puzzle prefabs & integration| | | | All |
+|Player Movement & Rotation| | All | | |
+|AI| All | | | |
+|Camera system| All | | | |
+|3D Modelling| All | | | |
+|Sound Design| All | | | |
+|Sound System| All | | | |
+|Post Processing System| All | | | |
+|UI| | Touched | All | |
+|Main menu/Loading screen| | | All | |
 |Save/Snapshot system| | All | | |
 
 #### Strengths and weaknesses with unity
