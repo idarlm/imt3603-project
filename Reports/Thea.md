@@ -55,14 +55,12 @@ public enum Scene
 Apart from its readability the Loader script exemplifies good coding practices by incorporating a static class, enhancing the modularity of the code. The LoaderCallback function ([Line 32-36]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/UI/Loader.cs#L32-L36)) in combination with the [LoaderCallback]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/UI/LoaderCallback.cs) script further ensures that a scene does not display before it completes loading. It's also important to note that the code relies on Unity's SceneManager, necessitating the addition of scenes to the build settings for the loading mechanism to function properly.
   
 ### [MainMenuUI]()
-The main menu code is maybe the cleanest code I have written in this project. It is very clean and readbale, as well as it is very easy to update if new functionalities were to be added.
-For the buttons I used serialzeField, which makes it easy to connect the UI buttons to the script and easy to make a new serialzeField and button.
+The MainMenuUI script is not only clean and easily comprehensible but also highly adaptable for future functionalities. Utilizing SerializeField for the buttons streamlines the connection between the UI buttons and the script, making it effortless to add new buttons through the creation of new SerializeField.
 ```cs
     [SerializeField] private Button playButton; // Button component to start game
     [SerializeField] private Button quitButton; // Button component to quit game
 ```
-For the buttons logic they have onclick listeners, with lambda functions which makes them easy to read, easy to update and easy to add new buttons with it getting messy. 
-lambda in the click listeners, easy to read. Using the enum to easily load the right startscene
+The button logic incorporates onClick listeners with lambda functions, contributing to enhanced readability, ease of updates, and a neat approach when introducing new buttons. The function below also illustrates the simplicity of using the loading system.
 ```cs
      playButton.onClick.AddListener(() =>
         {
@@ -70,27 +68,23 @@ lambda in the click listeners, easy to read. Using the enum to easily load the r
             Loader.Load(Loader.Scene.DemoScene);
         });
 ```
-The onclick listners are inside an Awake function (link til linje 9), so that they get initialized before the game starts, this will ensure that the buttons are clickable as soon as they have loaded on the screen.
-We talked about adding a load from save function to our game but did not have the time. Adding a button for this owuld be really easy as we could easily have a third button which would only work if there was a save, and could change the play buttons text to be restart instead of start using the same method as we did in the interaction text script(link til der ej sette teksta til interact).
-One thing that could be imrpoved is the quit button. As of now it just quits the game with no warning could update to have a confirmation.
+Placing the onClick listeners inside an Awake function ([Line 9]( https://github.com/idarlm/imt3603-project/blob/c5faf370b70f57b3a581585c0022ef9441037149/Assets/Scripts/UI/MainMenuUI.cs#L9)) ensures their initialization before the game starts, guaranteeing clickable buttons as soon as they load on the screen. While there were discussions about adding a load-from-save function to the game, time constraints prevented its implementation. Nevertheless, introducing a button for this would be straightforward, creating a third button that functions only if there's a save. Additionally, the play button's text could dynamically change to "Restart" instead of "Start," using a similar method as employed in the [interactionTextUI]( https://github.com/idarlm/imt3603-project/blob/c5faf370b70f57b3a581585c0022ef9441037149/Assets/Scripts/UI/interactionTextUI.cs#L43) script. One potential improvement involves the quit button, which currently exits the game abruptly; updating it to include a confirmation dialogue would enhance the user experience.
 
 
 ## Bad code
 
-### [InteractTrigger.cs]()
-Although the interactTrigge script is easy to read it does have some issues that made me consider it as bad code. 
+### [InteractTrigger.cs](https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/PuzzleFiles/InteractTrigger.cs)
+While the InteractTrigger script is easy to read and the logic is good, there are some aspects that lead me to consider it as bad code.
 ```cs
  if (Input.GetKeyDown(KeyCode.E) && inRange) {
             FireTriggered(this, EventArgs.Empty);
         }
 ```
-When checking if the player is interacting we are using Input.GetKeyDown, which isn't necessarily bad code in it self, but considering that we have a whole script dedicated to playerinput, it should have been incorporated there and then used here, so that it would be more maintainable and easier to update across all the scripts.
-
-The other issue that makes me consider this code as bad is our collision check.
+The code checks for player interaction using Input.GetKeyDown, which, while not inherently bad, would be more maintainable and easier to update if incorporated into our dedicated [player input script]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/PlayerInput/IPlayerInput.cs). That way, changes can be applied uniformly across all scripts.
 ```cs
 if (other.gameObject.name == "Player") {
 ```
-First of all its bad practice using hardcoded strings, in addition to using the same string in both the OnTriggerEnter and OnTriggerExit functions(link til linje 17 og 26). Here we should have used a const instead so that we could easily update it without having any errors related to spelling errors. It would also be more correct to use tags. Another problem with this check is if we were to update the game for multiplayer. Using a tag could work, but then we wouldnt know which player interacted with the object.
+The collision checks in both the OnTriggerEnter and OnTriggerExit functions ([Lines 15-30]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/PuzzleFiles/InteractTrigger.cs#L15-L30)) presents another concern. Using hardcoded strings is considered bad practice, and using the same string in both functions compounds the issue. Implementing a const would be preferable to be able to easily update the string without introducing errors related to spelling. Additionally, using tags instead of gameObjects names is a more applied practice. However, in the context of potential multiplayer updates, relying on tags could pose a challenge as it wouldn't differentiate which player interacted with the object.
 
 ### [KeypadListener.cs]() & [VisualListener.cs]()
 These scripts I consider bad code. They are connected to the same puzzle, which is the puzzle with three symbols that need to match for an event to fire. The logic of this puzzle was hard to code which is reflected in the code. We coded it so that each interactable object in the puzzle loops between four game objects. This is not the best solution as it takes up more resources and the code gets more confusing. If we had time we would have changed it to use one gameobject and then change that objects rotation. This would have improved both the scripts, as we would not need all the repeating code.
