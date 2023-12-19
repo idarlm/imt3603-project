@@ -4,8 +4,8 @@
 |Code video | 0 |
 |Good Code  | 20 |
 |Bad Code | 30 |
-|Development process | 15 |
-|Reflection | 20 |
+|Development process | 10 |
+|Reflection | 25 |
 
 ## Video
 I have decided not to do a video, because i feel there is no specific Unity game engine functionalities I have used that is not somewhat visible through the code files.
