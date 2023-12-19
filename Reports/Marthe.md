@@ -11,6 +11,7 @@
 I have decided not to do a video, because i feel there is no specific Unity game engine functionalities I have used that is not somewhat visible through the code files.
 
 ## Good code
+#### AnimationOnEvent, MoveOnEvent & RotateOnEvent
 I have implemented animation code to use on doors, walls, etc. to rotate and move. The code is implemented in a way that make it easier make new animations and have them activated on a fireTrigger. For example, to shrink something, all that is needed is a new code that inherit the AnimationOnEvent class, and shrink the targeted object by changing its scale using something like written below.
 ```cs
 transform.localScale += new Vector3(x, y, z);
@@ -25,6 +26,7 @@ Overall, the purpose of the AnimateOnEvent class and the scripts that inherit th
 
 
 ## Bad code
+#### VisualListener & KeypadListener
 Some of the code that me and another group member wrote that I think was bad was the code for the Keypad puzzle, where you need to interact with a cube to set in the right number sequence to open the castle door. Not only is the code badly implemented, but the puzzle idea as well. 
 We originally planned a puzzle that had three spots for one out of four different symbols. I admit we didn't think all to well through the implementation of this, and realised all too late that we could have done it much easier and better. 
 The objects hierarchy in Unity are set up like this:<br>
