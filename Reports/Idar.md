@@ -24,6 +24,8 @@ The code is divided into 6 behaviour classes:
     - SprintingState
 - PushingObjectState
 
+![Screenshot 2023-12-20 at 17 02 20](https://github.com/idarlm/imt3603-project/assets/101576034/2a8de82e-3137-4079-94c6-2544838c7592)
+
 These 6 classes are encapsulated by the PlayerMovementSystem class, which is passed along as context to the active state object. Most of the state data is hoisted in this class.
 Initially the state management logic (state switching etc.) was part of the PlayerMovementSystem class, but it was later refactored into it's own class, which André then expanded upon when developing the AI system.
 
