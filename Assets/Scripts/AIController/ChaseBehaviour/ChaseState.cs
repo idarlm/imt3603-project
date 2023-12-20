@@ -1,11 +1,6 @@
 using AIController.IdleBehaviour;
 using FX;
-using FX.Visual;
-using FX.Visual.Effects;
 using PlayerMovement;
-using StateMachine;
-using Unity.VisualScripting;
-using UnityEditor.Timeline;
 using UnityEngine;
 
 namespace AIController.ChaseBehaviour

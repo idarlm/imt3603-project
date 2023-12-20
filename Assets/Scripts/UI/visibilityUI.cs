@@ -29,7 +29,9 @@ public class VisibilityUI : MonoBehaviour
         illuminationSum = Mathf.Lerp(_previousIllumination, illuminationSum, Time.deltaTime * 5f);
 
         // Adjust the alpha of the UI image based on the player's illumination level
-        visibilityImage.color = visibilityImage.color.WithAlpha(illuminationSum);
+        var c = visibilityImage.color;
+        c.a = illuminationSum;
+        visibilityImage.color = c;
 
         // Lerping the stamina bar based on the stamina timer
         staminaBar.value = Mathf.Lerp(0f, 1f, stamina);

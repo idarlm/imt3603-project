@@ -25,6 +25,7 @@ namespace Pathing
             cageTrigger.ToggleOff();
         }
 
+        #if UNITY_EDITOR
         void OnDrawGizmos()
         {
             Gizmos.color = Color.red.WithAlpha(0.5f);
@@ -32,5 +33,6 @@ namespace Pathing
             Gizmos.color = Color.green.WithAlpha(0.5f);
             Gizmos.DrawSphere(playerTarget.position, 0.5f);
         }
+        #endif
     }
 }

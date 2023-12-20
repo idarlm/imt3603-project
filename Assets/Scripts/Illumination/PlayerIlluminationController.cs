@@ -1,8 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Illumination
 {
@@ -38,6 +40,7 @@ namespace Illumination
             IlluminationManager.Instance.ResetIllumination();
         }
 
+        #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             Handles.Label(leftHand.position, Math.Round(IlluminationManager.Instance.GetIllumination(leftHand.position,HumanBodyBones.LeftHand), 2).ToString());
@@ -45,6 +48,7 @@ namespace Illumination
             Handles.Label(head.position, Math.Round(IlluminationManager.Instance.GetIllumination(head.position,HumanBodyBones.Head), 2).ToString());
             Handles.Label(chest.position, Math.Round(IlluminationManager.Instance.GetIllumination(chest.position,HumanBodyBones.Chest), 2).ToString());
         }
+        #endif
         
         public PlayerIllumination GetIllumination()
         {

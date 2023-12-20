@@ -17,7 +17,7 @@ namespace AIController
 
         private void Update()
         {
-            _meshRenderer.materials[0].color = Color.white.WithAlpha(Easing.InQuad(stateMachine.DetectionPercentage));
+            _meshRenderer.materials[0].color = new Color(1.0f, 1.0f, 1.0f, Easing.InQuad(stateMachine.DetectionPercentage));
             // _meshRenderer.material.color = _meshRenderer.material.color.WithAlpha(stateMachine.DetectionPercentage);
         }
     }
