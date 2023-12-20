@@ -3,16 +3,15 @@ using AIController.Settings;
 using FX;
 using Illumination;
 using Pathing;
-using PlayerMovement;
 using StateMachine;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace AIController
 {
@@ -96,7 +95,7 @@ namespace AIController
         /**
          * GIZMOS 
          */
-
+        #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             var position = visionTransform.position;
@@ -143,6 +142,7 @@ namespace AIController
             
             
         }
+        #endif
         
         
         /**
