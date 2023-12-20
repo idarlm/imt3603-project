@@ -4,6 +4,10 @@
 
 [Video](https://drive.google.com/file/d/1MZ5threZp_iVDsykIGMxSYLG7tWscH_6/view)
 
+## Documentation
+- [gameprog.md](gameprog.md)
+- [Individual reports](Reports)
+
 ## Installation
 
 
@@ -15,10 +19,3 @@ Explore and solve puzzles to escape the rats and the castle.
 - Toggle crouch/sneak with Ctrl
 - Jump with Spacebar
 - Press E to interact with objects
-
-## Documentation
-- [gameprog.md](https://github.com/idarlm/imt3603-project/blob/247e600c9ffb8b3656a2ee7520f03253f70c343c/gameprog.md)
-- [Individual reports](https://github.com/idarlm/imt3603-project/tree/247e600c9ffb8b3656a2ee7520f03253f70c343c/Reports)
-- Gameplay video
-
-
