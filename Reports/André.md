@@ -2,12 +2,14 @@
 
 | Description         | min  | def  | max  |
 | ------------------- | ---- | ---- | ---- |
-| Gameplay video      | 5    | 10   | 20   |
-| Code video          | 0    | 10   | 15   |
-| Good Code           | 10   | 25   | 30   |
-| Bad Code            | 10   | 25   | 30   |
+| Gameplay video      | 5    | 16   | 20   |
+| Code video          | 0    | 0    | 15   |
+| Good Code           | 10   | 27   | 30   |
+| Bad Code            | 10   | 27   | 30   |
 | Development process | 10   | 10   | 30   |
 | Reflection          | 10   | 20   | 30   |
+
+
 
 
 
@@ -40,7 +42,17 @@ The illumination is calculated once per square. If an AI has already queried the
 
 Following a state machine pattern allowed complex chains of logic to be separated into different AIStates. While there are some issues  with how I've used states mentioned under bad code, I believe that it's still a positive. An example of a state  where it's easy to track what the AI does is [InspectLocation](https://github.com/idarlm/imt3603-project/blob/main/Assets/Scripts/AIController/PatrolBehaviour/InspectLocation.cs). The Update method contains little logic, making it fairly simple to read and rework. Trying to work all the logic of the various states into a single class would be messy, hard to maintain and develop, and likely an awful nested mess of if else statements.
 
+## Gizmos
 
+This is more about the usability of scripts in the context of the Unity engine more so than how the code itself is written, so I question whether it fits in here, but I'll include it regardless as it was an important factor in making some of the scripts be practical in use. See the gameplay video at around the 20:30 mark for a visual demonstration.
+
+The system used for AI pathing, the destination nodes to be specific, uses gizmos to indicate which node is next and which is the previous in the chain, making it easy to tell at a glance if you've set the wrong reference. Additionally, setting a node's next or previous to itself triggers a visual warning in the UI and a popup error message.This is done in the [OnDrawGirzmos()](https://github.com/idarlm/imt3603-project/blob/55b39a74f5a0339254330a6949c7e4bb34e56896/Assets/Scripts/Pathing/Waypoint.cs#L108) method. 
+
+The same has been done with the rat, letting you see what their detection range is, their FOV where the player can be seen, target waypoint  and cage, etc. 
+
+## StateFactory
+
+To instantiate the various states I utilize [StateFactory](https://github.com/idarlm/imt3603-project/blob/55b39a74f5a0339254330a6949c7e4bb34e56896/Assets/Scripts/AIController/StateFactory.cs#L11). The current implementation takes an enum and returns an AIState subclass based on the provided enum. The benefit of this is that it's easy to swap out implementations if you want to write variations on the same behaviour. Rather than having to go through code and replace `new SomeState()` in all places it is used, I instead only have to swap out the appropriate line in the switch statement. A slight sin against this is instances where I instantiate a "temporary" idle where I need to know the type to use a method it has. Instead a temporary idle should have just been a distinct state that utilized some parameter on the AIContext object to determine how long to idle.
 
 # Bad Code
 
@@ -111,7 +123,11 @@ Being the individual that shaped the direction the most in terms of art and goal
 
 While I had prior experience with 3D modeling and scene creation, I had no direct experience with any game engine in terms of coding, so the course provided an interesting opportunity for learning something closely related to a subject I was already interested in. 
 
-While I have used  singletons before, I've not used them like I've done in this project where a lot of scripts had a need to be able to be placed on an object and not be manually set up to reduce work loads. While singletons can be a bit messy in that the top level visibility of its use in code can be subtle, I found it a very useful tool. 
+While I have used  singletons before, I've not used them like I've done in this project where a lot of scripts had a need to be able to be placed on an object and not be manually set up to reduce work loads. While singletons can be a bit messy in that the top level visibility of its use in code can be subtle, I found it a very useful tool as a means of communicating between game objects. 
+
+A regrettable point in our project was the fact that we never had a game that had enough mechanics in place until very late in the process, which meant there was little to playtest. I noticed the need for playtesting quite a bit when recording the playthrough as, while I had created a world that looked palatable, the interaction between player, enemy and the world did not add up to  a pleasant gaming experience. 
+
+I could also have used less time on 3D modeling, asset hunting and world creation, though at the same time I don't think me contributing even more code would have benefited the group dynamic much. The fact that I was able to combine my existing passion for 3D content  and programming was what kept me going throughout the project, in addition to the interesting way one has to think when programming for a game engine. Quite different from what I'm used to from other courses. 
 
 
 
