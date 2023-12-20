@@ -15,7 +15,7 @@
 
 # Overview
 
-Throughout the project my primary task has been to develop  the enemy rats  that hunt for our mouse character. At the core of this is the AIStateMachine class, building on a template made by Idar. Below is a diagram that shows the relationship between that class and other important components of the system I've built up throughout the project. 
+Throughout the project my primary task has been to develop  the enemy rats  that hunt for our mouse character. At the core of this is the AIStateMachine class, building on a generic class made by Idar. Below is a diagram that shows the relationship between that class and other important components of the system I've built up throughout the project. 
 
 - ![gampeprog](images/gampeprog.png)
 
@@ -28,7 +28,7 @@ _An overview of the most important classes and how they relate to the AI system_
 
 In contrast to the bad practice of using magic numbers, as mentioned in the Bad Code section, the AI system gradually moved towards having parameters exposed as fields tweakable in the Unity UI, and eventually towards using a single object to broadcast these values to the various enemies on startup of a scene. 
 
-[AISettingsController](https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/AIController/Settings/AISettingsController.cs#L1) works in tandem with the [AISettingsManager ](https://github.com/idarlm/imt3603-project/blob/main/Assets/Scripts/AIController/Settings/AISettingsManager.cs) singleton to pass values to the AI on the map. The purpose of using  a singleton as a communications channel is avoiding the need to reference the AISettingsController when placing an AI in the map. While singletons can feel questionable, I often found myself reaching for the pattern when I needed to communicate between  objects without having to explicitly pass them a reference, which was  more or less a must for objects such as light sources and AI that needed to be able to know about something without incurring the work load of manually setting up a reference. 
+[AISettingsController](https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/AIController/Settings/AISettingsController.cs#L1) works in tandem with the [AISettingsManager ](https://github.com/idarlm/imt3603-project/blob/main/Assets/Scripts/AIController/Settings/AISettingsManager.cs) singleton to pass values to the AI on the map. The purpose of using  a singleton as a communications channel is avoiding the need to reference the `AISettingsController` when placing an AI in the map. While singletons can feel questionable, I often found myself reaching for the pattern when I needed to communicate between  objects without having to explicitly pass them a reference, which was  more or less a must for objects such as light sources and AI that needed to be able to know about something without incurring the work load of manually setting up a reference. 
 
 ### Illumination System
 
@@ -40,7 +40,7 @@ The illumination is calculated once per square. If an AI has already queried the
 
 ## State Machine
 
-Following a state machine pattern allowed complex chains of logic to be separated into different AIStates. While there are some issues  with how I've used states mentioned under bad code, I believe that it's still a positive. An example of a state  where it's easy to track what the AI does is [InspectLocation](https://github.com/idarlm/imt3603-project/blob/main/Assets/Scripts/AIController/PatrolBehaviour/InspectLocation.cs). The Update method contains little logic, making it fairly simple to read and rework. Trying to work all the logic of the various states into a single class would be messy, hard to maintain and develop, and likely an awful nested mess of if else statements.
+Following a state machine pattern allowed complex chains of logic to be separated into different AIStates. While there are some issues  with how I've used states mentioned under bad code, I believe that it's still a positive. An example of a state  where it's easy to track what the AI does is [InspectLocation](https://github.com/idarlm/imt3603-project/blob/main/Assets/Scripts/AIController/PatrolBehaviour/InspectLocation.cs). The `Update` method contains little logic, making it fairly simple to read and rework. Trying to work all the logic of the various states into a single class would be messy, hard to maintain and develop, and likely an awful nested mess of if else statements.
 
 ## Gizmos
 
@@ -52,7 +52,7 @@ The same has been done with the rat, letting you see what their detection range 
 
 ## StateFactory
 
-To instantiate the various states I utilize [StateFactory](https://github.com/idarlm/imt3603-project/blob/55b39a74f5a0339254330a6949c7e4bb34e56896/Assets/Scripts/AIController/StateFactory.cs#L11). The current implementation takes an enum and returns an AIState subclass based on the provided enum. The benefit of this is that it's easy to swap out implementations if you want to write variations on the same behaviour. Rather than having to go through code and replace `new SomeState()` in all places it is used, I instead only have to swap out the appropriate line in the switch statement. A slight sin against this is instances where I instantiate a "temporary" idle where I need to know the type to use a method it has. Instead a temporary idle should have just been a distinct state that utilized some parameter on the AIContext object to determine how long to idle.
+To instantiate the various states I utilize [StateFactory](https://github.com/idarlm/imt3603-project/blob/55b39a74f5a0339254330a6949c7e4bb34e56896/Assets/Scripts/AIController/StateFactory.cs#L11). The current implementation takes an enum and returns an `AIState` subclass based on the provided enum. The benefit of this is that it's easy to swap out implementations if you want to write variations on the same behaviour. Rather than having to go through code and replace `new SomeState()` in all places it is used, I instead only have to swap out the appropriate line in the switch statement. A slight sin against this is instances where I instantiate a "temporary" idle where I need to know the type to use a method it has. Instead a temporary idle should have just been a distinct state that utilized some parameter on the `AIContext` object to determine how long to idle.
 
 # Bad Code
 
@@ -66,7 +66,7 @@ A frequent sin  throughout the project has been the dreaded magic number, where 
 
 ### Communication with other objects
 
-While I think generally the state machine pattern works well by reducing various if statements, the system could benefit from being better structured. [AIState]() is the class defining the common behavior of the states the AI is in. As it is now, it is hard to track where various values gets uploaded to accompanying systems. The  Enter and Exit methods on this base class should probably have handled more of this logic, something which instead has repeated itself across the implementations in the subclasses, a ripe source for bugs. [AIStateMachine](https://github.com/idarlm/imt3603-project/blob/main/Assets/Scripts/AIController/AIStateMachine.cs) interacts with quite a  few systems through its AIState object. When this becomes hard to track, debugging the enemies becomes quite challenging, having to look through X amount of state subclasses, track how they transition and checking whether the correct operation is being done for each class. Moving more  logic into methods on the base class could allow logic to be easily located, and then just have the subclasses invoke different logic based on the needs of that state. Regardless of the solution, the system has grown big and hard to track.
+While I think generally the state machine pattern works well by reducing various if statements, the system could benefit from being better structured. [AIState]() is the class defining the common behavior of the states the AI is in. As it is now, it is hard to track where various values gets uploaded to accompanying systems. The  ` Enter`  and `Exit` methods on this base class should probably have handled more of this logic, something which instead has repeated itself across the implementations in the subclasses, a ripe source for bugs. [AIStateMachine](https://github.com/idarlm/imt3603-project/blob/main/Assets/Scripts/AIController/AIStateMachine.cs) interacts with quite a  few systems through its AIState object. When this becomes hard to track, debugging the enemies becomes quite challenging, having to look through X amount of state subclasses, track how they transition and checking whether the correct operation is being done for each class. Moving more  logic into methods on the base class could allow logic to be easily located, and then just have the subclasses invoke different logic based on the needs of that state. Regardless of the solution, the system has grown big and hard to track.
 
 ### State granularity
 
@@ -74,7 +74,7 @@ Some `Update` implementations grew to be too messy during development, with seve
 
 ### State  Transitions
 
-Currently it's a bit hard to track what states can lead to what other states, as state transitions happens in various if else statements in the Update method. A cleaner approach could be to do something like in Unity's Animator system, where transitions are caused by a set  of conditions that can be defined somewhere, preferrably in the Enter method, which then can be checked at the end of each Update call with the body above ideally only containing updates of appropriate values. Below is some pseudo code.
+Currently it's a bit hard to track what states can lead to what other states, as state transitions happens in various if else statements in the Update method. A cleaner approach could be to do something like in Unity's Animator system, where transitions are caused by a set  of conditions that can be defined somewhere, preferrably in the `Enter`  method, which then can be checked at the end of each Update call with the body above ideally only containing updates of appropriate values. Below is some pseudo code.
 
 ```c#
 void SetTransitionCondition(enum type, string name, (type)=>bool condition, AIState targetState) {
@@ -95,7 +95,7 @@ void Update(Context context) {
 }
 ```
 
-It would have to be more robust than this to factor in multiple conditions being met for a transition, but it would be a start in cleaning the code up as transitions always be defined in one place. 
+It would have to be more robust than this to factor in multiple conditions being met for a transition, but it would be a start in cleaning the code up as transitions would always be defined in one place. 
 
 ## FX System
 
@@ -124,13 +124,13 @@ public abstract class TransitionEffect<T>
 }
 ```
 
-Which is just a slight alteration of the original Effect abstract class and replacing the ApplyEffect parameter with a generic one.
+Which is just a slight alteration of the original Effect abstract class and replacing the `ApplyEffect()` parameter with a generic one.
 
 
 
 ## AIInteractionoFXManager
 
-While not the worst, it does have a slight smell to it. A good object oriented principle from SOLID is the Separation of Concern. [AIInteractionFXManager](https://github.com/idarlm/imt3603-project/blob/c238026ec51e6ca1c365c1ca43056a302bc8ffba/Assets/Scripts/FX/AIInteractionFXManager.cs#L17C33-L17C33) is responsible for queuing up FX in response to AI interaction, but it is also used by the rats to get information about the players capture state. A cleaner approach would be to let the state of enemy-player interaction be handled by one class, then have the FX system communicate with it and cue FX in response to state change. As can be seen by the diagram, AIInteractionFXManager also depends on the classes that interact with Unity's audio and volume components and control these. This is  the only singleton where the dependencies are not all in the direction of the singleton. I consider it cleaner to have the singleton have some data and methods to do operations on these, functioning as a communications channel. The current solution just feels less clean.
+While not the worst, it does have a slight smell to it. A good object oriented principle from SOLID is the Separation of Concern. [AIInteractionFXManager](https://github.com/idarlm/imt3603-project/blob/c238026ec51e6ca1c365c1ca43056a302bc8ffba/Assets/Scripts/FX/AIInteractionFXManager.cs#L17C33-L17C33) is responsible for queuing up FX in response to AI interaction, but it is also used by the rats to get information about the players capture state. A cleaner approach would be to let the state of enemy-player interaction be handled by one class, then have the FX system communicate with it and cue FX in response to state change. As can be seen by the diagram, `AIInteractionFXManager` also depends on the classes that interact with Unity's audio and volume components and control these. This is  the only singleton where the dependencies are not all in the direction of the singleton. I consider it cleaner to have the singleton have some data and methods to do operations on these, functioning as a communications channel. The current solution just feels less clean.
 
 # Reflection
 
