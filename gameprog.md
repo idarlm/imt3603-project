@@ -12,7 +12,7 @@
 
 <br>
 
-## [Gameplay Video]()
+## [Gameplay Video](https://drive.google.com/file/d/1MZ5threZp_iVDsykIGMxSYLG7tWscH_6/view?usp=sharing)
 
 ## Development process
 

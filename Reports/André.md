@@ -4,40 +4,25 @@
 | ------------------- | ---- | ---- | ---- |
 | Gameplay video      | 5    | 10   | 20   |
 | Code video          | 0    | 10   | 15   |
-| Good Code           | 10   | 20   | 30   |
-| Bad Code            | 10   | 20   | 30   |
-| Development process | 10   | 20   | 30   |
+| Good Code           | 10   | 25   | 30   |
+| Bad Code            | 10   | 25   | 30   |
+| Development process | 10   | 10   | 30   |
 | Reflection          | 10   | 20   | 30   |
 
 
 
 # Overview
 
-Throughout the project my primary task has been to develop  the enemy rats  that hunt for our titular mouse. This primarily involved, but was not limited to, the combination of a state machine communicating with an Unity Animator, a graphically programmed state machine handline the animation transitions. 
+Throughout the project my primary task has been to develop  the enemy rats  that hunt for our mouse character. At the core of this is the AIStateMachine class, building on a template made by Idar. Below is a diagram that shows the relationship between that class and other important components of the system I've built up throughout the project. 
 
-- Enemies
+- ![gampeprog](images/gampeprog.png)
 
-  - AI State machine
-  - Animation
-  - Stealth Mechanics
-  - Modeling
-  - Pathing system
-    - In world nodes acting as traversable linked lists
-    - Cages with a destination point for  the AI and player on capture
 
-- Camera
-
-- FX and Audio
-
-  - Changes in music based on detection
-  - Sound FX when nearly spotted, chase start, chase end, capture
-  - Changes in  Visual FX in response to being hunted or captured.
-
-  
+_An overview of the most important classes and how they relate to the AI system_
 
 # Good Code
 
-### AI  Settings
+## AI Settings
 
 In contrast to the bad practice of using magic numbers, as mentioned in the Bad Code section, the AI system gradually moved towards having parameters exposed as fields tweakable in the Unity UI, and eventually towards using a single object to broadcast these values to the various enemies on startup of a scene. 
 
@@ -53,7 +38,7 @@ The illumination is calculated once per square. If an AI has already queried the
 
 ## State Machine
 
-## State
+Following a state machine pattern allowed complex chains of logic to be separated into different AIStates. While there are some issues  with how I've used states mentioned under bad code, I believe that it's still a positive. An example of a state  where it's easy to track what the AI does is [InspectLocation](https://github.com/idarlm/imt3603-project/blob/main/Assets/Scripts/AIController/PatrolBehaviour/InspectLocation.cs). The Update method contains little logic, making it fairly simple to read and rework. Trying to work all the logic of the various states into a single class would be messy, hard to maintain and develop, and likely an awful nested mess of if else statements.
 
 
 
@@ -65,14 +50,6 @@ The illumination is calculated once per square. If an AI has already queried the
 
 A frequent sin  throughout the project has been the dreaded magic number, where during testing a new feature, plain numbers have been put in conditions and similar, where they then often remained. While it might make something work then and there, the need to change these values often  arrive sooner rather than later, and it was frequently hard to track down where exactly these values were set and used. The obvious solution is to utilize serialized fields exposed in the Unity editor, allowing easy and rapid tweaking during development, which is what I moved towards more and more.
 
-
-
-## FX System
-
-While the FX systems  works OK as is, when I wrote it a lot of repeating  patterns turned up  for  performing some  transition  over time, such as Increasing the volume of a song to fade it  in, or fade the screen to black. An improvement would be to write a generic system able to  que up and progress these transitions per frame, and then let the implementation of a base class determine what's actually done each frame. Since the sound system was added the last few days, this was not done, but it'll something I'll be considering if I  keep the project going.
-
-[AudioFade](https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/FX/Audio/AudioController.cs#L11C29-L11C29) looks suspiciously similar to [Effect](https://github.com/idarlm/imt3603-project/blob/c238026ec51e6ca1c365c1ca43056a302bc8ffba/Assets/Scripts/FX/Visual/Effects/Effect.cs#L9)
-
 ## AI System
 
 ### Communication with other objects
@@ -83,21 +60,60 @@ While I think generally the state machine pattern works well by reducing various
 
 Some `Update` implementations grew to be too messy during development, with several nested if statements. A solution to this, which was partially applied, would be to split AIStates up into smaller ones, though it's a balance between having to maintain too many small classes versus having to maintain messy `Update`logic like in [IdleState](https://github.com/idarlm/imt3603-project/blob/c238026ec51e6ca1c365c1ca43056a302bc8ffba/Assets/Scripts/AIController/IdleBehaviour/IdleState.cs#L52)
 
+### State  Transitions
 
+Currently it's a bit hard to track what states can lead to what other states, as state transitions happens in various if else statements in the Update method. A cleaner approach could be to do something like in Unity's Animator system, where transitions are caused by a set  of conditions that can be defined somewhere, preferrably in the Enter method, which then can be checked at the end of each Update call with the body above ideally only containing updates of appropriate values. Below is some pseudo code.
+
+```c#
+void SetTransitionCondition(enum type, string name, (type)=>bool condition, AIState targetState) {
+	// register some transition
+}
+
+void Enter() {
+	SetTransitionCondition(Float, "Lost Sight", (x)=>{x < 5.f}, AIStateLabel.Idle);
+    SetTransitionCondition(Float, "Seen Player", (x)=>{x > 10.f}, AIStateLabel.Chase);
+}
+
+void Update(Context context) {
+    // update context values
+    
+    CheckTransitionConditions(
+    	// list of key value pairs
+    );
+}
+```
+
+It would have to be more robust than this to factor in multiple conditions being met for a transition, but it would be a start in cleaning the code up as transitions always be defined in one place. 
+
+## FX System
+
+While the FX systems  works OK as is, when I wrote it a lot of repeating  patterns turned up  for  performing some  transition  over time, such as Increasing the volume of a song to fade it  in, or fade the screen to black. An improvement would be to write a generic system able to  que up and progress these transitions per frame, and then let the implementation of a base class determine what's actually done each frame. Since the sound system was added the last few days, this was not done, but it'll something I'll be considering if I  keep the project going.
+
+[AudioFade](https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/FX/Audio/AudioController.cs#L11C29-L11C29) looks suspiciously similar to [Effect](https://github.com/idarlm/imt3603-project/blob/c238026ec51e6ca1c365c1ca43056a302bc8ffba/Assets/Scripts/FX/Visual/Effects/Effect.cs#L9)
 
 ## AIInteractionoFXManager
 
-While not the worst, it does have a slight smell to it. A good object oriented principle from SOLID is the Separation of Concern. [AIInteractionFXManager](https://github.com/idarlm/imt3603-project/blob/c238026ec51e6ca1c365c1ca43056a302bc8ffba/Assets/Scripts/FX/AIInteractionFXManager.cs#L17C33-L17C33) is responsible for queuing up FX in response to AI interaction, but it is also used by the rats to get information about the players capture state. A cleaner approach would be to let the state of enemy-player interaction be handled by one class, then have the FX system communicate with it and cue FX in response to state change. 
-
-
-
-
-
-
-
-
+While not the worst, it does have a slight smell to it. A good object oriented principle from SOLID is the Separation of Concern. [AIInteractionFXManager](https://github.com/idarlm/imt3603-project/blob/c238026ec51e6ca1c365c1ca43056a302bc8ffba/Assets/Scripts/FX/AIInteractionFXManager.cs#L17C33-L17C33) is responsible for queuing up FX in response to AI interaction, but it is also used by the rats to get information about the players capture state. A cleaner approach would be to let the state of enemy-player interaction be handled by one class, then have the FX system communicate with it and cue FX in response to state change. As can be seen by the diagram, AIInteractionFXManager also depends on the classes that interact with Unity's audio and volume components and control these. This is  the only singleton where the dependencies are not all in the direction of the singleton. I consider it cleaner to have the singleton have some data and methods to do operations on these, functioning as a communications channel. The current solution just feels less clean.
 
 # Reflection
+
+## Development  Process
+
+Fairly early on in the project it became pretty apparent that the group had a divide down the middle in terms of ambition and motivation. I think it's fair to say that one half got demotivated by the speed at which the other half worked as they expressed feeling left behind due to being less proficient, and the other half got demotivated by the friction this created. While I won't speculate on reasons or the why of the way things turned out too much, I will reflect briefly on  what I could have done better personally. 
+
+While frequent no-shows and messages on discords at midnight prior to the set work-day is frustrating, I should still show the emotional maturity to not let frustrations impact the degree to which I utilize issues and other forms of git/jira related communications. Idar and myself were often physically present alone during some periods, during which we synchronized work through simple discussion. We didn't see this like a large problem as there was little overlap in the code we wrote, but I suspect not using issue tracking just increased the problems we had with group cohesion. 
+
+Being the individual that shaped the direction the most in terms of art and goals, I should also have taken up the responsibility of guiding those less able to a greater extent. My impression was that we had a relatively flat structure where we were expected to take initiative and work dynamically, but I think there was a growing expectation that we assign others  tasks. At the same time, when we did try to provide things to do, a lack of a common programming lingo was often challenging. It's hard for me to know what people are capable of doing, or what they would need, or want, guidance on.
+
+
+
+## Game Programming
+
+While I had prior experience with 3D modeling and scene creation, I had no direct experience with any game engine in terms of coding, so the course provided an interesting opportunity for learning something closely related to a subject I was already interested in. 
+
+While I have used  singletons before, I've not used them like I've done in this project where a lot of scripts had a need to be able to be placed on an object and not be manually set up to reduce work loads. While singletons can be a bit messy in that the top level visibility of its use in code can be subtle, I found it a very useful tool. 
+
+
 
 
 
