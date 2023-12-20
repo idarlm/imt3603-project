@@ -101,7 +101,32 @@ It would have to be more robust than this to factor in multiple conditions being
 
 While the FX systems  works OK as is, when I wrote it a lot of repeating  patterns turned up  for  performing some  transition  over time, such as Increasing the volume of a song to fade it  in, or fade the screen to black. An improvement would be to write a generic system able to  que up and progress these transitions per frame, and then let the implementation of a base class determine what's actually done each frame. Since the sound system was added the last few days, this was not done, but it'll something I'll be considering if I  keep the project going.
 
-[AudioFade](https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/FX/Audio/AudioController.cs#L11C29-L11C29) looks suspiciously similar to [Effect](https://github.com/idarlm/imt3603-project/blob/c238026ec51e6ca1c365c1ca43056a302bc8ffba/Assets/Scripts/FX/Visual/Effects/Effect.cs#L9)
+[AudioFade](https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/Scripts/FX/Audio/AudioController.cs#L11C29-L11C29) looks suspiciously similar to [Effect](https://github.com/idarlm/imt3603-project/blob/c238026ec51e6ca1c365c1ca43056a302bc8ffba/Assets/Scripts/FX/Visual/Effects/Effect.cs#L9). A  suitable solution could be something like:
+
+```c#
+public abstract class TransitionEffect<T>
+{
+    protected float TransitionTime = 0.5f;
+    protected float ElapsedTime = 0f;
+
+    public void Progress(float deltaTime)
+    {
+        ElapsedTime += deltaTime;
+        ApplyEffect(volume);
+    }
+
+    public bool IsDone()
+    {
+        return ElapsedTime >= TransitionTime;
+    }
+
+    protected abstract void ApplyEffect(T argument);
+}
+```
+
+Which is just a slight alteration of the original Effect abstract class and replacing the ApplyEffect parameter with a generic one.
+
+
 
 ## AIInteractionoFXManager
 
@@ -128,6 +153,8 @@ While I have used  singletons before, I've not used them like I've done in this 
 A regrettable point in our project was the fact that we never had a game that had enough mechanics in place until very late in the process, which meant there was little to playtest. I noticed the need for playtesting quite a bit when recording the playthrough as, while I had created a world that looked palatable, the interaction between player, enemy and the world did not add up to  a pleasant gaming experience. 
 
 I could also have used less time on 3D modeling, asset hunting and world creation, though at the same time I don't think me contributing even more code would have benefited the group dynamic much. The fact that I was able to combine my existing passion for 3D content  and programming was what kept me going throughout the project, in addition to the interesting way one has to think when programming for a game engine. Quite different from what I'm used to from other courses. 
+
+The interaction between my  AI Script and the animations I chose for my model and how they synergized  was very interesting. Since the look direction of the rat plays a large part in how they detect the player, I added in behavior such as playing an animation where the rat looks behind itself if the player is stood  closely behind the rat, or had the Animator play more frantic animations where the rat looks around it in a searching fashion when it has caught a glimpse of the player or "heard" something above a certain threshold. While there are plenty of quirks and bugs in the animations, I am still pleased with how 'lifelike' they turned out despite the relative simplicity of the underlying code. 
 
 
 
