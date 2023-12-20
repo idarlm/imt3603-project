@@ -88,35 +88,29 @@ if (other.gameObject.name == "Player") {
 The collision checks in both the OnTriggerEnter and OnTriggerExit functions ([Lines 15-30]( https://github.com/idarlm/imt3603-project/blob/be708eb4057fefc8854ebd3d6d808fdda2d29a94/Assets/PuzzleFiles/InteractTrigger.cs#L15-L30)) presents another concern. Using hardcoded strings is considered bad practice, and using the same string in both functions compounds the issue. Implementing a const would be preferable to be able to easily update the string without introducing errors related to spelling. Additionally, using tags instead of gameObjects names is a more applied practice. However, in the context of potential multiplayer updates, relying on tags could pose a challenge as it wouldn't differentiate which player interacted with the object.
 
 ### [KeypadListener.cs](https://github.com/idarlm/imt3603-project/blob/17779c6f017a7e275f14ff4af043da5eb3ef36d2/Assets/PuzzleFiles/KeypadListener.cs) & [VisualListener.cs](https://github.com/idarlm/imt3603-project/blob/17779c6f017a7e275f14ff4af043da5eb3ef36d2/Assets/PuzzleFiles/VisualListener.cs)
-These scripts I consider bad code. They are connected to the same puzzle, which is the puzzle with three symbols that need to match for an event to fire. The logic of this puzzle was hard to code which is reflected in the code. We coded it so that each interactable object in the puzzle loops between four game objects. This is not the best solution as it takes up more resources and the code gets more confusing. If we had time we would have changed it to use one gameobject and then change that objects rotation. This would have improved both the scripts, as we would not need all the repeating code.
+I consider the KeypadListener.cs and VisualListener.cs scripts bad code. They are connected to the same puzzle involving a PIN code, utilizing interactable game objects that display symbols. To trigger an event, the correct combination must be input. The puzzle's logic was challenging to implement, leading to complex code. Each interactable object within the puzzle cycles through four game objects, creating resource-intensive operations and introducing unnecessary complexity. With additional time, we would have pursued a more efficient solution utilizing a single game object with dynamic rotation. This approach would have streamlined both scripts and eliminated much of the repeating code.
 
-The code in KeypadListener is not that easy to read and has a lot of repeating code. OnTriggered and OnTriggeredFinished is almost identical(link) in addition to the code inside the for loop in these functions.  Fix it by double for loop, instead of checking manually for each key. If check to check if all true similar to the one in triggergroup(link til triggergourp).
+The KeypadListener code lacks readability and, as previously noted, suffers from significant code duplication. The OnTriggered ([Lines 22-51]( https://github.com/idarlm/imt3603-project/blob/17779c6f017a7e275f14ff4af043da5eb3ef36d2/Assets/PuzzleFiles/KeypadListener.cs#L22-L50)) and OnTriggeredFinished ([Lines 53-73]( https://github.com/idarlm/imt3603-project/blob/17779c6f017a7e275f14ff4af043da5eb3ef36d2/Assets/PuzzleFiles/KeypadListener.cs#L53-L73)) methods are nearly identical. To enhance code clarity and reduce redundancy, I would utilize a double for-loop rather than manually checking each key. Additionally, I would change the if-check ([Line 46-49]( https://github.com/idarlm/imt3603-project/blob/17779c6f017a7e275f14ff4af043da5eb3ef36d2/Assets/PuzzleFiles/KeypadListener.cs#L46-L49)) to an if-check like the one used in the [TriggerGroup]( https://github.com/idarlm/imt3603-project/blob/17779c6f017a7e275f14ff4af043da5eb3ef36d2/Assets/PuzzleFiles/TriggerGroup.cs#L38-L41) script. 
 
-
-Dynamic triggers and correct key array, but hardcoded three keys.  This is not flexible if we wanted to have puzzles with less or more symbols than three. It is also pointless for the arrays to be dynamic if they are only gonna contain three items anyway. Something that is good however is the use of serializefield so we can easily change correct keys and triggers in Unity.
+While the implementation of dynamic arrays for both the triggers and correct keys is commendable, its effectiveness is compromised by the fact that the key objects are constrained to three items. The absence of a dynamic array for the key objects restricts flexibility for puzzles featuring a different number of interactable game objects. Nevertheless, the use of SerializeField I consider good code, as it simplifies the process of modifying the correct keys in Unity.
 ```cs
     public PuzzleTrigger[] triggers; // List of all the triggers
     [SerializeField] GameObject[] correctKeys; 
     private bool key1 = false, key2 = false, key3 = false; 
     private Transform key1Object, key2Object, key3Object; // The object for each symbol
 ```
-
-Hardcoded for loop is considered bad practice. Why is it four? Four is the number of symbols each object has to rotate between. This should have been put in a variable so it would be clear what it was, as well as to make it easier to update.
+The hardcoded for-loop in the KeypadListener script is considered bad practice because it leaves the reader in the dark about why it iterates four times. In this code, the number four signifies the symbols each object can rotate between, and this constant should have been stored in a variable. Doing so would enhance clarity and facilitate easier updates to the code.
 ```cs
     for (var i = 0; i < 4; i++) {
 ```
-
-Bad variablenames and confusing code that does not make it easier. key2Object does not give a lot of information to the reader. We had trouble comming up with good variable names as we were not quite sure what the different parts of such a puzzle is called, so we ended on keys and used this everywhere. Later we realized it was a bad name since we actually have keys in some puzzles. The bad variable name combined with the confusing code that comes after makes it hard to undrstand what exactly is going on.
+Both the KeyPadListener script and VisualListner suffer from poor variable names and complex code that hinders code comprehension. Variable names like "key2Object" lack descriptive information for the reader. The challenge arose from uncertainty about the terminology for different puzzle components, leading to the adoption of "keys" as a generic term used throughout. This term is particularly confusing due to the actual presence of keys in some puzzles. Enhancing script clarity could possibly be achieved by assigning more accurately descriptive names to variables and introducing helping variables to assist in communicating the functionality of the complex code.
 ```cs
+    //Line 61 in the KeyPadListener Script
     key2Object = triggers[1].transform.GetChild(i);
-```
-This was one of the biggest issues in the VisualListener script as well.
-```cs
-     transform.GetChild(i).gameObject.SetActive(false);
-```
-The code above is repeated all the time but its confusing what this actually is. 
 
-
+    //Line 18 in the VisualListener Script
+    transform.GetChild(i).gameObject.SetActive(false);
+```
 
 ## Reflection
 At the beginning of this course, game development was completely new to me. The entire process, from understanding the game engine to learning a new programming language, presented a steep learning curve. In our group of four students, two, including myself, had no prior experience, while the other two possessed varying levels of experience. This dynamic introduced challenges, particularly as the experienced members set ambitious goals.
