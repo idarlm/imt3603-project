@@ -1,5 +1,9 @@
 # The Mouse Game
 
+## Demo video
+
+https://youtu.be/MEGxLQWMZOM
+
 ## Installation
 
 
